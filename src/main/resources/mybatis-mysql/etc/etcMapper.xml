@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sh.Mapper.EtcMapper">
+
+	<!-- 코드 관련 쿼리 -->
+	<select id="selectdinner" resultType="String" parameterType="String">
+		SELECT MENU
+		FROM
+		FOODTABLE
+		WHERE GDATE = #{nowDate} AND GUBN = 'C'
+	</select>
+	<select id="selectlunch" resultType="String" parameterType="String">
+		SELECT MENU
+		FROM
+		FOODTABLE
+		WHERE GDATE = #{nowDate} AND GUBN = 'B'
+	</select>
+	<select id="selectbreakfast" resultType="String" parameterType="String">
+		SELECT MENU
+		FROM
+		FOODTABLE
+		WHERE GDATE = #{nowDate} AND GUBN = 'A'
+	</select>
+	
+	<select id="selectItDamage" resultType="com.sh.Domain.ItDamage">   
+		SELECT * FROM IT_DAMAGE WHERE stat = '01' order by RTIME DESC 
+	</select>
+	
+	<update id="endDamage" parameterType="com.sh.Domain.ItDamage">
+		UPDATE IT_MST_HIS2 SET
+		ctime = #{ctime} 
+		WHERE jtime = #{rtime}
+	</update>		
+<!-- 	<update id="endDamage2" parameterType="com.sh.Domain.ItDamage"> -->
+<!-- 		UPDATE IT_DAMAGE   -->
+<!-- 		SET ctime = ${ctime}, stat = '09'  -->
+<!-- 		WHERE rtime = #{rtime} -->
+<!-- 	</update> --> 
+</mapper>
