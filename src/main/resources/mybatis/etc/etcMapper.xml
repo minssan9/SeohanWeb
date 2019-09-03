@@ -5,7 +5,7 @@
 	<!-- 코드 관련 쿼리 -->
 	<select id="foodList" resultType="com.sh.Domain.Food" parameterType="com.sh.Domain.Dto">
 		SELECT * FROM SITLIB.FOODTABLE
-		WHERE GDATE = #{queryDate} AND GUBN like '%'||#{queryType}||'%'
+		WHERE GDATE = #{querydate} AND GUBN like '%'||#{querytype}||'%'
 		ORDER BY GUBN, SER
 	</select> 
 	

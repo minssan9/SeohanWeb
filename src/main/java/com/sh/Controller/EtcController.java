@@ -37,6 +37,11 @@ public class EtcController {
 		return "food";
 	}
 
+	@RequestMapping("/hello")
+	public String hello() {
+		return "hello";
+	}
+	
 	@RequestMapping("/itdamage")
 	public ModelAndView selectItDamage(ModelAndView mav) { 
 		List<ItDamage> damageList = etcService.selectItDamage(); 
