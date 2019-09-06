@@ -20,6 +20,6 @@ public class Dto {
 	private String month;
 	private String day;
 	
-	private String queryDate="";
-	private String queryType=""; 
+	private String querydate="";
+	private String querytype=""; 
 }

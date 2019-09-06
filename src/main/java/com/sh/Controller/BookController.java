@@ -8,20 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sh.Domain.Book;
 
-@Controller
-@RequestMapping("/")
+@Controller 
 public class BookController {  
- 
-    @RequestMapping(value = "/hello")
-	public String hello() { 
-		return "hello";
-	}
-
-    @RequestMapping("/index")
-    public String velocity() {
-        return "index";
-    }
-    
+     
     @GetMapping("/bookList")
 	String bookList(@RequestParam(name="queryType", required=false, defaultValue="all") String queryType, Book book, Model model) throws Exception {
 //    	book = bookMapper.selectOne(); 
