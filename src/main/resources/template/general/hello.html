@@ -11,7 +11,7 @@
 
 <body>
 
-	<div id=app>
+	<div id="app">
 		<button v-on:click="getData">프레임워크 목록 가져오기</button>
 		<table class="table">
 			<thead>
@@ -36,7 +36,7 @@
 			el: '#app',
 			methods: {
 				getData: function () {
-					axios.get('/food?querydate=20190829')
+					axios.get('/general/food?querydate=20190829')
 						.then(response => {
 							return response.json();
 						})

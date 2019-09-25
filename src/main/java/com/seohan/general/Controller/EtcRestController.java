@@ -42,7 +42,7 @@ class EtcRestController {
 		return new InputStreamResource(is);
 	}
 	
-	@GetMapping("/food")
+	@GetMapping( "/food")
 	public @ResponseBody List<Food> FoodList(Dto dto) {  
 		List<Food> foodList = new ArrayList<Food>();
 		foodList = etcService.foodList(dto);  

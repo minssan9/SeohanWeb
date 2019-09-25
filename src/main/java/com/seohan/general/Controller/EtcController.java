@@ -34,8 +34,7 @@ public class EtcController {
 		} 
 		nowDate= nowDate.substring(0, 4) + "-" +nowDate.substring(4, 6)+"-"+nowDate.substring(6, 8);
 		model.addAttribute("date", nowDate); 
-		 
-
+		
 		return "general/food";
 	}
 

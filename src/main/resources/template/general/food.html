@@ -4,54 +4,52 @@
 	<meta charset="utf-8">
 	<title>식단표</title>
 	<link rel="SHORTCUT ICON" href="/resources/img/seohanico.gif" />
-	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js" />
-	<script src="https://unpkg.com/axios/dist/axios.min.js"/>
-	<link href="/resources/img/seohanico.jpg" rel="apple-touch-icon" sizes="180x180" /> 
+	<link href="/resources/img/seohanico.jpg" rel="apple-touch-icon" sizes="180x180" />
+
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+	<script src="https://npmcdn.com/axios/dist/axios.min.js"></script>
 </head>
-<body> 
+
+<body>
 	<h3> 식단표 </h3>
-	<div class="contents"> 
-		<div class="dataTable_wrapper">
-			<table >
-				<tbody>
-					<dl th:each="List : ${foodList}">
-						<dd class="genre" th:text="${List.gubn}"></dd>
-						<dd class="genre" th:text="${List.menu}"></dd>
-					</dl> 
-				</tbody>
-			</table>
-			<ul>
-				<li style="list-style-type:none" v-for="player in players">
-					<player-card
-					v-bind:player="player"
-					v-bind:key="player.id">
-					</player-card>
-				</li>
-			</ul>
-		</div>
-	</div> 
+	<div id="app">
+		<button v-on:click="getData">프레임워크 목록 가져오기</button>
+		<table>
+			<thead>
+					 <th>구분</th>
+					 <th>메</th> 
+				</thead>
+			<tbody>
+				<tr v-for="data in dataList">
+					<td>{{data.gubn}}</td>
+					<td>{{data.menu}}</td>
+				</tr> 
+			</tbody>
+		</table> 
+	</div>
 
-	<script type="text/babel">var app = new Vue({
-        el: '#contents',
-        data: {
-            players: [
-                { id: "1", 
-                  name: "Lionel Messi", 
-                  description: "Argentina's superstar" },
-                { id: "2", 
-                  name: "Christiano Ronaldo", 
-                  description: "World #1-ranked player from Portugal" }
-            ]
-        }
-    });
+	<script> 
+		new Vue({
+			el: '#app',
+			data:{
+				dataList:[]
+			},
+			methods: {
+				getData: function () {
+					// axios.get('/general/food',{ 
+					// 	params: {queryDate:'20190925'}
+					// })						
+					axios.get('/general/food?querydate=20190925')
+						.then(response => {
+							console.log(`status code: ${response.data}`);
+							console.log(`headers: ${response.data}`);
+							this.dataList = response.data;			
+						})
+				}
+			},
+			mounted: function () {
+			}
+		});  
 	</script>
-	<!-- jQuery -->
-	<script src="/resources/js/jquery/jquery.js"></script>
-	<script src="/resources/js/bootstrap.min.js"></script>
-	<script src="/resources/js/metisMenu.min.js"></script>
-	<script src="/resources/js/jquery.dataTables.min.js"></script>
-	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
-
-	</body>
-
-	</html>
+</body>
+</html>

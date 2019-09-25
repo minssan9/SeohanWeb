@@ -1,11 +1,11 @@
-package com.seohan.Controller;
+package com.seohan.book.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.seohan.Domain.Book; 
+import com.seohan.book.Domain.Book; 
 
 @RestController
 class BookRestController {

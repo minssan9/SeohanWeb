@@ -1,4 +1,4 @@
-package com.seohan.Domain;
+package com.seohan.general.Domain;
 
 import lombok.Data;
 
