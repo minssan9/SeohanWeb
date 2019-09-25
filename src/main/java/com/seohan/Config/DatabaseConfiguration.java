@@ -1,4 +1,4 @@
-package com.sh.Config; 
+package com.seohan.Config; 
 import java.sql.DriverManager;
 
 import javax.sql.DataSource;
@@ -21,7 +21,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
   
 @Configuration
-@MapperScan(basePackages = {"com.sh.Mapper"})
+@MapperScan(basePackages = {"com.seohan.general.Mapper"}) 
 @EnableTransactionManagement
  class DatabaseConfiguration {
 

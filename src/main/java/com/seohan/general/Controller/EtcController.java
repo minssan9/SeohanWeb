@@ -1,4 +1,4 @@
-package com.sh.Controller;
+package com.seohan.general.Controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,8 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sh.Domain.ItDamage;
-import com.sh.Service.EtcService;
+import com.seohan.general.Domain.ItDamage;
+import com.seohan.general.Service.EtcService;
 
 @Controller
 public class EtcController {

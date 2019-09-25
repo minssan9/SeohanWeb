@@ -1,4 +1,4 @@
-package com.sh.Service;
+package com.seohan.general.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -7,11 +7,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sh.Domain.Dto;
-import com.sh.Domain.Food;
-import com.sh.Domain.ItDamage;
-import com.sh.Domain.SmsModel;
-import com.sh.Mapper.EtcMapper;
+import com.seohan.Domain.SmsModel;
+import com.seohan.general.Domain.Dto;
+import com.seohan.general.Domain.Food;
+import com.seohan.general.Domain.ItDamage;
+import com.seohan.general.Mapper.EtcMapper;
 
 @Service
 public class EtcServiceImpl implements EtcService {

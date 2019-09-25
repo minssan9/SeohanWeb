@@ -1,4 +1,4 @@
-package com.sh.Controller;
+package com.seohan.general.Controller;
 
 import java.io.File;
 import java.io.InputStream;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sh.Domain.Dto;
-import com.sh.Domain.Food;
-import com.sh.Domain.ItDamage;
-import com.sh.Service.EtcService;
+import com.seohan.general.Domain.Dto;
+import com.seohan.general.Domain.Food;
+import com.seohan.general.Domain.ItDamage;
+import com.seohan.general.Service.EtcService;
 
 import lombok.extern.slf4j.Slf4j; 
 

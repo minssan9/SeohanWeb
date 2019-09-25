@@ -1,10 +1,10 @@
-package com.sh.Service;
+package com.seohan.general.Service;
 
 import java.util.List;
 
-import com.sh.Domain.Dto;
-import com.sh.Domain.Food;
-import com.sh.Domain.ItDamage;
+import com.seohan.general.Domain.Dto;
+import com.seohan.general.Domain.Food;
+import com.seohan.general.Domain.ItDamage;
 
 public interface EtcService { 
 	public List<Food> foodList(Dto dto);
