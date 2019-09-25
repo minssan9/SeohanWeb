@@ -22,6 +22,8 @@ import com.seohan.general.Service.EtcService;
 
 import lombok.extern.slf4j.Slf4j; 
 
+
+@RequestMapping("/general")
 @RestController
 @Slf4j 
 class EtcRestController { 

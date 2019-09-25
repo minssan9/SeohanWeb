@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.seohan.general.Domain.ItDamage;
 import com.seohan.general.Service.EtcService;
 
+@RequestMapping("/generalPage")
 @Controller
 public class EtcController {
 
@@ -23,7 +24,7 @@ public class EtcController {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd");
 	
-	@RequestMapping("/foodPage")
+	@RequestMapping("/food")
 	public String todayFood(Model model, String datepicker) {
 		Calendar cal = Calendar.getInstance();
 		String nowDate = sdf.format(cal.getTime());
@@ -33,20 +34,21 @@ public class EtcController {
 		} 
 		nowDate= nowDate.substring(0, 4) + "-" +nowDate.substring(4, 6)+"-"+nowDate.substring(6, 8);
 		model.addAttribute("date", nowDate); 
+		 
 
-		return "food";
+		return "general/food";
 	}
 
 	@RequestMapping("/hello")
 	public String hello() {
-		return "hello";
+		return "general/hello";
 	}
 	
 	@RequestMapping("/itdamage")
 	public ModelAndView selectItDamage(ModelAndView mav) { 
 		List<ItDamage> damageList = etcService.selectItDamage(); 
 		mav.addObject("List", damageList); 
-		mav.setViewName("itDamage");
+		mav.setViewName("general/itDamage");
 		return mav;
 	}
 	
@@ -54,6 +56,6 @@ public class EtcController {
 	public String endDamage(ModelAndView mav, ItDamage itDamage) { 
 		etcService.endDamage(itDamage); 
 
-		return "redirect:itdamage";
+		return "redirect:general/itdamage";
 	} 
 }
