@@ -9,10 +9,10 @@
 		<version>2.1.7.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
+	<groupId>com.seohan</groupId>
 	<artifactId>SeohanWeb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SeohanWeb3</name>
+	<name>SeohanWeb</name>
 	<description>SeohanWeb</description>
 
 	<properties>
