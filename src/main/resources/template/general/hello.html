@@ -11,8 +11,10 @@
 
 <body>
 
-	<div id="app">
+	<div id="app" class="input-group date " data-provide="datepicker">
 		<button v-on:click="getData">프레임워크 목록 가져오기</button>
+		<input class="datepicker " name="datepicker" type="date" value="${date}">
+
 		<table class="table">
 			<thead>
 				<tr>
