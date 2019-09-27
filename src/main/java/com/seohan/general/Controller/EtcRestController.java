@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.seohan.general.Domain.Dto;
 import com.seohan.general.Domain.Food;
@@ -47,5 +48,13 @@ class EtcRestController {
 		List<Food> foodList = new ArrayList<Food>();
 		foodList = etcService.foodList(dto);  
 		return foodList;
+	}
+
+
+	@RequestMapping("/itdamage")
+	public @ResponseBody List<ItDamage> iddamage(ModelAndView mav) { 
+		List<ItDamage> damageList = new ArrayList<ItDamage>();  
+		damageList = etcService.itDamage(); 
+		return damageList;
 	}
 }

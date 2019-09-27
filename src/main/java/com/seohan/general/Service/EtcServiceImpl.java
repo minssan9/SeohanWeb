@@ -27,8 +27,8 @@ public class EtcServiceImpl implements EtcService {
  
 
 	@Override
-	public List<ItDamage> selectItDamage() {
-		return etcMapper.selectItDamage();
+	public List<ItDamage> itDamage() {
+		return etcMapper.itDamage();
 	}
 
 	@Override

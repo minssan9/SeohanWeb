@@ -9,7 +9,7 @@
 		ORDER BY GUBN, SER
 	</select> 
 	
-	<select id="selectItDamage" resultType="com.seohan.general.Domain.ItDamage">   
+	<select id="itDamage" resultType="com.seohan.general.Domain.ItDamage">   
 		SELECT * FROM SITLIB.IT_DAMAGE WHERE stat = '01' order by RTIME DESC 
 	</select>
 	

@@ -44,11 +44,8 @@ public class EtcController {
 	}
 	
 	@RequestMapping("/itdamage")
-	public ModelAndView selectItDamage(ModelAndView mav) { 
-		List<ItDamage> damageList = etcService.selectItDamage(); 
-		mav.addObject("List", damageList); 
-		mav.setViewName("general/itDamage");
-		return mav;
+	public String selectItDamage(ModelAndView mav) {		
+		return "general/itDamage";
 	}
 	
 	@RequestMapping("/endDamage")

@@ -8,6 +8,6 @@ import com.seohan.general.Domain.ItDamage;
 
 public interface EtcMapper {
 	public List<Food> foodList(Dto dto); 
-	public List<ItDamage> selectItDamage();
+	public List<ItDamage> itDamage();
 	public void endDamage(ItDamage itDamage);
 }
