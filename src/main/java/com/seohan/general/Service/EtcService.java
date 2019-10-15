@@ -11,5 +11,7 @@ public interface EtcService {
 
 	public List<ItDamage> itDamage();
 
-	public void endDamage(ItDamage itDamage);
+	public void postItDamage(ItDamage itDamage);
+
+	public void endItDamage(ItDamage itDamage);
 }
