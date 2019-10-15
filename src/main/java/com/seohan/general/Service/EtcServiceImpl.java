@@ -32,7 +32,12 @@ public class EtcServiceImpl implements EtcService {
 	}
 
 	@Override
-	public void endDamage(ItDamage itDamage) { 
+	public void postItDamage(ItDamage itDamage) { 
+		etcMapper.postItDamage(itDamage); 
+	}
+
+	@Override
+	public void endItDamage(ItDamage itDamage) {
 		Calendar cal = Calendar.getInstance();
 		String nowDate = sdf.format(cal.getTime());		 
 		SmsModel smsModel = new SmsModel();
@@ -41,7 +46,7 @@ public class EtcServiceImpl implements EtcService {
 		smsModel.setPhone(itDamage.getRtel());
 		smsModel.setSendNo("043-530-3174");
 		
-		 etcMapper.endDamage(itDamage); 
+		 etcMapper.endItDamage(itDamage); 
 	}
 
 }

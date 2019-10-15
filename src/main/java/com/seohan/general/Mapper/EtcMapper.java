@@ -9,5 +9,6 @@ import com.seohan.general.Domain.ItDamage;
 public interface EtcMapper {
 	public List<Food> foodList(Dto dto); 
 	public List<ItDamage> itDamage();
-	public void endDamage(ItDamage itDamage);
+	public void postItDamage(ItDamage itDamage);
+	public void endItDamage(ItDamage itDamage);
 }

@@ -48,13 +48,22 @@ class EtcRestController {
 		List<Food> foodList = new ArrayList<Food>();
 		foodList = etcService.foodList(dto);  
 		return foodList;
-	}
-
+	} 
 
 	@RequestMapping("/itdamage")
-	public @ResponseBody List<ItDamage> iddamage(ModelAndView mav) { 
+	public @ResponseBody List<ItDamage> iddamage() { 
 		List<ItDamage> damageList = new ArrayList<ItDamage>();  
 		damageList = etcService.itDamage(); 
 		return damageList;
+	}
+
+	@RequestMapping("/postitdamage")
+	public void postItDamage(ItDamage itDamage ) { 		
+		etcService.postItDamage(itDamage ); 		
+	}
+
+	@RequestMapping("/endtitdamage")
+	public void endItDamage(ItDamage itDamage ) { 		
+		etcService.endItDamage(itDamage ); 		
 	}
 }
