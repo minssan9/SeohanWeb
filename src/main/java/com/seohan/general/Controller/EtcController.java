@@ -35,18 +35,18 @@ public class EtcController {
 		return "general/food";
 	}
 
-	@RequestMapping("/hello")
+	@RequestMapping("/index")
 	public String hello() {
-		return "general/hello";
+		return "index";
 	}
 	
 	@RequestMapping("/itdamage")
 	public String selectItDamage() {		
-		return "general/itDamage";
+		return "general/itDamage/list";
 	}
 	
-	@RequestMapping("/itDamageNew")
+	@RequestMapping("/itDamage/New")
 	public String itDamageNew(Dto dto) { 
-		return "general/itDamageNew";
+		return "general/itDamage/new";
 	} 
 }
