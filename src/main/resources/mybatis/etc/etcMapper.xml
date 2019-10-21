@@ -9,13 +9,15 @@
 		ORDER BY GUBN, SER
 	</select> 
 	
-	<select id="selectItDamage" resultType="com.seohan.general.Domain.ItDamage">   
+	<select id="itDamage" resultType="com.seohan.general.Domain.ItDamage">   
 		SELECT * FROM SITLIB.IT_DAMAGE WHERE stat = '01' order by RTIME DESC 
 	</select>
 	
-	<update id="endDamage" parameterType="com.seohan.general.Domain.ItDamage">
-		UPDATE SITLIB.IT_MST_HIS2 SET
-		ctime = #{ctime} 
-		WHERE jtime = #{rtime}
-	</update>		 
+	<!-- <insert id="putItDamage" parameterType="com.seohan.general.Domain.ItDamage">
+		insert into SITLIB.IT_DAMAGE 
+	</insert>		  -->
+
+	<update id="postItDamage" parameterType="com.seohan.general.Domain.ItDamage"> 
+		UPDATE SITLIB.IT_DAMAGE SET ctime = #{ctime}, stat = #{stat} WHERE rtime = #{rtime}
+	</update>
 </mapper>

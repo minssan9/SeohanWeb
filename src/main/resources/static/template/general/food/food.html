@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<title>식단표</title>
+	<!-- <link rel="SHORTCUT ICON" href="/resources/img/seohanico.gif" /> -->
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="../../static/js/app.b22ce679862c47a75225.js"></script>
+	
+	<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+	<script src="https://npmcdn.com/axios/dist/axios.min.js"></script> -->
+</head>
+
+<body>
+	<h3> 식단표 </h3>
+	<div id="app"   >
+		<input v-model="datepicker" v-on:change="getData" type="date" value="datepicker && datepicker.toISOString().split('T')[0]">
+
+		<table class="table table-striped table-bordered ">
+			<thead>
+				<th>구분</th>
+				<th>메뉴</th>
+			</thead>
+			<tbody>
+				<tr v-for="data in dataList">
+					<td>{{data.gubn}}</td>
+					<td>{{data.menu}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<script>
+		// import axios from 'axios'
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				datepicker: new Date(),
+				querydate: '',
+				dataList: []
+			},
+			created() {
+				var today = new Date();
+				querydate = today.getFullYear() + '' + ('00' + (today.getMonth() + 1)).slice(-2) + '' + today.getDate();
+				this.datepicker = today.getFullYear() + '-' + ('00' + (today.getMonth() + 1)).slice(-2) + '-' + today.getDate();;
+
+				axios.get('/general/food?querydate=' + querydate)
+					.then(response => {
+						this.dataList = response.data;
+					})
+					.catch(e => {
+						console.error(e)
+					})
+			},
+			methods: {
+				getData: function () {
+					querydate = this.datepicker.substr(0, 4) + this.datepicker.substr(5, 2) + this.datepicker.substr(8, 2);
+					axios.get('/general/food?querydate=' + querydate)
+						.then(response => {
+							this.dataList = response.data;
+						})
+						.catch(e => {
+							console.error(e)
+						})
+				}
+			},
+			mounted: function () {
+			}
+		});  
+	</script>
+</body>
+
+</html>
