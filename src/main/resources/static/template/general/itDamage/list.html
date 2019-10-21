@@ -14,9 +14,9 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
     <!-- <link href="../static/css/app.30790115300ab27614ce176899523b62.css" rel=stylesheet> -->
-    <script type=text/javascript src="../static/js/manifest.2ae2e69a05c33dfc65f8.js"> </script>
-    <script type=text/javascript src="../static/js/vendor.e00e51762311e00a2108.js"> </script>
-    <script type=text/javascript src="../static/js/app.b22ce679862c47a75225.js"> </script>
+    <script type=text/javascript src="../../static/js/manifest.2ae2e69a05c33dfc65f8.js"> </script>
+    <script type=text/javascript src="../../static/js/vendor.e00e51762311e00a2108.js"> </script>
+    <script type=text/javascript src="../../static/js/app.b22ce679862c47a75225.js"> </script>
 	
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 	<script src="https://npmcdn.com/axios/dist/axios.min.js"></script>
@@ -89,12 +89,12 @@
 						})
 				},
 				enditdamage: function (data) {
-					var date = new Date();
-					dateTimeString = date.getFullYear() + ("0" + (date.getMonth() + 1)).slice(-2) 
-									+ ("0" + date.getDate()).slice(-2) + ("0" + date.getHours() + 1 ).slice(-2) 
-									+ ("0" + date.getMinutes()).slice(-2) + ("0" + date.getSeconds()).slice(-2) ;
-					data.ctime = dateTimeString;
-					axios.put('/general/itdamage/put', data ) 					 
+					// var date = new Date();
+					// dateTimeString = date.getFullYear() + ("0" + (date.getMonth() + 1)).slice(-2) 
+					// 				+ ("0" + date.getDate()).slice(-2) + ("0" + date.getHours() + 1 ).slice(-2) 
+					// 				+ ("0" + date.getMinutes()).slice(-2) + ("0" + date.getSeconds()).slice(-2) ;
+					// data.ctime = dateTimeString;
+					axios.post('/general/itdamage/post', data ) 					 
 					.catch(e => {
 						console.log(e);
 					})

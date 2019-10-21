@@ -1,4 +1,4 @@
-package com.seohan.Config; 
+package com.seohan.config; 
 import java.sql.DriverManager;
 
 import javax.sql.DataSource;
@@ -19,38 +19,36 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-  
+
 @Configuration
-@MapperScan(basePackages = {"com.seohan.general.Mapper"}) 
+@MapperScan(basePackages = { "com.seohan.general.Mapper" })
 @EnableTransactionManagement
- class DatabaseConfiguration {
+class DatabaseConfiguration {
 
 	@Autowired
 	private ApplicationContext applicationContext;
 
-	@Bean 
+	@Bean
 	@Primary
 	@ConfigurationProperties(prefix = "spring.datasource.hikari")
-	public DataSource mainDataSource() {		
-	    HikariConfig config = new HikariConfig();
-	    config.setDataSourceClassName("org.apache.commons.dbcp.BasicDataSource");
-//	    config.setDriverClassName("com.ibm.as400.access.AS400JDBCDriver");
-	    
-		return DataSourceBuilder.create()
-				.type(HikariDataSource.class)
-				.build();
+	public DataSource mainDataSource() {
+		HikariConfig config = new HikariConfig();
+		config.setDataSourceClassName("org.apache.commons.dbcp.BasicDataSource");
+		// config.setDriverClassName("com.ibm.as400.access.AS400JDBCDriver");
+
+		return DataSourceBuilder.create().type(HikariDataSource.class).build();
 	}
-	
-//	@Qualifier("mainDataSource")
+
+	// @Qualifier("mainDataSource")
 	@Bean
-	public DataSourceTransactionManager transactionManager( DataSource dataSource) {
+	public DataSourceTransactionManager transactionManager(DataSource dataSource) {
 		DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(dataSource);
 		transactionManager.setGlobalRollbackOnParticipationFailure(false);
 		return transactionManager;
 	}
 
 	@Bean
-//	@ConfigurationProperties(prefix = "mybatis")
+	// @ConfigurationProperties(prefix = "mybatis")
 	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		sqlSessionFactoryBean.setDataSource(dataSource);

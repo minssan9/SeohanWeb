@@ -16,4 +16,5 @@ public class ItDamage {
 	private String ctxt; 
 	private String ctime;
 	private String fileName;
+	private String stat;
 }

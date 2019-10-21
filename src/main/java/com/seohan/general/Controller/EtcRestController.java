@@ -46,29 +46,28 @@ class EtcRestController {
 	}
 	
 	@GetMapping( "/food")
-	public @ResponseBody List<Food> FoodList(Dto dto) {  
+	public @ResponseBody List<Food> FoodList(Dto dto) throws Exception {  
 		List<Food> foodList = new ArrayList<Food>();
 		foodList = etcService.foodList(dto);  
 		return foodList;
 	} 
 
 	@GetMapping("/itdamage")
-	public @ResponseBody List<ItDamage> iddamage() { 
+	public @ResponseBody List<ItDamage> iddamage() throws Exception { 
 		List<ItDamage> damageList = new ArrayList<ItDamage>();  
 		damageList = etcService.itDamage(); 
 		return damageList;
 	}
 
-	@PostMapping("/itdamage/post")
-	public void postItDamage(ItDamage itDamage ) { 		
-		etcService.postItDamage(itDamage ); 		
+	@PutMapping("/itdamage/put")
+	public void putItDamage(@RequestBody ItDamage itDamage ) throws Exception { 		
+		etcService.putItDamage(itDamage ); 		
 	}
 
-	@PutMapping("/itdamage/put", )
-	public void endItDamage(@RequestBody ItDamage itDamage ) { 		
-		etcService.endItDamage(itDamage ); 		
-	}
-	
+	@PostMapping("/itdamage/post")
+	public void postItDamage(@RequestBody ItDamage itDamage )  throws Exception { 		
+		etcService.postItDamage(itDamage); 		
+	}	
 	
     // @Value("${temp.path}") private String tempPath; 
 	

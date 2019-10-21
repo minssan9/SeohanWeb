@@ -13,13 +13,11 @@
 		SELECT * FROM SITLIB.IT_DAMAGE WHERE stat = '01' order by RTIME DESC 
 	</select>
 	
-	<insert id="postItDamage" parameterType="com.seohan.general.Domain.ItDamage">
+	<!-- <insert id="putItDamage" parameterType="com.seohan.general.Domain.ItDamage">
 		insert into SITLIB.IT_DAMAGE 
-	</insert>		 
+	</insert>		  -->
 
-	<update id="endItDamage" parameterType="com.seohan.general.Domain.ItDamage">
-		UPDATE SITLIB.IT_MST_HIS2 SET
-		ctime = #{ctime} 
-		WHERE jtime = #{rtime}
-	</update>		 
+	<update id="postItDamage" parameterType="com.seohan.general.Domain.ItDamage"> 
+		UPDATE SITLIB.IT_DAMAGE SET ctime = #{ctime}, stat = #{stat} WHERE rtime = #{rtime}
+	</update>
 </mapper>
