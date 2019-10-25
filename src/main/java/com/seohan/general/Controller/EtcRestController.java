@@ -6,8 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.kuljaninemir.springbootftpclient.FTPFileWriter;
 import com.seohan.general.Domain.Dto;
 import com.seohan.general.Domain.Food;
 import com.seohan.general.Domain.ItDamage;
@@ -33,8 +30,8 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @Slf4j 
 class EtcRestController {
-	@Inject
-	FTPFileWriter ftpFileWriter;
+//	@Inject
+//	FTPFileWriter ftpFileWriter;
 	
 	@Autowired
 	private EtcService etcService;
@@ -46,16 +43,16 @@ class EtcRestController {
 	@RequestMapping("/fileDownload")
 	public  Resource fileDownload( ItDamage itDamage) throws Exception { 
 		
-		ftpFileWriter.open();
-		if(ftpFileWriter.isConnected()){
-		    ftpFileWriter.loadFile("/SeoHan/ITDAMAGE/" + itDamage.getFileName(),  "C:/temp/" + itDamage.getFileName());
-		    ftpFileWriter.saveFile(inputstream, "/SeoHan/ITDAMAGE/" + itDamage.getFileName(), false);
-		    ftpFileWriter.saveFile(sourcepath, "C:/temp/" + itDamage.getFileName(), true);
-//		    ftpFileWriter.loadFile(path, outputstream);
-//		    ftpFileWriter.saveFile(inputstream, remotepath, false);
-//		    ftpFileWriter.saveFile(sourcepath, destpath, true);
-		}
-		ftpFileWriter.close();
+//		ftpFileWriter.open();
+//		if(ftpFileWriter.isConnected()){
+//		    ftpFileWriter.loadFile("/SeoHan/ITDAMAGE/" + itDamage.getFileName(),  "C:/temp/" + itDamage.getFileName());
+//		    ftpFileWriter.saveFile(inputstream, "/SeoHan/ITDAMAGE/" + itDamage.getFileName(), false);
+//		    ftpFileWriter.saveFile(sourcepath, "C:/temp/" + itDamage.getFileName(), true);
+////		    ftpFileWriter.loadFile(path, outputstream);
+////		    ftpFileWriter.saveFile(inputstream, remotepath, false);
+////		    ftpFileWriter.saveFile(sourcepath, destpath, true);
+//		}
+//		ftpFileWriter.close();
 		
 		File file = new File("/SeoHan/ITDAMAGE/" + itDamage.getFileName());
 		InputStream is = FileUtils.openInputStream(file);
