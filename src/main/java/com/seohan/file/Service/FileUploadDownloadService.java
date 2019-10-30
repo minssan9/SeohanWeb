@@ -19,10 +19,9 @@ public class FileUploadDownloadService {
 	private final Path fileLocation;
 
 	@Autowired
-	public FileUploadDownloadService(FileUploadProperties prop) {
-	    this.fileLocation = Paths.get(prop.getUploadDir())
-	            .toAbsolutePath().normalize();
-	    
+	public FileUploadDownloadService(FileUploadProperties fileproperties) {
+	    this.fileLocation = Paths.get(fileproperties.getUploadDir())
+	            .toAbsolutePath().normalize(); 
 	    try {
 	        Files.createDirectories(this.fileLocation);
 	    }catch(Exception e) {
@@ -30,14 +29,14 @@ public class FileUploadDownloadService {
 	    }
 	}
 
-	public String storeFile(MultipartFile file) {
+	public String storeFile(String destPath, MultipartFile file) {
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
 		try {
 			// 파일명에 부적합 문자가 있는지 확인한다.
 			if (fileName.contains(".."))
 				throw new FileUploadException("파일명에 부적합 문자가 포함되어 있습니다. " + fileName);
-
+			destPath = destPath; 
 			Path targetLocation = this.fileLocation.resolve(fileName);
 
 			Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);

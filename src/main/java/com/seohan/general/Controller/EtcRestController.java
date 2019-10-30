@@ -54,7 +54,7 @@ class EtcRestController {
 //		}
 //		ftpFileWriter.close();
 		
-		File file = new File("/SeoHan/ITDAMAGE/" + itDamage.getFileName());
+		File file = new File("/SeoHan/ITDAMAGE/" + itDamage.getFile().getName());
 		InputStream is = FileUtils.openInputStream(file);
 		return new InputStreamResource(is);
 	}
