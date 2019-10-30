@@ -1,5 +1,7 @@
 package com.seohan.general.Domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -15,5 +17,6 @@ public class ItDamage {
 	private String rtxt; 
 	private String ctxt; 
 	private String ctime;
-	private String fileName;
+	private MultipartFile file;	
+	private String stat;
 }

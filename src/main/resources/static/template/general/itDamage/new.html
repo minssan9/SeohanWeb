@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>전산고장신고</title>
+	<link rel="SHORTCUT ICON" href="/resources/img/seohanico.gif" />
+	<script src="/webjars/jquery/dist/jquery.min.js"></script>
+	<link href="/resources/img/seohanico.jpg" rel="apple-touch-icon" sizes="180x180" />
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	
+    <!-- <link href="../static/css/app.30790115300ab27614ce176899523b62.css" rel=stylesheet> -->
+    <script type=text/javascript src="../static/js/manifest.2ae2e69a05c33dfc65f8.js"> </script>
+    <script type=text/javascript src="../static/js/vendor.e00e51762311e00a2108.js"> </script>
+    <script type=text/javascript src="../static/js/app.b22ce679862c47a75225.js"> </script>
+	
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+	<script src="https://npmcdn.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<h2>도서 추가 페이지</h2>
+		<div class="panel panel-default ">
+			<form action="/itDamage/new" method="post" class="panel-body" enctype="multipart/form-data"
+				name="insertForm">
+
+				<div class="form-group">
+					<label style="width:10%;" for="exampleInputEmail1">ISBN</label> <input
+						style="width:70%; display:-webkit-inline-box;" class="form-control" type="text" id="isbn"
+						name="isbn"> 
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">도서번호</label> <input type="text" class="form-control" id="book_cd"
+						name="book_cd" required="required">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1">도서명</label> <input type="text" class="form-control" id="title"
+						name="title" placeholder="도서명" required="required">
+				</div>
+				<div class="col-md-7 col-sm-7	col-xs-7 left">
+					<label for="exampleInputPassword1">대분류</label> <select class="selectpicker form-control"
+						style="font-size: 14px; margin-top: 10px; vertical-align: baseline;" id="b_group"
+						name="b_group">
+						<c:forEach items="${BCodeList}" var="code">
+							<option value="${code.code}-${code.name}">${code.code}-${code.name}
+						</c:forEach>
+					</select>
+				</div>
+				<div class="col-md-5 col-sm-5	col-xs-5 right">
+					<label for="exampleInputPassword1">소분류</label> <select class="selectpicker form-control"
+						style="font-size: 14px; margin-top: 10px; vertical-align: baseline;" id="c_group"
+						name="c_group">
+						<c:forEach items="${CCodeList}" var="code">
+							<option value="${code.code}-${code.name}">${code.code}-${code.name}
+						</c:forEach>
+					</select>
+				</div>
+				<div class="col-md-6 col-sm-6	col-xs-6">
+					<label for="exampleInputPassword1">출판사</label> <input type="text" class="form-control" id="publish"
+						name="publish" placeholder="출판사" required="required">
+				</div>
+				<div class="col-md-6 col-sm-6	col-xs-6">
+					<label for="exampleInputPassword1">저자</label> <input type="text" class="form-control" id="author"
+						name="author" placeholder="저자">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1">요약</label> <input type="text" class="form-control" id="summary"
+						name="summary" placeholder="요약">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1">가격</label><input type="number" class="form-control" name="price"
+						id="price" placeholder="0" required="required">
+				</div>
+				<!-- 					<div class="form-group file"> -->
+				<!-- 						<label for="exampleInputPassword1">파일</label> <input type="file" -->
+				<!-- 							class="form-control" id="file" name="file" placeholder="파일"> -->
+				<!-- 					</div> -->
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<button type="submit" class="btn btn-default" onClick="formChk();  ">확인</button>
+				</div>
+			</form>
+		</div>
+	</div> 
+	<script>
+		// import axios from 'axios'
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				datepicker: new Date(),
+				querydate: '',
+				dataList: []
+			},
+			created() {
+				var today = new Date();
+				querydate = today.getFullYear() + '' + ('00' + (today.getMonth() + 1)).slice(-2) + '' + today.getDate();
+				this.datepicker = today.getFullYear() + '-' + ('00' + (today.getMonth() + 1)).slice(-2) + '-' + today.getDate();;
+
+				axios.get('/general/itdamage')
+					.then(response => {
+						this.dataList = response.data;
+					})
+					.catch(e => {
+						console.error(e)
+					})
+			},
+			methods: {
+				getData: function () {
+					querydate = this.datepicker.substr(0, 4) + this.datepicker.substr(5, 2) + this.datepicker.substr(8, 2);
+					axios.get('/general/itdamage')
+						.then(response => {
+							this.dataList = response.data;
+						})
+						.catch(e => {
+							console.error(e)
+						})
+				}
+			},
+			mounted: function () {
+			}
+		});  
+	</script>
+</body>
+
+</html>

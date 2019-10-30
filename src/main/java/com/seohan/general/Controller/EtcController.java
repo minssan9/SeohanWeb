@@ -1,18 +1,15 @@
 package com.seohan.general.Controller;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+
+import com.seohan.general.Domain.Dto;
+import com.seohan.general.Service.EtcService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.seohan.general.Domain.ItDamage;
-import com.seohan.general.Service.EtcService;
 
 @RequestMapping("/generalPage")
 @Controller
@@ -34,28 +31,22 @@ public class EtcController {
 		} 
 		nowDate= nowDate.substring(0, 4) + "-" +nowDate.substring(4, 6)+"-"+nowDate.substring(6, 8);
 		model.addAttribute("date", nowDate); 
-		 
-
-		return "general/food";
+		
+		return "general/food/food";
 	}
 
-	@RequestMapping("/hello")
+	@RequestMapping("/index")
 	public String hello() {
-		return "general/hello";
+		return "index";
 	}
 	
 	@RequestMapping("/itdamage")
-	public ModelAndView selectItDamage(ModelAndView mav) { 
-		List<ItDamage> damageList = etcService.selectItDamage(); 
-		mav.addObject("List", damageList); 
-		mav.setViewName("general/itDamage");
-		return mav;
+	public String selectItDamage() {		
+		return "general/itDamage/list";
 	}
 	
-	@RequestMapping("/endDamage")
-	public String endDamage(ModelAndView mav, ItDamage itDamage) { 
-		etcService.endDamage(itDamage); 
-
-		return "redirect:general/itdamage";
+	@RequestMapping("/itDamage/New")
+	public String itDamageNew(Dto dto) { 
+		return "general/itDamage/new";
 	} 
 }

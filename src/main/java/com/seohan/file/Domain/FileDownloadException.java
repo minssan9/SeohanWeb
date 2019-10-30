@@ -1,0 +1,11 @@
+package com.seohan.file.Domain;
+
+public class FileDownloadException extends RuntimeException {
+    public FileDownloadException(String message) {
+        super(message);
+    }
+    
+    public FileDownloadException(String message, Throwable cause) {
+        super(message, cause);
+    }
+}
