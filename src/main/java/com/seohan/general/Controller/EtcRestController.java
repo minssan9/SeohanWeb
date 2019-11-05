@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.seohan.file.Service.FTPService;
 import com.seohan.general.Domain.Dto;
 import com.seohan.general.Domain.Food;
 import com.seohan.general.Domain.ItDamage;
@@ -29,12 +30,11 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/general")
 @RestController
 @Slf4j 
-class EtcRestController {
-//	@Inject
-//	FTPFileWriter ftpFileWriter;
-	
+class EtcRestController {  
 	@Autowired
 	private EtcService etcService;
+	@Autowired
+	private FTPService ftpService;
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -81,6 +81,11 @@ class EtcRestController {
 	@PostMapping("/itdamage/post")
 	public void postItDamage(@RequestBody ItDamage itDamage )  throws Exception { 		
 		etcService.postItDamage(itDamage); 		
+	}	
+
+	@PostMapping("/ftptest")
+	public void ftptest()  throws Exception { 		
+		ftpService.connect();	 
 	}	
 	
     // @Value("${temp.path}") private String tempPath; 

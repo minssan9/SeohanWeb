@@ -15,11 +15,11 @@ import com.seohan.file.Domain.FileDownloadException;
 import com.seohan.file.Domain.FileUploadException;
 
 @Service
-public class FileUploadDownloadService { 
+public class FileService { 
 	private final Path fileLocation;
 
 	@Autowired
-	public FileUploadDownloadService(FileUploadProperties fileproperties) {
+	public FileService(FileUploadProperties fileproperties) {
 	    this.fileLocation = Paths.get(fileproperties.getUploadDir())
 	            .toAbsolutePath().normalize(); 
 	    try {
