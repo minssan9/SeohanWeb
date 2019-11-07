@@ -5,12 +5,14 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
+import com.seohan.config.FTPProperties;
 import com.seohan.config.FileUploadProperties;
 
 @SpringBootApplication
 @EnableAutoConfiguration
 @EnableConfigurationProperties({
-    FileUploadProperties.class
+    FileUploadProperties.class,
+    FTPProperties.class
 })
 public class SeohanWebPubApplication {
 

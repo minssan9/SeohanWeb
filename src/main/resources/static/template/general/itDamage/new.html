@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!DOCTYPE html>  
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,60 +21,63 @@
 
 <body>
 	<div class="container">
-		<h2>도서 추가 페이지</h2>
+		<h2>전산고장신고</h2>
 		<div class="panel panel-default ">
-			<form action="/itDamage/new" method="post" class="panel-body" enctype="multipart/form-data"
+			<form action="/itDamage/save" method="post" class="panel-body" enctype="multipart/form-data"
 				name="insertForm">
 
 				<div class="form-group">
-					<label style="width:10%;" for="exampleInputEmail1">ISBN</label> <input
-						style="width:70%; display:-webkit-inline-box;" class="form-control" type="text" id="isbn"
-						name="isbn"> 
+					<label >공장</label> 
+					<select v-for="factory in factoryList" class="selectpicker form-control" id="factory"
+						name="factory" style="font-size: 14px; margin-top: 10px; vertical-align: baseline;">
+						<option value="{{data.code}}">{{data.name}}
+					</select>
+					
+					<input	type="text" class="form-control"  id="factory"
+						name="factory" placeholder="출판사" > 
 				</div>
 				<div class="form-group">
-					<label for="exampleInputEmail1">도서번호</label> <input type="text" class="form-control" id="book_cd"
-						name="book_cd" required="required">
+					<label >도서번호</label> <input type="text" class="form-control" id="book_cd"
+						name="book_cd" placeholder="출판사"  required="required">
 				</div>
 				<div class="form-group">
-					<label for="exampleInputPassword1">도서명</label> <input type="text" class="form-control" id="title"
+					<label >도서명</label> <input type="text" class="form-control" id="title"
 						name="title" placeholder="도서명" required="required">
 				</div>
 				<div class="col-md-7 col-sm-7	col-xs-7 left">
-					<label for="exampleInputPassword1">대분류</label> <select class="selectpicker form-control"
-						style="font-size: 14px; margin-top: 10px; vertical-align: baseline;" id="b_group"
-						name="b_group">
+					<label >대분류</label> <select class="selectpicker form-control" id="b_group"
+						name="b_group" style="font-size: 14px; margin-top: 10px; vertical-align: baseline;">
 						<c:forEach items="${BCodeList}" var="code">
 							<option value="${code.code}-${code.name}">${code.code}-${code.name}
 						</c:forEach>
 					</select>
 				</div>
 				<div class="col-md-5 col-sm-5	col-xs-5 right">
-					<label for="exampleInputPassword1">소분류</label> <select class="selectpicker form-control"
-						style="font-size: 14px; margin-top: 10px; vertical-align: baseline;" id="c_group"
-						name="c_group">
+					<label >소분류</label> <select class="selectpicker form-control" id="c_group"
+						name="c_group" style="font-size: 14px; margin-top: 10px; vertical-align: baseline;" >
 						<c:forEach items="${CCodeList}" var="code">
 							<option value="${code.code}-${code.name}">${code.code}-${code.name}
 						</c:forEach>
 					</select>
 				</div>
 				<div class="col-md-6 col-sm-6	col-xs-6">
-					<label for="exampleInputPassword1">출판사</label> <input type="text" class="form-control" id="publish"
+					<label >출판사</label> <input type="text" class="form-control" id="publish"
 						name="publish" placeholder="출판사" required="required">
 				</div>
 				<div class="col-md-6 col-sm-6	col-xs-6">
-					<label for="exampleInputPassword1">저자</label> <input type="text" class="form-control" id="author"
+					<label >저자</label> <input type="text" class="form-control" id="author"
 						name="author" placeholder="저자">
 				</div>
 				<div class="form-group">
-					<label for="exampleInputPassword1">요약</label> <input type="text" class="form-control" id="summary"
+					<label >요약</label> <input type="text" class="form-control" id="summary"
 						name="summary" placeholder="요약">
 				</div>
 				<div class="form-group">
-					<label for="exampleInputPassword1">가격</label><input type="number" class="form-control" name="price"
+					<label >가격</label><input type="number" class="form-control" name="price"
 						id="price" placeholder="0" required="required">
 				</div>
 				<!-- 					<div class="form-group file"> -->
-				<!-- 						<label for="exampleInputPassword1">파일</label> <input type="file" -->
+				<!-- 						<label >파일</label> <input type="file" -->
 				<!-- 							class="form-control" id="file" name="file" placeholder="파일"> -->
 				<!-- 					</div> -->
 				<div class="col-md-12 col-sm-12 col-xs-12">

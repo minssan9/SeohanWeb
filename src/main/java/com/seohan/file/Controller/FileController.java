@@ -23,13 +23,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.seohan.file.Domain.FileUploadResponse;
-import com.seohan.file.Service.FileUploadDownloadService;
+import com.seohan.file.Service.FileService;
 
 @RestController
 public class FileController {
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 	 @Autowired
-	    private FileUploadDownloadService service;
+	    private FileService service;
 	 
 	    @PostMapping("/uploadFile")
 	    public FileUploadResponse uploadFile(String destPath, @RequestParam("file") MultipartFile file) {
