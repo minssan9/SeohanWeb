@@ -57,7 +57,7 @@ class EtcRestController {
 		File file = new File("/SeoHan/ITDAMAGE/" + itDamage.getFile().getName());
 		InputStream is = FileUtils.openInputStream(file);
 		return new InputStreamResource(is);
-	}
+	} 
 	
 	@GetMapping( "/food")
 	public @ResponseBody List<Food> FoodList(Dto dto) throws Exception {  
@@ -73,7 +73,7 @@ class EtcRestController {
 		return damageList;
 	}
 
-	@PutMapping("/itdamage/put")
+	@PutMapping("/itdamage/save")
 	public void putItDamage(@RequestBody ItDamage itDamage ) throws Exception { 		
 		etcService.putItDamage(itDamage ); 		
 	}

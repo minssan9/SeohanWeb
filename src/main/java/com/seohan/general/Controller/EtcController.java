@@ -45,7 +45,7 @@ public class EtcController {
 		return "general/itDamage/list";
 	}
 	
-	@RequestMapping("/itDamage/New")
+	@RequestMapping("/itdamage/new")
 	public String itDamageNew(Dto dto) { 
 		return "general/itDamage/new";
 	} 
