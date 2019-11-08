@@ -1,5 +1,4 @@
 package com.seohan.book.Domain;
- 
 
 import lombok.Data;
 import lombok.ToString;

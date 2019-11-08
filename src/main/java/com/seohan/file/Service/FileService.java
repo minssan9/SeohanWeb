@@ -1,7 +1,10 @@
 package com.seohan.file.Service;
 
 import java.net.MalformedURLException;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -10,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.seohan.config.FileUploadProperties;
+import com.seohan.Config.FileUploadProperties;
 import com.seohan.file.Domain.FileDownloadException;
 import com.seohan.file.Domain.FileUploadException;
 

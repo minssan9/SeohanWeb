@@ -3,21 +3,19 @@ package com.seohan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-import com.seohan.config.FTPProperties;
-import com.seohan.config.FileUploadProperties;
 
 @SpringBootApplication
-@EnableAutoConfiguration
-@EnableConfigurationProperties({
-    FileUploadProperties.class,
-    FTPProperties.class
-})
-public class SeohanWebPubApplication {
-
+@EnableAutoConfiguration 
+public class SeohanWebPubApplication extends SpringBootServletInitializer{
+	@Override 
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return builder.sources(SeohanWebPubApplication.class); 
+	}
 	public static void main(String[] args) {
 		SpringApplication.run(SeohanWebPubApplication.class, args);
 	}
-
 }
+

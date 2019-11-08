@@ -28,8 +28,8 @@ import lombok.extern.slf4j.Slf4j;
 
 
 @RequestMapping("/general")
-@RestController
 @Slf4j 
+@RestController
 class EtcRestController {  
 	@Autowired
 	private EtcService etcService;

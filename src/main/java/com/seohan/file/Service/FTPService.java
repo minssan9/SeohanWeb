@@ -14,7 +14,7 @@ import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 import com.jcraft.jsch.SftpException;
-import com.seohan.config.FTPProperties;
+import com.seohan.Config.FTPProperties;
 
 @Service
 public class FTPService { 
