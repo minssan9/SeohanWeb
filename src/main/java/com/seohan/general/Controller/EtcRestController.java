@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.seohan.file.Service.FTPService;
+//import com.seohan.file.Service.FTPService;
 import com.seohan.general.Domain.Dto;
 import com.seohan.general.Domain.Food;
 import com.seohan.general.Domain.ItDamage;
@@ -83,9 +84,10 @@ class EtcRestController {
 		etcService.postItDamage(itDamage); 		
 	}	
 
-	@PostMapping("/ftptest")
+	@GetMapping("/ftptest")
 	public void ftptest()  throws Exception { 		
-		ftpService.connect();	 
+		ftpService.open();
+		ftpService.close(); 
 	}	
 	
     // @Value("${temp.path}") private String tempPath; 
