@@ -23,7 +23,7 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 @MapperScan(basePackages = { "com.seohan.general.Mapper" })
 @EnableTransactionManagement
-class DatabaseConfiguration {
+class JPAConfiguration {
 
 	@Autowired
 	private ApplicationContext applicationContext;
