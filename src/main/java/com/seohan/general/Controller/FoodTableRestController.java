@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.seohan.file.Service.FTPService;
 import com.seohan.general.Domain.FoodTable;
 import com.seohan.general.Domain.It_Damage;
+import com.seohan.general.Mapper.FoodTableRepository;
 import com.seohan.general.Service.FoodTableService;
 
 import lombok.extern.slf4j.Slf4j; 
@@ -29,6 +30,10 @@ import lombok.extern.slf4j.Slf4j;
 class FoodTableRestController {  
 	@Autowired
 	private FoodTableService foodTableService;
+
+	@Autowired
+	private FoodTableRepository foodTableRepo;
+	
 	@Autowired
 	private FTPService ftpService;
 
