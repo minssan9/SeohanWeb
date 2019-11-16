@@ -19,11 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.seohan.file.Service.FTPService;
-//import com.seohan.file.Service.FTPService;
-import com.seohan.general.Domain.Dto;
-import com.seohan.general.Domain.Food;
-import com.seohan.general.Domain.ItDamage;
-import com.seohan.general.Service.EtcService;
+import com.seohan.general.Domain.It_Damage;
+import com.seohan.general.Service.ItDamageService;
 
 import lombok.extern.slf4j.Slf4j; 
 
@@ -31,9 +28,9 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/general")
 @Slf4j 
 @RestController
-class EtcRestController {  
+class ItDamageRestController {  
 	@Autowired
-	private EtcService etcService;
+	private ItDamageService itDamageService;
 	@Autowired
 	private FTPService ftpService;
 
@@ -42,7 +39,7 @@ class EtcRestController {
 	
 	
 	@RequestMapping("/fileDownload")
-	public  Resource fileDownload( ItDamage itDamage) throws Exception { 
+	public  Resource fileDownload( It_Damage itDamage) throws Exception { 
 		
 //		ftpFileWriter.open();
 //		if(ftpFileWriter.isConnected()){
@@ -55,33 +52,25 @@ class EtcRestController {
 //		}
 //		ftpFileWriter.close();
 		
-		File file = new File("/SeoHan/ITDAMAGE/" + itDamage.getFile().getName());
+		File file = new File("/SeoHan/ITDAMAGE/" + itDamage.getAttach());
 		InputStream is = FileUtils.openInputStream(file);
 		return new InputStreamResource(is);
 	} 
-	
-	@GetMapping( "/food")
-	public @ResponseBody List<Food> FoodList(Dto dto) throws Exception {  
-		List<Food> foodList = new ArrayList<Food>();
-		foodList = etcService.foodList(dto);  
-		return foodList;
-	} 
-
+	 
 	@GetMapping("/itdamage")
-	public @ResponseBody List<ItDamage> iddamage() throws Exception { 
-		List<ItDamage> damageList = new ArrayList<ItDamage>();  
-		damageList = etcService.itDamage(); 
+	public @ResponseBody List<It_Damage> iddamage() throws Exception { 
+		List<It_Damage> damageList = itDamageService.itDamage(); 
 		return damageList;
 	}
 
 	@PutMapping("/itdamage/save")
-	public void putItDamage(@RequestBody ItDamage itDamage ) throws Exception { 		
-		etcService.putItDamage(itDamage ); 		
+	public void putItDamage(@RequestBody It_Damage itDamage ) throws Exception { 		
+		itDamageService.saveItDamage(itDamage ); 		
 	}
 
 	@PostMapping("/itdamage/post")
-	public void postItDamage(@RequestBody ItDamage itDamage )  throws Exception { 		
-		etcService.postItDamage(itDamage); 		
+	public void postItDamage(@RequestBody It_Damage itDamage )  throws Exception { 		
+		itDamageService.saveItDamage(itDamage); 		
 	}	
 
 	@GetMapping("/ftptest")

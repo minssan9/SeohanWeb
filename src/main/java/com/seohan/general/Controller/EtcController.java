@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import com.seohan.general.Domain.Dto;
-import com.seohan.general.Service.EtcService;
+import com.seohan.general.Service.FoodTableService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,11 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/generalPage")
 @Controller
-public class EtcController {
-
-	@Autowired
-	private EtcService etcService;
-
+public class EtcController { 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd");
 	
