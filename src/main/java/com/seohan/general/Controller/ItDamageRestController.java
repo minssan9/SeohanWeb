@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.seohan.file.Service.FTPService;
 import com.seohan.general.Domain.It_Damage;
+import com.seohan.general.Mapper.It_DamageRepository;
 import com.seohan.general.Service.ItDamageService;
 
 import lombok.extern.slf4j.Slf4j; 
@@ -31,6 +32,9 @@ import lombok.extern.slf4j.Slf4j;
 class ItDamageRestController {  
 	@Autowired
 	private ItDamageService itDamageService;
+	@Autowired
+	private It_DamageRepository it_DamageRepo;
+	
 	@Autowired
 	private FTPService ftpService;
 
@@ -59,8 +63,7 @@ class ItDamageRestController {
 	 
 	@GetMapping("/itdamage")
 	public @ResponseBody List<It_Damage> iddamage() throws Exception { 
-		List<It_Damage> damageList = itDamageService.itDamage(); 
-		return damageList;
+		return it_DamageRepo.it_DamageListbyStat("01");
 	}
 
 	@PutMapping("/itdamage/save")
