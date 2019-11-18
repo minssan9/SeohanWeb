@@ -31,8 +31,16 @@ public class TemplateController {
 		return "general/food/food";
 	}
 
-	@RequestMapping("/index")
+	@RequestMapping("/hello")
 	public String hello() {
+		return "general/account/hello";
+	}
+	@RequestMapping("/my")
+	public String my() {
+		return "general/account/my";
+	}
+	@RequestMapping("/index")
+	public String index() {
 		return "index";
 	}
 	
