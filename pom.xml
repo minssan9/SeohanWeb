@@ -73,9 +73,7 @@
 			<version>2.7.1</version>
 			<scope>test</scope>
 		</dependency>
-
-
-<<<<<<< HEAD
+ 
 
 		<!-- DBMS dependecies -->
 		<dependency>
@@ -86,8 +84,8 @@
 <!-- 			<groupId>org.mybatis.spring.boot</groupId> -->
 <!-- 			<artifactId>mybatis-spring-boot-starter</artifactId> -->
 <!-- 			<version>2.1.0</version> -->
-<!-- 		</dependency> -->
-=======
+<!-- 		</dependency> --> 
+
 		<!-- DBCP -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -101,8 +99,8 @@
 		<!-- <groupId>org.mybatis.spring.boot</groupId> -->
 		<!-- <artifactId>mybatis-spring-boot-starter</artifactId> -->
 		<!-- <version>2.1.0</version> -->
-		<!-- </dependency> -->
->>>>>>> b0b94a761d0ea5a02d98f3d07aa8d0a55bc341f8
+		<!-- </dependency> --> 
+		
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
