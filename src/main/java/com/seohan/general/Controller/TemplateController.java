@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/generalPage")
 @Controller
-public class EtcController { 
+public class TemplateController { 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd");
 	
@@ -37,12 +37,17 @@ public class EtcController {
 	}
 	
 	@RequestMapping("/itdamage")
-	public String selectItDamage() {		
+	public String itDamageList() {		
 		return "general/itDamage/list";
 	}
 	
 	@RequestMapping("/itdamage/new")
-	public String itDamageNew(Dto dto) { 
+	public String itDamageNew() { 
 		return "general/itDamage/new";
+	} 
+	
+	@RequestMapping("/temperature")
+	public String temperatureList() { 
+		return "general/temperature/list";
 	} 
 }
