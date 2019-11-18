@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>식단표</title>
-	<link rel="SHORTCUT ICON" href="../../static/resources/img/seohanico.gif" />
+	<link rel="SHORTCUT ICON" href="../../static/img/seohanico.gif" />
 
 	<script src="/webjars/jquery/dist/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -51,7 +51,7 @@
 				querydate = today.getFullYear() + '' + ('00' + (today.getMonth() + 1)).slice(-2) + '' + today.getDate();
 				this.datepicker = today.getFullYear() + '-' + ('00' + (today.getMonth() + 1)).slice(-2) + '-' + today.getDate();;
 
-				axios.get('/general/food?querydate=' + querydate)
+				axios.get('/general/food?gdate=' + querydate)
 					.then(response => {
 						this.dataList = response.data;
 					})
@@ -62,7 +62,7 @@
 			methods: {
 				getData: function () {
 					querydate = this.datepicker.substr(0, 4) + this.datepicker.substr(5, 2) + this.datepicker.substr(8, 2);
-					axios.get('/general/food?querydate=' + querydate)
+					axios.get('/general/food?gdate=' + querydate)
 						.then(response => {
 							this.dataList = response.data;
 						})

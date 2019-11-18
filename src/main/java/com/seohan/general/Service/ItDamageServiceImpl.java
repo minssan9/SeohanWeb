@@ -8,37 +8,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.seohan.general.Domain.Dto;
-import com.seohan.general.Domain.Food;
-import com.seohan.general.Domain.ItDamage;
+import com.seohan.general.Domain.FoodTable;
+import com.seohan.general.Domain.It_Damage;
 import com.seohan.general.Domain.SmsModel;
-import com.seohan.general.Mapper.EtcMapper;
+import com.seohan.general.Mapper.It_DamageRepository;
 import com.seohan.global.Domain.Response;
 
 @Service
-public class EtcServiceImpl implements EtcService {
+public class ItDamageServiceImpl implements ItDamageService {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 
-	@Autowired
-	private EtcMapper etcMapper; 
-	
-	@Override
-	public List<Food> foodList(Dto dto) throws Exception { 
-		return etcMapper.foodList(dto);
-	}
- 
+//	@Autowired
+//	private EtcMapper etcMapper; 
 
+    @Autowired
+    It_DamageRepository it_DamageRepository;
+      
 	@Override
-	public List<ItDamage> itDamage() throws Exception {
-		return etcMapper.itDamage();
+	public List<It_Damage> itDamage() throws Exception {
+//		return etcMapper.itDamage();
+		return it_DamageRepository.it_DamageListbyStat("01");
 	}
 
 	@Override
-	public void putItDamage(ItDamage itDamage) throws Exception { 
-		etcMapper.postItDamage(itDamage) ; 
+	public void saveItDamage(It_Damage itDamage) throws Exception { 
+//		etcMapper.postItDamage(itDamage) ;		
+		it_DamageRepository.save(itDamage);
 	}
 
 	@Override
-	public void postItDamage(ItDamage itDamage) throws Exception {
+	public void updateItDamage(It_Damage itDamage) throws Exception {
 		Calendar cal = Calendar.getInstance();
 		String nowDate = sdf.format(cal.getTime());		 
 		SmsModel smsModel = new SmsModel();
@@ -50,6 +49,7 @@ public class EtcServiceImpl implements EtcService {
 		smsModel.setPhone(itDamage.getRtel());
 		smsModel.setSendNo("043-530-3174");
 		
-		etcMapper.postItDamage(itDamage);
+		it_DamageRepository.save(itDamage);
+//		etcMapper.postItDamage(itDamage);
 	} 
 }
