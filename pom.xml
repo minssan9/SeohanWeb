@@ -21,6 +21,11 @@
 	</properties>
 
 	<dependencies>
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.boot</groupId> -->
+		<!-- <artifactId>spring-boot-starter-tomcat</artifactId> -->
+		<!-- <scope>provided</scope> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
@@ -38,24 +43,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.boot</groupId> -->
-<!-- 			<artifactId>spring-boot-starter-tomcat</artifactId> -->
-<!-- 			<scope>provided</scope> -->
-<!-- 		</dependency> -->
 		<!-- //코드 수정시 자동 빌드 -->
 		<dependency>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-devtools</artifactId>
-		<scope>runtime</scope>
-		<optional>true</optional>
-		</dependency>
-
-		<!-- //thymeleaf 템플릿 -->
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
 		</dependency>
+				
 
 		<!-- FTP -->
 		<dependency>
@@ -73,18 +68,28 @@
 			<version>2.7.1</version>
 			<scope>test</scope>
 		</dependency>
- 
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.50</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.kuljaninemir</groupId>
+			<artifactId>spring-boot-ftp-client</artifactId>
+			<version>2.0.05</version>
+		</dependency>
+
 
 		<!-- DBMS dependecies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.mybatis.spring.boot</groupId> -->
-<!-- 			<artifactId>mybatis-spring-boot-starter</artifactId> -->
-<!-- 			<version>2.1.0</version> -->
-<!-- 		</dependency> --> 
+		<!-- <dependency> -->
+		<!-- <groupId>org.mybatis.spring.boot</groupId> -->
+		<!-- <artifactId>mybatis-spring-boot-starter</artifactId> -->
+		<!-- <version>2.1.0</version> -->
+		<!-- </dependency> -->
 
 		<!-- DBCP -->
 		<dependency>
@@ -99,8 +104,8 @@
 		<!-- <groupId>org.mybatis.spring.boot</groupId> -->
 		<!-- <artifactId>mybatis-spring-boot-starter</artifactId> -->
 		<!-- <version>2.1.0</version> -->
-		<!-- </dependency> --> 
-		
+		<!-- </dependency> -->
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -121,7 +126,7 @@
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
-		</dependency>  
+		</dependency>
 		<dependency>
 			<groupId>net.sf.jt400</groupId>
 			<artifactId>jt400</artifactId>
@@ -145,17 +150,14 @@
 		</dependency>
 
 
+		<!-- ETC -->
+		<!-- //thymeleaf 템플릿 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 
-		<dependency>
-			<groupId>com.jcraft</groupId>
-			<artifactId>jsch</artifactId>
-			<version>0.1.50</version>
-		</dependency>
-		<dependency>
-			<groupId>com.github.kuljaninemir</groupId>
-			<artifactId>spring-boot-ftp-client</artifactId>
-			<version>2.0.05</version>
-		</dependency>
+		<!-- WebJar -->
 		<dependency>
 			<groupId>org.springframework.restdocs</groupId>
 			<artifactId>spring-restdocs-mockmvc</artifactId>
