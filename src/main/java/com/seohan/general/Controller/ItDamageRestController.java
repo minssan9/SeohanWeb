@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,20 +44,20 @@ class ItDamageRestController {
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd"); 
 	
 	@GetMapping("/itdamage/file")
-	public  Resource fileDownload(It_Damage itDamage) throws Exception { 
+	public  Resource fileDownload(@RequestParam("attach") String attach) throws Exception { 
 		
 		ftpService.open();
 //		if(ftpService.isConnected()){
-		    ftpService.downloadFile("/SeoHan/ITDAMAGE/" + itDamage.getAttach(),  "C:/temp/" + itDamage.getAttach());
-//		    ftpService.saveFile(inputStream, "/SeoHan/ITDAMAGE/" + itDamage.getAttach(), false);
-//		    ftpService.saveFile(sourcepath, "C:/temp/" + itDamage.getAttach(), true);
+		    ftpService.downloadFile("/SeoHan/ITDAMAGE/" + attach,  "C:/temp/" + attach);
+//		    ftpService.saveFile(inputStream, "/SeoHan/ITDAMAGE/" + fileName, false);
+//		    ftpService.saveFile(sourcepath, "C:/temp/" + fileName, true);
 //		    ftpFileWriter.loadFile(path, outputstream);
 //		    ftpFileWriter.saveFile(inputstream, remotepath, false);
 //		    ftpFileWriter.saveFile(sourcepath, destpath, true);
 //		}
 		ftpService.close();
 		
-		File file = new File("C:/temp/" + itDamage.getAttach());
+		File file = new File("C:/temp/" + attach);
 		InputStream is = FileUtils.openInputStream(file);
 		return new InputStreamResource(is);
 	} 

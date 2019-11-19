@@ -100,7 +100,7 @@
 					})
 				},
 				fileDown: function (data) { 
-					axios.get('/general/itdamage/file', data) 					 
+					axios.get('/general/itdamage/file', data.attach) 
 					.catch(e => {
 						console.log(e);
 					})
