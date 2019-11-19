@@ -36,9 +36,9 @@
 					<td class="longlen" ><a v-bind:href="data.rtel">{{data.rtel}}</a></td>
 					<td class="longlen" >{{data.rtxt}}</td>
 					<td class="genre">
-						<!-- <button class="btn btn-default btn-sm" type="button"
-							onClick="location.href='/file?fileName={{data.fileName}}""> -->
-						다운로드
+						<button class="btn btn-default btn-sm" type="button"
+							@click="fileDown(data)">다운로드</button>
+						
 					</td>
 					</td>
 					<td class="genre" >
@@ -98,7 +98,13 @@
 					.catch(e => {
 						console.log(e);
 					})
-				}
+				},
+				fileDown: function (data) { 
+					axios.get('/general/itdamage/file', data) 					 
+					.catch(e => {
+						console.log(e);
+					})
+				} 			
 			},
 			mounted: function () {
 			}

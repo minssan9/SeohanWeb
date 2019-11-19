@@ -29,7 +29,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/general")
 @Slf4j 
 @RestController
-class ItDamageRestController {  
+class ItDamageRestController { 
+	
 	@Autowired
 	private ItDamageService itDamageService;
 	@Autowired
@@ -39,24 +40,23 @@ class ItDamageRestController {
 	private FTPService ftpService;
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd");
+	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd"); 
 	
-	
-	@RequestMapping("/fileDownload")
-	public  Resource fileDownload( It_Damage itDamage) throws Exception { 
+	@GetMapping("/itdamage/file")
+	public  Resource fileDownload(It_Damage itDamage) throws Exception { 
 		
-//		ftpFileWriter.open();
-//		if(ftpFileWriter.isConnected()){
-//		    ftpFileWriter.loadFile("/SeoHan/ITDAMAGE/" + itDamage.getFileName(),  "C:/temp/" + itDamage.getFileName());
-//		    ftpFileWriter.saveFile(inputstream, "/SeoHan/ITDAMAGE/" + itDamage.getFileName(), false);
-//		    ftpFileWriter.saveFile(sourcepath, "C:/temp/" + itDamage.getFileName(), true);
-////		    ftpFileWriter.loadFile(path, outputstream);
-////		    ftpFileWriter.saveFile(inputstream, remotepath, false);
-////		    ftpFileWriter.saveFile(sourcepath, destpath, true);
+		ftpService.open();
+//		if(ftpService.isConnected()){
+		    ftpService.downloadFile("/SeoHan/ITDAMAGE/" + itDamage.getAttach(),  "C:/temp/" + itDamage.getAttach());
+//		    ftpService.saveFile(inputStream, "/SeoHan/ITDAMAGE/" + itDamage.getAttach(), false);
+//		    ftpService.saveFile(sourcepath, "C:/temp/" + itDamage.getAttach(), true);
+//		    ftpFileWriter.loadFile(path, outputstream);
+//		    ftpFileWriter.saveFile(inputstream, remotepath, false);
+//		    ftpFileWriter.saveFile(sourcepath, destpath, true);
 //		}
-//		ftpFileWriter.close();
+		ftpService.close();
 		
-		File file = new File("/SeoHan/ITDAMAGE/" + itDamage.getAttach());
+		File file = new File("C:/temp/" + itDamage.getAttach());
 		InputStream is = FileUtils.openInputStream(file);
 		return new InputStreamResource(is);
 	} 
