@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,13 +26,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.seohan.file.Domain.FileUploadResponse;
 import com.seohan.file.Service.FileService;
 
+@RequestMapping("/file")
 @RestController
 public class FileController {
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 	 @Autowired
 	    private FileService service;
 	 
-	    @PostMapping("/uploadFile")
+	    @PostMapping("/upload")
 	    public FileUploadResponse uploadFile(String destPath, @RequestParam("file") MultipartFile file) {
 	    	
 	    	String fileName = service.storeFile(destPath, file);	        
@@ -51,7 +53,7 @@ public class FileController {
 	                .collect(Collectors.toList());
 	    }
 	    
-	    @GetMapping("/downloadFile/{fileName:.+}")
+	    @GetMapping("/download/{fileName:.+}")
 	    public ResponseEntity<Resource> downloadFile( 
 	    		 @PathVariable String fileName, HttpServletRequest request){
 	    	 // Load file as Resource

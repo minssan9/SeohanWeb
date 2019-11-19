@@ -11,17 +11,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter { 
 	
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/css/**", "/script/**", "image/**", "/fonts/**", "lib/**");
-	}
+//	@Override
+//	public void configure(WebSecurity web) throws Exception {
+//		web.ignoring().antMatchers("/css/**", "/script/**", "image/**", "/fonts/**", "lib/**");
+//	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 			.antMatchers("/admin/**").hasRole("ADMIN")
-			.antMatchers("/", "/hello").permitAll().anyRequest().authenticated().and().formLogin()
-			.and().httpBasic();
+			.antMatchers("/", "/hello")
+			.permitAll().anyRequest().authenticated().and().formLogin().and().httpBasic();
 	}
 	
 	@Bean

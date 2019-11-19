@@ -1,10 +1,17 @@
 package com.seohan.general.Controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,19 +53,21 @@ class ETCRestController {
 		return temperatureRepo.TemperatureDataList(temperatureData.getCO_GB(), temperatureData.getCO_GB());
 				
 	}   
-    // @Value("${temp.path}") private String tempPath; 
+//     private String tempPath = "C:/"; 
 	
     // @RequestMapping(value = "/upload", method = RequestMethod.POST)
     // public List<MultipartFile> upload(MultipartFile[] files) {
 	// 	return null;
   
     //     // PROCESS... 
-	// }
-	
-	// @GetMapping("/{id}")
-	// public Resource download(@PathVariable String id) throws IOException {
-	// 	File file = new File(tempPath + id);
-	// 	InputStream is = FileUtils.openInputStream(file);
-	// 	return new InputStreamResource(is);
-	// }
+//	// }
+//	
+//	 @GetMapping("/file")
+//	 public Resource download(@PathVariable String fileName) throws IOException {
+//		 
+//	 	File file = new File(tempPath + fileName);
+//	 	InputStream is = FileUtils.openInputStream(file);
+//	 	ftpService.open();
+//	 	return new InputStreamResource(is);
+//	 }
 }
