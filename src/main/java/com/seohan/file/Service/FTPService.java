@@ -45,13 +45,13 @@ public class FTPService {
 			throw new IOException("Exception in connecting to FTP Server");
 		}
 		System.out.println("FTP connection success!");
-		ftp.login(ID, "EDPS");
+		ftp.login(ID, PASSWORD);
 	}
 	 
-	public void downloadFile(String source, String destination) throws IOException {
+	public boolean downloadFile(String source, String destination) throws IOException {
 		File destinationFile = new File(destination);
 		OutputStream out1 = new BufferedOutputStream(new FileOutputStream(destinationFile)); 
-	    ftp.retrieveFile(source, out1);
+		return   ftp.retrieveFile(source, out1);
 	}
 	public void putFileToPath(File file, String path) throws IOException {
 	    ftp.storeFile(path, new FileInputStream(file));

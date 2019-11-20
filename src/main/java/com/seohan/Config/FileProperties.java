@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 @Component
 @Configuration
-public class FileUploadProperties {
+public class FileProperties {
 	@Value("${file.upload-dir}")
     private String uploadDir;
 }

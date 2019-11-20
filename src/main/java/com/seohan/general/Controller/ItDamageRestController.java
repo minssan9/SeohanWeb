@@ -1,27 +1,29 @@
 package com.seohan.general.Controller;
 
 import java.io.File;
-import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.seohan.Config.FileProperties;
+import com.seohan.file.Domain.FileDownloadException;
 import com.seohan.file.Service.FTPService;
 import com.seohan.general.Domain.It_Damage;
 import com.seohan.general.Mapper.It_DamageRepository;
@@ -43,32 +45,37 @@ public class ItDamageRestController {
 	@Autowired
 	private FTPService ftpService; 
  
+	@Autowired
+	private FileProperties fileproperties;
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd"); 
 	
 	@GetMapping(value="/itdamage/file", produces="text/plain;charset=UTF-8")
-	public  Resource fileDownload(@PathVariable("attach") String attach, 
-			HttpServletRequest request, HttpServletResponse response) throws Exception { 
-		
-//		ftpService.open();
-//		if(ftpService.isConnected()){
-		    ftpService.downloadFile("/SeoHan/ITDAMAGE/" + attach,  "C:/temp/" + attach);
-//		    ftpService.saveFile(inputStream, "/SeoHan/ITDAMAGE/" + fileName, false);
-//		    ftpService.saveFile(sourcepath, "C:/temp/" + fileName, true);
-//		    ftpFileWriter.loadFile(path, outputstream);
-//		    ftpFileWriter.saveFile(inputstream, remotepath, false);
-//		    ftpFileWriter.saveFile(sourcepath, destpath, true);
-//		}
-//		ftpService.close();
-		
-	    Path fileLocation = null ;
-		File file = new File("C:/temp/" + attach);
-		InputStream is = FileUtils.openInputStream(file);
+	public  Resource fileDownload(@RequestParam("attach") String attach, 
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		try {
+		    Path fileLocation = null;
+		    File theDirs = new File("C:\\SeoHan\\ITDAMAGE");
+		    theDirs.mkdirs();
+		    
+		    boolean success = ftpService.downloadFile("/SeoHan/ITDAMAGE/" + attach,  "C:/SeoHan/ITDAMAGE/" + attach);		    
+//		    File file = new File("C:/SeoHan/ITDAMAGE/" + attach);
+		    
+		    fileLocation = Paths.get(fileproperties.getUploadDir())
+		            .toAbsolutePath().normalize();   
+		    
+			Path filePath = fileLocation.resolve(attach).normalize();
+			Resource resource = new UrlResource(filePath.toUri());
 
-		Path filePath = fileLocation .resolve(file.getPath()).normalize();
-		Resource resource = new UrlResource(filePath.toUri());
-		return resource ;
+			if (resource.exists()) {
+				return resource;
+			} else {
+				throw new FileDownloadException(attach + " 파일을 찾을 수 없습니다.");
+			}
+		} catch (MalformedURLException e) {
+			throw new FileDownloadException(attach + " 파일을 찾을 수 없습니다.", e);
+		} 
 	} 
 	 
 	@GetMapping("/itdamage")
