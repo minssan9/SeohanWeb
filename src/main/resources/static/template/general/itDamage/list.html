@@ -35,10 +35,14 @@
 					<td class="genre" >{{data.rname}}</td>
 					<td class="longlen" ><a v-bind:href="data.rtel">{{data.rtel}}</a></td>
 					<td class="longlen" >{{data.rtxt}}</td>
-					<td class="genre">
-						<button class="btn btn-default btn-sm" type="button"
-							@click="fileDown(data)">다운로드</button>
-						
+					<td class="genre"  >
+						<div v-if="data.attach === '' ">
+						</div>
+						<div v-else>
+							<button 
+								class="btn btn-default btn-sm" type="button"
+								@click="fileDown(data)">다운로드</button>
+						</div>
 					</td>
 					</td>
 					<td class="genre" >
@@ -100,9 +104,9 @@
 					})
 					.getData()
 				},
-				fileDown: function () {
+				fileDown: function (data) {
 					attach = encodeURI(data.attach);
-					axios.get('/general/itdamage/file') 
+					axios.get('/general/itdamage/file?attach=' + attach) 
 					.catch(e => {
 						console.log(e);
 					})

@@ -2,20 +2,23 @@ package com.seohan.general.Controller;
 
 import java.io.File;
 import java.io.InputStream;
+import java.nio.file.Path;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/general")
 @Slf4j 
 @RestController
-class ItDamageRestController { 
+public class ItDamageRestController { 
 	
 	@Autowired
 	private ItDamageService itDamageService;
@@ -38,15 +41,17 @@ class ItDamageRestController {
 	private It_DamageRepository it_DamageRepo;
 	
 	@Autowired
-	private FTPService ftpService;
+	private FTPService ftpService; 
+ 
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd"); 
 	
-	@GetMapping("/itdamage/file")
-	public  Resource fileDownload(@RequestParam("attach") String attach) throws Exception { 
+	@GetMapping(value="/itdamage/file", produces="text/plain;charset=UTF-8")
+	public  Resource fileDownload(@PathVariable("attach") String attach, 
+			HttpServletRequest request, HttpServletResponse response) throws Exception { 
 		
-		ftpService.open();
+//		ftpService.open();
 //		if(ftpService.isConnected()){
 		    ftpService.downloadFile("/SeoHan/ITDAMAGE/" + attach,  "C:/temp/" + attach);
 //		    ftpService.saveFile(inputStream, "/SeoHan/ITDAMAGE/" + fileName, false);
@@ -55,11 +60,15 @@ class ItDamageRestController {
 //		    ftpFileWriter.saveFile(inputstream, remotepath, false);
 //		    ftpFileWriter.saveFile(sourcepath, destpath, true);
 //		}
-		ftpService.close();
+//		ftpService.close();
 		
+	    Path fileLocation = null ;
 		File file = new File("C:/temp/" + attach);
 		InputStream is = FileUtils.openInputStream(file);
-		return new InputStreamResource(is);
+
+		Path filePath = fileLocation .resolve(file.getPath()).normalize();
+		Resource resource = new UrlResource(filePath.toUri());
+		return resource ;
 	} 
 	 
 	@GetMapping("/itdamage")

@@ -28,7 +28,7 @@ import lombok.Data;
 public class FTPProperties {  
 	private String url; // FTP 접속지 IP
 	private int    port;             // FTP 접속지 Port
-	private String id;// ID
-    private String password;        // PASSWORD
+	private String id; 
+    private String password; 
     private String path;
 } 
