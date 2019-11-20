@@ -13,7 +13,7 @@ import org.springframework.context.annotation.PropertySource;
 @ComponentScan 
 @EnableAutoConfiguration
 @Configuration
-@PropertySource(value = { "classpath:${jdbc.properties}" })
+@PropertySource(value = { "classpath:${account.config}" })
 public class SeohanWebApplication extends SpringBootServletInitializer {
 
 	@Override

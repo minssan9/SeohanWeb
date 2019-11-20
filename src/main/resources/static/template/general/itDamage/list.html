@@ -98,9 +98,11 @@
 					.catch(e => {
 						console.log(e);
 					})
+					.getData()
 				},
-				fileDown: function (data) { 
-					axios.get('/general/itdamage/file', data.attach) 
+				fileDown: function () {
+					attach = encodeURI(data.attach);
+					axios.get('/general/itdamage/file') 
 					.catch(e => {
 						console.log(e);
 					})
