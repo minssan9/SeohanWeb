@@ -50,36 +50,36 @@ public class ItDamageRestController {
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd"); 
-	
-	@GetMapping(value="/itdamage/file", produces="text/plain;charset=UTF-8")
-	public  Resource fileDownload(@RequestParam("attach") String attach, 
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		try {
-		    Path fileLocation = null;
-		    File theDirs = new File("C:\\SeoHan\\ITDAMAGE");
-		    theDirs.mkdirs();
-		    
-		    boolean success = ftpService.downloadFile("/SeoHan/ITDAMAGE/" + attach,  "C:/SeoHan/ITDAMAGE/" + attach);		    
-//		    File file = new File("C:/SeoHan/ITDAMAGE/" + attach);
-		    
-		    fileLocation = Paths.get(fileproperties.getUploadDir())
-		            .toAbsolutePath().normalize();   
-		    
-			Path filePath = fileLocation.resolve(attach).normalize();
-			Resource resource = new UrlResource(filePath.toUri());
-
-			if (resource.exists()) {
-				return resource;
-			} else {
-				throw new FileDownloadException(attach + " 파일을 찾을 수 없습니다.");
-			}
-		} catch (MalformedURLException e) {
-			throw new FileDownloadException(attach + " 파일을 찾을 수 없습니다.", e);
-		} 
-	} 
+//	
+//	@GetMapping(value="/itdamage/file", produces="text/plain;charset=UTF-8")
+//	public  Resource fileDownload(@RequestParam("attach") String attach, 
+//			HttpServletRequest request, HttpServletResponse response) throws Exception {
+//		try {
+//		    Path fileLocation = null;
+//		    File theDirs = new File("C:\\SeoHan\\ITDAMAGE");
+//		    theDirs.mkdirs();
+//		    
+//		    boolean success = ftpService.downloadFile("/SeoHan/ITDAMAGE/" + attach,  "C:/SeoHan/ITDAMAGE/" + attach);		    
+////		    File file = new File("C:/SeoHan/ITDAMAGE/" + attach);
+//		    
+//		    fileLocation = Paths.get(fileproperties.getUploadDir())
+//		            .toAbsolutePath().normalize();   
+//		    
+//			Path filePath = fileLocation.resolve(attach).normalize();
+//			Resource resource = new UrlResource(filePath.toUri());
+//
+//			if (resource.exists()) {
+//				return resource;
+//			} else {
+//				throw new FileDownloadException(attach + " 파일을 찾을 수 없습니다.");
+//			}
+//		} catch (MalformedURLException e) {
+//			throw new FileDownloadException(attach + " 파일을 찾을 수 없습니다.", e);
+//		} 
+//	} 
 	 
 	@GetMapping("/itdamage")
-	public @ResponseBody List<It_Damage> iddamage() throws Exception { 
+	public @ResponseBody List<It_Damage> itDamage() throws Exception { 
 		return it_DamageRepo.it_DamageListbyStat("01");
 	}
 

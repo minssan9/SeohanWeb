@@ -92,17 +92,12 @@
 							console.log(e);
 						})
 				},
-				enditdamage: function (data) {
-					// var date = new Date();
-					// dateTimeString = date.getFullYear() + ("0" + (date.getMonth() + 1)).slice(-2) 
-					// 				+ ("0" + date.getDate()).slice(-2) + ("0" + date.getHours() + 1 ).slice(-2) 
-					// 				+ ("0" + date.getMinutes()).slice(-2) + ("0" + date.getSeconds()).slice(-2) ;
-					// data.ctime = dateTimeString;
+				enditdamage: function (data) { 
 					axios.post('/general/itdamage/post', data ) 					 
 					.catch(e => {
 						console.log(e);
 					})
-					.getData()
+					.getData();
 				},
 				fileDown: function (data) {
 					attach = encodeURI(data.attach);
