@@ -1,18 +1,12 @@
 package com.seohan.general.Controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,7 +38,9 @@ class ETCRestController {
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd");
 	 
 	@GetMapping( "/food")
-	public @ResponseBody List<FoodTable> FoodList(FoodTable foodTable) throws Exception {		
+	public @ResponseBody List<FoodTable> FoodList(@RequestParam String gdate) throws Exception {		
+		FoodTable foodTable= new FoodTable();
+		foodTable.setGdate(gdate);
 		return foodTableRepo.foodTableListbyGdate(foodTable.getGdate());  
 	}   
 
