@@ -50,9 +50,9 @@ public class FileService {
 		}
 	}
 
-	public Resource loadFileAsResource(String fileName) {
+	public Resource loadFileAsResource(String path, String fileName) {
 		try {
-			Path filePath = this.fileLocation.resolve(fileName).normalize();
+			Path filePath = this.fileLocation.resolve(path + fileName).normalize();
 			Resource resource = new UrlResource(filePath.toUri());
 
 			if (resource.exists()) {

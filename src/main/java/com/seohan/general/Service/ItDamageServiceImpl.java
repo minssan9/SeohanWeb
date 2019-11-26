@@ -31,13 +31,7 @@ public class ItDamageServiceImpl implements ItDamageService {
 	}
 
 	@Override
-	public void saveItDamage(It_Damage itDamage) throws Exception { 
-//		etcMapper.postItDamage(itDamage) ;		
-		it_DamageRepository.save(itDamage);
-	}
-
-	@Override
-	public void updateItDamage(It_Damage itDamage) throws Exception {
+	public It_Damage save(It_Damage itDamage) throws Exception {
 		Calendar cal = Calendar.getInstance();
 		String nowDate = sdf.format(cal.getTime());		 
 		SmsModel smsModel = new SmsModel();
@@ -49,7 +43,7 @@ public class ItDamageServiceImpl implements ItDamageService {
 		smsModel.setPhone(itDamage.getRtel());
 		smsModel.setSendNo("043-530-3174");
 		
-		it_DamageRepository.save(itDamage);
-//		etcMapper.postItDamage(itDamage);
+		it_DamageRepository.save(itDamage); 
+		return itDamage;
 	} 
 }

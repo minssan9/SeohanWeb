@@ -53,11 +53,11 @@ public class FileController {
 	                .collect(Collectors.toList());
 	    }
 	    
-	    @GetMapping("/download/{fileName:.+}")
+	    @GetMapping("/{fileName:.+}")
 	    public ResponseEntity<Resource> downloadFile( 
 	    		 @PathVariable String fileName, HttpServletRequest request){
 	    	 // Load file as Resource
-	        Resource resource = service.loadFileAsResource(fileName);
+	        Resource resource = service.loadFileAsResource("/itdamage/", fileName);
 	 
 	        // Try to determine file's content type
 	        String contentType = null;

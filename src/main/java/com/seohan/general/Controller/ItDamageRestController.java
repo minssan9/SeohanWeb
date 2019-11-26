@@ -1,29 +1,24 @@
 package com.seohan.general.Controller;
 
-import java.io.File;
-import java.net.MalformedURLException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.seohan.Config.FileProperties;
-import com.seohan.file.Domain.FileDownloadException;
 import com.seohan.file.Service.FTPService;
 import com.seohan.general.Domain.It_Damage;
 import com.seohan.general.Mapper.It_DamageRepository;
@@ -32,6 +27,7 @@ import com.seohan.general.Service.ItDamageService;
 import lombok.extern.slf4j.Slf4j; 
 
 
+@CrossOrigin(origins= {"http://localhost:8091", "http://localhost:8090"})
 @RequestMapping("/general")
 @Slf4j 
 @RestController
@@ -50,55 +46,37 @@ public class ItDamageRestController {
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd"); 
-//	
-//	@GetMapping(value="/itdamage/file", produces="text/plain;charset=UTF-8")
-//	public  Resource fileDownload(@RequestParam("attach") String attach, 
-//			HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		try {
-//		    Path fileLocation = null;
-//		    File theDirs = new File("C:\\SeoHan\\ITDAMAGE");
-//		    theDirs.mkdirs();
-//		    
-//		    boolean success = ftpService.downloadFile("/SeoHan/ITDAMAGE/" + attach,  "C:/SeoHan/ITDAMAGE/" + attach);		    
-////		    File file = new File("C:/SeoHan/ITDAMAGE/" + attach);
-//		    
-//		    fileLocation = Paths.get(fileproperties.getUploadDir())
-//		            .toAbsolutePath().normalize();   
-//		    
-//			Path filePath = fileLocation.resolve(attach).normalize();
-//			Resource resource = new UrlResource(filePath.toUri());
-//
-//			if (resource.exists()) {
-//				return resource;
-//			} else {
-//				throw new FileDownloadException(attach + " 파일을 찾을 수 없습니다.");
-//			}
-//		} catch (MalformedURLException e) {
-//			throw new FileDownloadException(attach + " 파일을 찾을 수 없습니다.", e);
-//		} 
-//	} 
+
 	 
 	@GetMapping("/itdamage")
-	public @ResponseBody List<It_Damage> itDamage() throws Exception { 
+	public @ResponseBody List<It_Damage> getAllItDamage() throws Exception { 
 		return it_DamageRepo.it_DamageListbyStat("01");
 	}
 
-	@PutMapping("/itdamage/save")
-	public void putItDamage(@RequestBody It_Damage itDamage ) throws Exception { 		
-		itDamageService.saveItDamage(itDamage ); 		
+	@GetMapping("/itdamage/{rdate}")
+	public @ResponseBody List<It_Damage> getItDamage(@PathVariable String rdate) throws Exception { 
+		return it_DamageRepo.it_DamageListbyRdate(rdate);
 	}
 
-	@PostMapping("/itdamage/post")
-	public void postItDamage(@RequestBody It_Damage itDamage )  throws Exception { 		
-		itDamageService.saveItDamage(itDamage); 		
-	}	
+	@PutMapping("/itdamage/{rdate}")
+	public ResponseEntity<It_Damage> updateItDamage(@RequestBody It_Damage itDamage ) throws Exception { 		
+		It_Damage itDamageUpdated = itDamageService.save(itDamage); 
+		return new ResponseEntity<It_Damage>(itDamage, HttpStatus.OK);
+	}
 
-	@GetMapping("/ftptest")
-	public void ftptest()  throws Exception { 		
-		ftpService.open();
-		ftpService.close(); 
+	@PostMapping("/itdamage")
+	public ResponseEntity<Void> createItDamage(@RequestBody It_Damage itDamage )  throws Exception { 		
+		It_Damage itDamageCreated =  itDamageService.save(itDamage); 		
+
+	    URI uri = ServletUriComponentsBuilder
+	    		.fromCurrentRequest()
+	    		.path("/{rdate}")
+	    		.buildAndExpand(itDamageCreated.getRtime())
+	        .toUri();
+
+	    return ResponseEntity.created(uri).build();
 	}	
-	
+ 
     // @Value("${temp.path}") private String tempPath; 
 	
     // @RequestMapping(value = "/upload", method = RequestMethod.POST)
