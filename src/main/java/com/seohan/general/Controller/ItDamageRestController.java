@@ -3,13 +3,13 @@ package com.seohan.general.Controller;
 import java.io.File;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -26,7 +26,7 @@ import com.seohan.general.Service.ItDamageService;
 
 import lombok.extern.slf4j.Slf4j; 
 
-
+@CrossOrigin(origins = { "http://localhost:8091"})
 @RequestMapping("/general")
 @Slf4j 
 @RestController
