@@ -13,4 +13,7 @@ import com.seohan.general.Domain.It_Damage;
 public interface It_DamageRepository extends JpaRepository<It_Damage, Long> {
 	@Query(value="select a.* from SITLIB.IT_DAMAGE a where a.stat= :stat", nativeQuery=true)
 	public List<It_Damage> it_DamageListbyStat(@Param("stat") String stat) throws Exception; 
+
+	@Query(value="select a.* from SITLIB.IT_DAMAGE a where a.rtime= :rtime", nativeQuery=true)
+	public List<It_Damage> it_DamageListbyRdate(@Param("rtime") String rtime) throws Exception; 
 }

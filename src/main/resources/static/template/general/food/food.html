@@ -1,43 +1,62 @@
 <!DOCTYPE html>
 
 <head>
-	<meta charset="utf-8">
-	<title>식단표</title>
-	<link rel="SHORTCUT ICON" href="../../static/img/seohanico.gif" />
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>식단표</title>
+<link rel="SHORTCUT ICON" href="../../static/img/seohanico.gif" />
 
-	<script src="/webjars/jquery/dist/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <script type=text/javascript src="../../static/js/manifest.2ae2e69a05c33dfc65f8.js"> </script>
-    <script type=text/javascript src="../../static/js/vendor.e00e51762311e00a2108.js"> </script>
-    <script type=text/javascript src="../../static/js/app.b22ce679862c47a75225.js"> </script>
-    
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-		
-	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-	<script src="https://npmcdn.com/axios/dist/axios.min.js"></script>	
+<script src="/webjars/jquery/dist/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type=text/javascript
+	src="../../static/js/manifest.2ae2e69a05c33dfc65f8.js"> </script>
+<script type=text/javascript
+	src="../../static/js/vendor.e00e51762311e00a2108.js"> </script>
+<script type=text/javascript
+	src="../../static/js/app.b22ce679862c47a75225.js"> </script>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="https://npmcdn.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
-	<h3> 식단표 </h3>
-	<div id="app"   >
-		<input v-model="datepicker" v-on:change="getData" type="date" value="datepicker && datepicker.toISOString().split('T')[0]">
+	<div class="container" id="app">
+		<div class="row panel panel-default panel-body">
+			<h3>식단표</h3>
+			<input v-model="datepicker" v-on:change="getData" type="date"
+				value="datepicker && datepicker.toISOString().split('T')[0]">
 
-		<table class="table table-striped table-bordered ">
-			<thead>
-				<th>구분</th>
-				<th>메뉴</th>
-			</thead>
-			<tbody>
-				<tr v-for="data in dataList">
-					<td>{{data.gubn}}</td>
-					<td>{{data.menu}}</td>
-				</tr>
-			</tbody>
-		</table>
+			<table class="table table-striped table-bordered ">
+				<thead>
+					<th class="">구분</th>
+					<th class="">메뉴</th>
+				</thead>
+				<tbody>
+					<tr v-for="data in dataList">
+						<td class="type" :rowspan="rowspanSettings[index]"
+							v-if="rowspanSettings[index] > 0"><span
+							v-html="{{data.gubn}}"></span></td>
+						<td>{{data.menu}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
-	<script>
+
+	<script> 
+		$(document).ready(function(e){
+		    genRowspan("type");
+		});
+		 
+		
 		// import axios from 'axios'
 		var vm = new Vue({
 			el: '#app',
@@ -45,6 +64,17 @@
 				datepicker: new Date(),
 				querydate: '',
 				dataList: []
+			},
+			computed:{ 
+				genRowspan(className){
+				    $("." + className).each(function() {
+				        var rows = $("." + className + ":contains('" + $(this).text() + "')");
+				        if (rows.length > 1) {
+				            rows.eq(0).attr("rowspan", rows.length);
+				            rows.not(":eq(0)").remove();
+				        }
+				    });
+				}				
 			},
 			created() {
 				var today = new Date();
@@ -64,7 +94,9 @@
 					querydate = this.datepicker.substr(0, 4) + this.datepicker.substr(5, 2) + this.datepicker.substr(8, 2);
 					axios.get('/general/food?gdate=' + querydate)
 						.then(response => {
-							this.dataList = response.data;
+							this.dataList = response.data; 
+							
+							genRowspan('type');
 						})
 						.catch(e => {
 							console.error(e)

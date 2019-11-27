@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.seohan.Config.FileUploadProperties;
+import com.seohan.Config.FileProperties;
 import com.seohan.file.Domain.FileDownloadException;
 import com.seohan.file.Domain.FileUploadException;
 
@@ -22,7 +22,7 @@ public class FileService {
 	private final Path fileLocation;
 
 	@Autowired
-	public FileService(FileUploadProperties fileproperties) {
+	public FileService(FileProperties fileproperties) {
 	    this.fileLocation = Paths.get(fileproperties.getUploadDir())
 	            .toAbsolutePath().normalize(); 
 	    try {
@@ -50,9 +50,9 @@ public class FileService {
 		}
 	}
 
-	public Resource loadFileAsResource(String fileName) {
+	public Resource loadFileAsResource(String path, String fileName) {
 		try {
-			Path filePath = this.fileLocation.resolve(fileName).normalize();
+			Path filePath = this.fileLocation.resolve(path + fileName).normalize();
 			Resource resource = new UrlResource(filePath.toUri());
 
 			if (resource.exists()) {
