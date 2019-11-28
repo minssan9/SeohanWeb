@@ -8,20 +8,24 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 @SpringBootApplication
 @ComponentScan 
 @EnableAutoConfiguration
 @Configuration
 @PropertySource(value = { "classpath:${account.config}" })
+@CrossOrigin(origins = { "http://localhost:8091"})
 public class SeohanWebApplication extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(SeohanWebApplication.class);
 	}
-
+ 
 	public static void main(String[] args) {
 		SpringApplication.run(SeohanWebApplication.class, args);
 	}
+	
 }

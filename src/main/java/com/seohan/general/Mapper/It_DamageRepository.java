@@ -15,5 +15,5 @@ public interface It_DamageRepository extends JpaRepository<It_Damage, Long> {
 	public List<It_Damage> it_DamageListbyStat(@Param("stat") String stat) throws Exception; 
 
 	@Query(value="select a.* from SITLIB.IT_DAMAGE a where a.rtime= :rtime", nativeQuery=true)
-	public List<It_Damage> it_DamageListbyRdate(@Param("rtime") String rtime) throws Exception; 
+	public It_Damage it_DamageListbyRdate(@Param("rtime") String rtime) throws Exception; 
 }

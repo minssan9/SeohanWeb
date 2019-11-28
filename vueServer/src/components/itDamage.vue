@@ -2,7 +2,7 @@
 	<div id="itDamage">
 		<table class="table table-striped table-bordered " id="dataTable">
 			<tbody>
-				<tr v-for="data in dataList"> 
+				<tr v-for="data in dataList">
 					<td class="genre" >{{data.class1}} </td>
 					<td class="genre" >{{data.co_gb}}</td>
 					<td class="genre" >{{data.rteam}}</td>
@@ -12,8 +12,6 @@
 					<td class="genre">
 						<button class="btn btn-default btn-sm" type="button"
 							@click="fileDown(data)">다운로드</button>
-						
-					</td>
 					</td>
 					<td class="genre" >
 						<button class="btn btn-default btn-sm" type="button" id="endDamage"
@@ -26,26 +24,23 @@
 
 </template>
 
-<script> 
-import  axios  from "axios";
-
-const COURSE_API_URL = "http://localhost:8090";
+<script>
+import itDamageService from '../service/itDamageService';
 
 export default {
   name: 'itDamage',
   data() {
     return{
-				ctime:'', 
-				rtime:'', 
+				ctime:'',
+				rtime:'',
 				datepicker: new Date(),
 				querydate: '',
         dataList: []
         };
       },
-      methods: { 
-				getData: function () {
-					var querydate = this.datepicker.substr(0, 4) + this.datepicker.substr(5, 2) + this.datepicker.substr(8, 2);
-					axios.get('http://localhost:8090/general/itdamage')
+      methods: {
+				getData() {
+					itDamageService.retrieveItDamage()
 						.then(response => {
 							this.dataList = response.data;
 							console.log(response);
@@ -54,35 +49,23 @@ export default {
 							console.log(e);
 						})
 				},
-				enditdamage: function (data) { 
-					axios.post('http://localhost:8090/general/itdamage/post', data ) 					 
+				enditdamage(data) {
+					itDamageService.updateItDamage(data).then(()=>{
+            this.getData();
+          })
 					.catch(e => {
 						console.log(e);
 					})
-					.getData()
 				},
-				fileDown: function () {
-					attach = encodeURI(data.attach);
-					axios.get('/general/itdamage/file') 
-					.catch(e => {
-						console.log(e);
-					})
-				} 			
+				fileDown(data) {
+          itDamageService.fileDown(data);
+          var attach = encodeURI(data.attach);
+          window.open('http://minssan9.seohan.com:8090/file/'+ attach)
+				}
 			},
 			created() {
-				var today = new Date();
-				var querydate = today.getFullYear() + '' + ('00' + (today.getMonth() + 1)).slice(-2) + '' + today.getDate();
-				this.datepicker = today.getFullYear() + '-' + ('00' + (today.getMonth() + 1)).slice(-2) + '-' + today.getDate();;
-
-				axios.get('http://localhost:8090/general/itdamage')
-					.then(response => {
-						this.dataList = response.data;
-						console.log(response);						 
-					})
-					.catch(e => {
-						console.error(e)
-					})
-			},			
+        this.getData();
+			},
 			mounted: function () {
 			}
 }

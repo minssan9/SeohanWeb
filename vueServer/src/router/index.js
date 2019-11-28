@@ -5,17 +5,20 @@ import itDamage from '@/components/itDamage'
 
 Vue.use(Router)
 
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    },
-    {
-      path: '/general/itDamage',
-      name: 'itDamage',
-      component: itDamage
-    } 
-  ]
-})
+const router = new Router({
+    mode: 'history', // Use browser history
+    routes: [
+      {
+        path: '/',
+        name: 'HelloWorld',
+        component: HelloWorld
+      },
+      {
+        path: '/general/itDamage',
+        name: 'itDamage',
+        component: itDamage
+      } ,
+    ]
+});
+
+export default router;
