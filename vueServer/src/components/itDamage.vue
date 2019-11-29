@@ -60,7 +60,7 @@ export default {
 				fileDown(data) {
           itDamageService.fileDown(data);
           var attach = encodeURI(data.attach);
-          window.open('http://minssan9.seohan.com:8090/file/'+ attach)
+          window.open('${COURSE_API_URL}/file/'+ attach)
 				}
 			},
 			created() {

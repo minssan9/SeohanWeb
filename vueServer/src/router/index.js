@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import itDamage from '@/components/itDamage'
+import foodTable from '@/components/foodTable'
 
 Vue.use(Router)
 
@@ -17,6 +18,11 @@ const router = new Router({
         path: '/general/itDamage',
         name: 'itDamage',
         component: itDamage
+      } ,
+      {
+        path: '/general/foodTable',
+        name: 'foodTable',
+        component: foodTable
       } ,
     ]
 });

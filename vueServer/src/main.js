@@ -7,11 +7,13 @@ import axios from 'axios'
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
+const COURSE_API_URL = "http://minssan9.seohan.com:8090";
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   components: { App },
+  render: h => h(App),
   template: '<App/>'
 })
