@@ -6,9 +6,7 @@ import router from './router'
 import axios from 'axios'
 
 Vue.config.productionTip = false
-Vue.prototype.$http = axios
-const COURSE_API_URL = "http://minssan9.seohan.com:8090";
-
+Vue.prototype.$http = axios 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

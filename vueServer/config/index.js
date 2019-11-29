@@ -6,11 +6,19 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      // proxy all requests starting with /api to jsonplaceholder
+      '/api': {
+        target: 'http://localhost:8090',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -19,7 +27,7 @@ module.exports = {
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
-
+     
     // Use Eslint Loader?
     // If true, your code will be linted during bundling and
     // linting errors and warnings will be shown in the console.
@@ -44,14 +52,27 @@ module.exports = {
   },
 
   build: {
+
+    // Various Dev Server settings
+    host: 'http://ind.seohan.com', // can be overwritten by process.env.HOST
+    port: 8091, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     // Template for index.html
     index: path.resolve(__dirname, '../dist/index.html'),
 
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
-
+    assetsPublicPath: '/', 
+    proxyTable: {
+      // proxy all requests starting with /api to jsonplaceholder
+      '/api': {
+        target: 'http://ind.seohan.com:8090',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+    },
     /**
      * Source Maps
      */
