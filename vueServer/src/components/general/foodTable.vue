@@ -11,7 +11,7 @@
 					<th class="">메뉴</th>
 				</thead>
 				<tbody>
-					<tr v-for="data in dataList">
+					<tr v-for="data in dataList" v-bind:key=data>
 						<td class="type"><span
 							v-html="data.gubn"></span></td>
 						<td>{{data.menu}}</td>

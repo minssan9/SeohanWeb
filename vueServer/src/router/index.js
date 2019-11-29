@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import itDamage from '@/components/itDamage'
+
+import itDamage  from '@/components/itDamage'
 import foodTable from '@/components/foodTable'
+import qrReader  from '@/components/qrReader'
 
 Vue.use(Router)
 
@@ -23,6 +25,11 @@ const router = new Router({
         path: '/general/foodTable',
         name: 'foodTable',
         component: foodTable
+      } ,
+      {
+        path: '/general/qrReader',
+        name: 'qrReader',
+        component: qrReader
       } ,
     ]
 });

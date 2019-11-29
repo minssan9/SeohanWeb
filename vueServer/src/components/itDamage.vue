@@ -2,7 +2,7 @@
 	<div id="itDamage">
 		<table class="table table-striped table-bordered " id="dataTable">
 			<tbody>
-				<tr v-for="data in dataList">
+				<tr v-for="data in dataList" v-bind:key=data>
 					<td class="genre" >{{data.class1}} </td>
 					<td class="genre" >{{data.co_gb}}</td>
 					<td class="genre" >{{data.rteam}}</td>
