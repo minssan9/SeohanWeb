@@ -14,6 +14,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +28,7 @@ import com.seohan.file.Domain.FileUploadResponse;
 import com.seohan.file.Service.FileService;
 
 @RequestMapping("/file")
-@RestController
+@RestController 
 public class FileController {
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 	 @Autowired
@@ -53,11 +54,11 @@ public class FileController {
 	                .collect(Collectors.toList());
 	    }
 	    
-	    @GetMapping("/download/{fileName:.+}")
+	    @GetMapping("/{fileName:.+}")
 	    public ResponseEntity<Resource> downloadFile( 
 	    		 @PathVariable String fileName, HttpServletRequest request){
 	    	 // Load file as Resource
-	        Resource resource = service.loadFileAsResource(fileName);
+	        Resource resource = service.loadFileAsResource("/itdamage/", fileName);
 	 
 	        // Try to determine file's content type
 	        String contentType = null;

@@ -1,22 +1,22 @@
 package com.seohan.general.Controller;
 
-import java.io.File;
-import java.io.InputStream;
+import java.net.URI;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.seohan.file.Service.FTPService;
 import com.seohan.general.Domain.It_Damage;
@@ -24,7 +24,6 @@ import com.seohan.general.Mapper.It_DamageRepository;
 import com.seohan.general.Service.ItDamageService;
 
 import lombok.extern.slf4j.Slf4j; 
-
 
 @RequestMapping("/general")
 @Slf4j 
@@ -41,39 +40,28 @@ class ItDamageRestController {
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd"); 
-	
-	@GetMapping("/itdamage/file")
-	public  Resource fileDownload(It_Damage itDamage) throws Exception { 
-		
-		ftpService.open();
-//		if(ftpService.isConnected()){
-		    ftpService.downloadFile("/SeoHan/ITDAMAGE/" + itDamage.getAttach(),  "C:/temp/" + itDamage.getAttach());
-//		    ftpService.saveFile(inputStream, "/SeoHan/ITDAMAGE/" + itDamage.getAttach(), false);
-//		    ftpService.saveFile(sourcepath, "C:/temp/" + itDamage.getAttach(), true);
-//		    ftpFileWriter.loadFile(path, outputstream);
-//		    ftpFileWriter.saveFile(inputstream, remotepath, false);
-//		    ftpFileWriter.saveFile(sourcepath, destpath, true);
-//		}
-		ftpService.close();
-		
-		File file = new File("C:/temp/" + itDamage.getAttach());
-		InputStream is = FileUtils.openInputStream(file);
-		return new InputStreamResource(is);
-	} 
 	 
 	@GetMapping("/itdamage")
-	public @ResponseBody List<It_Damage> iddamage() throws Exception { 
+	public @ResponseBody List<It_Damage> getAllList() throws Exception { 
 		return it_DamageRepo.it_DamageListbyStat("01");
 	}
 
+	@GetMapping("/itdamage/{rtime}")
+	public @ResponseBody It_Damage getOneItDamage(@PathVariable String rtime) throws Exception { 
+		return it_DamageRepo.it_DamageListbyRdate(rtime);
+	}
+	
 	@PutMapping("/itdamage/save")
-	public void putItDamage(@RequestBody It_Damage itDamage ) throws Exception { 		
-		itDamageService.saveItDamage(itDamage ); 		
+	public ResponseEntity<It_Damage> updateItDamage(@PathVariable String rtime, @RequestBody It_Damage itDamage ) throws Exception { 		
+		It_Damage itDamageUpdated = itDamageService.save(itDamage );
+		return new ResponseEntity<It_Damage>(itDamageUpdated, HttpStatus.OK);
 	}
 
-	@PostMapping("/itdamage/post")
-	public void postItDamage(@RequestBody It_Damage itDamage )  throws Exception { 		
-		itDamageService.saveItDamage(itDamage); 		
+	@PostMapping("/itdamage/{rtime}")
+	public ResponseEntity<Void> createItDamage(@PathVariable String rtime, @RequestBody It_Damage itDamage )  throws Exception { 		
+		It_Damage itDamageCreated= itDamageService.save(itDamage );
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{rtime}"	).buildAndExpand(itDamageCreated.getRtime()).toUri();
+		return   ResponseEntity.created(uri).build();
 	}	
 
 	@GetMapping("/ftptest")

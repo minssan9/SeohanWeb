@@ -1,9 +1,11 @@
 package com.seohan.file.Service;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 
 import org.apache.commons.net.PrintCommandListener;
@@ -45,9 +47,11 @@ public class FTPService {
 		System.out.println("FTP connection success!");
 		ftp.login(ID, PASSWORD);
 	}
-	public void downloadFile(String source, String destination) throws IOException {
-	    FileOutputStream out = new FileOutputStream(destination);
-	    ftp.retrieveFile(source, out);
+	 
+	public boolean downloadFile(String source, String destination) throws IOException {
+		File destinationFile = new File(destination);
+		OutputStream out1 = new BufferedOutputStream(new FileOutputStream(destinationFile)); 
+		return   ftp.retrieveFile(source, out1);
 	}
 	public void putFileToPath(File file, String path) throws IOException {
 	    ftp.storeFile(path, new FileInputStream(file));
