@@ -12,7 +12,7 @@ class itDamageService {
 
     fileDown(data) {
       // var attach = encodeURI(data.attach);
-      return axios.get('/api/file/' + data.attach );
+      return axios.get('/api/file/' + data);
     }
 }
 

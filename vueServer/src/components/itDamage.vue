@@ -70,8 +70,8 @@ export default {
         });
     },
     fileDown(data) {
-      itDamageService.fileDown(data);      
-      window.open("/api/file/" + encodeURI(data.attach));
+      itDamageService.fileDown(encodeURI(data.attach));      
+    //   window.open("/api/file/" + encodeURI(data.attach));
     }
   },
   created() {
