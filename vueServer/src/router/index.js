@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import itDamage  from '@/components/general/itDamage'
+import itDamage  from '@/components/general/itDamage/list'
+import itDamageNew  from '@/components/general/itDamage/new'
 import foodTable from '@/components/general/foodTable'
 import qrReader  from '@/components/general/qrReader'
 
@@ -13,13 +14,14 @@ Vue.use(Router)
 const router = new Router({
     mode: 'history', // Use browser history
     routes: [
-      { path: '/', component: Home },
-      { path: '*', component: NotFound },
       //general
       {path: '/general/itDamage', component: itDamage} ,
+      {path: '/general/itDamage/new', component: itDamageNew} ,
       {path: '/general/foodTable',component: foodTable} ,
       {path: '/general/qrReader',component: qrReader} ,
       //
+      { path: '/', component: Home },
+      { path: '*', component: NotFound },
     ]
 });
 

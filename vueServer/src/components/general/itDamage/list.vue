@@ -1,5 +1,7 @@
 <template>
   <div id="itDamage">
+    <router-link to="/general/itdamage/new" exact>New Post</router-link>
+
     <table class="table table-striped table-bordered" id="dataTable">
       <tbody>
         <tr v-for="data in dataList" v-bind:key="data">
@@ -34,7 +36,7 @@
 </template>
 
 <script>
-import itDamageService from "../../service/general/itDamageService";
+import itDamageService from "../../../service/general/itDamageService";
 
 export default {
   name: "itDamage",
@@ -47,10 +49,13 @@ export default {
       dataList: []
     };
   },
+  watch:{
+    '$route':'getData'
+  },
   methods: {
     getData() {
       itDamageService
-        .retrieveItDamage()
+        .retrieveList()
         .then(response => {
           this.dataList = response.data;
           console.log(response);
@@ -61,7 +66,7 @@ export default {
     },
     enditdamage(data) {
       itDamageService
-        .updateItDamage(data)
+        .update(data)
         .then(() => {
           this.getData();
         })
@@ -70,7 +75,7 @@ export default {
         });
     },
     fileDown(data) {
-      // itDamageService.fileDown(encodeURI(data.attach));      
+      // itDamageService.fileDown(encodeURI(data.attach));
       window.open("/api/file/" + data.attach);
     }
   },

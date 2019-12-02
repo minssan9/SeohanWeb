@@ -1,17 +1,24 @@
 import axios from "axios";
 
+const route = 'general/itdamage';
 
 class itDamageService {
-    retrieveItDamage () {
+    retrieveList () {
       return axios.get('/api/general/itdamage');
     }
-
-    updateItDamage(data) {
+    retrieve(id) {
+      return axios.get('/api/general/itdamage/'+ id);
+    }
+    update(data) {
       return axios.post('/api/general/itdamage/post', data );
     }
-
+    save(data) {
+      return axios.post('/api/general/itdamage/post', data );
+    }
+    fileUpload(data) {
+      return axios.put('/api/file/upload/' + data);
+    }
     fileDown(data) {
-      // var attach = encodeURI(data.attach);
       return axios.get('/api/file/' + data);
     }
 }
