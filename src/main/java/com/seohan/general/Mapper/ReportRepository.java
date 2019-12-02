@@ -15,5 +15,5 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
 	public List<Report> it_DamageListbyStat(@Param("stat") String stat) throws Exception; 
 
 	@Query(value="select a.* from SGLIB.PCMSTPF a where a.rtime= :rtime", nativeQuery=true)
-	public Report it_DamageListbyRdate(@Param("rtime") String rtime) throws Exception; 
+	public Report it_DamageListbyRdate(@Param("udate") String udate) throws Exception; 
 }

@@ -70,6 +70,7 @@ export default {
         });
     },
     fileDown(data) {
+      // itDamageService.fileDown(encodeURI(data.attach));      
       window.open("/api/file/" + data.attach);
     }
   },
