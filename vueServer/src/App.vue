@@ -7,12 +7,9 @@
 
 <script>
   import router from "./router";
-  import itDamage from "./components/itDamage.vue";
-
 export default {
   name: 'App',
   components:{
-    itDamage
   }
 }
 </script>

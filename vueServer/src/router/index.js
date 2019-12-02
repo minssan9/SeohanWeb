@@ -1,36 +1,25 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 
-import itDamage  from '@/components/itDamage'
-import foodTable from '@/components/foodTable'
-import qrReader  from '@/components/qrReader'
+import itDamage  from '@/components/general/itDamage'
+import foodTable from '@/components/general/foodTable'
+import qrReader  from '@/components/general/qrReader'
+
+const Home = { template: '<div>Home</div>'}
+const NotFound = { template: '<div>Not Found</div>'}
 
 Vue.use(Router)
 
 const router = new Router({
     mode: 'history', // Use browser history
     routes: [
-      {
-        path: '/',
-        name: 'HelloWorld',
-        component: HelloWorld
-      },
-      {
-        path: '/general/itDamage',
-        name: 'itDamage',
-        component: itDamage
-      } ,
-      {
-        path: '/general/foodTable',
-        name: 'foodTable',
-        component: foodTable
-      } ,
-      {
-        path: '/general/qrReader',
-        name: 'qrReader',
-        component: qrReader
-      } ,
+      { path: '/', component: Home },
+      { path: '*', component: NotFound },
+      //general
+      {path: '/general/itDamage', component: itDamage} ,
+      {path: '/general/foodTable',component: foodTable} ,
+      {path: '/general/qrReader',component: qrReader} ,
+      //
     ]
 });
 

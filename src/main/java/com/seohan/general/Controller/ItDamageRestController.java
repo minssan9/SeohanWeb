@@ -68,21 +68,5 @@ class ItDamageRestController {
 	public void ftptest()  throws Exception { 		
 		ftpService.open();
 		ftpService.close(); 
-	}	
-	
-    // @Value("${temp.path}") private String tempPath; 
-	
-    // @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    // public List<MultipartFile> upload(MultipartFile[] files) {
-	// 	return null;
-  
-    //     // PROCESS... 
-	// }
-	
-	// @GetMapping("/{id}")
-	// public Resource download(@PathVariable String id) throws IOException {
-	// 	File file = new File(tempPath + id);
-	// 	InputStream is = FileUtils.openInputStream(file);
-	// 	return new InputStreamResource(is);
-	// }
+	}
 }

@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import itDamageService from "../service/itDamageService";
+import itDamageService from "../../service/general/itDamageService";
 
 export default {
   name: "itDamage",
@@ -70,8 +70,7 @@ export default {
         });
     },
     fileDown(data) {
-      itDamageService.fileDown(encodeURI(data.attach));      
-    //   window.open("/api/file/" + encodeURI(data.attach));
+      window.open("/api/file/" + data.attach);
     }
   },
   created() {

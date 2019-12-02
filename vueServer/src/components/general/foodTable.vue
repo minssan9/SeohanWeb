@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import foodTableService from '../service/foodTableService';
+import foodTableService from '../../service/general/foodTableService';
 
 export default {
 			name: 'foodTable',
@@ -49,8 +49,8 @@ export default {
 			},
 			created() {
 				var today = new Date();
-				this.querydate = today.getFullYear() + '' + ('00' + (today.getMonth() + 1)).slice(-2) + '' + today.getDate();
-				this.datepicker = today.getFullYear() + '-' + ('00' + (today.getMonth() + 1)).slice(-2) + '-' + today.getDate();;
+				this.querydate = today.getFullYear() + '' + ('00' + (today.getMonth() + 1)).slice(-2) + '' + ('00' + (today.getDate() + 1)).slice(-2);
+				this.datepicker = today.getFullYear() + '-' + ('00' + (today.getMonth() + 1)).slice(-2) + '-' +  ('00' + (today.getDate() + 1)).slice(-2);
         this.getData();
 			},
 			mounted: function () {
