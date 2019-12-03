@@ -10,7 +10,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="IT_DAMAGE") 
+@Table(name="IT_DAMAGE", schema="SITLIB") 
 public class ItDamage { 
 	private String co_gb;  
 	private String fact;  

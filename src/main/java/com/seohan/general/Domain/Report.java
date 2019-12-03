@@ -1,5 +1,7 @@
 package com.seohan.general.Domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -9,34 +11,36 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="PCMSTPF")
-public class Report {
+@IdClass(Report.class)
+@Table(name="PCMSTPF", schema="SGLIB")
+public class Report implements Serializable {
 	private String FGUB;
 	
 	@Id
-	private String UDATE; 
-	private String SER;
+	private String udate;
+	@Id
+	private String ser;
 	
-	private String UTIME;
-	private String LINE;
-	private String RUT;
-	private String SGUB;
-	private String USABN;
-	private String UDES;
-	private String DSABN;
-	private String SDATE;
-	private String STIME;
-	private String EDATE;
-	private String ETIME;
-	private String BPMTD;
-	private String FTCOD;
-	private String FTDES;
-	private String FOURM;
-	private String BSDES;
-	private String GJDES;
-	private String SMSCHK1;
-	private String SMSCHK2;
-	private String CONTENT;
-	private String STAT;
-	private String FILL;
+	private String utime;
+	private String line;
+	private String rut;
+	private String sgub;
+	private String usabn;
+	private String udes;
+	private String dsabn;
+	private String sdate;
+	private String stime;
+	private String edate;
+	private String etime;
+	private String bpmtd;
+	private String ftcod;
+	private String ftdes;
+	private String fourm;
+	private String bsdes;
+	private String gjdes;
+	private String smschk1;
+	private String smschk2;
+	private String content;
+	private String stat;
+	private String fill;
 }

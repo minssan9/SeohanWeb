@@ -31,9 +31,6 @@ class ETCRestController {
 	@Autowired
 	private TemperatureRepository temperatureRepo;
 	
-	@Autowired
-	private FTPService ftpService;
-
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd");
 	 
@@ -41,7 +38,7 @@ class ETCRestController {
 	public @ResponseBody List<FoodTable> FoodList(@RequestParam String gdate) throws Exception {		
 		FoodTable foodTable= new FoodTable();
 		foodTable.setGdate(gdate);
-		return foodTableRepo.foodTableListbyGdate(foodTable.getGdate());  
+		return foodTableRepo.findByGdate(foodTable.getGdate());  
 	}   
 
 	@GetMapping( "/temperature")

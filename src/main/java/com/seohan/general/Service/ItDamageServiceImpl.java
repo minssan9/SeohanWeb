@@ -45,14 +45,14 @@ public class ItDamageServiceImpl implements ItDamageService {
 		Report report = new Report();
 		String docuNo[] = itDamage.getClass3().split("-");
 		if (itDamage.getClass3().length()> 0 ) {
-			report.setUDATE(docuNo[0]);
-			report.setSER(docuNo[1]);
-			report.setSGUB("G");
-			report.setSDATE(nowDate.substring(8));
-			report.setSTIME(nowDate.substring(8, 14));
-			report.setEDATE(nowDate.substring(8));
-			report.setETIME(nowDate.substring(8, 14));
-			report.setSTAT("9");
+			report.setUdate(docuNo[0]);
+			report.setSer(docuNo[1]);
+			report.setSgub("G");
+			report.setSdate(nowDate.substring(8));
+			report.setStime(nowDate.substring(8, 14));
+			report.setEdate(nowDate.substring(8));
+			report.setEtime(nowDate.substring(8, 14));
+			report.setStat("9");
 			reportRepository.save(report);			
 		}		
 		itDamageRepository.save(itDamage );;		 

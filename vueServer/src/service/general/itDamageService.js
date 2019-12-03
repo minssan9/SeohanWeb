@@ -4,16 +4,16 @@ const route = 'general/itdamage';
 
 class itDamageService {
     retrieveList () {
-      return axios.get('/api/general/itdamage');
+      return axios.get('/api/' + route);
     }
     retrieve(id) {
-      return axios.get('/api/general/itdamage/'+ id);
+      return axios.get('/api/' + route + '/'+ id);
     }
     update(data) {
-      return axios.post('/api/general/itdamage/post', data );
+      return axios.put('/api/' + route , data );
     }
     save(data) {
-      return axios.post('/api/general/itdamage/post', data );
+      return axios.post('/api/' + route + '/save/'+data.rtime, data );
     }
     fileUpload(data) {
       return axios.put('/api/file/upload/' + data);

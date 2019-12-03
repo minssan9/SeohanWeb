@@ -7,8 +7,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.seohan.general.Domain.Dto;
-import com.seohan.general.Domain.FoodTable;
 import com.seohan.general.Domain.Report;
 import com.seohan.general.Domain.SmsModel;
 import com.seohan.general.Mapper.ReportRepository;
@@ -27,7 +25,8 @@ public class ReportServiceImpl implements ReportService {
 	@Override
 	public List<Report> report() throws Exception {
 //		return etcMapper.report();
-		return reportRepository.reportListbyStat("01");
+//		return reportRepository.reportListbyStat("01");
+		return reportRepository.findByStat("01");
 	}
 
 	@Override

@@ -33,34 +33,32 @@ class ReportRestController {
 	@Autowired
 	private ReportService reportService;
 	@Autowired
-	private ReportRepository reportRepo;
-	
-//	@Autowired
-//	private FTPService ftpService;
+	private ReportRepository reportRepository;
+	 
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd"); 
 	 
-	@GetMapping("/")
-	public @ResponseBody List<Report> getAllList() throws Exception { 
-		return reportRepo.reportListbyStat("01");
+	@GetMapping("")
+	public @ResponseBody List<Report> getAllList() throws Exception {  
+		return reportRepository.findByStat("1");
 	}
 
-	@GetMapping("/{udate}")
+	@GetMapping("{udate}")
 	public @ResponseBody Report getOneReport(@PathVariable String udate) throws Exception { 
-		return reportRepo.reportListbyUdate(udate);
+		return reportRepository.reportListbyUdate(udate);
 	}
 	
-	@PutMapping("/save")
-	public ResponseEntity<Report> updateReport(@PathVariable String udate, @RequestBody Report report ) throws Exception { 		
+	@PutMapping("save")
+	public ResponseEntity<Report> updateReport(@PathVariable String udate, @PathVariable String ser, @RequestBody Report report ) throws Exception { 		
 		Report reportUpdated = reportService.save(report );
 		return new ResponseEntity<Report>(reportUpdated, HttpStatus.OK);
 	}
 
-	@PostMapping("/{udate}")
-	public ResponseEntity<Void> createReport(@PathVariable String udate, @RequestBody Report report )  throws Exception { 		
+	@PostMapping("")
+	public ResponseEntity<Void> createReport(@RequestBody Report report )  throws Exception { 		
 		Report reportCreated= reportService.save(report );
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{udate}"	).buildAndExpand(reportCreated.getUDATE()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{udate}"	).buildAndExpand(reportCreated.getUdate()).toUri();
 		return   ResponseEntity.created(uri).build();
 	}
 

@@ -19,7 +19,7 @@ public class FoodTableServiceImpl implements FoodTableService {
 	@Override
 	public List<FoodTable> foodTableList(FoodTable foodTable) throws Exception { 
 //		return etcMapper.foodList(dto);
-		List<FoodTable> foodTableResult = foodTableRepository.foodTableListbyGdate(foodTable.getGdate());
+		List<FoodTable> foodTableResult = foodTableRepository.findByGdate(foodTable.getGdate());
 		return foodTableResult;
 	} 
 	  

@@ -24,7 +24,7 @@ import com.seohan.general.Service.ItDamageService;
 
 import lombok.extern.slf4j.Slf4j; 
 
-@RequestMapping("/general")
+@RequestMapping("/general/itdamage")
 @Slf4j 
 @RestController
 class ItDamageRestController { 
@@ -40,34 +40,27 @@ class ItDamageRestController {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd"); 
 	 
-	@GetMapping("/itdamage")
+	@GetMapping("")
 	public @ResponseBody List<ItDamage> getAllList() throws Exception { 
 		return itDamageRepo.findItDamageByStat("01"); 
 	}
 
-	@GetMapping("/itdamage/{rtime}")
+	@GetMapping("{rtime}")
 	public @ResponseBody ItDamage getOneItDamage(@PathVariable String rtime) throws Exception { 
 		return itDamageRepo.findItDamageByRtime("SEOHAN", rtime);
 	}
-	
-	@PutMapping("/itdamage/save")
-	public ResponseEntity<ItDamage> createItDamage(@PathVariable String rtime, @RequestBody ItDamage itDamage ) throws Exception { 		
+	@PutMapping("")
+	public ResponseEntity<ItDamage> updateItDamage(@PathVariable String rtime, @RequestBody ItDamage itDamage ) throws Exception { 		
 		ItDamage itDamageUpdated = itDamageService.save(itDamage );
 		
 		return new ResponseEntity<ItDamage>(itDamageUpdated, HttpStatus.OK);
 	}
 
-	@PostMapping("/itdamage/{rtime}")
-	public ResponseEntity<Void> updateItDamage(@PathVariable String rtime, @RequestBody ItDamage itDamage )  throws Exception { 		
+	@PostMapping("save")
+	public ResponseEntity<Void> createItDamage(@RequestBody ItDamage itDamage )  throws Exception { 		
 		ItDamage itDamageCreated= itDamageService.save(itDamage );
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{rtime}"	).buildAndExpand(itDamageCreated.getRtime()).toUri();
 		return   ResponseEntity.created(uri).build();
-	}	
-
-	@GetMapping("/ftptest")
-	public void ftptest()  throws Exception { 		
-		ftpService.open();
-		ftpService.close(); 
-	}
+	}	 
 }

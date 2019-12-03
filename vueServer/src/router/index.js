@@ -3,6 +3,8 @@ import Router from 'vue-router'
 
 import itDamage  from '@/components/general/itDamage/list'
 import itDamageNew  from '@/components/general/itDamage/new'
+import report  from '@/components/general/report/list'
+import reportNew  from '@/components/general/report/new'
 import foodTable from '@/components/general/foodTable'
 import qrReader  from '@/components/general/qrReader'
 
@@ -17,6 +19,8 @@ const router = new Router({
       //general
       {path: '/general/itDamage', component: itDamage} ,
       {path: '/general/itDamage/new', component: itDamageNew} ,
+      {path: '/general/report', component: report} ,
+      {path: '/general/report/new', component: reportNew} ,
       {path: '/general/foodTable',component: foodTable} ,
       {path: '/general/qrReader',component: qrReader} ,
       //

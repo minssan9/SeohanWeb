@@ -10,7 +10,9 @@ import org.springframework.stereotype.Repository;
 import com.seohan.general.Domain.FoodTable; 
 
 @Repository
-public interface FoodTableRepository extends JpaRepository<FoodTable, Long> { 
+public interface FoodTableRepository extends JpaRepository<FoodTable, Long> {
+
+	List<FoodTable> findByGdate(String gdate); 
 //	@Query(value="select DISTINCT a.* from SITLIB.FOODTABLE a where a.gdate= :gdate", nativeQuery=true)
 //	public List<FoodTable> foodTableListbyGdate(@Param("gdate") String gdate) throws Exception;  
 }
