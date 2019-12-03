@@ -11,6 +11,6 @@ import com.seohan.general.Domain.FoodTable;
 
 @Repository
 public interface FoodTableRepository extends JpaRepository<FoodTable, Long> { 
-	@Query(value="select DISTINCT a.* from SITLIB.FOODTABLE a where a.gdate= :gdate", nativeQuery=true)
-	public List<FoodTable> foodTableListbyGdate(@Param("gdate") String gdate) throws Exception;  
+//	@Query(value="select DISTINCT a.* from SITLIB.FOODTABLE a where a.gdate= :gdate", nativeQuery=true)
+//	public List<FoodTable> foodTableListbyGdate(@Param("gdate") String gdate) throws Exception;  
 }

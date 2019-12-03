@@ -12,8 +12,8 @@ import com.seohan.general.Domain.Report;
 @Repository
 public interface ReportRepository extends JpaRepository<Report, Long> {
 	@Query(value="select a.* from SGLIB.PCMSTPF a where a.stat= :stat", nativeQuery=true)
-	public List<Report> it_DamageListbyStat(@Param("stat") String stat) throws Exception; 
+	public List<Report> reportListbyStat(@Param("stat") String stat) throws Exception; 
 
 	@Query(value="select a.* from SGLIB.PCMSTPF a where a.udate= :udate", nativeQuery=true)
-	public Report it_DamageListbyUdate(@Param("udate") String udate) throws Exception; 
+	public Report reportListbyUdate(@Param("udate") String udate) throws Exception; 
 }

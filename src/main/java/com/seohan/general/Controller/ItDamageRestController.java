@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.seohan.file.Service.FTPService;
-import com.seohan.general.Domain.It_Damage;
-import com.seohan.general.Mapper.It_DamageRepository;
+import com.seohan.general.Domain.ItDamage;
+import com.seohan.general.Mapper.ItDamageRepository;
 import com.seohan.general.Service.ItDamageService;
 
 import lombok.extern.slf4j.Slf4j; 
@@ -33,7 +32,7 @@ class ItDamageRestController {
 	@Autowired
 	private ItDamageService itDamageService;
 	@Autowired
-	private It_DamageRepository it_DamageRepo;
+	private ItDamageRepository itDamageRepo;
 	
 	@Autowired
 	private FTPService ftpService;
@@ -42,24 +41,26 @@ class ItDamageRestController {
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd"); 
 	 
 	@GetMapping("/itdamage")
-	public @ResponseBody List<It_Damage> getAllList() throws Exception { 
-		return it_DamageRepo.it_DamageListbyStat("01");
+	public @ResponseBody List<ItDamage> getAllList() throws Exception { 
+		return itDamageRepo.findItDamageByStat("01"); 
 	}
 
 	@GetMapping("/itdamage/{rtime}")
-	public @ResponseBody It_Damage getOneItDamage(@PathVariable String rtime) throws Exception { 
-		return it_DamageRepo.it_DamageListbyRdate(rtime);
+	public @ResponseBody ItDamage getOneItDamage(@PathVariable String rtime) throws Exception { 
+		return itDamageRepo.findItDamageByRtime("SEOHAN", rtime);
 	}
 	
 	@PutMapping("/itdamage/save")
-	public ResponseEntity<It_Damage> updateItDamage(@PathVariable String rtime, @RequestBody It_Damage itDamage ) throws Exception { 		
-		It_Damage itDamageUpdated = itDamageService.save(itDamage );
-		return new ResponseEntity<It_Damage>(itDamageUpdated, HttpStatus.OK);
+	public ResponseEntity<ItDamage> createItDamage(@PathVariable String rtime, @RequestBody ItDamage itDamage ) throws Exception { 		
+		ItDamage itDamageUpdated = itDamageService.save(itDamage );
+		
+		return new ResponseEntity<ItDamage>(itDamageUpdated, HttpStatus.OK);
 	}
 
 	@PostMapping("/itdamage/{rtime}")
-	public ResponseEntity<Void> createItDamage(@PathVariable String rtime, @RequestBody It_Damage itDamage )  throws Exception { 		
-		It_Damage itDamageCreated= itDamageService.save(itDamage );
+	public ResponseEntity<Void> updateItDamage(@PathVariable String rtime, @RequestBody ItDamage itDamage )  throws Exception { 		
+		ItDamage itDamageCreated= itDamageService.save(itDamage );
+		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{rtime}"	).buildAndExpand(itDamageCreated.getRtime()).toUri();
 		return   ResponseEntity.created(uri).build();
 	}	

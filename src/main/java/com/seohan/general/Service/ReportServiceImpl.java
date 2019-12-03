@@ -22,12 +22,12 @@ public class ReportServiceImpl implements ReportService {
 //	private EtcMapper etcMapper; 
 
     @Autowired
-    ReportRepository it_DamageRepository;
+    ReportRepository reportRepository;
       
 	@Override
 	public List<Report> report() throws Exception {
 //		return etcMapper.report();
-		return it_DamageRepository.it_DamageListbyStat("01");
+		return reportRepository.reportListbyStat("01");
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class ReportServiceImpl implements ReportService {
 		Response<Object> response = new Response<Object>();
 		 
 		
-		it_DamageRepository.save(report); 
+		reportRepository.save(report); 
 		return report;
 	} 
 }

@@ -10,7 +10,7 @@ import lombok.Data;
 
 @Data
 @Entity 
-@IdClass(FoodTable.class)
+@IdClass(FoodTable.class) 
 public class FoodTable implements Serializable { 
 	@Id
 	String gdate;

@@ -9,8 +9,7 @@ import lombok.Data;
 
 @Data
 @Entity
-//@IdClass(Report.class)
-@Table(name="SGLIB.PCMSTPF")
+@Table(name="PCMSTPF")
 public class Report {
 	private String FGUB;
 	

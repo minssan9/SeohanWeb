@@ -2,6 +2,7 @@ package com.seohan.general.Domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -9,7 +10,8 @@ import lombok.Data;
 
 @Data
 @Entity
-public class It_Damage { 
+@Table(name="IT_DAMAGE") 
+public class ItDamage { 
 	private String co_gb;  
 	private String fact;  
 	private String wrkct;  

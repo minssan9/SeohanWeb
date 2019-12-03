@@ -33,22 +33,22 @@ class ReportRestController {
 	@Autowired
 	private ReportService reportService;
 	@Autowired
-	private ReportRepository it_DamageRepo;
+	private ReportRepository reportRepo;
 	
-	@Autowired
-	private FTPService ftpService;
+//	@Autowired
+//	private FTPService ftpService;
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd"); 
 	 
 	@GetMapping("/")
 	public @ResponseBody List<Report> getAllList() throws Exception { 
-		return it_DamageRepo.it_DamageListbyStat("01");
+		return reportRepo.reportListbyStat("01");
 	}
 
 	@GetMapping("/{udate}")
 	public @ResponseBody Report getOneReport(@PathVariable String udate) throws Exception { 
-		return it_DamageRepo.it_DamageListbyRdate(udate);
+		return reportRepo.reportListbyUdate(udate);
 	}
 	
 	@PutMapping("/save")

@@ -5,15 +5,15 @@
     <table class="table table-striped table-bordered" id="dataTable">
       <tbody>
         <tr v-for="data in dataList" v-bind:key="data">
-          <td class="genre">{{data.class1}}</td>
-          <td class="genre">{{data.co_gb}}</td>
-          <td class="genre">{{data.rteam}}</td>
-          <td class="genre">{{data.rname}}</td>
-          <td class="longlen">
+          <td class="d-none d-sm-block">{{data.class1}}</td>
+          <td class="d-none d-sm-block">{{data.co_gb}}</td>
+          <td class="d-none d-sm-block">{{data.rteam}}</td>
+          <td class="d-none d-sm-block">{{data.rname}}</td>
+          <td class="">
             <a v-bind:href="data.rtel">{{data.rtel}}</a>
           </td>
-          <td class="longlen">{{data.rtxt}}</td>
-          <td class="genre">
+          <td class="">{{data.rtxt}}</td>
+          <td class="">
             <button
               v-show="data.attach"
               class="btn btn-default btn-sm"
