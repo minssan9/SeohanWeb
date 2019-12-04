@@ -2,7 +2,7 @@
 export const Auth = {
     login(email, pw) {
         return new Promise((resolve, reject) => {
-            if (email !== 'test@test.com' || pw !== 'password123') return reject()
+            if (email !== 'test@test.com' || pw !== '1234') return reject()
             const token = Math.random().toString(36).substring(2)
             localStorage.token = token
             this.onChange(true)
