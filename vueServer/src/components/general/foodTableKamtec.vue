@@ -16,9 +16,10 @@
         </thead>
         <tbody>
           <tr v-for="data in dataList" v-bind:key="data">
-            <td class="type">
-              <span v-html="data.gubn"></span>
-            </td>
+            <td class="type d-sm-block" v-if="data.gubn==='A'">아침</td>
+            <td class="type d-sm-block"  v-else-if="data.gubn==='B'">점심</td>
+            <td class="type d-sm-block" v-else-if="data.gubn==='C'">저녁</td>
+            <td class="type d-sm-block" v-else-if="data.gubn==='D'">야식</td>
             <td>{{data.menu}}</td>
           </tr>
         </tbody>
