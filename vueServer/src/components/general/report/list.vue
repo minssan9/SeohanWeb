@@ -4,7 +4,7 @@
 
     <table class="table table-striped table-bordered" id="dataTable">
       <tbody>
-        <tr v-for="data in dataList" v-bind:key="data">
+        <tr v-for="data in dataList" v-bind:key="data.rtime">
           <td class="d-none d-sm-block">{{data.class1}}</td>
           <td class="d-none d-sm-block">{{data.co_gb}}</td>
           <td class="d-none d-sm-block">{{data.rteam}}</td>
