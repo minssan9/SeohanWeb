@@ -1,15 +1,14 @@
 <template>
   <div class="container" id="app">
     <div class="row panel panel-default panel-body">
-      <div>
-        <h3>식단표</h3>
-        <input
-          v-model="datepicker"
-          v-on:change="getData"
-          type="date"
-          value="datepicker && datepicker.toISOString().split('T')[0]"
-        />
-      </div>
+      <h3>식단표</h3>
+      <input
+        v-model="datepicker"
+        v-on:change="getData"
+        type="date"
+        value="datepicker && datepicker.toISOString().split('T')[0]"
+      />
+
       <table class="table table-striped table-bordered">
         <thead>
           <th class>구분</th>
@@ -47,7 +46,7 @@ export default {
         this.datepicker.substr(5, 2) +
         this.datepicker.substr(8, 2);
       foodTableService
-        .retrieveFoodTable(this.querydate)
+        .retrieveFoodTableKamtec(this.querydate)
         .then(response => {
           this.dataList = response.data;
         })

@@ -3,12 +3,11 @@ import axios from "axios";
 
 class foodTableService {
     retrieveFoodTable (querydate) {
-      return axios.get('/api/general/food?gdate=' + querydate);
+      return axios.get('/api/general/foodTable?gdate=' + querydate);
     }
-
-    // updateFoodTable(data) {
-    //   return axios.post('${COURSE_API_URL}/general/itdamage/post', data );
-    // }
+    retrieveFoodTableKamtec (querydate) {
+      return axios.get('/api/general/foodTableKamtec?gdate=' + querydate);
+    } 
 
     fileDown(data) {
       // var attach = encodeURI(data.attach);

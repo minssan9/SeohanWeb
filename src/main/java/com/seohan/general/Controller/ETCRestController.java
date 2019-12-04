@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.seohan.file.Service.FTPService;
 import com.seohan.general.Domain.FoodTable;
+import com.seohan.general.Domain.FoodTableKamtec;
 import com.seohan.general.Domain.TemperatureData;
+import com.seohan.general.Mapper.FoodTableKamtecRepository;
 import com.seohan.general.Mapper.FoodTableRepository;
 import com.seohan.general.Mapper.TemperatureRepository;
 
@@ -29,17 +30,26 @@ class ETCRestController {
 	@Autowired
 	private FoodTableRepository foodTableRepo;
 	@Autowired
+	private FoodTableKamtecRepository foodTableKamtecRepo;
+	
+	@Autowired
 	private TemperatureRepository temperatureRepo;
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd");
 	 
-	@GetMapping( "/food")
-	public @ResponseBody List<FoodTable> FoodList(@RequestParam String gdate) throws Exception {		
+	@GetMapping( "/foodTable")
+	public @ResponseBody List<FoodTable> FoodTable(@RequestParam String gdate) throws Exception {		
 		FoodTable foodTable= new FoodTable();
 		foodTable.setGdate(gdate);
 		return foodTableRepo.findByGdate(foodTable.getGdate());  
-	}   
+	}
+	@GetMapping( "/foodTableKamtec")
+	public @ResponseBody List<FoodTableKamtec> FoodTableKamtec(@RequestParam String gdate) throws Exception {		
+		FoodTable foodTable= new FoodTable();
+		foodTable.setGdate(gdate);
+		return foodTableKamtecRepo.findByGdate(foodTable.getGdate());  
+	}
 
 	@GetMapping( "/temperature")
 	public @ResponseBody List<TemperatureData> TemperatureList(TemperatureData temperatureData) throws Exception {		
