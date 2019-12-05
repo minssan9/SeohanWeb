@@ -25,6 +25,7 @@ public interface ItDamageRepository extends JpaRepository<ItDamage, Long> {
 	public void updateItDamage(@Param("ctime") String ctime, @Param("co_gb") String co_gb, @Param("rtime") String rtime) throws Exception;
  
 	public List<ItDamage> findAll();
+	 
 
 	public List<ItDamage> findItDamageByStat(String stat);
 

@@ -44,7 +44,7 @@ public class ItDamageServiceImpl implements ItDamageService {
 //		smsModel.setSendNo("043-530-3174");
 		Report report = new Report();
 		String docuNo[] = itDamage.getClass3().split("-");
-		if (itDamage.getClass3().length()> 0 ) {
+		if (itDamage.getClass3().trim().length()> 0 ) {
 			report.setUdate(docuNo[0]);
 			report.setSer(docuNo[1]);
 			report.setSgub("G");
