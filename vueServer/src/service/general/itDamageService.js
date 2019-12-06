@@ -1,6 +1,16 @@
 import axios from "axios";
 
 const route = 'general/itdamage';
+// const myApi = axios.create({
+//   baseURL: 'http://localhost',
+//   timeout: 10000,
+//   // withCredentials: true,
+//   transformRequest: [(data) => JSON.stringify(data.data)],
+//   headers: {
+//     'Accept': 'application/json',
+//     'Content-Type': 'application/json',
+//   }
+// });
 
 class itDamageService {
     retrieveList () {

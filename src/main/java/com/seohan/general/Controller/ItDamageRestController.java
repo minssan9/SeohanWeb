@@ -50,7 +50,7 @@ class ItDamageRestController {
 		return itDamageRepo.findItDamageByRtime("SEOHAN", rtime);
 	}
 	@PutMapping("")
-	public ResponseEntity<ItDamage> updateItDamage(@PathVariable String rtime, @RequestBody ItDamage itDamage ) throws Exception { 		
+	public ResponseEntity<ItDamage> updateItDamage(@RequestBody ItDamage itDamage ) throws Exception { 		
 		ItDamage itDamageUpdated = itDamageService.save(itDamage );
 		
 		return new ResponseEntity<ItDamage>(itDamageUpdated, HttpStatus.OK);

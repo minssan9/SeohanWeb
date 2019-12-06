@@ -1,15 +1,14 @@
 <template>
   <div class="container" id="app">
     <div class="row panel panel-default panel-body">
-      <div>
-        <h3>식단표</h3>
-        <input
-          v-model="datepicker"
-          v-on:change="getData"
-          type="date"
-          value="datepicker && datepicker.toISOString().split('T')[0]"
-        />
-      </div>
+      <h3>식단표</h3>
+      <input
+        v-model="datepicker"
+        v-on:change="getData"
+        type="date"
+        value="datepicker && datepicker.toISOString().split('T')[0]"
+      />
+
       <table class="table table-striped table-bordered">
         <thead>
           <th class>구분</th>
@@ -17,10 +16,10 @@
         </thead>
         <tbody>
           <tr v-for="data in dataList" v-bind:key="data">
-            <td class="type" v-if="data.gubn==='A'">아침</td>
-            <td class="type" v-else-if="data.gubn==='B'">점심</td>
-            <td class="type" v-else-if="data.gubn==='C'">저녁</td>
-            <td class="type" v-else-if="data.gubn==='D'">야식</td>
+            <td class="type d-sm-block" v-if="data.gubn==='A'">아침</td>
+            <td class="type d-sm-block"  v-else-if="data.gubn==='B'">점심</td>
+            <td class="type d-sm-block" v-else-if="data.gubn==='C'">저녁</td>
+            <td class="type d-sm-block" v-else-if="data.gubn==='D'">야식</td>
             <td>{{data.menu}}</td>
           </tr>
         </tbody>
@@ -48,7 +47,7 @@ export default {
         this.datepicker.substr(5, 2) +
         this.datepicker.substr(8, 2);
       foodTableService
-        .retrieveFoodTable(this.querydate)
+        .retrieveFoodTableKamtec(this.querydate)
         .then(response => {
           this.dataList = response.data;
         })

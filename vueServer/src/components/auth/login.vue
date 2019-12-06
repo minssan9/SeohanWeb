@@ -10,14 +10,23 @@
 </template>
 
 <script>
+import {Auth} from '@/api'
+
 export default {
-  name: "itDamage",
+  data() {
+    return {
+      email: 'test@test.com',
+      password: '',
+      err: false
+    }
+  },
   methods: {
     login() {
       Auth.login(this.email, this.password).then(() => {
         // 인증에 성공하면 이전 페이지로 이동한다
-        this.$router.replace(this.$route.query.redirect || "/");
-      });
+        this.$router.replace(this.$route.query.redirect || "/");        
+      })
+      .catch(() => this.err = true);
     }
   }
 };
