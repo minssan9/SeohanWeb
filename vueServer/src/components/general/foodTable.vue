@@ -64,13 +64,13 @@ export default {
       "" +
       ("00" + (today.getMonth() + 1)).slice(-2) +
       "" +
-      ("00" + (today.getDate() + 1)).slice(-2);
+      ("00" + (today.getDate())).slice(-2);
     this.datepicker =
       today.getFullYear() +
       "-" +
       ("00" + (today.getMonth() + 1)).slice(-2) +
       "-" +
-      ("00" + (today.getDate() + 1)).slice(-2);
+      ("00" + (today.getDate())).slice(-2);
     this.getData();
   },
   mounted: function() {},

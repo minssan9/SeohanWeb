@@ -10,7 +10,7 @@
           <td class="d-none d-sm-block">{{data.rteam}}</td>
           <td class="d-none d-sm-block">{{data.rname}}</td>
           <td class="">
-            <a v-bind:href="data.rtel">{{data.rtel}}</a>
+            <a v-bind:href="'tel:' + data.rtel">{{data.rtel}}</a>
           </td>
           <td class="">{{data.rtxt}}</td>
           <td class="">
