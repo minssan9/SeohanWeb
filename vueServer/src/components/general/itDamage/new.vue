@@ -1,6 +1,10 @@
 <template>
-  <div id="itDamage">
+  <div id="itDamage" class="container">
     등록
+      <label>File
+        <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+      </label>
+        <button v-on:click="submitFile()">Submit</button>
   </div>
 </template>
 
@@ -11,7 +15,9 @@ export default {
   name: "itDamage",
   data() {
     return {
-      rtime: "",
+      file:'',
+      fiels:'',
+      rtime: '',
       dataList: []
     };
   },
@@ -28,6 +34,7 @@ export default {
         });
     },
     save(data) {
+
       itDamageService
         .save(data)
         .then(() => {
@@ -36,6 +43,41 @@ export default {
         .catch(e => {
           console.log(e);
         });
+
+
+    },
+    handleFileUpload(){
+      this.file = this.$refs.file.files[0];
+    },
+    handleFilesUpload(){
+      this.files = this.$refs.files.files;
+    },
+    submitFile(){
+      let formData = new FormData();
+      formData.append('file', this.file);
+
+      // for( var i = 0; i < this.files.length; i++ ){
+      //   let file = this.files[i];
+
+      //   formData.append('files[' + i + ']', file);
+      // }
+
+      axios.post( '/single-file',
+        formData,
+        {
+          headers: {
+              'Content-Type': 'multipart/form-data'
+          }
+        }
+      ).then(function(){
+        console.log('SUCCESS!!');
+      })
+      .catch(function(){
+        console.log('FAILURE!!');
+      });
+    },
+    fileUpload(){
+      this.file = this.$refs.file.files[0];
     },
     fileDown(data) {
       window.open("/api/file/" + data.attach);
