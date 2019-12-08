@@ -33,10 +33,7 @@ class ItDamageRestController {
 	private ItDamageService itDamageService;
 	@Autowired
 	private ItDamageRepository itDamageRepo;
-	
-	@Autowired
-	private FTPService ftpService;
-
+ 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd"); 
 	 

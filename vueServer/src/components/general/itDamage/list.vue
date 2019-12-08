@@ -5,11 +5,11 @@
     <table class="table table-striped table-bordered" id="dataTable">
       <tbody>
         <tr v-for="data in dataList" v-bind:key="data.rtime">
-          <td class="d-none d-sm-block">{{data.class1}}</td>
-          <td class="d-none d-sm-block">{{data.co_gb}}</td>
-          <td class="d-none d-sm-block">{{data.rteam}}</td>
-          <td class="d-none d-sm-block">{{data.rname}}</td>
-          <td class="">
+          <td class="d-none ">{{data.class1}}</td>
+          <td class="d-none ">{{data.co_gb}}</td>
+          <td class="d-none ">{{data.rteam}}</td>
+          <td class="d-none ">{{data.rname}}</td>
+          <td class="d-none ">
             <a v-bind:href="'tel:' + data.rtel">{{data.rtel}}</a>
           </td>
           <td class="">{{data.rtxt}}</td>
@@ -36,12 +36,13 @@
 </template>
 
 <script>
-import itDamageService from "../../../service/general/itDamageService";
+import itDamageService from "@/service/general/itDamageService";
 
 export default {
   name: "itDamage",
   data() {
     return {
+      folderPath:"itdamage",
       ctime: "",
       rtime: "",
       datepicker: new Date(),

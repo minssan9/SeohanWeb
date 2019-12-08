@@ -4,15 +4,18 @@
 
     <table class="table table-striped table-bordered" id="dataTable">
       <tbody>
-        <tr v-for="data in dataList" v-bind:key="data.rtime">
-          <td class="d-none d-sm-block">{{data.class1}}</td>
-          <td class="d-none d-sm-block">{{data.co_gb}}</td>
-          <td class="d-none d-sm-block">{{data.rteam}}</td>
-          <td class="d-none d-sm-block">{{data.rname}}</td>
-          <td class="">
-            <a v-bind:href="data.rtel">{{data.rtel}}</a>
-          </td>
-          <td class="">{{data.rtxt}}</td>
+        <tr v-for="data in dataList" v-bind:key="data.udate">
+          <td class="d-none d-sm-block">{{data.udate}}</td>
+          <td class="d-none d-sm-block">{{data.ser}}</td>
+          <td class="d-none d-sm-block">{{data.fgub}}</td>
+          <td class="d-none d-sm-block">{{data.line}}</td>
+          <td class="d-none d-sm-block">{{data.rut}}</td> 
+          <td class="d-none d-sm-block">{{data.sgub}}</td> 
+          <td class="d-none d-sm-block">{{data.fourm}}</td> 
+          <td class="">{{data.udes}}</td>
+          <td class="">{{data.bsdes}}</td>
+          <td class="">{{data.gjdes}}</td>
+          <td class="">{{data.fill}}</td>
           <td class="">
             <button
               v-show="data.attach"
@@ -36,7 +39,7 @@
 </template>
 
 <script>
-import reportService from "../../../service/general/reportService";
+import reportService from "@/service/general/reportService";
 
 export default {
   name: "report",

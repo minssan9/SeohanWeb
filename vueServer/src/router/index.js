@@ -3,9 +3,10 @@ import Router from 'vue-router'
 import {Auth} from '../api'
 import Login from '@/components/Auth/Login.vue'
 
+// import general  from '@/components/general/Home'
 import itDamageList  from '@/components/general/itDamage/list'
 import itDamageNew  from '@/components/general/itDamage/new'
-import report  from '@/components/general/report/list'
+import reportList  from '@/components/general/report/list'
 import reportNew  from '@/components/general/report/new'
 import foodTable from '@/components/general/foodTable'
 import foodTableKamtec from '@/components/general/foodTableKamtec'
@@ -28,6 +29,7 @@ const router = new Router({
     mode: 'history', // Use browser history
     routes: [
       //general
+      // {path: '/general', component: general} ,
       {
         path: '/general/itDamage',
         component:{ template: '<div>Posts <br/><router-view></router-view></div>' },
@@ -40,7 +42,15 @@ const router = new Router({
       },
       // {path: '/general/itDamage/list', component: itDamageList} ,
       // {path: '/general/itDamage/new', component: itDamageNew, beforeEnter:requireAuth} ,
-      {path: '/general/report', component: report} ,
+      {path: '/general/report', 
+        component:{ template: '<div>Posts <br/><router-view></router-view></div>' },
+        children:[
+          { path: 'list', component: reportList} ,
+          { path: 'new', component: reportNew, 
+            beforeEnter:requireAuth
+          } ,    
+        ]
+      } ,
       {path: '/general/report/new', component: reportNew} ,
       {path: '/general/foodTable',component: foodTable} ,
       {path: '/general/foodTableKamtec',component: foodTableKamtec} ,

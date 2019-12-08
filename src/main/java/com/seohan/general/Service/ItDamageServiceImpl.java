@@ -32,7 +32,7 @@ public class ItDamageServiceImpl implements ItDamageService {
 	}
 
 	@Override
-	@Transactional
+//	@Transactional
 	public ItDamage save(ItDamage itDamage) throws Exception {
 		Calendar cal = Calendar.getInstance();
 		String nowDate = sdf.format(cal.getTime());	 
@@ -46,16 +46,21 @@ public class ItDamageServiceImpl implements ItDamageService {
 		String docuNo[] = itDamage.getClass3().split("-");
 		if (itDamage.getClass3().trim().length()> 0 ) {
 			report.setUdate(docuNo[0]);
-			report.setSer(docuNo[1]);
+			report.setSer((docuNo[1]));
 			report.setSgub("G");
 			report.setSdate(nowDate.substring(8));
 			report.setStime(nowDate.substring(8, 14));
 			report.setEdate(nowDate.substring(8));
 			report.setEtime(nowDate.substring(8, 14));
 			report.setStat("9");
-			reportRepository.save(report);			
+			try{
+				reportRepository.save(report);			
+			}
+			catch(Exception e){
+				e.printStackTrace(); //오류 출력(방법은 여러가지)
+			}
 		}		
-		itDamageRepository.save(itDamage );;		 
+		itDamageRepository.save(itDamage );		 
 		return itDamage;
 	} 
 }

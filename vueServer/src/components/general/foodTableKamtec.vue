@@ -16,10 +16,10 @@
         </thead>
         <tbody>
           <tr v-for="data in dataList" v-bind:key="data">
-            <td class="type d-sm-block" v-if="data.gubn==='A'">아침</td>
-            <td class="type d-sm-block"  v-else-if="data.gubn==='B'">점심</td>
-            <td class="type d-sm-block" v-else-if="data.gubn==='C'">저녁</td>
-            <td class="type d-sm-block" v-else-if="data.gubn==='D'">야식</td>
+            <td class="" v-if="data.gubn==='A'">아침</td>
+            <td class="" v-else-if="data.gubn==='B'">점심</td>
+            <td class="" v-else-if="data.gubn==='C'">저녁</td>
+            <td class="" v-else-if="data.gubn==='D'">야식</td>
             <td>{{data.menu}}</td>
           </tr>
         </tbody>
@@ -58,50 +58,14 @@ export default {
   },
   created() {
     var today = new Date();
-    this.querydate =
-      today.getFullYear() +
-      "" +
-      ("00" + (today.getMonth() + 1)).slice(-2) +
-      "" +
-      ("00" + (today.getDate() + 1)).slice(-2);
     this.datepicker =
       today.getFullYear() +
       "-" +
       ("00" + (today.getMonth() + 1)).slice(-2) +
       "-" +
-      ("00" + (today.getDate() + 1)).slice(-2);
+      ("00" + today.getDate()).slice(-2);
     this.getData();
   },
   mounted: function() {},
-  computed: {
-    genRowspan(className) {
-      $("." + className).each(function() {
-        var rows = $("." + className + ":contains('" + $(this).text() + "')");
-        if (rows.length > 1) {
-          rows.eq(0).attr("rowspan", rows.length);
-          rows.not(":eq(0)").remove();
-        }
-      });
-    }
-  }
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1,
-h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>

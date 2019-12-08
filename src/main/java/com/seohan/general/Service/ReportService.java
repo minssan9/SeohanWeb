@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.seohan.general.Domain.Report;
 
-public interface ReportService {
-	public List<Report> report() throws Exception;
+public interface ReportService { 
 	public Report save(Report report) throws Exception; 
 }

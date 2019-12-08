@@ -17,10 +17,7 @@
         </thead>
         <tbody>
           <tr v-for="data in dataList" v-bind:key="data">
-            <td class="type" v-if="data.gubn==='A'">아침</td>
-            <td class="type" v-else-if="data.gubn==='B'">점심</td>
-            <td class="type" v-else-if="data.gubn==='C'">저녁</td>
-            <td class="type" v-else-if="data.gubn==='D'">야식</td>
+            <td :rowspan="rowspanSettings[index]" v-if="rowspanSettings[index] > 0">{{data.gubn}}</td>
             <td>{{data.menu}}</td>
           </tr>
         </tbody>
@@ -30,7 +27,7 @@
 </template>
 
 <script>
-import foodTableService from "../../service/general/foodTableService";
+import foodTableService from "@/service/general/foodTableService";
 
 export default {
   name: "foodTable",
@@ -50,6 +47,16 @@ export default {
       foodTableService
         .retrieveFoodTable(this.querydate)
         .then(response => {
+          // response.data.forEach(data => {
+            response.data.forEach(function(item){
+            switch (item.gubn){
+              case'A':item.gubn='아침';break;
+              case'B':item.gubn='점심';break;
+              case'C':item.gubn='저녁';break;
+              case'D':item.gubn='야식';break;
+            }
+          });
+        
           this.dataList = response.data;
         })
         .catch(e => {
@@ -59,12 +66,6 @@ export default {
   },
   created() {
     var today = new Date();
-    this.querydate =
-      today.getFullYear() +
-      "" +
-      ("00" + (today.getMonth() + 1)).slice(-2) +
-      "" +
-      ("00" + (today.getDate())).slice(-2);
     this.datepicker =
       today.getFullYear() +
       "-" +
@@ -88,21 +89,3 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1,
-h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>

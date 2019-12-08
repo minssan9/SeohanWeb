@@ -11,8 +11,8 @@ import com.seohan.general.Domain.Report;
 
 @Repository
 public interface ReportRepository extends JpaRepository<Report, Long> {
-//	@Query(value="select a.* from SGLIB.PCMSTPF a where a.stat= :stat", nativeQuery=true)
-//	public List<Report> reportListbyStat(@Param("stat") String stat) throws Exception; 
+	@Query(value="select max(ser)+1 as ser from SGLIB.PCMSTPF a where a.udate= :udate", nativeQuery=true)
+	public String getMaxSerReportByUdate(@Param("udate") String udate) throws Exception; 
 
 	public List<Report> findByStat(String stat);
 	

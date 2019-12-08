@@ -32,10 +32,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.boot</groupId> -->
+<!-- 			<artifactId>spring-boot-starter-web</artifactId> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web-services</artifactId>
@@ -173,27 +173,27 @@
 
 		<!-- ETC -->
 		<!-- //thymeleaf 템플릿 -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.boot</groupId> -->
+<!-- 			<artifactId>spring-boot-starter-thymeleaf</artifactId> -->
+<!-- 		</dependency> -->
 
-		<!-- WebJar -->
-		<dependency>
-			<groupId>org.springframework.restdocs</groupId>
-			<artifactId>spring-restdocs-mockmvc</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars.bower</groupId>
-			<artifactId>jquery</artifactId>
-			<version>3.3.1 </version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>webjars-locator-core</artifactId>
-			<version>0.35</version>
-		</dependency>
+		<!-- WebJar --> 
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.restdocs</groupId> -->
+<!-- 			<artifactId>spring-restdocs-mockmvc</artifactId> -->
+<!-- 			<scope>test</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.webjars.bower</groupId> -->
+<!-- 			<artifactId>jquery</artifactId> -->
+<!-- 			<version>3.3.1 </version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.webjars</groupId> -->
+<!-- 			<artifactId>webjars-locator-core</artifactId> -->
+<!-- 			<version>0.35</version> -->
+<!-- 		</dependency> -->
 	</dependencies>
 
 	<build>

@@ -24,6 +24,7 @@ public class Report implements Serializable {
 	private String utime;
 	private String line;
 	private String rut;
+	@Id
 	private String sgub;
 	private String usabn;
 	private String udes;
