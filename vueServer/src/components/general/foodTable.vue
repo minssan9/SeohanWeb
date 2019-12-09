@@ -56,7 +56,7 @@ export default {
               case'D':item.gubn='야식';break;
             }
           });
-        
+
           this.dataList = response.data;
         })
         .catch(e => {
@@ -76,15 +76,6 @@ export default {
   },
   mounted: function() {},
   computed: {
-    genRowspan(className) {
-      $("." + className).each(function() {
-        var rows = $("." + className + ":contains('" + $(this).text() + "')");
-        if (rows.length > 1) {
-          rows.eq(0).attr("rowspan", rows.length);
-          rows.not(":eq(0)").remove();
-        }
-      });
-    }
   }
 };
 </script>

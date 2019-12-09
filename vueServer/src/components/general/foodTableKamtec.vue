@@ -16,10 +16,7 @@
         </thead>
         <tbody>
           <tr v-for="data in dataList" v-bind:key="data">
-            <td class="" v-if="data.gubn==='A'">아침</td>
-            <td class="" v-else-if="data.gubn==='B'">점심</td>
-            <td class="" v-else-if="data.gubn==='C'">저녁</td>
-            <td class="" v-else-if="data.gubn==='D'">야식</td>
+            <td :rowspan="rowspanSettings[index]" v-if="rowspanSettings[index] > 0">{{data.gubn}}</td>
             <td>{{data.menu}}</td>
           </tr>
         </tbody>
@@ -49,6 +46,14 @@ export default {
       foodTableService
         .retrieveFoodTableKamtec(this.querydate)
         .then(response => {
+            response.data.forEach(function(item){
+            switch (item.gubn){
+              case'A':item.gubn='아침';break;
+              case'B':item.gubn='점심';break;
+              case'C':item.gubn='저녁';break;
+              case'D':item.gubn='야식';break;
+            }
+          });
           this.dataList = response.data;
         })
         .catch(e => {
