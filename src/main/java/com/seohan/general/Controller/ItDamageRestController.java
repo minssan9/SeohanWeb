@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -38,8 +39,8 @@ class ItDamageRestController {
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd"); 
 	 
 	@GetMapping("")
-	public @ResponseBody List<ItDamage> getAllList() throws Exception { 
-		return itDamageRepo.findItDamageByStat("01"); 
+	public @ResponseBody List<ItDamage> getAllList(@RequestParam String stat) throws Exception {		
+		return itDamageRepo.findItDamageByStat(stat); 
 	}
 
 	@GetMapping("{rtime}")
@@ -48,15 +49,13 @@ class ItDamageRestController {
 	}
 	@PutMapping("")
 	public ResponseEntity<ItDamage> updateItDamage(@RequestBody ItDamage itDamage ) throws Exception { 		
-		ItDamage itDamageUpdated = itDamageService.save(itDamage );
-		
+		ItDamage itDamageUpdated = itDamageRepo.save(itDamage ); 
 		return new ResponseEntity<ItDamage>(itDamageUpdated, HttpStatus.OK);
 	}
 
 	@PostMapping("save")
 	public ResponseEntity<Void> createItDamage(@RequestBody ItDamage itDamage )  throws Exception { 		
-		ItDamage itDamageCreated= itDamageService.save(itDamage );
-		
+		ItDamage itDamageCreated= itDamageService.save(itDamage ); 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{rtime}"	).buildAndExpand(itDamageCreated.getRtime()).toUri();
 		return   ResponseEntity.created(uri).build();
 	}	 

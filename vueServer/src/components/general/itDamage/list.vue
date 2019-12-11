@@ -5,11 +5,11 @@
     <table class="table table-striped table-bordered" id="dataTable">
       <tbody>
         <tr v-for="data in dataList" v-bind:key="data.rtime">
-          <td class="d-none ">{{data.class1}}</td>
-          <td class="d-none ">{{data.co_gb}}</td>
-          <td class="d-none ">{{data.rteam}}</td>
-          <td class="d-none ">{{data.rname}}</td>
-          <td class="d-none ">
+          <td class="d-sm-block ">{{data.class1}}</td>
+          <td class="d-sm-block ">{{data.co_gb}}</td>
+          <td class="d-sm-block ">{{data.rteam}}</td>
+          <td class="d-sm-block ">{{data.rname}}</td>
+          <td class="d-sm-block ">
             <a v-bind:href="'tel:' + data.rtel">{{data.rtel}}</a>
           </td>
           <td class="">{{data.rtxt}}</td>
@@ -36,7 +36,8 @@
 </template>
 
 <script>
-import itDamageService from "@/service/general/itDamageService";
+// import itDamageService from "@/service/general/itDamageService";
+import crudService from "@/service/general/crudService";
 
 export default {
   name: "itDamage",
@@ -55,8 +56,8 @@ export default {
   },
   methods: {
     getData() {
-      itDamageService
-        .retrieveList()
+      crudService
+        .retrieveList('01')
         .then(response => {
           this.dataList = response.data;
           console.log(response);
@@ -66,7 +67,7 @@ export default {
         });
     },
     enditdamage(data) {
-      itDamageService
+      crudService
         .update(data)
         .then(() => {
           this.getData();
@@ -76,32 +77,14 @@ export default {
         });
     },
     fileDown(data) {
-      // itDamageService.fileDown(encodeURI(data.attach));
-      window.open("/api/file/" + data.attach);
+      var folderPath="itdamage";
+      window.open("/api/file/" + folderPath + "/" + data.attach);
     }
   },
   created() {
+    crudService.setRoute('general/itdamage');
     this.getData();
   },
   mounted: function() {}
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1,
-h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>

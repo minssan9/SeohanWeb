@@ -58,10 +58,10 @@ public class FileService {
 			if (resource.exists()) {
 				return resource;
 			} else {
-				throw new FileDownloadException(fileName + " 파일을 찾을 수 없습니다.");
+				throw new FileDownloadException(fileName + " File not found.");
 			}
 		} catch (MalformedURLException e) {
-			throw new FileDownloadException(fileName + " 파일을 찾을 수 없습니다.", e);
+			throw new FileDownloadException(fileName + " File not found.", e);
 		}
 	}
 }

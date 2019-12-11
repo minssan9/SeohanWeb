@@ -10,7 +10,7 @@ import itDamageNew from '@/components/general/itDamage/new'
 
 import report from '@/components/general/report/report'
 import reportList from '@/components/general/report/list'
-import reportNew from '@/components/general/report/new'
+// import reportNew from '@/components/general/report/new'
 import foodTable from '@/components/general/foodTable'
 import foodTableKamtec from '@/components/general/foodTableKamtec'
 import qrReader from '@/components/general/qrReader'
@@ -47,7 +47,7 @@ const router = new Router({
         component: report,
         children: [
           {path: 'list', component: reportList },
-          {path: 'new', component: reportNew,beforeEnter: requireAuth},
+          // {path: 'new', component: reportNew,beforeEnter: requireAuth},
         ]
       },
       { path: 'foodTable', component: foodTable },

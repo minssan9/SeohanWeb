@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -33,15 +34,14 @@ class ReportRestController {
 	@Autowired
 	private ReportService reportService;
 	@Autowired
-	private ReportRepository reportRepository;
-	 
-
+	private ReportRepository reportRepository; 
+	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd"); 
 	 
 	@GetMapping("")
-	public @ResponseBody List<Report> getAllList() throws Exception {  
-		return reportRepository.findByStat("1");
+	public @ResponseBody List<Report> getAllList(@RequestParam String stat) throws Exception {  
+		return reportRepository.findByStat(stat);
 	}
 
 	@GetMapping("{udate}")

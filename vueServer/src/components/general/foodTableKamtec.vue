@@ -1,26 +1,29 @@
 <template>
   <div class="container" id="app">
     <div class="row panel panel-default panel-body">
-      <h3>식단표</h3>
-      <input
-        v-model="datepicker"
-        v-on:change="getData"
-        type="date"
-        value="datepicker && datepicker.toISOString().split('T')[0]"
-      />
-
-      <table class="table table-striped table-bordered">
-        <thead>
-          <th class>구분</th>
-          <th class>메뉴</th>
-        </thead>
-        <tbody>
-          <tr v-for="data in dataList" v-bind:key="data">
-            <td :rowspan="rowspanSettings[index]" v-if="rowspanSettings[index] > 0">{{data.gubn}}</td>
-            <td>{{data.menu}}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div>
+        <h3>식단표</h3>
+        <input
+          v-model="datepicker"
+          v-on:change="getData"
+          type="date"
+          value="datepicker && datepicker.toISOString().split('T')[0]"
+        />
+      </div>
+      <div>
+        <table class="table table-striped table-bordered">
+          <thead>
+            <th class>구분</th>
+            <th class>메뉴</th>
+          </thead>
+          <tbody>
+            <tr v-for="data in dataList" v-bind:key="data">
+              <td :rowspan="rowspanSettings[index]" v-if="rowspanSettings[index] > 0">{{data.gubn}}</td>
+              <td>{{data.menu}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
@@ -46,12 +49,20 @@ export default {
       foodTableService
         .retrieveFoodTableKamtec(this.querydate)
         .then(response => {
-            response.data.forEach(function(item){
-            switch (item.gubn){
-              case'A':item.gubn='아침';break;
-              case'B':item.gubn='점심';break;
-              case'C':item.gubn='저녁';break;
-              case'D':item.gubn='야식';break;
+          response.data.forEach(function(item) {
+            switch (item.gubn) {
+              case "A":
+                item.gubn = "아침";
+                break;
+              case "B":
+                item.gubn = "점심";
+                break;
+              case "C":
+                item.gubn = "저녁";
+                break;
+              case "D":
+                item.gubn = "야식";
+                break;
             }
           });
           this.dataList = response.data;
@@ -71,6 +82,6 @@ export default {
       ("00" + today.getDate()).slice(-2);
     this.getData();
   },
-  mounted: function() {},
+  mounted: function() {}
 };
 </script>

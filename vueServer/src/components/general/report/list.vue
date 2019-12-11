@@ -9,9 +9,9 @@
           <td class="d-none d-sm-block">{{data.ser}}</td>
           <td class="d-none d-sm-block">{{data.fgub}}</td>
           <td class="d-none d-sm-block">{{data.line}}</td>
-          <td class="d-none d-sm-block">{{data.rut}}</td> 
-          <td class="d-none d-sm-block">{{data.sgub}}</td> 
-          <td class="d-none d-sm-block">{{data.fourm}}</td> 
+          <td class="d-none d-sm-block">{{data.rut}}</td>
+          <td class="d-none d-sm-block">{{data.sgub}}</td>
+          <td class="d-none d-sm-block">{{data.fourm}}</td>
           <td class="">{{data.udes}}</td>
           <td class="">{{data.bsdes}}</td>
           <td class="">{{data.gjdes}}</td>
@@ -39,14 +39,14 @@
 </template>
 
 <script>
-import reportService from "@/service/general/reportService";
+import crudService from "@/service/general/crudService";
 
 export default {
   name: "report",
   data() {
-    return { 
+    return {
       stat: "",
-      datepicker: new Date(), 
+      datepicker: new Date(),
       dataList: []
     };
   },
@@ -56,7 +56,7 @@ export default {
   methods: {
     getData() {
       var stat = "1";
-      reportService
+      crudService
         .retrieveList(stat)
         .then(response => {
           this.dataList = response.data;
@@ -67,7 +67,7 @@ export default {
         });
     },
     endreport(data) {
-      reportService
+      crudService
         .update(data)
         .then(() => {
           this.getData();
@@ -76,11 +76,12 @@ export default {
           console.log(e);
         });
     },
-    fileDown(data) { 
+    fileDown(data) {
       window.open("/api/file/" + data.attach);
     }
   },
   created() {
+    crudService.setRoute('general/report');
     this.getData();
   },
   mounted: function() {}

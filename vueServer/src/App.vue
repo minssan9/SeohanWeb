@@ -19,6 +19,7 @@
 import router from "./router";
 import { Auth } from "./api";
 
+const route = "";
 export default {
   name: "App",
   data() {

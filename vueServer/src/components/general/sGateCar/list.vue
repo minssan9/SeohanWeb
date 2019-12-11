@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import sGateCarService from "../../../service/general/sGateCarService";
+import crudService from "@/service/general/crudService";
 
 export default {
   name: "sGateCar",
@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     getData() {
-      sGateCarService
+      crudService
         .retrieveList()
         .then(response => {
           this.dataList = response.data;
@@ -65,7 +65,7 @@ export default {
         });
     },
     endsGateCar(data) {
-      sGateCarService
+      crudService
         .update(data)
         .then(() => {
           this.getData();
@@ -75,11 +75,12 @@ export default {
         });
     },
     fileDown(data) {
-      // sGateCarService.fileDown(encodeURI(data.attach));
+      // crudService.fileDown(encodeURI(data.attach));
       window.open("/api/file/" + data.attach);
     }
   },
   created() {
+    crudService.setRoute('general/sGateCar');
     this.getData();
   },
   mounted: function() {}

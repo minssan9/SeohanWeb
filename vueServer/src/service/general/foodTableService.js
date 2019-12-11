@@ -1,17 +1,15 @@
 import axios from "axios";
 
-
 class foodTableService {
-    retrieveFoodTable (querydate) {
-      return axios.get('/api/general/foodTable?gdate=' + querydate);
-    }
-    retrieveFoodTableKamtec (querydate) {
-      return axios.get('/api/general/foodTableKamtec?gdate=' + querydate);
-    } 
-
-    fileDown(data) {
-      // var attach = encodeURI(data.attach);
-      return axios.get('/api/file/' + data.attach );
+    foodTable (querydate, company) {
+      var route='';
+      switch (company){
+        case('seohan'): route = 'foodTable'; break;
+        case('kamtec'): route = 'foodTableKamtec'; break;
+        case('lab'): route = 'foodTableLab'; break;
+        // case('kamtec'): route = 'foodTableKamtec'; break;
+      }
+      return axios.get('/api/general/'+ route + '?gdate=' + querydate);
     }
 }
 
