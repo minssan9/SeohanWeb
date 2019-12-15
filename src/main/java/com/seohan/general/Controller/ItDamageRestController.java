@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.seohan.file.Service.FTPService;
+import com.seohan.file.Service.FileService;
 import com.seohan.general.Domain.ItDamage;
 import com.seohan.general.Mapper.ItDamageRepository;
 import com.seohan.general.Service.ItDamageService;
@@ -29,7 +30,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j 
 @RestController
 class ItDamageRestController { 
-	
+	@Autowired
+	private FileService fileService;
 	@Autowired
 	private ItDamageService itDamageService;
 	@Autowired
@@ -47,16 +49,18 @@ class ItDamageRestController {
 	public @ResponseBody ItDamage getOneItDamage(@PathVariable String rtime) throws Exception { 
 		return itDamageRepo.findItDamageByRtime("SEOHAN", rtime);
 	}
-	@PutMapping("")
+	@PutMapping("update")
 	public ResponseEntity<ItDamage> updateItDamage(@RequestBody ItDamage itDamage ) throws Exception { 		
-		ItDamage itDamageUpdated = itDamageRepo.save(itDamage ); 
+		ItDamage itDamageUpdated = itDamageService.update(itDamage); 
 		return new ResponseEntity<ItDamage>(itDamageUpdated, HttpStatus.OK);
 	}
 
 	@PostMapping("save")
-	public ResponseEntity<Void> createItDamage(@RequestBody ItDamage itDamage )  throws Exception { 		
-		ItDamage itDamageCreated= itDamageService.save(itDamage ); 
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{rtime}"	).buildAndExpand(itDamageCreated.getRtime()).toUri();
-		return   ResponseEntity.created(uri).build();
+	public ResponseEntity<ItDamage> createItDamage(@RequestBody ItDamage itDamage)  throws Exception {		
+		ItDamage itDamageCreated= itDamageService.save(itDamage );  
+		
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/"+itDamageCreated.getRtime()	).buildAndExpand(itDamageCreated.getRtime()).toUri();
+//		return   ResponseEntity.created(uri).build();
+		return new ResponseEntity<ItDamage>(itDamageCreated, HttpStatus.OK);
 	}	 
 }

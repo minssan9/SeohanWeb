@@ -10,7 +10,7 @@
       <a class="navbar-brand" href="/general/foodtablekamtec" exact>캄텍 식단표</a>
       <a class="navbar-brand" v-if="loggedIn" to="/logout">Logout</a>
       <a class="navbar-brand" v-else to="/login" exact>Login</a>
-    </nav> -->
+    </nav>-->
     <router-view />
   </div>
 </template>
@@ -26,6 +26,9 @@ export default {
     return {
       loggedIn: Auth.loggedIn()
     };
+  },
+  render() {
+    // return <link rel="icon" href='@/assets/icon/seohanico.png' />;
   },
   created() {
     Auth.onChange = loggedIn => {

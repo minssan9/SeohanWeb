@@ -4,25 +4,24 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.seohan.file.Service.FileService;
 import com.seohan.general.Domain.ItDamage;
 import com.seohan.general.Domain.Report;
-import com.seohan.general.Domain.SmsModel;
 import com.seohan.general.Mapper.ItDamageRepository;
 import com.seohan.general.Mapper.ReportRepository;
-import com.seohan.global.Domain.Response;
 
 @Service
 public class ItDamageServiceImpl implements ItDamageService {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 
 	@Autowired
+	FileService fileService;
+	@Autowired
     ReportRepository reportRepository; 
-
     @Autowired
     ItDamageRepository itDamageRepository;
       
@@ -33,7 +32,7 @@ public class ItDamageServiceImpl implements ItDamageService {
 
 	@Override
 //	@Transactional
-	public ItDamage save(ItDamage itDamage) throws Exception {
+	public ItDamage update(ItDamage itDamage) throws Exception {
 		Calendar cal = Calendar.getInstance();
 		String nowDate = sdf.format(cal.getTime());	 
 		
@@ -60,7 +59,29 @@ public class ItDamageServiceImpl implements ItDamageService {
 				e.printStackTrace(); //오류 출력(방법은 여러가지)
 			}
 		}		
-		itDamageRepository.save(itDamage );		 
+		itDamageRepository.save(itDamage );	
+		
+		return itDamage;
+	} 
+	
+	@Override 
+	public ItDamage save(ItDamage itDamage) throws Exception {
+		Calendar cal = Calendar.getInstance();
+		String nowDate = sdf.format(cal.getTime());	 
+		
+		itDamage.setCo_gb("SEOHAN");
+		itDamage.setStat("01");
+		itDamage.setRtime(nowDate); 
+		itDamage.setClass1(itDamage.getClass1().replace(" ",""));
+		if(!itDamage.getAttach().equals("")) {
+			String ext = FilenameUtils.getExtension(itDamage.getAttach());
+			itDamage.setAttach(nowDate + "." + ext);
+		}
+//		smsModel.setContent(itDamage.getRtxt() + " - 조치 완료 / 확인 후 미조치사항 전산팀 연락 바람");
+//		smsModel.setPhone(itDamage.getRtel());
+//		smsModel.setSendNo("043-530-3174");
+		itDamageRepository.save(itDamage );	
+		
 		return itDamage;
 	} 
 }

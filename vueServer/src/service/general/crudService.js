@@ -16,10 +16,16 @@ class crudService {
     return axios.put('/api/' + route + '/', data);
   }
   save(data) {
-    return axios.post('/api/' + route / save / + data.rtime, data);
+    return axios.post('/api/' + route +'/save', data);
   }
-  fileUpload(data) {
-    return axios.put('/api/file/upload/' + data);
+  fileUpload(folderPath, data) {
+    return axios.post('/api/file/upload'+ '/' +folderPath, data, {
+      headers: {
+        // encodeURI(param) headers: {
+        'Content-Type': 'multipart/form-data',    
+        "Process-Data": false,
+      }
+    });
   }
   fileDown(data) {
     return axios.get('/api/file/' + data);
@@ -32,8 +38,11 @@ class crudService {
   getListByAdgub(adgub) {
     return axios.get('/api/' + route + '?adgub=' + adgub);
   }
-  getLineListByFact(factory) {
-    return axios.get('/api/' + route + '?factory=' + factory);
+  getFact() {
+    return axios.get('/api/' + route + '/fact');
+  }
+  getWrkctListByFact(factory) {
+    return axios.get('/api/' + route + '/fact/' + factory);
   }
 }
 

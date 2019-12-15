@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,9 +39,10 @@ class CodeLibRestController {
 	}
 
 	@GetMapping("{adgub}")
-	public @ResponseBody List<CodeLib> getOneCodeLib(@PathVariable String adgub) throws Exception { 
+	public @ResponseBody List<CodeLib> getCodeLibByAdgub(@PathVariable String adgub) throws Exception { 
 		return codeLibRepo.findByAdgub(adgub);
-	}
+	} 	
+	
 	@PutMapping("")
 	public ResponseEntity<CodeLib> updateCodeLib(@RequestBody CodeLib itDamage ) throws Exception { 		
 		CodeLib itDamageUpdated = codeLibRepo.save(itDamage ); 
@@ -53,4 +55,9 @@ class CodeLibRestController {
 //		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{rtime}"	).buildAndExpand(codeLibCreated.getRtime()).toUri();
 //		return   ResponseEntity.created(uri).build();
 //	}	 
+
+	@GetMapping("/fact")
+	public @ResponseBody List<CodeLib> getFact() throws Exception { 
+		return codeLibRepo.findFact();
+	}
 }

@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 @Entity 
 @IdClass(FoodTableLab.class) 
-@Table(name="SFOODTABLE", schema="KITLIB")
+@Table(name="SFOODTABLE", schema="SITLIB")
 public class FoodTableLab implements Serializable { 
 	@Id
 	String gdate;
