@@ -11,8 +11,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
-@SpringBootApplication
-@ComponentScan 
+@SpringBootApplication 
 @EnableAutoConfiguration
 @Configuration
 @PropertySource(value = { "classpath:${account.config}" })
