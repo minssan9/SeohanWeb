@@ -2,11 +2,12 @@ package com.seohan.general.Service;
 
 import java.util.List;
 
-import com.seohan.general.Domain.Dto;
-import com.seohan.general.Domain.FoodTable;
-import com.seohan.general.Domain.It_Damage;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.seohan.general.Domain.ItDamage;
 
 public interface ItDamageService {
-	public List<It_Damage> itDamage() throws Exception;
-	public It_Damage save(It_Damage itDamage) throws Exception; 
+	List<ItDamage> itDamage() throws Exception;
+	ItDamage save(ItDamage itDamage) throws Exception;
+	ItDamage update(ItDamage itDamage) throws Exception; 
 }

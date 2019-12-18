@@ -5,14 +5,11 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
-@SpringBootApplication
-@ComponentScan 
+@SpringBootApplication 
 @EnableAutoConfiguration
 @Configuration
 @PropertySource(value = { "classpath:${account.config}" })
