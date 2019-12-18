@@ -22,7 +22,7 @@
 		<java.version>1.8</java.version>
 		<querydsl.version>4.1.4</querydsl.version>
 		<tomcat.version>9.0.27</tomcat.version>
-      <start-class>com.seohan.SeohanWebApplication</start-class>
+		<start-class>com.seohan.SeohanWebApplication</start-class>
 	</properties>
 
 	<dependencies>

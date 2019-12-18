@@ -12,7 +12,7 @@ import report from '@/components/general/report/report'
 import reportList from '@/components/general/report/list'
 // import reportNew from '@/components/general/report/new'
 import foodTable from '@/components/general/foodTable'
-import foodTableKamtec from '@/components/general/foodTableKamtec'
+// import foodTableKamtec from '@/components/general/foodTableKamtec'
 import qrReader from '@/components/general/qrReader'
 
 const Home = { template: '<div>Home</div>' }
@@ -51,7 +51,7 @@ const router = new Router({
         ]
       },
       { path: 'foodTable', component: foodTable },
-      { path: 'foodTableKamtec', component: foodTableKamtec },
+      // { path: 'foodTableKamtec', component: foodTableKamtec },
       { path: 'qrReader', component: qrReader },
     ]
   },
