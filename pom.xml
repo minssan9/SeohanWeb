@@ -37,11 +37,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web-services</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.boot</groupId> -->
+<!-- 			<artifactId>spring-boot-starter-test</artifactId> -->
+<!-- 			<scope>test</scope> -->
+<!-- 		</dependency> -->
 		<!-- //코드 수정시 자동 빌드 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -89,24 +89,7 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>1.4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mockftpserver</groupId>
-			<artifactId>MockFtpServer</artifactId>
-			<version>2.7.1</version>
-			<scope>test</scope>
-		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.jcraft</groupId> -->
-<!-- 			<artifactId>jsch</artifactId> -->
-<!-- 			<version>0.1.50</version> -->
-<!-- 		</dependency> -->
-		<dependency>
-			<groupId>com.github.kuljaninemir</groupId>
-			<artifactId>spring-boot-ftp-client</artifactId>
-			<version>2.0.05</version>
-		</dependency>
-
+		</dependency> 
 
 		<!-- DBMS dependecies -->
 		<dependency>
@@ -188,33 +171,28 @@
 	</dependencies>
 
 	<build>
-		<finalName>ROOT.war</finalName>
+		<finalName>seohanWeb.war</finalName>
 		<plugins>
 			<plugin>
-				<groupId>org.asciidoctor</groupId>
-				<artifactId>asciidoctor-maven-plugin</artifactId>
-				<version>1.5.8</version>
-				<executions>
-					<execution>
-						<id>generate-docs</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>process-asciidoc</goal>
-						</goals>
-						<configuration>
-							<backend>html</backend>
-							<doctype>book</doctype>
-						</configuration>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.springframework.restdocs</groupId>
-						<artifactId>spring-restdocs-asciidoctor</artifactId>
-						<version>${spring-restdocs.version}</version>
-					</dependency>
-				</dependencies>
-			</plugin> 
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M3</version>
+				<configuration>
+					<testFailureIgnore>true</testFailureIgnore>
+					<shutdown>kill</shutdown> <!-- Use it if required -->
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<url>http://localhost:8090/</url>
+					<path>/</path>
+					<username>tomcat</username>
+					<password>tomcat</password>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -225,9 +203,6 @@
 		<repository>
 			<id>repo</id>
 			<url>file://${project.basedir}/lib</url>
-		</repository>
-		<!-- <repository> <id>com.ibm.db2.jcc</id> <url> https://artifacts.alfresco.com/nexus/content/repositories/public/ 
-			</url> </repository> -->
+		</repository> 
 	</repositories>
-
 </project>
