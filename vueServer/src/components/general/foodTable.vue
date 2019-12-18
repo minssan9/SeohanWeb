@@ -38,7 +38,7 @@ export default {
   data() {
     return {
       datepicker: new Date(),
-      querydate: "",
+      querydate: "20191218",
       company: "",
       dataList: []
     };
