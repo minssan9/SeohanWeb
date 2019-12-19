@@ -64,10 +64,10 @@
 
 
 		<!-- Spring Security -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.springframework.boot</groupId> -->
-		<!-- <artifactId>spring-boot-starter-security</artifactId> -->
-		<!-- </dependency> -->
+		<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 		<!-- <dependency> -->
 		<!-- <groupId>org.springframework.ldap</groupId> -->
 		<!-- <artifactId>spring-ldap-core</artifactId> -->
@@ -82,11 +82,7 @@
 		<!-- </dependency> -->
 
 
-		<!-- FTP -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.springframework.integration</groupId> -->
-		<!-- <artifactId>spring-integration-sftp</artifactId> -->
-		<!-- </dependency> -->
+		<!-- FTP --> 
 		<dependency>
 			<groupId>commons-net</groupId>
 			<artifactId>commons-net</artifactId>
