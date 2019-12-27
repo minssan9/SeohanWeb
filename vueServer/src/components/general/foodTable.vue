@@ -14,15 +14,15 @@
         />
 
       </div>
-        <table class="table table-striped table-bordered">
+        <table class="table table-bordered">
           <thead>
             <th class>구분</th>
             <th class>메뉴</th>
           </thead>
           <tbody>
-            <tr v-for="data in dataList" v-bind:key="data">
-              <td >{{data.gubn}}</td>
-              <td>{{data.menu}}</td>
+            <tr v-for="data in dataList" v-bind:key="data.gubn">
+              <td  v-bind:class="{'A' : data.gubn==='아침' || data.gubn==='저녁'}">{{data.gubn}}</td>
+              <td v-bind:class="{'A' : data.gubn==='아침' || data.gubn==='저녁'}">{{data.menu}}</td>
             </tr>
           </tbody>
         </table>
@@ -44,6 +44,13 @@ export default {
     };
   },
   methods: {
+    background(thing){
+      if (thing ==='A'){
+        return 'red' ;
+      }else{
+        return 'black' ;
+      }
+    },
     foodTable(company) {
       this.querydate =this.datepicker.substr(0, 4) +this.datepicker.substr(5, 2) +this.datepicker.substr(8, 2);
       this.company= company;
@@ -55,24 +62,29 @@ export default {
             switch (item.gubn) {
               case "A":
                 item.gubn = "아침";
+                // this.tableStyle.backgroundColor='EFEFEF';
                 break;
               case "B":
                 item.gubn = "점심";
+                // this.tableStyle.backgroundColor='FBFBFB';
                 break;
               case "C":
                 item.gubn = "저녁";
+                // this.tableStyle.backgroundColor='EFEFEF';
                 break;
               case "D":
                 item.gubn = "야식";
+                // this.tableStyle.backgroundColor='FBFBFB';
                 break;
             }
           });
           this.dataList = response.data;
+
         })
         .catch(e => {
           console.error(e);
         });
-    }
+    },
   },
   created() {
     var today = new Date();
@@ -81,7 +93,13 @@ export default {
     this.foodTable('seohan');
   },
   mounted: function() {},
-  computed: {}
+  computed: {
+  }
 };
 </script>
+<style scoped>
+  .A, .C {
+    background-color: #EFEFEF;
+  }
+</style>
 

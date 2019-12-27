@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { Auth } from '../api'
-import Login from '@/components/Auth/Login.vue'
+import { Auth } from '../api'           // 로그인 성공시, actions에서 store에 isAuth값을 true로 바꿔줬다. 그걸 이용한다.
+// import store from '@/vuex/store'
 
+import Login from '@/components/auth/Login.vue'
 import general  from '@/components/general/general'
+
 import itDamage from '@/components/general/itDamage/itDamage'
 import itDamageList from '@/components/general/itDamage/list'
 import itDamageNew from '@/components/general/itDamage/new'
@@ -11,8 +13,8 @@ import itDamageNew from '@/components/general/itDamage/new'
 import report from '@/components/general/report/report'
 import reportList from '@/components/general/report/list'
 // import reportNew from '@/components/general/report/new'
+
 import foodTable from '@/components/general/foodTable'
-// import foodTableKamtec from '@/components/general/foodTableKamtec'
 import qrReader from '@/components/general/qrReader'
 
 const Home = { template: '<div>Home</div>' }
@@ -20,12 +22,10 @@ const NotFound = { template: '<div>Not Found</div>' }
 
 Vue.use(Router)
 
-const requireAuth = (to, from, next) => {
-  if (Auth.loggedIn()) return next()
-  next({
-    path: '/login',
-    query: { redirect: to.fullPath }
-  })
+const requireAuth = () => (from, to, next) => {
+  const isAuthenticated = false
+  if (isAuthenticated) return next()
+  next('/api/login?returnPath=me')
 }
 
 const router = new Router({

@@ -7,10 +7,27 @@
       <a class="navbar-brand" href="/general/itdamage/list" exact>전산고장신고</a>
       <a class="navbar-brand" href="/general/report/list" exact>공정신고</a>
       <a class="navbar-brand" href="/general/foodtable" exact>식단표</a>
-      <!-- <a class="navbar-brand" href="/general/foodtablekamtec" exact>캄텍 식단표</a> -->
-      <a class="navbar-brand" v-if="loggedIn" to="/logout">Logout</a>
-      <a class="navbar-brand" v-else to="/login" exact>Login</a>
+      <a class="navbar-brand" v-if="isAuthenticated" @click.prevent="onClickLogout"  >Logout</a>
+      <a class="navbar-brand" v-else href="/login" exact>Login</a>
     </nav>
     <router-view></router-view>
   </div>
 </template>
+
+<script>
+  import store from '@/vuex/store'
+
+  export default {
+    computed: {
+      isAuthenticated() {
+        return store.getters.isAuthenticated
+      }
+    },
+    methods: {
+      onClickLogout() {
+        // LOGOUT 변이 실행 후 리다이렉트
+        store.dispatch('LOGOUT').then(() => this.$router.push('/'))
+      }
+    }
+  }
+</script>

@@ -6,8 +6,8 @@
         <form @submit="save">
           <div class="input-group">
             <label for="fact">공장</label>
-            <select class="form-control" id="fact" v-model="fact" @change="selectfact(fact)" required>					
-                  <option selected value="null">공장</option>			 
+            <select class="form-control" id="fact" v-model="fact" @change="selectfact(fact)" required>
+                  <option selected value="null">공장</option>
                   <option v-for="fact in factList" v-bind:key="fact.asgub" v-bind:value="fact.asgub" >{{ fact.asdes }}</option>
 						</select>
           </div>
@@ -57,20 +57,20 @@ export default {
   data() {
     return {
       folderPath:"itdamage",
-      file: '', 
+      file: '',
       rtime: '',
       fact:'',
       wrkct:'',
-      class1:'',   
+      class1:'',
       class2:'',
-      class3:'',  
+      class3:'',
       rsabun:'',
-      rteam:'', 
-      rname:'', 
-      rtel:'',  
-      rtxt:'',   
+      rteam:'',
+      rname:'',
+      rtel:'',
+      rtxt:'',
       attach:'',
-      stat:'01',  
+      stat:'01',
       class1List:[],
       factList:[],
       wrkctList:[],
@@ -82,10 +82,10 @@ export default {
       formData.append("file", this.file);
       formData.append("fileName",fileName);
       // for( var i = 0; i < this.files.length; i++ ){
-      //   let file = this.files[i]; 
+      //   let file = this.files[i];
       //   formData.append('files[' + i + ']', file);
       // }
- 
+
       crudService
       .fileUpload(this.folderPath,formData)
       .then(function() {
@@ -95,11 +95,24 @@ export default {
         console.log("FAILURE!!");
       });
     },
-    save(e) {      
+    save(e) {
       crudService.setRoute('general/itdamage');
+      let formData = new FormData();
+      formData.append("file", this.file);
+      formData.append("fileName",fileName);
+
+      crudService
+      .fileUpload(this.folderPath,formData)
+      .then(function() {
+        console.log("SUCCESS!!");
+      })
+      .catch(function() {
+        console.log("FAILURE!!");
+      });
+
       crudService.save(this._data)
-      .then((response) => { 
-        this.submitFile(response.data.rtime) 
+      .then((response) => {
+        // this.submitFile(response.data.rtime)
       })
       .catch(e => {
         console.log(e);
@@ -108,7 +121,7 @@ export default {
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
       this.attach =this.$refs.file.files[0].name;
-    }, 
+    },
     fileDown(data) {
       window.open("/api/file/" + data.attach);
     },

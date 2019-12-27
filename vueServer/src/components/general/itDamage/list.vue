@@ -16,14 +16,14 @@
           <td class="">
             <button
               v-show="data.attach"
-              class="btn btn-default btn-sm"
+              class="btn btn-indigo btn-sm"
               type="button"
               @click="fileDown(data)"
             >다운로드</button>
           </td>
           <td class="genre">
             <button
-              class="btn btn-default btn-sm"
+              class="btn btn-indigo btn-sm"
               type="button"
               id="endDamage"
               @click="enditdamage(data)"
@@ -79,7 +79,7 @@ export default {
     fileDown(data) {
       var folderPath="itdamage";
       window.open("/api/file/" + folderPath + "/" + data.attach);
-    }
+    },
   },
   created() {
     crudService.setRoute('general/itdamage');

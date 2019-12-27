@@ -15,12 +15,13 @@ import lombok.Data;
 @IdClass(User.class)
 @Table(name = "GR_INSA", schema = "TPRLIB")
 public class User implements Serializable {
-	@Id
+	@Id 
 	private String asabn;	
 	
 	@Id
 	@Column(name="CO_GB")
 	private String companyCode; 
+	
 	private String pass;
 	private String asosk;
 	private String kname;

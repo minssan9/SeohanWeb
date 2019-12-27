@@ -19,8 +19,7 @@ public class WebConfig implements WebMvcConfigurer {
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
-				.allowedMethods("GET", "POST", "HEAD", "PUT", "DELETE", "OPTIONS");
-//		@CrossOrigin(origins = { "http://localhost:8091", "http://localhost", "http://minssan9.seohan.com"})
+				.allowedMethods("GET", "POST", "HEAD", "PUT", "DELETE", "OPTIONS"); 
 	}
 
 
@@ -31,18 +30,18 @@ public class WebConfig implements WebMvcConfigurer {
       return multipartResolver;
    }
 
-    @Bean
-    public CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("*");  // TODO: lock down before deploying
-        config.addAllowedHeader("*");
-        config.addExposedHeader(HttpHeaders.AUTHORIZATION);
-        config.addAllowedMethod("*");
-        source.registerCorsConfiguration("/**", config);
-        return new CorsFilter(source);
-    }
+//    @Bean
+//    public CorsFilter corsFilter() {
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowCredentials(true);
+//        config.addAllowedOrigin("*");  // TODO: lock down before deploying
+//        config.addAllowedHeader("*");
+//        config.addExposedHeader(HttpHeaders.AUTHORIZATION);
+//        config.addAllowedMethod("*");
+//        source.registerCorsConfiguration("/**", config);
+//        return new CorsFilter(source);
+//    }
     
     
 }

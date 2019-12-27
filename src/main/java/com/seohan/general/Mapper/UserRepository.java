@@ -15,6 +15,6 @@ public interface UserRepository extends JpaRepository<User, String> {
 	
 	User findByAsabn(String asabn);
 	
-	List<User> findByCompanyCode(String companyCode);
+	List<User> findByCompanyCode(String companyCode); 
 }
  
