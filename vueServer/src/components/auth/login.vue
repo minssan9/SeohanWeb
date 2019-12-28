@@ -37,6 +37,9 @@ export default {
       pass: ""
     };
   },
+  created(){
+    this.$store.commit('logout');
+  },
   methods: {
     onSubmit() {
       // Auth.login(this.asabn, this.pass).then(() => {
@@ -44,11 +47,12 @@ export default {
       //   this.$router.replace(this.$route.query.redirect || "/");
       // });
       // axios.post('/api/' + route +'/save', data);
-      axios.post(`/api/auth/signin`, this.data).then(res => {
+      axios.post(`/api/auth/signin`, this._data).then(res => {
         console.log(res);
+        this.$store
         this.$router.replace(this.$route.query.redirect || "/");
       });
     }
-  }
+  },  
 };
 </script>

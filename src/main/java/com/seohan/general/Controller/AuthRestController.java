@@ -27,19 +27,19 @@ class AuthRestController {
 //	@Autowired
 //	private UserDetailsService userService;
 	@Autowired
-	private UserRepository userRepo;
+	private UserRepository userRepository;
  
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd"); 
 	 
 	@GetMapping("")
 	public @ResponseBody List<User> getAllList(@RequestParam String companyCode) throws Exception {		
-		return userRepo.findByCompanyCode(companyCode); 
+		return userRepository.findByCompanyCode(companyCode); 
 	}
 
 	@GetMapping("/userinfo")
 	public @ResponseBody User getOneUser(@RequestParam String id) throws Exception { 
-		return userRepo.findByAsabn(id);
+		return userRepository.findByAsabn(id);
 	}
 	
 	@GetMapping("/login")
@@ -54,9 +54,11 @@ class AuthRestController {
 	}
 	@PostMapping("/signin")
 	public ResponseEntity<User> updateUser(@RequestBody User user ) throws Exception { 		
-		User userUpdated = null;
-//				userService. (user); 
-		return new ResponseEntity<User>(userUpdated, HttpStatus.OK);
+		User userSignin = userRepository.findByAsabn(user.getAsabn());
+		if (userSignin.getPass().equals(user.getPass())) {
+			
+		}
+		return new ResponseEntity<User>(userSignin, HttpStatus.OK);
 	}
 
 //	@PostMapping("save")
