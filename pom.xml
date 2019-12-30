@@ -64,10 +64,10 @@
 
 
 		<!-- Spring Security -->
-<!-- 		<dependency> -->
-<!-- 		<groupId>org.springframework.boot</groupId> -->
-<!-- 		<artifactId>spring-boot-starter-security</artifactId> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.boot</groupId> -->
+		<!-- <artifactId>spring-boot-starter-security</artifactId> -->
+		<!-- </dependency> -->
 		<!-- <dependency> -->
 		<!-- <groupId>org.springframework.ldap</groupId> -->
 		<!-- <artifactId>spring-ldap-core</artifactId> -->
@@ -84,10 +84,15 @@
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
-		</dependency>
+		</dependency><!-- https://mvnrepository.com/artifact/org.mindrot.bcrypt/bcrypt -->
+		<!-- https://mvnrepository.com/artifact/org.mindrot/jbcrypt -->
+		<dependency>
+			<groupId>org.mindrot</groupId>
+			<artifactId>jbcrypt</artifactId>
+			<version>0.3m</version>
+		</dependency> 
 
-
-		<!-- FTP --> 
+		<!-- FTP -->
 		<dependency>
 			<groupId>commons-net</groupId>
 			<artifactId>commons-net</artifactId>

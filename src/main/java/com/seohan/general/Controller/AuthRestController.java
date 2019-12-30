@@ -3,6 +3,8 @@ package com.seohan.general.Controller;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.seohan.common.Domain.Result;
+import com.seohan.common.Service.jwt.JwtService;
 import com.seohan.general.Domain.User;
 import com.seohan.general.Mapper.UserRepository;
+import com.seohan.general.Service.UserService;
 
 import lombok.extern.slf4j.Slf4j; 
 
@@ -24,8 +29,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j 
 @RestController
 class AuthRestController {  
-//	@Autowired
-//	private UserDetailsService userService;
+	@Autowired
+	private UserService userService;
 	@Autowired
 	private UserRepository userRepository;
  
@@ -60,6 +65,19 @@ class AuthRestController {
 		}
 		return new ResponseEntity<User>(userSignin, HttpStatus.OK);
 	}
+	
+	@Autowired
+    private JwtService jwtService;
+    
+    @PostMapping(value="/signin")
+    public Result signin(String email, String password, HttpServletResponse response){
+    	Result result = Result.successInstance();
+        User loginUser= userService.signin(email, password);
+        String token = jwtService.create("member", loginUser, "user"); 
+        response.setHeader("Authorization", token);
+        result.setData(loginUser);
+        return result;
+    }
 
 //	@PostMapping("save")
 //	public ResponseEntity<User> createUser(@RequestBody User user)  throws Exception {		
