@@ -33,6 +33,10 @@ class AuthRestController {
 	private UserService userService;
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+    private JwtService jwtService;
+	
  
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd"); 
@@ -57,19 +61,18 @@ class AuthRestController {
 		}
 		return "login.html";
 	}
-	@PostMapping("/signin")
-	public ResponseEntity<User> updateUser(@RequestBody User user ) throws Exception { 		
-		User userSignin = userRepository.findByAsabn(user.getAsabn());
-		if (userSignin.getPass().equals(user.getPass())) {
-			
-		}
-		return new ResponseEntity<User>(userSignin, HttpStatus.OK);
-	}
 	
-	@Autowired
-    private JwtService jwtService;
+//	@PostMapping("/signin")
+//	public ResponseEntity<User> updateUser(@RequestBody User user ) throws Exception { 		
+//		User userSignin = userRepository.findByAsabn(user.getAsabn());
+//		if (userSignin.getPass().equals(user.getPass())) {
+//			
+//		}
+//		return new ResponseEntity<User>(userSignin, HttpStatus.OK);
+//	}
+	
     
-    @PostMapping(value="/signin")
+    @PostMapping("/signin")
     public Result signin(String email, String password, HttpServletResponse response){
     	Result result = Result.successInstance();
         User loginUser= userService.signin(email, password);

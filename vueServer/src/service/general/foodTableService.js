@@ -2,7 +2,7 @@ import axios from "axios";
 
 class foodTableService {
     foodTable (querydate, company) {
-      var route='';
+      var route='foodTable';
       switch (company){
         case('seohan'): route = 'foodTable'; break;
         case('kamtec'): route = 'foodTableKamtec'; break;

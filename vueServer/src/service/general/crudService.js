@@ -13,7 +13,7 @@ class crudService {
     return axios.get('/api/' + route + '/' + id);
   }
   update(data) {
-    return axios.put('/api/' + route + '/', data);
+    return axios.put('/api/' + route + '/update', data);
   }
   save(data) {
     return axios.post('/api/' + route +'/save', data);
@@ -22,7 +22,7 @@ class crudService {
     return axios.post('/api/file/upload'+ '/' +folderPath, data, {
       headers: {
         // encodeURI(param) headers: {
-        'Content-Type': 'multipart/form-data',    
+        'Content-Type': 'multipart/form-data',
         "Process-Data": false,
       }
     });

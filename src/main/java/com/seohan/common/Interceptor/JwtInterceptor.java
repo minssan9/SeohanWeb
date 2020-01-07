@@ -17,16 +17,16 @@ public class JwtInterceptor implements HandlerInterceptor{
 	@Autowired
 	private JwtService jwtService;
 
-	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
-		final String token = request.getHeader(HEADER_AUTH);
-
-		if(token != null && jwtService.isUsable(token)){
-			return true;
-		}else{
-			throw new UnauthorizedException();
-		}
-
-	}
+//	@Override
+//	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+//			throws Exception {
+//		final String token = request.getHeader(HEADER_AUTH);
+//
+//		if(token != null && jwtService.isUsable(token)){
+//			return true;
+//		}else{
+//			throw new UnauthorizedException();
+//		}
+//
+//	}
 }

@@ -36,5 +36,5 @@ public class User implements Serializable {
 	private String team_nm;
 	private String part_nm;
 
-	private String role;
+//	private String role;
 }
