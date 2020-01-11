@@ -43,8 +43,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User signin(String asabn, String password) {
-		User user = userRepository.findByAsabn(asabn);
+	public User signin(String companyCode, String asabn, String password) {
+		User user = userRepository.findByAsabnAndCo_gb(asabn, companyCode) ;
 		Objects.requireNonNull(user, SIGNIN_EXCEPTION_MSG);
 
 		if (!this.isAccordPassword(user, password)) {

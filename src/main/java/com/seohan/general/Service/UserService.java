@@ -14,7 +14,7 @@ public interface UserService {
     
     void validate(String email);
 
-    User signin(String email, String password);
+    User signin( String companyCode, String asabn, String password);
      
 	User findByAsabn(String asabn);
 }

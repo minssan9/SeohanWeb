@@ -33,7 +33,6 @@ class AuthRestController {
 	private UserService userService;
 	@Autowired
 	private UserRepository userRepository;
-	
 	@Autowired
     private JwtService jwtService;
 	
@@ -73,9 +72,9 @@ class AuthRestController {
 	
     
     @PostMapping("/signin")
-    public Result signin(String email, String password, HttpServletResponse response){
+    public Result signin(@RequestBody User user, HttpServletResponse response){
     	Result result = Result.successInstance();
-        User loginUser= userService.signin(email, password);
+        User loginUser= userService.signin(user.getCompanyCode(), user.getAsabn(), user.getPass());
         String token = jwtService.create("member", loginUser, "user"); 
         response.setHeader("Authorization", token);
         result.setData(loginUser);

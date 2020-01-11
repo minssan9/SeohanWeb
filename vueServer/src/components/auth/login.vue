@@ -3,6 +3,13 @@
   <div>
     <!-- <form @submit="onSubmit"> -->
     <div class="form-group">
+      <div>
+        <buttonGroup>
+          <button class="btn btn-default" v-on:click="setCompanyCode('SEOHAN')">서한</button>
+          <button class="btn btn-default" v-on:click="setCompanyCode('KAMTEC')">캄텍</button>
+          <button class="btn btn-default" v-on:click="setCompanyCode('KOFCO')">프랜지</button>
+        </buttonGroup>
+      </div>
       <label for="ID">ID</label>
       <input type="text" v-model="asabn" name="asabn" class="form-control" />
       <!-- :class="{ 'is-invalid': submitted && !id }" -->
@@ -33,14 +40,18 @@ export default {
   name: "Login",
   data() {
     return {
+      companyCode:"",
       asabn: "",
       pass: ""
     };
   },
-  created(){
-    this.$store.commit('logout');
+  created() {
+    this.$store.commit("logout");
   },
   methods: {
+    setCompanyCode(companyCode){
+      this.companyCode= companyCode;
+    },
     onSubmit() {
       // Auth.login(this.asabn, this.pass).then(() => {
       //   // 인증에 성공하면 이전 페이지로 이동한다
@@ -49,10 +60,10 @@ export default {
       // axios.post('/api/' + route +'/save', data);
       axios.post(`/api/auth/signin`, this._data).then(res => {
         console.log(res);
-        this.$store
+        this.$store;
         this.$router.replace(this.$route.query.redirect || "/");
       });
     }
-  },  
+  }
 };
 </script>
