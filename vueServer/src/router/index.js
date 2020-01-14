@@ -4,6 +4,7 @@ import { Auth } from '../api'           // 로그인 성공시, actions에서 st
 // import store from '@/vuex/store'
 
 import Login from '@/components/auth/Login.vue'
+import Me from '@/components/auth/me.vue'
 import general  from '@/components/general/general'
 
 import itDamage from '@/components/general/itDamage/itDamage'
@@ -25,6 +26,10 @@ Vue.use(Router)
 const requireAuth = () => (from, to, next) => {
   const isAuthenticated = false
   if (isAuthenticated) return next()
+  // next({
+  //   path:'/login',
+  //   query:{redirect:to.fullPath}
+  // })
   next('/api/login?returnPath=me')
 }
 

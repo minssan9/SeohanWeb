@@ -9,6 +9,8 @@
       <a class="navbar-brand" href="/general/foodtable" exact>식단표</a>
       <a class="navbar-brand" v-if="isAuthenticated" @click.prevent="onClickLogout"  >Logout</a>
       <a class="navbar-brand" v-else href="/login" exact>Login</a>
+      <a class="navbar-brand" to="/me">Me</a>
+
     </nav>
     <router-view></router-view>
   </div>
@@ -26,7 +28,7 @@
     methods: {
       onClickLogout() {
         // LOGOUT 변이 실행 후 리다이렉트
-        store.dispatch('LOGOUT').then(() => this.$router.push('/'))
+        store.dispatch('LOGOUT').then(() => this.$router.push('/general'))
       }
     }
   }

@@ -49,14 +49,14 @@ public class UserServiceImpl implements UserService {
 
 		if (!this.isAccordPassword(user, password)) {
 			throw new IllegalStateException(SIGNIN_EXCEPTION_MSG);
-		}
-
+		} 
 		return user;
 	}
 
 	private boolean isAccordPassword(User user, String password) {
-		String encodedPassword = user.getPass();
-		return BCrypt.checkpw(password, encodedPassword);
+		String encodedPassword = user.getPass().trim();
+//		return BCrypt.checkpw(password, encodedPassword);
+		return password.equals(encodedPassword);
 	}
   
 	@Override
