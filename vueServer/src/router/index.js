@@ -26,11 +26,7 @@ Vue.use(Router)
 const requireAuth = () => (from, to, next) => {
   const isAuthenticated = false
   if (isAuthenticated) return next()
-  // next({
-  //   path:'/login',
-  //   query:{redirect:to.fullPath}
-  // })
-  next('/api/login?returnPath=me')
+  next('/login?returnPath=me')
 }
 
 const router = new Router({
@@ -56,13 +52,12 @@ const router = new Router({
         ]
       },
       { path: 'foodTable', component: foodTable },
-      // { path: 'foodTableKamtec', component: foodTableKamtec },
       { path: 'qrReader', component: qrReader },
     ]
   },
   { path: '/', component: Home },
   { path: '*', component: NotFound },
-  { path: '/login', component: Login },
+  { path: '/login', component: Login  },
   {
     path: '/logout',
     beforeEnter(to, from, next) {
@@ -70,6 +65,7 @@ const router = new Router({
       next('/')
     }
   },
+  { path: '/me', component: Me, beforeEnter: requireAuth  }
   ]
 });
 

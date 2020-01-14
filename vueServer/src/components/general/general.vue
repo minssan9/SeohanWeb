@@ -9,7 +9,7 @@
       <a class="navbar-brand" href="/general/foodtable" exact>식단표</a>
       <a class="navbar-brand" v-if="isAuthenticated" @click.prevent="onClickLogout"  >Logout</a>
       <a class="navbar-brand" v-else href="/login" exact>Login</a>
-      <a class="navbar-brand" to="/me">Me</a>
+      <a class="navbar-brand" href="/me">Me</a>
 
     </nav>
     <router-view></router-view>
