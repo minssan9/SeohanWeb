@@ -22,6 +22,7 @@ export default {
   created() {
     Auth.onChange = loggedIn => {
       console.log("onchage", loggedIn);
+
       this.loggedIn = loggedIn;
     };
   },

@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import { Auth } from '../api'           // 로그인 성공시, actions에서 store에 isAuth값을 true로 바꿔줬다. 그걸 이용한다.
-// import store from '@/vuex/store'
+import store from '@/vuex/store'
 
 import Login from '@/components/auth/Login.vue'
-import Me from '@/components/auth/me.vue'
+// import Me from '@/components/auth/me.vue'
+const Me = { template: '<div>Me</div>' }
 import general  from '@/components/general/general'
 
 import itDamage from '@/components/general/itDamage/itDamage'
@@ -24,28 +25,24 @@ const NotFound = { template: '<div>Not Found</div>' }
 Vue.use(Router)
 
 const requireAuth = () => (from, to, next) => {
-  const isAuthenticated = false
-  if (isAuthenticated) return next()
-  next('/login?returnPath=me')
+  if (store.getters.isAuthenticated) return next()
+  next('/login?returnPath=general')
 }
 
 const router = new Router({
   mode: 'history', // Use browser history
   routes: [{
-    path: '/general',
-    component: general,
+    path: '/general', component: general,
     children: [
       {
-        path: 'itDamage',
-        component: itDamage,
+        path: 'itDamage', component: itDamage,
         children: [
           {path: 'list', component: itDamageList },
-          {path: 'new', component: itDamageNew,beforeEnter: requireAuth},
+          {path: 'new', component: itDamageNew,beforeEnter: requireAuth() },
         ]
       },
       {
-        path: 'report',
-        component: report,
+        path: 'report', component: report,
         children: [
           {path: 'list', component: reportList },
           // {path: 'new', component: reportNew,beforeEnter: requireAuth},
@@ -58,14 +55,13 @@ const router = new Router({
   { path: '/', component: Home },
   { path: '*', component: NotFound },
   { path: '/login', component: Login  },
-  {
-    path: '/logout',
+  { path: '/logout',
     beforeEnter(to, from, next) {
       Auth.logout()
       next('/')
     }
   },
-  { path: '/me', component: Me, beforeEnter: requireAuth  }
+  { path: '/me', component: Me, beforeEnter: requireAuth()  }
   ]
 });
 
