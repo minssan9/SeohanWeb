@@ -6,25 +6,25 @@
 
 <script>
 import router from "./router";
-import { Auth } from "./api";
+// import { Auth } from "./api";
 
 const route = "";
 export default {
   name: "App",
   data() {
     return {
-      loggedIn: Auth.loggedIn()
+      // loggedIn: Auth.loggedIn()
     };
   },
   render() {
     // return <link rel="icon" href='@/assets/icon/seohanico.png' />;
   },
   created() {
-    Auth.onChange = loggedIn => {
-      console.log("onchage", loggedIn);
+    // Auth.onChange = loggedIn => {
+    //   console.log("onchage", loggedIn);
 
-      this.loggedIn = loggedIn;
-    };
+    //   this.loggedIn = loggedIn;
+    // };
   },
   components: {}
 };

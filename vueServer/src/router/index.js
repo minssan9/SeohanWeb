@@ -55,12 +55,12 @@ const router = new Router({
   { path: '/', component: Home },
   { path: '*', component: NotFound },
   { path: '/login', component: Login  },
-  { path: '/logout',
-    beforeEnter(to, from, next) {
-      Auth.logout()
-      next('/')
-    }
-  },
+  // { path: '/logout',
+  //   beforeEnter(to, from, next) {
+  //     // Auth.logout()
+  //     next('/')
+  //   }
+  // },
   { path: '/me', component: Me, beforeEnter: requireAuth()  }
   ]
 });
