@@ -16,9 +16,7 @@
   </div>
 </template>
 
-<script>
-  import store from '@/vuex/store'
-
+<script> 
   export default {
     computed: {
       isAuthenticated() {

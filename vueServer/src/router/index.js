@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { Auth } from '../api'           // 로그인 성공시, actions에서 store에 isAuth값을 true로 바꿔줬다. 그걸 이용한다.
-import store from '@/vuex/store'
+// import store from '@/vuex/store'
 
 import Login from '@/components/auth/Login.vue'
 // import Me from '@/components/auth/me.vue'

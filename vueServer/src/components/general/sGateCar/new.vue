@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import sGateCarService from "../../../service/general/sGateCarService";
+import sGateCarService from "@/services/general/sGateCarService";
 
 export default {
   name: "sGateCar",
