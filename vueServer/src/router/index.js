@@ -3,8 +3,8 @@ import Router from 'vue-router'
 // import store from '@/vuex/store'
 
 import Login from '@/components/auth/Login.vue'
-// import Me from '@/components/auth/me.vue'
-const Me = { template: '<div>Me</div>' }
+import Profile from '@/components/auth/Profile.vue'
+
 import general  from '@/components/general/general'
 
 import itDamage from '@/components/general/itDamage/itDamage'
@@ -54,13 +54,7 @@ const router = new Router({
   { path: '/', component: Home },
   { path: '*', component: NotFound },
   { path: '/login', component: Login  },
-  // { path: '/logout',
-  //   beforeEnter(to, from, next) {
-  //     // Auth.logout()
-  //     next('/')
-  //   }
-  // },
-  { path: '/me', component: Me, beforeEnter: requireAuth()  }
+  { path: '/Profile', component: Profile, beforeEnter: requireAuth()  }
   ]
 });
 

@@ -38,7 +38,7 @@
         <div
           class="alert alert-danger"
           role="alert"
-          v-if="errors.has('username')"
+          v-if="errors.has('asabn')"
         >Username is required!</div>
       </div>
       <div class="form-group">
@@ -50,6 +50,11 @@
           v-model="user.pass"
           v-validate="'required'"
         />
+          <div
+            class="alert alert-danger"
+            role="alert"
+            v-if="errors.has('pass')"
+          >Password is required!</div>
       </div>
       <div class="form-group">
         <input type="submit" class="btn btn-primary" value="Login" @click="onSubmit" />
@@ -59,12 +64,12 @@
 </template>
 
 <script>
-import User from '@/models/user';
+import User from "@/models/user";
 import axios from "axios";
 import vuex, { mapActions } from "vuex";
 
 export default {
-  name: 'login',
+  name: "login",
   computed: {
     loggedIn() {
       return this.$store.state.auth.status.loggedIn;
@@ -72,14 +77,14 @@ export default {
   },
   data() {
     return {
-      user: new User('', '', ''),
+      user: new User("", "", ""),
       loading: false,
-      message: ''
+      message: ""
     };
-  },  
+  },
   mounted() {
     if (this.loggedIn) {
-      this.$router.push('/');
+      this.$router.push("/");
     }
   },
   methods: {
@@ -107,9 +112,8 @@ export default {
     //   // 리다이렉트 처리
     //   this.$router.push(returnPath);
     // },
-    
-    onSubmit() { 
 
+    onSubmit() {
       this.loading = true;
       this.$validator.validateAll();
 
@@ -119,9 +123,9 @@ export default {
       }
 
       if (this.user.companyCode && this.user.asabn && this.user.pass) {
-        this.$store.dispatch('auth/login', this.user).then(
+        this.$store.dispatch("auth/login", this.user).then(
           () => {
-            this.$router.push('/profile');
+            this.$router.push("/profile");
           },
           error => {
             this.loading = false;

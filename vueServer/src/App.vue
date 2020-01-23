@@ -12,11 +12,6 @@
 
       <div class="navbar-nav ml-auto" v-if="!currentUser">
         <li class="nav-item">
-          <a href="/register" class="nav-link">
-            <font-awesome-icon icon="user-plus" />Sign Up
-          </a>
-        </li>
-        <li class="nav-item">
           <a href="/login" class="nav-link">
             <font-awesome-icon icon="sign-in-alt" />Login
           </a>
@@ -27,7 +22,7 @@
         <li class="nav-item">
           <a href="/profile" class="nav-link">
             <font-awesome-icon icon="user" />
-            {{currentUser.username}}
+            {{currentUser.asabn}}
           </a>
         </li>
         <li class="nav-item">

@@ -1,14 +1,15 @@
 export default class User {
     companyCode='';
-    username='';    
+    kname='';
     email='';
     asabn='';
     pass='';
 
-    constructor (companyCode, asabn, email, pass) {
-      this.companyCode = companyCode;      
-      this.username = username;      
-      this.email = email;
+    constructor (companyCode, asabn, pass) {
+      // ,email,kname
+      this.companyCode = companyCode;
+      // this.kname = kname;
+      // this.email = email;
       this.asabn = asabn;
       this.pass = pass;
     }
