@@ -1,13 +1,16 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <div class="navbar-brand">vue-login</div>
-      <div class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a href="/" class="nav-link">
-            <font-awesome-icon icon="home" />Home
-          </a>
-        </li>
+    <nav class="navbar navbar-light bg-light">
+      <div  >
+        <a class="navbar-brand" href="/">
+          <img src="@/assets/seohanico.jpg" width="30" height="30" alt />
+        </a>
+        <a class="navbar-brand" href="/general/itdamage/list" exact>전산고장신고</a>
+        <a class="navbar-brand" href="/general/report/list" exact>공정신고</a>
+        <a class="navbar-brand" href="/general/foodtable" exact>식단표</a>
+        <!-- <a class="navbar-brand" v-if="currentUser" href @click.prevent="onClickLogout">Logout</a>
+        <a class="navbar-brand" v-if="!currentUser" href="/login" exact>Login</a>
+        <a class="navbar-brand" v-if="currentUser" href="/me">Me</a> -->
       </div>
 
       <div class="navbar-nav ml-auto" v-if="!currentUser">
@@ -17,7 +20,6 @@
           </a>
         </li>
       </div>
-
       <div class="navbar-nav ml-auto" v-if="currentUser">
         <li class="nav-item">
           <a href="/profile" class="nav-link">
@@ -41,6 +43,9 @@
 <script>
 export default {
   computed: {
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated;
+    },
     currentUser() {
       return this.$store.state.auth.user;
     }

@@ -43,7 +43,9 @@ public class JwtServiceImpl implements JwtService {
 	@Override
 	public boolean isUsable(String jwt) {
 		try {
-			Jws<Claims> claims = Jwts.parser().setSigningKey(this.generateKey()).parseClaimsJws(jwt);
+			Jws<Claims> claims = Jwts.parser()
+								.setSigningKey(this.generateKey())
+								.parseClaimsJws(jwt);
 			return true;
 
 		} catch (Exception e) {

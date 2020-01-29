@@ -12,8 +12,9 @@ class AuthService {
       })
       .then(this.handleResponse)
       .then(response => {
-        if (response.data.accessToken) {
+        if (response.headers.authorization) {
           localStorage.setItem('user', JSON.stringify(response.data));
+          localStorage.setItem('accessToken', response.headers.authorization);
         }
 
         return response.data;
@@ -22,6 +23,7 @@ class AuthService {
 
   logout() {
     localStorage.removeItem('user');
+    localStorage.removeItem('accessToken');
   }
 
   // register(user) {

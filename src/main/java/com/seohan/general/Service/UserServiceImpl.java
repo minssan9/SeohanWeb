@@ -60,8 +60,8 @@ public class UserServiceImpl implements UserService {
 	}
   
 	@Override
-	public User findByAsabn(String asabn) {
-		return userRepository.findByAsabn(asabn);
+	public User findByCompanyCodeAndAsabn(User user) {
+		return userRepository.findByAsabnAndCo_gb(user.getAsabn(), user.getCompanyCode());
 	}
  
 }

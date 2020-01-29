@@ -3,7 +3,7 @@
     <header class="jumbotron">
       <h3>id : {{content.asabn}}</h3>
       <h3>user name : {{content.kname}}</h3>
-      <h3>email : {{content.email}}</h3>
+      <h3>email : {{content.asabn}}@seohan.com</h3>
     </header>
   </div>
 </template>

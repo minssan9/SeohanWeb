@@ -3,6 +3,7 @@ package com.seohan.general.Controller;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,14 +41,14 @@ class AuthRestController {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd"); 
 	 
-	@GetMapping("")
-	public @ResponseBody List<User> getAllList(@RequestParam String companyCode) throws Exception {		
-		return userRepository.findByCompanyCode(companyCode); 
-	}
-
-	@GetMapping("/userinfo")
-	public @ResponseBody User getOneUser(@RequestParam String id) throws Exception { 
-		return userRepository.findByAsabn(id);
+	@PostMapping("/userinfo")
+	public @ResponseBody User getOneUser(@RequestBody User user, HttpServletRequest request) throws Exception {
+		String accessToken = request.getHeader("Authorization");
+		if (jwtService.isUsable(accessToken)) {
+			return userRepository.findByAsabnAndCo_gb(user.getAsabn(), user.getCompanyCode());			
+		} else {
+			return null;
+		}
 	}
 	
 	@GetMapping("/login")

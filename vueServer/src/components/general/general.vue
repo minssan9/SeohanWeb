@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <nav class="navbar navbar-light bg-light">
-      <a class="navbar-brand" href="/">
+    <nav class="navbar navbar-light ">
+      <!-- <a class="navbar-brand" href="/">
         <img src="@/assets/seohanico.jpg" width="30" height="30" alt="">
       </a>
       <a class="navbar-brand" href="/general/itdamage/list" exact>전산고장신고</a>
@@ -9,14 +9,14 @@
       <a class="navbar-brand" href="/general/foodtable" exact>식단표</a>
       <a class="navbar-brand" v-if="isAuthenticated" href="" @click.prevent="onClickLogout"  >Logout</a>
       <a class="navbar-brand" v-else href="/login" exact>Login</a>
-      <a class="navbar-brand" v-if="isAuthenticated" href="/me">Me</a>
+      <a class="navbar-brand" v-if="isAuthenticated" href="/me">Me</a> -->
 
     </nav>
     <router-view></router-view>
   </div>
 </template>
 
-<script> 
+<script>
   export default {
     computed: {
       isAuthenticated() {

@@ -15,8 +15,7 @@ public interface UserRepository extends JpaRepository<User, String> {
 			nativeQuery=true)
     User findByAsabnAndCo_gb(@Param("asabn") String asabn, @Param("companyCode") String companyCode);
 	
-	User findByAsabn(String asabn);
-	
-	List<User> findByCompanyCode(String companyCode); 
+	User findByAsabn(String asabn); 
+		 
 }
  

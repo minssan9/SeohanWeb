@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 // import store from '@/vuex/store'
+import authHeader from '@/services/auth/auth-header'
 
 import Login from '@/components/auth/Login.vue'
 import Profile from '@/components/auth/Profile.vue'
 
-import general  from '@/components/general/general'
+import general from '@/components/general/general'
 
 import itDamage from '@/components/general/itDamage/itDamage'
 import itDamageList from '@/components/general/itDamage/list'
@@ -24,8 +25,8 @@ const NotFound = { template: '<div>Not Found</div>' }
 Vue.use(Router)
 
 const requireAuth = () => (from, to, next) => {
-  if (store.getters.isAuthenticated) return next()
-  next('/login?returnPath=general')
+  if (authHeader ()) return next()
+  next('/')
 }
 
 const router = new Router({
@@ -36,14 +37,14 @@ const router = new Router({
       {
         path: 'itDamage', component: itDamage,
         children: [
-          {path: 'list', component: itDamageList },
-          {path: 'new', component: itDamageNew,beforeEnter: requireAuth() },
+          { path: 'list', component: itDamageList },
+          { path: 'new', component: itDamageNew,beforeEnter: requireAuth() },
         ]
       },
       {
         path: 'report', component: report,
         children: [
-          {path: 'list', component: reportList },
+          { path: 'list', component: reportList },
           // {path: 'new', component: reportNew,beforeEnter: requireAuth},
         ]
       },
@@ -53,8 +54,9 @@ const router = new Router({
   },
   { path: '/', component: Home },
   { path: '*', component: NotFound },
-  { path: '/login', component: Login  },
-  { path: '/Profile', component: Profile, beforeEnter: requireAuth()  }
+  { path: '/login', component: Login },
+  { path: '/Profile', component: Profile , beforeEnter: requireAuth() }
+
   ]
 });
 

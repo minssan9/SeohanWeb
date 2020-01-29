@@ -22,6 +22,13 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
   // these devServer options should be customized in /config/index.js
   devServer: {
+    // https: true,
+    // https: {
+    //     key: fs.readFileSync('/etc/letsencrypt/live/webrot360.tk/privkey1.pem'),
+    //     cert: fs.readFileSync('/etc/letsencrypt/live/webrot360.tk/cert1.pem'),
+    //     ca: fs.readFileSync('/etc/letsencrypt/live/webrot360.tk/chain1.pem'),
+    // },
+
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [
