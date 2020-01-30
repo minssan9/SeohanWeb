@@ -1,46 +1,40 @@
 // components/Login.vue
 <template>
-  <div class="col-md-12">
-    <div class="card card-container">
-      <div class="form-group">
-        <div class="btn-group">
-          <button
-            id="SEOHAN"
-            type="button"
-            class="btn btn-default"
-            value="SEOHAN"
-            v-on:click="setCompanyCode('SEOHAN')"
-          >서한</button>
-          <button
-            id="KAMTEC"
-            type="button"
-            class="btn btn-default"
-            value="KAMTEC"
-            v-on:click="setCompanyCode('SEOHAN')"
-          >캄텍</button>
-          <button
-            id="KOFCO"
-            type="button"
-            class="btn btn-default"
-            value="KOFCO"
-            v-on:click="setCompanyCode('SEOHAN')"
-          >프랜지</button>
-        </div>
-        <p></p>
-        <label for="ID">ID</label>
-        <input
-          type="text"
-          class="form-control"
-          v-model="user.asabn"
-          name="asabn"
-          v-validate="'required'"
-        />
-        <div
-          class="alert alert-danger"
-          role="alert"
-          v-if="errors.has('asabn')"
-        >Username is required!</div>
+  <div class="col-md-4">
+    <div id="login" class="form-group">
+      <div class="btn-group">
+        <button
+          id="SEOHAN"
+          type="button"
+          class="btn btn-default"
+          value="SEOHAN"
+          v-on:click="setCompanyCode('SEOHAN')"
+        >서한</button>
+        <button
+          id="KAMTEC"
+          type="button"
+          class="btn btn-default"
+          value="KAMTEC"
+          v-on:click="setCompanyCode('SEOHAN')"
+        >캄텍</button>
+        <button
+          id="KOFCO"
+          type="button"
+          class="btn btn-default"
+          value="KOFCO"
+          v-on:click="setCompanyCode('SEOHAN')"
+        >프랜지</button>
       </div>
+      <p></p>
+      <label for="ID">ID</label>
+      <input
+        type="text"
+        class="form-control"
+        v-model="user.asabn"
+        name="asabn"
+        v-validate="'required'"
+      />
+      <div class="alert alert-danger" role="alert" v-if="errors.has('asabn')">Username is required!</div>
       <div class="form-group">
         <label for="password">Password</label>
         <input
@@ -50,11 +44,7 @@
           v-model="user.pass"
           v-validate="'required'"
         />
-          <div
-            class="alert alert-danger"
-            role="alert"
-            v-if="errors.has('pass')"
-          >Password is required!</div>
+        <div class="alert alert-danger" role="alert" v-if="errors.has('pass')">Password is required!</div>
       </div>
       <div class="form-group">
         <input type="submit" class="btn btn-primary" value="Login" @click="onSubmit" />
@@ -142,3 +132,13 @@ export default {
   }
 };
 </script>
+<style scoped>
+#login {
+  width: 500px;
+  border: 1px solid #cccccc;
+  background-color: #ffffff;
+  margin: auto;
+  margin-top: 200px;
+  padding: 20px;
+}
+</style>

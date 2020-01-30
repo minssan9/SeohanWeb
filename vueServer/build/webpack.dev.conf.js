@@ -24,9 +24,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   devServer: {
     // https: true,
     // https: {
-    //     key: fs.readFileSync('/etc/letsencrypt/live/webrot360.tk/privkey1.pem'),
-    //     cert: fs.readFileSync('/etc/letsencrypt/live/webrot360.tk/cert1.pem'),
-    //     ca: fs.readFileSync('/etc/letsencrypt/live/webrot360.tk/chain1.pem'),
+    //     key: require('../auth/seohan.com.key'),
+    //     cert: require('../auth/seohan.com.crt'),
+    //     ca: require('../auth/rootca.crt'),
     // },
 
     clientLogLevel: 'warning',
@@ -72,7 +72,14 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         to: config.dev.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+    new FriendlyErrorsPlugin(),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jquery: 'jquery',
+      'window.jQuery': 'jquery',
+      jQuery : 'jquery'
+    })
   ]
 })
 

@@ -3,6 +3,6 @@ export default function authHeader () {
     if (accessToken) {
       return { Authorization: accessToken }
     } else {
-      return {}
+      return false
     }
   }

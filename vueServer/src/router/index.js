@@ -26,7 +26,7 @@ Vue.use(Router)
 
 const requireAuth = () => (from, to, next) => {
   if (authHeader ()) return next()
-  next('/')
+  next('/login')
 }
 
 const router = new Router({
@@ -38,7 +38,7 @@ const router = new Router({
         path: 'itDamage', component: itDamage,
         children: [
           { path: 'list', component: itDamageList },
-          { path: 'new', component: itDamageNew,beforeEnter: requireAuth() },
+          { path: 'new', component: itDamageNew },
         ]
       },
       {
@@ -50,10 +50,11 @@ const router = new Router({
       },
       { path: 'foodTable', component: foodTable },
       { path: 'qrReader', component: qrReader },
-    ]
+    ],
+    beforeEnter: requireAuth(),
   },
-  { path: '/', component: Home },
-  { path: '*', component: NotFound },
+  { path: '/', component: Home,beforeEnter: requireAuth(), },
+  { path: '*', component: NotFound,beforeEnter: requireAuth(), },
   { path: '/login', component: Login },
   { path: '/Profile', component: Profile , beforeEnter: requireAuth() }
 
