@@ -1,6 +1,6 @@
 // components/Login.vue
 <template>
-  <div class="col-md-4">
+  <div class="col-md-4 col-sm-4 col-xs-8">
     <div id="login" class="form-group">
       <div class="btn-group">
         <button
