@@ -131,9 +131,10 @@
             </div>
           </div>
         </nav>
+
+        <router-view />
       </div>
     </div>
-        <router-view />
     <!--
         <a class="navbar-brand" href="/">
           <img src="@/assets/seohanico.jpg" width="30" height="30" alt />

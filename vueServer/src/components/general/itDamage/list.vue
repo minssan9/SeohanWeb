@@ -4,15 +4,16 @@
 
     <table class="table table-striped table-bordered" id="dataTable">
       <tbody>
-        <tr v-for="data in dataList" v-bind:key="data.rtime">
-          <td class="d-sm-block ">{{data.class1}}</td>
-          <td class="d-sm-block ">{{data.co_gb}}</td>
-          <td class="d-sm-block ">{{data.rteam}}</td>
-          <td class="d-sm-block ">{{data.rname}}</td>
-          <td class="d-sm-block ">
+        <tr v-for="data in dataList" v-bind:key="data.rtime" v-on:click="'tel:' + data.rtel">
+          <td class="d-none d-sm-block">{{data.class1}}</td>
+          <td class="d-none d-sm-block">{{data.co_gb}}</td>
+          <td class="d-none d-sm-block">{{data.rteam}}</td>
+          <td class="d-none d-sm-block">
+            <a v-bind:href="'tel:' + data.rtel">{{data.rname}}</a></td>
+          <td class="d-none d-sm-block">
             <a v-bind:href="'tel:' + data.rtel">{{data.rtel}}</a>
           </td>
-          <td class="">{{data.rtxt}}</td>
+          <td class=""><a v-bind:href="'tel:' + data.rtel">{{data.rtxt}}</a></td>
           <td class="">
             <button
               v-show="data.attach"
