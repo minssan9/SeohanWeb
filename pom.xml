@@ -80,6 +80,7 @@
 		<!-- <groupId>com.unboundid</groupId> -->
 		<!-- <artifactId>unboundid-ldapsdk</artifactId> -->
 		<!-- </dependency> -->
+
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
@@ -90,7 +91,7 @@
 			<groupId>org.mindrot</groupId>
 			<artifactId>jbcrypt</artifactId>
 			<version>0.3m</version>
-		</dependency> 
+		</dependency>
 
 		<!-- FTP -->
 		<dependency>
@@ -123,26 +124,12 @@
 			<artifactId>querydsl-apt</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>org.mybatis.spring.boot</groupId> -->
-		<!-- <artifactId>mybatis-spring-boot-starter</artifactId> -->
-		<!-- <version>2.1.0</version> -->
-		<!-- </dependency> -->
 
 		<!-- DBCP -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>org.mybatis.spring.boot</groupId> -->
-		<!-- <artifactId>mybatis-spring-boot-starter</artifactId> -->
-		<!-- <version>2.1.0</version> -->
-		<!-- </dependency> -->
 
 		<dependency>
 			<groupId>mysql</groupId>
@@ -185,6 +172,12 @@
 			<groupId>net.sf.jt400</groupId>
 			<artifactId>jt400</artifactId>
 			<version>9.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
 		</dependency>
 	</dependencies>
 

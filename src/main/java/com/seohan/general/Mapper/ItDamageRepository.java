@@ -24,8 +24,7 @@ public interface ItDamageRepository extends JpaRepository<ItDamage, Long> {
 	@Query(value="update SITLIB.IT_DAMAGE SET CTIME=:ctime where a.co_gb= :co_gb and a.rtime= :rtime ", nativeQuery=true)
 	public void updateItDamage(@Param("ctime") String ctime, @Param("co_gb") String co_gb, @Param("rtime") String rtime) throws Exception;
  
-	public List<ItDamage> findAll();
-	 
+	public List<ItDamage> findAll(); 
 
 	public List<ItDamage> findItDamageByStat(String stat);
 

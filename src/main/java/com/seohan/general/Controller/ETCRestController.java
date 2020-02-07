@@ -3,16 +3,22 @@ package com.seohan.general.Controller;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.seohan.general.Domain.FoodTable;
 import com.seohan.general.Domain.FoodTableKamtec;
 import com.seohan.general.Domain.FoodTableLab;
+import com.seohan.general.Domain.KakaoMessageModel;
 import com.seohan.general.Domain.TemperatureData;
 import com.seohan.general.Mapper.CodeLibRepository;
 import com.seohan.general.Mapper.FoodTableKamtecRepository;
@@ -65,5 +71,24 @@ class ETCRestController {
 	public @ResponseBody List<TemperatureData> TemperatureList(TemperatureData temperatureData) throws Exception {		
 		return temperatureRepo.TemperatureDataList(temperatureData.getCO_GB(), temperatureData.getCO_GB());				
 	}
-	 
+	
+	@GetMapping( "/kakao")
+	public void kakaoTest() throws Exception {
+		HttpHeaders headers = new HttpHeaders();		
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		RestTemplate restTemplate = new RestTemplate();
+		String url = "localhost:8190/kakao/save";		
+		
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("template_code", "COM_MMS_00");
+        jsonObject.put("recipient_num", "01067766160");
+        jsonObject.put("content", [{"COM_MMS_00"}]);
+
+        HttpEntity<String> entity = new HttpEntity<String>(jsonObject.toString(),headers);
+		String answer = restTemplate.postForObject(url, entity, String.class);
+		
+
+		System.out.println(answer);
+		KakaoMessageModel kakaoMessageModel = new KakaoMessageModel();
+	}	 
 }
