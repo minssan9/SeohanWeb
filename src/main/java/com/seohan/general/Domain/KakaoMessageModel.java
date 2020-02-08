@@ -2,12 +2,6 @@ package com.seohan.general.Domain;
 
 import java.sql.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import com.seohan.kakao.Domain.KakaoMessageModel;
-
 import lombok.Data;
 
 @Data 
