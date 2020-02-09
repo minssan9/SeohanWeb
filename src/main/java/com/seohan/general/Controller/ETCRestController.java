@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.seohan.general.Domain.FoodTable;
 import com.seohan.general.Domain.FoodTableKamtec;
 import com.seohan.general.Domain.FoodTableLab;
@@ -104,24 +105,29 @@ class ETCRestController {
 			// --------------------------
 			// 서버에게 웹에서 <Form>으로 값이 넘어온 것과 같은 방식으로 처리하라는 걸 알려준다
 			http.setRequestProperty("content-type", "application/json");
+			http.setRequestProperty("Accept", "application/json");
 
 			// --------------------------
 			// 서버로 값 전송
 			// --------------------------  
-			JSONObject jsonObject = new JSONObject(); 
-//			jsonObject.put("template_code", "COM_MMS_00");
-//			jsonObject.put("recipient_num", "01067766160");
-//			jsonObject.put("content", "test");
+			JSONObject jsonObject = new JSONObject(); 			
+			jsonObject.put("template_code", "COM_MMS_00");
+			jsonObject.put("recipient_num", "01067766160");
+			jsonObject.put("content", "test");
 
 			KakaoMessageModel kakaoMessageModel = new KakaoMessageModel();
 			kakaoMessageModel.setTemplate_code("COM_MMS_00");
 			kakaoMessageModel.setRecipient_num("01067766160");
 			kakaoMessageModel.setContent("test");
-			jsonObject.put("kakaoMessageModel", kakaoMessageModel.toString());
-
+						
+			ObjectMapper objectMapper = new ObjectMapper();
+			String paramJSON = objectMapper.writeValueAsString(kakaoMessageModel);
+			
+			//paramJSON = jsonObject.toString();
+			
 			OutputStreamWriter outStream = new OutputStreamWriter(http.getOutputStream(), "UTF-8");
 			PrintWriter writer = new PrintWriter(outStream);
-			writer.write(jsonObject.toString());
+			writer.write(paramJSON);			
 			writer.flush();
 			// --------------------------
 			// Response Code
