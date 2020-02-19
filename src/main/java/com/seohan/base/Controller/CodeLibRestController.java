@@ -1,7 +1,10 @@
-package com.seohan.general.Controller;
+package com.seohan.base.Controller;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import com.seohan.base.Domain.CodeLib;
+import com.seohan.base.Mapper.CodeLibRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,16 +14,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.seohan.general.Domain.CodeLib;
-import com.seohan.general.Mapper.CodeLibRepository;
-
 import lombok.extern.slf4j.Slf4j; 
 
-@RequestMapping("/general/codeLib")
+@RequestMapping("/base/codeLib")
 @Slf4j 
 @RestController
 class CodeLibRestController { 

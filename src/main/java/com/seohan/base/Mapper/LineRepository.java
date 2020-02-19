@@ -1,11 +1,11 @@
-package com.seohan.general.Mapper;
+package com.seohan.base.Mapper;
 
 import java.util.List;
 
+import com.seohan.base.Domain.LineView;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import com.seohan.general.Domain.LineView;  
 
 @Repository
 public interface LineRepository extends JpaRepository<LineView, Long> {

@@ -1,4 +1,4 @@
-package com.seohan.general.Domain;
+package com.seohan.base.Domain;
 
 import java.io.Serializable;
 

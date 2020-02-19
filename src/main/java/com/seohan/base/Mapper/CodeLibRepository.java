@@ -1,14 +1,13 @@
-package com.seohan.general.Mapper;
+package com.seohan.base.Mapper;
 
 import java.util.List;
+
+import com.seohan.base.Domain.CodeLib;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
-import com.seohan.general.Domain.FoodTable;
-import com.seohan.general.Domain.CodeLib; 
 
 @Repository
 public interface CodeLibRepository extends JpaRepository<CodeLib, Long> { 

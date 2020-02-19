@@ -1,7 +1,10 @@
-package com.seohan.general.Controller;
+package com.seohan.base.Controller;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import com.seohan.base.Domain.LineView;
+import com.seohan.base.Mapper.LineRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,12 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.seohan.general.Domain.LineView;
-import com.seohan.general.Mapper.LineRepository;
-
 import lombok.extern.slf4j.Slf4j; 
 
-@RequestMapping("/general/wrkct")
+@RequestMapping("/base/line")
 @Slf4j 
 @RestController
 class LineRestController { 
@@ -55,6 +55,5 @@ class LineRestController {
 //		Line reportCreated= lineService.save(report );
 //		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{udate}"	).buildAndExpand(reportCreated.getUdate()).toUri();
 //		return   ResponseEntity.created(uri).build();
-//	}
-
+//	} 
 }

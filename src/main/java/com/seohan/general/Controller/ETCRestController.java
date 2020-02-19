@@ -9,33 +9,27 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-
-import org.json.simple.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.seohan.base.Mapper.CodeLibRepository;
 import com.seohan.general.Domain.FoodTable;
 import com.seohan.general.Domain.FoodTableKamtec;
 import com.seohan.general.Domain.FoodTableLab;
 import com.seohan.general.Domain.KakaoMessageModel;
 import com.seohan.general.Domain.TemperatureData;
-import com.seohan.general.Mapper.CodeLibRepository;
 import com.seohan.general.Mapper.FoodTableKamtecRepository;
 import com.seohan.general.Mapper.FoodTableLabRepository;
 import com.seohan.general.Mapper.FoodTableRepository;
 import com.seohan.general.Mapper.TemperatureRepository;
+
+import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,8 +38,6 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 class ETCRestController {
 
-	@Autowired
-	private CodeLibRepository codeLibRepo;
 	@Autowired
 	private FoodTableRepository foodTableRepo;
 	@Autowired
