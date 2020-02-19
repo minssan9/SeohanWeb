@@ -1,6 +1,6 @@
 package com.seohan.general.Mapper;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,8 +11,11 @@ import com.seohan.general.Domain.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
-	@Query(value="SELECT asabn username, passwd password, '' email, 'USER' role FROM tsilib.EMP_MST a where a.asabn= :asabn",
+		@Query(value="SELECT * FROM tprlib.gr_insa a where a.co_gb=:companyCode and a.asabn= :asabn",
 			nativeQuery=true)
-    User findByUsername(@Param("asabn") String asabn);
+    User findByAsabnAndCo_gb(@Param("asabn") String asabn, @Param("companyCode") String companyCode);
+	
+	User findByAsabn(String asabn); 
+		 
 }
  

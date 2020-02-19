@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - SeohanWebApplication",
+            "request": "launch",
+            "mainClass": "com.seohan.SeohanWebApplication",
+            "projectName": "SeohanWeb"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-SeohanWebPubApplication<SeohanWeb>",
             "request": "launch",
             "cwd": "${workspaceFolder}",

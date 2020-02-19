@@ -1,0 +1,18 @@
+package com.seohan.base.Mapper;
+
+import java.util.List;
+
+import com.seohan.base.Domain.LineView;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface LineRepository extends JpaRepository<LineView, Long> {
+	
+	List<LineView> findByActgb(String actgb);
+	
+	List<LineView> findByFact(String fact);
+	
+	LineView findByWrkct(String wrkct);  
+}

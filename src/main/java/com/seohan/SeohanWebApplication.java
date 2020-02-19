@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @SpringBootApplication 
 @EnableAutoConfiguration
 @Configuration
-@PropertySource(value = { "classpath:${account.config}" })
-@CrossOrigin(origins = { "http://localhost:8091"})
+@PropertySource(value = {"classpath:account.properties" })
+@CrossOrigin(origins = { "http://localhost:8091",  "http://localhost:8090",  "http://localhost"})
 public class SeohanWebApplication extends SpringBootServletInitializer {
 
 	@Override
@@ -24,5 +24,4 @@ public class SeohanWebApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(SeohanWebApplication.class, args);
 	}
-	
 }
