@@ -4,19 +4,19 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Immutable;
 
 import lombok.Data;
 
 @Data
-@Entity
-@IdClass(LineView.class)
+@Entity 
+@Immutable
 @Table(name = "WRKCT_VW", schema = "SBLIB")
 public class LineView implements Serializable {
 	@Id
 	private String wrkct;
-	@Id
 	private String wrkds;
 	private Double manto;
 	private Double manpo;

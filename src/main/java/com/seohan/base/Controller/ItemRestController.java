@@ -19,44 +19,47 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/base/item")
 @Slf4j
 @RestController
-class LineRestController {
-
-	// @Autowired
-	// private LineService lineService;
+class ItemRestController {
+ 
 	@Autowired
 	private ItemRepository itemRepository;
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd");
 
-	@GetMapping("")
-	public @ResponseBody List<ItemView> getAllList(@RequestParam String actgb) throws Exception {
-		return itemRepository.findByActgb(actgb);
-	}
+	// @GetMapping("/getAll/{pNo}/{size}")
+	// public @ResponseBody List<ItemView> getAllList(@PathVariable Integer pNo, 
 
-	@GetMapping("/{pumgb}")
-	public @ResponseBody List<ItemView> getListByPumgb(@PathVariable String pumgb) throws Exception {
-		return itemRepository.findByPumgb(pumgb);
-	}
+	// @PathVariable Integer size,) throws Exception {
+	// 	Page<ItemView> getAllEmp(Pageable page);
+	// 	return itemRepository.findByActgb("A");
+	// }
+
+	// @GetMapping("/{pumgb}")
+	// public @ResponseBody List<ItemView> getListByPumgb(@PathVariable String pumgb) throws Exception {
+	// 	return itemRepository.findByPumgb(pumgb);
+	// }
 
 	@GetMapping("{itmno}")
-	public @ResponseBody ItemView getOneLine(@PathVariable String itmno) throws Exception {
+	public @ResponseBody ItemView getOneItem(@PathVariable String itmno) throws Exception {
 		return itemRepository.findByItmno(itmno);
 	}
 
 	// @PutMapping("save")
-	// public ResponseEntity<Line> updateLine(@PathVariable String udate,
-	// @PathVariable String ser, @RequestBody Line report ) throws Exception {
-	// Line reportUpdated = lineService.save(report );
-	// return new ResponseEntity<Line>(reportUpdated, HttpStatus.OK);
+	// public ResponseEntity<Item> updateItem(@PathVariable String udate,
+	// @PathVariable String ser, @RequestBody Item report ) throws Exception {
+	// Item reportUpdated = ItemService.save(report );
+	// return new ResponseEntity<Item>(reportUpdated, HttpStatus.OK);
 	// }
 
 	// @PostMapping("")
-	// public ResponseEntity<Void> createLine(@RequestBody Line report ) throws
+	// public ResponseEntity<Void> createItem(@RequestBody Item report ) throws
 	// Exception {
-	// Line reportCreated= lineService.save(report );
+	// Item reportCreated= ItemService.save(report );
 	// URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{udate}"
 	// ).buildAndExpand(reportCreated.getUdate()).toUri();
 	// return ResponseEntity.created(uri).build();
 	// }
 }
+
+ 

@@ -4,13 +4,15 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Immutable;
 
 import lombok.Data;
 
 @Data
 @Entity 
+// @Immutable
 @Table(name = "ITMSTPF_VW", schema = "SMLIB")
 public class ItemView implements Serializable {
 	@Id 

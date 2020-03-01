@@ -3,8 +3,8 @@ package com.seohan.base.Controller;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import com.seohan.base.Domain.CodeLib;
-import com.seohan.base.Mapper.CodeLibRepository;
+import com.seohan.base.Domain.Code;
+import com.seohan.base.Mapper.CodeRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,44 +19,44 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j; 
 
-@RequestMapping("/base/codeLib")
+@RequestMapping("/base/code")
 @Slf4j 
 @RestController
-class CodeLibRestController { 
+class CodeRestController { 
 	
 //	@Autowired
 //	private CodeLibService codeLibService;
 	@Autowired
-	private CodeLibRepository codeLibRepo;
+	private CodeRepository codeRepo;
  
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd"); 
 	 
 	@GetMapping("")
-	public @ResponseBody List<CodeLib> getAllList() throws Exception { 
-		return codeLibRepo.findAll(); 
+	public @ResponseBody List<Code> getAllList() throws Exception { 
+		return codeRepo.findAll(); 
 	}
 
 	@GetMapping("{adgub}")
-	public @ResponseBody List<CodeLib> getCodeLibByAdgub(@PathVariable String adgub) throws Exception { 
-		return codeLibRepo.findByAdgub(adgub);
+	public @ResponseBody List<Code> getCodeByAdgub(@PathVariable String adgub) throws Exception { 
+		return codeRepo.findByAdgub(adgub);
 	} 	
 	
 	@PutMapping("")
-	public ResponseEntity<CodeLib> updateCodeLib(@RequestBody CodeLib itDamage ) throws Exception { 		
-		CodeLib itDamageUpdated = codeLibRepo.save(itDamage ); 
-		return new ResponseEntity<CodeLib>(itDamageUpdated, HttpStatus.OK);
+	public ResponseEntity<Code> updateCode(@RequestBody Code itDamage ) throws Exception { 		
+		Code itDamageUpdated = codeRepo.save(itDamage ); 
+		return new ResponseEntity<Code>(itDamageUpdated, HttpStatus.OK);
 	}
 
 //	@PostMapping("save")
-//	public ResponseEntity<Void> createCodeLib(@RequestBody CodeLib codeLib )  throws Exception { 		
-//		CodeLib codeLibCreated= codeLibService.save(codeLib ); 
-//		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{rtime}"	).buildAndExpand(codeLibCreated.getRtime()).toUri();
+//	public ResponseEntity<Void> createCode(@RequestBody Code Code )  throws Exception { 		
+//		Code CodeCreated= CodeService.save(Code ); 
+//		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{rtime}"	).buildAndExpand(CodeCreated.getRtime()).toUri();
 //		return   ResponseEntity.created(uri).build();
 //	}	 
 
 	@GetMapping("/fact")
-	public @ResponseBody List<CodeLib> getFact() throws Exception { 
-		return codeLibRepo.findFact();
+	public @ResponseBody List<Code> getFact() throws Exception { 
+		return codeRepo.findFact();
 	}
 }

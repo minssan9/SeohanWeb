@@ -11,9 +11,9 @@ import lombok.Data;
 
 @Data 
 @Entity 
-@IdClass(CodeLib.class) 
+@IdClass(Code.class) 
 @Table(name="ACODERP", schema="SALIB")
-public class CodeLib implements Serializable {
+public class Code implements Serializable {
 	@Id
 	private String adgub;
 	@Id
