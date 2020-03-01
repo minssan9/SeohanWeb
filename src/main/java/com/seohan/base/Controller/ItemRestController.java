@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/base/item")
 @Slf4j
 @RestController
-class LineRestController {
+class ItemRestController {
 
 	// @Autowired
 	// private LineService lineService;
