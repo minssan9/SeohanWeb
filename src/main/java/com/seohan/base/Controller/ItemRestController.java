@@ -20,13 +20,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 class ItemRestController {
-<<<<<<< HEAD
- 
-=======
 
 	// @Autowired
 	// private LineService lineService;
->>>>>>> 544f89f0afb06785ae481aadfe4706bb3248c365
+
 	@Autowired
 	private ItemRepository itemRepository;
 
