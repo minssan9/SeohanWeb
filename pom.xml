@@ -53,7 +53,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency> 
+		</dependency>
 		<!-- //코드 수정시 자동 빌드 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -130,7 +130,6 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -177,6 +176,13 @@
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
+		</dependency>
+
+<!-- 		logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.25</version>
 		</dependency>
 	</dependencies>
 
