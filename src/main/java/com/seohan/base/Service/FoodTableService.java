@@ -1,9 +1,11 @@
-// package com.seohan.base.Service;
+package com.seohan.base.Service;
 
-// import java.util.List;
+import java.util.List;
 
-// import com.seohan.general.Domain.FoodTable;
+import java.util.List;
 
-// public interface FoodTableService { 
-// 	public List<FoodTable> foodTableList(FoodTable foodTable) throws Exception; 
-// }
+import com.seohan.general.Domain.FoodTable;
+
+public interface FoodTableService { 
+	public List<FoodTable> foodTableList(FoodTable foodTable) throws Exception; 
+}
