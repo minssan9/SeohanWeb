@@ -20,7 +20,7 @@ public class SeohanWebApplication extends SpringBootServletInitializer {
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(SeohanWebApplication.class);
 	}
- 
+  
 	public static void main(String[] args) {
 		SpringApplication.run(SeohanWebApplication.class, args);
 	}
