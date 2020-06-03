@@ -1,6 +1,7 @@
 package com.seohan.Config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.MultipartResolver;
@@ -15,6 +16,10 @@ import com.seohan.common.Interceptor.JwtInterceptor;
 @Configuration
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
+
+	@Value("${allowOriginList}")
+	String allowOriginList;
+
 	private static final String[] EXCLUDE_PATHS = {
 			"/member/**",
 			"/error/**"
@@ -23,7 +28,8 @@ public class WebConfig implements WebMvcConfigurer {
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
-				.allowedMethods("GET", "POST", "HEAD", "PUT", "DELETE", "OPTIONS"); 
+				.allowedMethods("GET", "POST", "HEAD", "PUT", "DELETE", "OPTIONS");
+//				.allowedOrigins(allowOriginList);
 	}
 
 

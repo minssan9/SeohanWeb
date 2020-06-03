@@ -20,11 +20,12 @@ public class Scheduler {
 		System.out.println("Java cron job expression:: " + strDate);
 	}
 
-	@Scheduled(fixedDelay = 1000)
+//	@Scheduled(fixedDelay = 1000)
+	@Scheduled(cron = "0 0 0 8 * ?")
 	public void getStockDataSch() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 		Date now = new Date();
 		String strDate = sdf.format(now);
-		System.out.println("Java cron job expression:: " + strDate);
+		System.out.println("save Stock Data:: " + strDate);
 	}
 }
