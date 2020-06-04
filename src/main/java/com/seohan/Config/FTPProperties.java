@@ -20,15 +20,15 @@ import lombok.Data;
 //	@Value("${ftp.path}")
 //    private String path;
 //} 
-
-
-@Data 
-@Configuration
-@ConfigurationProperties(prefix = "ftp")
-public class FTPProperties {  
-	private String url; // FTP 접속지 IP
-	private int    port;             // FTP 접속지 Port
-	private String id; 
-    private String password; 
-    private String path;
-} 
+//
+//
+//@Data 
+//@Configuration
+//@ConfigurationProperties(prefix = "ftp")
+//public class FTPProperties {  
+//	private String url; // FTP 접속지 IP
+//	private int    port;             // FTP 접속지 Port
+//	private String id; 
+//    private String password; 
+//    private String path;
+//} 
