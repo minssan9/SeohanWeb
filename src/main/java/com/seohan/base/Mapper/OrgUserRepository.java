@@ -12,5 +12,5 @@ import com.seohan.base.Domain.OrgUser;
 
 @Repository
 public interface OrgUserRepository extends JpaRepository<OrgUser, Long> {
-	List<Code> findByCOMPANYCODE(String companycode);
+	List<Code> findByCompanycode(String companycode);
 }
