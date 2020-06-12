@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PoHeaderRepository extends JpaRepository<PoHeader, Long> {
+public interface PoRepository extends JpaRepository<PoHeader, Long> {
 
-    public List<PoHeader> findByCO_GBAndPO_NO(String CO_GB, String PO_NO);
+    public List<PoHeader> findByCogbAndPono(String co_gb, String po_no);
 }

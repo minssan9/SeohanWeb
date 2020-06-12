@@ -4,66 +4,71 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@Entity 
-@IdClass(PoHeader.class)
-@Table(name="PO_HEADER", schema="TPRLIB")
+@Entity
+@IdClass(PoHeaderId.class)
+@Table(name = "PO_HEADER", schema = "TPRLIB")
 public class PoHeader implements Serializable {
-	@Id
-	private String	CO_GB;
-	@Id
-	private String	PO_NO;
-	@Id
-	private long	SUB_NO;
-	private String	MR_NO;
-	private String	PO_GB;
-	private String	PO_TX;
-	private String	ST_CUST_CD;
-	private String	CUST_CD;
-	private String	CUST_NM;
-	private String	CUST_CHRG_NM;
-	private String	CUST_CHRG_HP;
-	private String	VIA_CUST_CD;
-	private String	DIRECT_FL;
-	private String	PO_CLASS;
-	private String	PO_CHRG_YMD;
-	private String	PO_DEPT_CD;
-	private String	PO_DEPT_NM;
-	private String	PO_CHRG_ID;
-	private String	PO_CHRG_NM;
-	private String	PO_YMD;
-	private String	PO_APPR_ID;
-	private String	PO_APPR_NM;
-	private String	FC_FL;
-	private String	CONTRCT_NO;
-	private String	PO_FILE_NO;
-	private String	PO_REMARK;
-	private String	CUST_REMARK;
-	private String	MR_DEPT_CD;
-	private String	MR_DEPT_NM;
-	private String	YSN_DEPT_CD;
-	private String	YSN_DEPT_NM;
-	private String	YSN_YEAR;
-	private String	YSN_CD;
-	private String	YSN_NM;
-	private String	PO_ITMNO;
-	private String	PO_ITM_NM;
-	private double	NEGO_TOT_AMT;
-	private double	PO_TOT_AMT;
-	private String	RP_FIN_YMD;
-	private String	RP_FIN_ID;
-	private String	RP_FIN_NM;
-	private String	UPDATE_YMD;
-	private String	GLOBIZ_FL;
-	private String	STATUS_CD;
-	private String	IF_FLAG;
+    @Id
+    @Column(name = "CO_GB")
+    private String cogb;
+    @Id
+    @Column(name = "PO_NO")
+    private String pono;
 
-	@OneToMany(mappedBy = "poHeader")
-	@JoinColumns({
-			@JoinColumn(name="CO_GB"),
-			@JoinColumn(name="PO_NO")
-	})
-	private List<PoDetail> poDetails;
+    private long   sub_no;
+    private String mr_no;
+    private String po_gb;
+    private String po_tx;
+    private String st_cust_cd;
+    private String cust_cd;
+    private String cust_nm;
+    private String cust_chrg_nm;
+    private String cust_chrg_hp;
+    private String via_cust_cd;
+    private String direct_fl;
+    private String po_class;
+    private String po_chrg_ymd;
+    private String po_dept_cd;
+    private String po_dept_nm;
+    private String po_chrg_id;
+    private String po_chrg_nm;
+    private String po_ymd;
+    private String po_appr_id;
+    private String po_appr_nm;
+    private String fc_fl;
+    private String contrct_no;
+    private String po_file_no;
+    private String po_remark;
+    private String cust_remark;
+    private String mr_dept_cd;
+    private String mr_dept_nm;
+    private String ysn_dept_cd;
+    private String ysn_dept_nm;
+    private String ysn_year;
+    private String ysn_cd;
+    private String ysn_nm;
+    private String po_itmno;
+    private String po_itm_nm;
+    private double nego_tot_amt;
+    private double po_tot_amt;
+    private String rp_fin_ymd;
+    private String rp_fin_id;
+    private String rp_fin_nm;
+    private String update_ymd;
+    private String globiz_fl;
+    private String status_cd;
+    private String if_flag;
+
+
+    @OneToMany(mappedBy = "poHeader", fetch = FetchType.LAZY)
+//    @JoinTable(name = "PO_DETAIL",
+//            joinColumns = {
+//                    @JoinColumn(name = "CO_GB", referencedColumnName="CO_GB", insertable = false, updatable = false),
+//                    @JoinColumn(name = "PO_NO", referencedColumnName="PO_NO", insertable = false, updatable = false)
+//            })
+    private List<PoDetail> poDetails = new ArrayList<>();
 }

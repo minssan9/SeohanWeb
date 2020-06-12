@@ -14,12 +14,12 @@ import java.io.Serializable;
 @Table(name = "BOMSTPF", schema = "SBLIB")
 public class BomMaster implements Serializable {
 	@Id
-	private String	PITEM;
+	private String	pitem;
 	@Id
-	private String	CITEM;
-	private String	STDATE;
-	private long	ASYNO;
-	private long	ASYQT;
-	private String	STATS;
-	private String	FILL;
+	private String	citem;
+	private String	stdate;
+	private long	asyno;
+	private long	asyqt;
+	private String	stats;
+	private String	fill;
 }
