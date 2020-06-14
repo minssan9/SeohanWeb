@@ -9,15 +9,20 @@ import java.util.List;
 
 @Data
 @Entity
-@IdClass(PoHeaderId.class)
+@IdClass(PoId.class)
 @Table(name = "PO_HEADER", schema = "TPRLIB")
 public class PoHeader implements Serializable {
     @Id
-    @Column(name = "CO_GB")
-    private String cogb;
-    @Id
-    @Column(name = "PO_NO")
-    private String pono;
+    @EmbeddedId
+    private PoId poId;
+
+//    @Id
+//    @Column(name = "CO_GB")
+//    private String cogb;
+//
+//    @Id
+//    @Column(name = "PO_NO")
+//    private String pono;
 
     private long   sub_no;
     private String mr_no;
@@ -36,7 +41,8 @@ public class PoHeader implements Serializable {
     private String po_dept_nm;
     private String po_chrg_id;
     private String po_chrg_nm;
-    private String po_ymd;
+    @Column(name = "PO_YMD")
+    private String poYmd;
     private String po_appr_id;
     private String po_appr_nm;
     private String fc_fl;
@@ -64,11 +70,12 @@ public class PoHeader implements Serializable {
     private String if_flag;
 
 
-    @OneToMany(mappedBy = "poHeader", fetch = FetchType.LAZY)
-//    @JoinTable(name = "PO_DETAIL",
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @org.hibernate.annotations.ForeignKey(name = "none")
+//    @JoinTable(schema = "TPRLIB", name = "PO_DETAIL",
 //            joinColumns = {
-//                    @JoinColumn(name = "CO_GB", referencedColumnName="CO_GB", insertable = false, updatable = false),
-//                    @JoinColumn(name = "PO_NO", referencedColumnName="PO_NO", insertable = false, updatable = false)
+//                    @JoinColumn(name = "CO_GB", insertable = false, updatable = false),
+//                    @JoinColumn(name = "PO_NO", insertable = false, updatable = false)
 //            })
     private List<PoDetail> poDetails = new ArrayList<>();
 }

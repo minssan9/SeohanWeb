@@ -40,9 +40,7 @@ class ETCRestController {
 
 	@GetMapping("/foodTable")
 	public @ResponseBody List<FoodTable> FoodTable(@RequestParam String gdate) throws Exception {
-		FoodTable foodTable = new FoodTable();
-		foodTable.setGdate(gdate);
-		return foodTableRepo.findByGdate(foodTable.getGdate());
+		return foodTableRepo.findByGdate(gdate);
 	}
 
 	@GetMapping("/foodTableKamtec")

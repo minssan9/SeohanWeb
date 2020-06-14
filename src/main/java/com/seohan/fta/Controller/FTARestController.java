@@ -1,8 +1,8 @@
-package com.seohan.fta.Domain.com.seohan.fta.Controller;
+package com.seohan.fta.Controller;
 
 import com.seohan.fta.Domain.PoHeader;
 
-import com.seohan.fta.Domain.com.seohan.fta.Mapper.PoRepository;
+import com.seohan.fta.Mapper.PoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,10 +23,16 @@ class FTARestController {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd");
 
-	@GetMapping("/Po")
+	@GetMapping("/po")
 	public @ResponseBody
-	List<PoHeader> PoHeader(@RequestParam(value = "company") String company, @RequestParam(value = "poNo") String poNo) throws Exception {
-		List<PoHeader> retList = PoRepo.findByCogbAndPono(company, poNo);
-		return retList;
+	List<PoHeader> PoHeader(@RequestParam String company, @RequestParam String pono) throws Exception {
+
+		return PoRepo.findByCogbAndPono(company, pono);
+	}
+
+	@GetMapping("/po/ymd")
+	public @ResponseBody
+	List<PoHeader> getPoByYmd(@RequestParam String company, @RequestParam String poymd) throws Exception {
+		return PoRepo.findByCogbAndPoYmd(company, poymd);
 	}
 }

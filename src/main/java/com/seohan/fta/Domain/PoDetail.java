@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Data
 @Entity 
-@IdClass(PoDetailId.class)
+@IdClass(PoId.class)
 @Table(name="PO_DETAIL", schema="TPRLIB")
 public class PoDetail implements Serializable {
 	@Id
