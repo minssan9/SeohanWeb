@@ -1,6 +1,6 @@
 package com.seohan;
 import com.seohan.fta.Domain.PoHeader;
-import com.seohan.fta.Mapper.PoRepository;
+import com.seohan.fta.Mapper.PoHeaderRepository;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +12,7 @@ import java.util.List;
 public class FTATest{
 
     @Autowired
-    private PoRepository poRepo;
+    private PoHeaderRepository poRepo;
 
     @Test
     public void test() throws Exception{

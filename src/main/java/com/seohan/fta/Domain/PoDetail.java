@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Data
 @Entity 
-@IdClass(PoId.class)
+@IdClass(PoDetailId.class)
 @Table(name="PO_DETAIL", schema="TPRLIB")
 public class PoDetail implements Serializable {
 	@Id
@@ -17,7 +17,8 @@ public class PoDetail implements Serializable {
 	@Column(name = "PO_NO")
 	private String	pono;
 	@Id
-	private double	po_seq;
+	@Column(name = "PO_SEQ")
+	private double	poseq;
 
 	private String	st_itmno;
 	private String	itmno;

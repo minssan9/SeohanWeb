@@ -2,7 +2,7 @@ package com.seohan.fta.Controller;
 
 import com.seohan.fta.Domain.PoHeader;
 
-import com.seohan.fta.Mapper.PoRepository;
+import com.seohan.fta.Mapper.PoHeaderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 class FTARestController {
 	@Autowired
-	private PoRepository PoRepo;
+	private PoHeaderRepository PoRepo;
 
 //	@Autowired
 //	private PoDetailRepository PoDetailRepo;

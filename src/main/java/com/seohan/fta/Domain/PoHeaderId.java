@@ -11,7 +11,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @Embeddable
-public class PoId implements Serializable {
+public class PoHeaderId implements Serializable {
 
     @EqualsAndHashCode.Include
     @Id

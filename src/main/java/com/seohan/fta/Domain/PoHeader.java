@@ -9,20 +9,16 @@ import java.util.List;
 
 @Data
 @Entity
-@IdClass(PoId.class)
+@IdClass(PoHeaderId.class)
 @Table(name = "PO_HEADER", schema = "TPRLIB")
 public class PoHeader implements Serializable {
     @Id
-    @EmbeddedId
-    private PoId poId;
+    @Column(name = "CO_GB")
+    private String cogb;
 
-//    @Id
-//    @Column(name = "CO_GB")
-//    private String cogb;
-//
-//    @Id
-//    @Column(name = "PO_NO")
-//    private String pono;
+    @Id
+    @Column(name = "PO_NO")
+    private String pono;
 
     private long   sub_no;
     private String mr_no;
@@ -72,10 +68,5 @@ public class PoHeader implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @org.hibernate.annotations.ForeignKey(name = "none")
-//    @JoinTable(schema = "TPRLIB", name = "PO_DETAIL",
-//            joinColumns = {
-//                    @JoinColumn(name = "CO_GB", insertable = false, updatable = false),
-//                    @JoinColumn(name = "PO_NO", insertable = false, updatable = false)
-//            })
     private List<PoDetail> poDetails = new ArrayList<>();
 }
