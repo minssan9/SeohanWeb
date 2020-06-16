@@ -69,11 +69,7 @@ public class PoHeader implements Serializable {
     private String status_cd;
     private String if_flag;
 
-//    @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY)
     @org.hibernate.annotations.ForeignKey(name = "none")
-//    @JoinTable(schema = "TPRLIB", name = "PO_DETAIL",
-//            joinColumns = {@JoinColumn(name = "CO_GB"),@JoinColumn(name = "PO_NO")},
-//            inverseJoinColumns = @JoinColumn(name = "PO_SEQ"))
     private List<PoDetail> poDetails = new ArrayList<>();
 }

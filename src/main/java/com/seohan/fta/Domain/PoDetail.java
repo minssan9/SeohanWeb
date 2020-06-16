@@ -47,4 +47,11 @@ public class PoDetail implements Serializable {
 	private String	asset_cd;
 	private String	status_cd;
 
+	@JsonManagedReference
+	@ManyToOne(fetch=FetchType.LAZY, optional = true)
+	@JoinColumns(value = {
+					@JoinColumn(name = "CO_GB", insertable = false, updatable = false),
+					@JoinColumn(name = "PO_NO", insertable = false, updatable = false)
+			}, foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
+	private PoHeader poHeader;
 }

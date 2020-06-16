@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class PoDetailId implements Serializable {
 
     @EqualsAndHashCode.Include
-//    @Id
+    @Id
     @Column(name="CO_GB")
     private String cogb;
 
