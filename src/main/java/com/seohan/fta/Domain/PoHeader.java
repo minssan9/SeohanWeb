@@ -1,6 +1,9 @@
 package com.seohan.fta.Domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +14,7 @@ import java.util.List;
 @Entity
 @IdClass(PoHeaderId.class)
 @Table(name = "PO_HEADER", schema = "TPRLIB")
+@ToString(exclude = {"poDetails"})
 public class PoHeader implements Serializable {
     @Id
     @Column(name = "CO_GB")
@@ -65,8 +69,11 @@ public class PoHeader implements Serializable {
     private String status_cd;
     private String if_flag;
 
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JsonBackReference
+    @OneToMany(fetch = FetchType.LAZY)
     @org.hibernate.annotations.ForeignKey(name = "none")
+//    @JoinTable(schema = "TPRLIB", name = "PO_DETAIL",
+//            joinColumns = {@JoinColumn(name = "CO_GB"),@JoinColumn(name = "PO_NO")},
+//            inverseJoinColumns = @JoinColumn(name = "PO_SEQ"))
     private List<PoDetail> poDetails = new ArrayList<>();
 }

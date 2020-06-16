@@ -16,10 +16,10 @@ public class FTATest{
 
     @Test
     public void test() throws Exception{
-        List<PoHeader> poHeaders = new ArrayList<>();
+        PoHeader poHeader = new PoHeader();
         try {
-            poHeaders = poRepo.findByCogbAndPono("SEOHAN", "PO20200608043");
-            System.out.print(poHeaders);
+            poHeader = poRepo.findByCogbAndPono("SEOHAN", "PO20200608043");
+            System.out.print(poHeader);
         }catch (Exception e){
             e.printStackTrace();
         };

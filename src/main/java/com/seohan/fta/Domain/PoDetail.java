@@ -1,6 +1,10 @@
 package com.seohan.fta.Domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.Generated;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,13 +13,16 @@ import java.io.Serializable;
 @Entity 
 @IdClass(PoDetailId.class)
 @Table(name="PO_DETAIL", schema="TPRLIB")
+@ToString(exclude = {"poHeader"})
 public class PoDetail implements Serializable {
 	@Id
 	@Column(name = "CO_GB")
 	private String	cogb;
+
 	@Id
 	@Column(name = "PO_NO")
 	private String	pono;
+
 	@Id
 	@Column(name = "PO_SEQ")
 	private double	poseq;
@@ -40,10 +47,4 @@ public class PoDetail implements Serializable {
 	private String	asset_cd;
 	private String	status_cd;
 
-	@ManyToOne(fetch=FetchType.LAZY, optional = true)
-	@JoinColumns(value = {
-					@JoinColumn(name = "CO_GB", insertable = false, updatable = false),
-					@JoinColumn(name = "PO_NO", insertable = false, updatable = false)
-			}, foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
-	private PoHeader poHeader;
 }
