@@ -3,6 +3,8 @@ package com.seohan.fta.Controller;
 import com.seohan.fta.Domain.PoHeader;
 
 import com.seohan.fta.Mapper.PoHeaderRepository;
+import com.seohan.fta.Mapper.PoHeaderRepositoryCustom;
+import com.seohan.fta.Mapper.PoHeaderRepositoryImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -28,7 +30,9 @@ class FTARestController {
 
 	@GetMapping("/po")
 	public ResponseEntity po(@RequestParam String company, @RequestParam String pono) throws Exception {
-		return new ResponseEntity( PoRepo.findByCogbAndPono(company, pono), HttpStatus.OK);
+//		return new ResponseEntity( PoRepo.findByCogbAndPono(company, pono), HttpStatus.OK);
+		return new ResponseEntity( PoRepo.poList(company,  pono), HttpStatus.OK);
+
 	}
 
 	@GetMapping("/po/ymd")

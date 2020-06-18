@@ -20,7 +20,7 @@ public class FTATest{
         List<PoDto> poDtos = new ArrayList<>();
         try {
 
-            poDtos = poRepo.findByCogbAndPono("SEOHAN", "PO20200608043");
+//            poDtos = poRepo.findByCogbAndPono("SEOHAN", "PO20200608043");
             System.out.print(poDtos);
         }catch (Exception e){
             e.printStackTrace();

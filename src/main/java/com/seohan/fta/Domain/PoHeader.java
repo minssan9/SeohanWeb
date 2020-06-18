@@ -69,7 +69,7 @@ public class PoHeader implements Serializable {
     private String status_cd;
     private String if_flag;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @org.hibernate.annotations.ForeignKey(name = "none")
     private List<PoDetail> poDetails = new ArrayList<>();
 }

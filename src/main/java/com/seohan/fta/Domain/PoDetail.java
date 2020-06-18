@@ -53,6 +53,6 @@ public class PoDetail implements Serializable {
 	@JoinColumns(value = {
 					@JoinColumn(name = "CO_GB", insertable = false, updatable = false),
 					@JoinColumn(name = "PO_NO", insertable = false, updatable = false)
-			}, foreignKey = @ForeignKey(name="TPRLIB.F_R3"))
+			}, foreignKey = @ForeignKey(name="P_PO_HEADER"))
 	private PoHeader poHeader;
 }
