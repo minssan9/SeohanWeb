@@ -6,6 +6,8 @@ import com.seohan.fta.Mapper.PoHeaderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
@@ -25,15 +27,12 @@ class FTARestController {
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd");
 
 	@GetMapping("/po")
-	public @ResponseBody
-	PoHeader PoHeader(@RequestParam String company, @RequestParam String pono) throws Exception {
-
-		return PoRepo.findByCogbAndPono(company, pono);
+	public ResponseEntity po(@RequestParam String company, @RequestParam String pono) throws Exception {
+		return new ResponseEntity( PoRepo.findByCogbAndPono(company, pono), HttpStatus.OK);
 	}
 
 	@GetMapping("/po/ymd")
-	public @ResponseBody
-	List<PoHeader> getPoByYmd(@RequestParam String company, @RequestParam String poymd, Pageable pageable) throws Exception {
-		return PoRepo.findByCogbAndPoYmd(company, poymd);
+	public ResponseEntity getPoByYmd(@RequestParam String company, @RequestParam String poymd, Pageable pageable) throws Exception {
+		return new ResponseEntity(PoRepo.findByCogbAndPoYmd(company, poymd), HttpStatus.OK);
 	}
 }

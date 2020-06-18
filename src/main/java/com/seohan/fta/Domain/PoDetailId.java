@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import java.io.Serializable;
@@ -24,6 +25,7 @@ public class PoDetailId implements Serializable {
 
     @EqualsAndHashCode.Include
     @Id
+    @GeneratedValue
     @Column(name="PO_SEQ")
-    private String poseq;
+    private double poseq;
 }

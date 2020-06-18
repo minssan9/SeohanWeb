@@ -10,9 +10,9 @@ import java.io.Serializable;
 
 @Data
 @Entity
-@IdClass(BomMaster.class)
+@IdClass(Bom.class)
 @Table(name = "BOMSTPF", schema = "SBLIB")
-public class BomMaster implements Serializable {
+public class Bom implements Serializable {
 	@Id
 	private String	pitem;
 	@Id

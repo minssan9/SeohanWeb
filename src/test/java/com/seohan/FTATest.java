@@ -1,4 +1,5 @@
 package com.seohan;
+import com.seohan.fta.Domain.PoDto;
 import com.seohan.fta.Domain.PoHeader;
 import com.seohan.fta.Mapper.PoHeaderRepository;
 import org.junit.Test;
@@ -16,10 +17,11 @@ public class FTATest{
 
     @Test
     public void test() throws Exception{
-        PoHeader poHeader = new PoHeader();
+        List<PoDto> poDtos = new ArrayList<>();
         try {
-            poHeader = poRepo.findByCogbAndPono("SEOHAN", "PO20200608043");
-            System.out.print(poHeader);
+
+            poDtos = poRepo.findByCogbAndPono("SEOHAN", "PO20200608043");
+            System.out.print(poDtos);
         }catch (Exception e){
             e.printStackTrace();
         };
