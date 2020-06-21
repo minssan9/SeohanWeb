@@ -42,7 +42,7 @@ class UserRestController {
 //
 	@GetMapping("{adgub}")
 	public @ResponseBody List<Code> getUserInfo(@RequestBody OrgUserDto orgUserDto ) throws Exception { 
-		return orgUserRepository.findByCOMPANYCODE(orgUserDto.getCOMPANYCODE());
+		return orgUserRepository.findByCompanycode(orgUserDto.getCOMPANYCODE());
 	} 	
 //	
 //	@PutMapping("")
