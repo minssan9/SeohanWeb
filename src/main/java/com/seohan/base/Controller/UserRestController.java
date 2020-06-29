@@ -1,25 +1,19 @@
 package com.seohan.base.Controller;
 
-import java.text.SimpleDateFormat;
-import java.util.List;
-
+import com.seohan.base.Domain.AccessHis;
 import com.seohan.base.Domain.Code;
 import com.seohan.base.Dto.OrgUserDto;
-import com.seohan.base.Mapper.CodeRepository;
+import com.seohan.base.Mapper.AccessHisRepository;
 import com.seohan.base.Mapper.OrgUserRepository;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import lombok.extern.slf4j.Slf4j; 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 @RequestMapping("/base/user")
 @Slf4j 
@@ -28,7 +22,10 @@ class UserRestController {
 	
 //	@Autowired
 //	private OrgUserService orgUserService;
-	
+
+	@Autowired
+	private AccessHisRepository accessHisRepository;
+
 	@Autowired
 	private OrgUserRepository orgUserRepository;
  
@@ -56,5 +53,11 @@ class UserRestController {
 ////		Code CodeCreated= CodeService.save(Code ); 
 ////		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{rtime}"	).buildAndExpand(CodeCreated.getRtime()).toUri();
 ////		return   ResponseEntity.created(uri).build();
-////	}	  
+////	}
+
+	@PostMapping("/ip")
+	public ResponseEntity saveAccessHis(@RequestBody AccessHis accessHis ) throws Exception {
+		accessHis.setExectime( new Date());
+		return new ResponseEntity(accessHisRepository.save(accessHis), HttpStatus.OK);
+	}
 }
