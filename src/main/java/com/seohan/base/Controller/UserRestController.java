@@ -57,8 +57,7 @@ class UserRestController {
 
 	@PostMapping("/ip")
 	public ResponseEntity saveAccessHis(@RequestBody AccessHis accessHis ) throws Exception {
-		Date currentDate = new Date();
-		accessHis.setExectime(currentDate);
+		accessHis.setExectime( new Date());
 		return new ResponseEntity(accessHisRepository.save(accessHis), HttpStatus.OK);
 	}
 }
