@@ -24,7 +24,7 @@ public class Scheduler  {
 		String strDate = sdf.format(now);
 
 		scheduledJobs.saveBalance(strDate );
-		System.out.println("Java cron job expression:: " + strDate);
+		System.out.println("Java cron job expression:: " + strDate); 
 	}
 
 	@Scheduled(fixedDelay = 1000)
