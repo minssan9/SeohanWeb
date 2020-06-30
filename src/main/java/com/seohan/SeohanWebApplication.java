@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @PropertySource(value = {"classpath:account.properties" })
 @CrossOrigin(origins = { "http://localhost:8091",  "http://localhost:8090",  "http://localhost"})
 public class SeohanWebApplication extends SpringBootServletInitializer {
-
+ 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(SeohanWebApplication.class);
