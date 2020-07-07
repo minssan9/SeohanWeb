@@ -21,9 +21,15 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<querydsl.version>4.1.4</querydsl.version>
+		<hibernate.version>5.4.10.Final</hibernate.version>
 		<tomcat.version>9.0.27</tomcat.version>
+		<apache.dbcp2.version>2.7.0</apache.dbcp2.version>
+		<spring.batch.version>4.2.1.RELEASE</spring.batch.version>
+		<junit.version>4.12</junit.version>
 		<start-class>com.seohan.SeohanWebApplication</start-class>
 	</properties>
+
+
 
 	<dependencies>
 		<dependency>
@@ -53,6 +59,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-batch</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+
+		<!--		batch-->
+		<dependency>
+			<groupId>org.springframework.batch</groupId>
+			<artifactId>spring-batch-core</artifactId>
+			<version>${spring.batch.version}</version>
 		</dependency>
 		<!-- //코드 수정시 자동 빌드 -->
 		<dependency>
@@ -138,7 +157,8 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<version>1.18.10</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.zaxxer</groupId>
@@ -179,7 +199,25 @@
 			<version>1.7.25</version>
 		</dependency>
 
-
+		<!-- Test DI  -->
+		<!-- 스프링 배치 어플리케이션 테스트 유틸리티. -->
+		<dependency>
+			<groupId>org.springframework.batch</groupId>
+			<artifactId>spring-batch-test</artifactId>
+			<version>${spring.batch.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- 단위 테스트 -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-batch</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
