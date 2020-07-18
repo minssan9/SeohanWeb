@@ -1,9 +1,5 @@
 package com.seohan.machine.Controller;
 
-import com.seohan.file.Service.FileService;
-import com.seohan.general.Domain.ItDamage;
-import com.seohan.general.Mapper.ItDamageRepository;
-import com.seohan.general.Service.ItDamageService;
 import com.seohan.machine.Domain.SettingHis;
 import com.seohan.machine.Mapper.SettingHisRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -40,13 +36,13 @@ class SettingHisController {
 	}
 
 	@GetMapping("{testemp}")
-	public @ResponseBody List<SettingHis> findSettingHisByTestemp(@PathVariable String testemp) throws Exception {
-		return settingHisRepo.findSettingHisByTestemp(testemp);
+	public ResponseEntity<List<SettingHis>> findSettingHisByTestemp(@PathVariable String testemp) throws Exception {
+		return new ResponseEntity<List<SettingHis>>(settingHisRepo.findSettingHisByTestemp(testemp),HttpStatus.OK);
 	}
 
 	@GetMapping("{confirmemp}")
-	public @ResponseBody List<SettingHis> findSettingHisByConfirmemp(@PathVariable String confirmemp) throws Exception {
-		return settingHisRepo.findSettingHisByTestemp(confirmemp);
+	public ResponseEntity<List<SettingHis>> findSettingHisByConfirmemp(@PathVariable String confirmemp) throws Exception {
+		return new ResponseEntity<List<SettingHis>> (settingHisRepo.findSettingHisByTestemp(confirmemp), HttpStatus.OK);
 	}
 
 	@PutMapping("update")

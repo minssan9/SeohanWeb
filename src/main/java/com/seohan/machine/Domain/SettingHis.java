@@ -29,12 +29,16 @@ public class SettingHis  {
     private double prespec    ;
     private double aftspec    ;
     private String testcase    ;
+    private Date testdt    ;
+    private String testdate    ;
     private double testdata    ;
     private String testresult    ;
     private String testemp    ;
+    private Date confirmdt    ;
+    private String confirmdate    ;
     private String confirmemp    ;
     private String remark01    ;
     private String remark02    ;
-    private String status    ;
+    private String stat    ;
 
 }

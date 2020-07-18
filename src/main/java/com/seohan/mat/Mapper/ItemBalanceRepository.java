@@ -1,6 +1,5 @@
 package com.seohan.mat.Mapper;
 
-import com.seohan.general.Domain.FoodTable;
 import com.seohan.mat.Domain.ItemBalance;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
