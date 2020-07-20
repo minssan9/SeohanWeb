@@ -15,6 +15,4 @@ public interface MemberService {
     void validate(String email);
 
     Member signin( String companyCode, String asabn, String password);
-       
-	Member findByCompanyCodeAndAsabn(Member member);
 }

@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import com.seohan.auth.Domain.Member;
 import com.seohan.auth.Mapper.MemberRepository;
 
+import javax.swing.text.html.Option;
+import java.util.Optional;
+
 /**
  * Created by vivie on 2017-06-08.
  */
@@ -26,7 +29,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public boolean isExist(String asabn) {
 		boolean isExist = false;
-		Member member = memeberRepository.findByAsabn(asabn);
+		Optional<Member> member = memeberRepository.findByAsabn(asabn);
 		if (member != null) {
 			isExist = true;
 		}
@@ -42,14 +45,14 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member signin(String companyCode, String asabn, String password) {
-		Member member = memeberRepository.findByAsabnAndCo_gb(asabn, companyCode) ;
+		Optional<Member> member = memeberRepository.findByAsabnAndCo_gb(asabn, companyCode) ;
 		if(member==null){
 			throw new IllegalStateException(NOTEXIST_EXCEPTION_MSG);
 		}
-		if (!this.isAccordPassword(member, password)) {
+		if (!this.isAccordPassword(member.get(), password)) {
 			throw new IllegalStateException(SIGNIN_EXCEPTION_MSG);
 		}
-		return member;
+		return member.get();
 	}
 
 	private boolean isAccordPassword(Member member, String password) {
@@ -57,10 +60,6 @@ public class MemberServiceImpl implements MemberService {
 //		return BCrypt.checkpw(password, encodedPassword);
 		return password.equals(encodedPassword);
 	}
-  
-	@Override
-	public Member findByCompanyCodeAndAsabn(Member member) {
-		return memeberRepository.findByAsabnAndCo_gb(member.getAsabn(), member.getCompanyCode());
-	}
+
  
 }

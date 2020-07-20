@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
+import java.util.Optional;
 
 @RequestMapping("/auth")
 @Slf4j 
@@ -34,13 +35,14 @@ class AuthRestController {
 	@PostMapping("/userinfo")
 	@ResponseBody
 	public ResponseEntity<Member> getOneMember(RequestEntity<Member> reqeustEntity) {
-		HttpHeaders  headers = reqeustEntity.getHeaders();
-		String accessToken = headers.get("Authorization").toString();
+		String accessToken = reqeustEntity.getHeaders().get("Authorization").toString();
 		Member member = reqeustEntity.getBody();
+
 		if (jwtService.isUsable(accessToken)) {
-			return new ResponseEntity<Member>(memberRepository.findByAsabnAndCo_gb(member.getAsabn(), member.getCompanyCode()), HttpStatus.OK);
+			Optional<Member> loadedMember = memberRepository.findByAsabnAndCo_gb(member.getAsabn(), member.getCompanyCode());
+			return new ResponseEntity<Member>(loadedMember.get(), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<Member>(memberRepository.findByAsabnAndCo_gb(member.getAsabn(), member.getCompanyCode()), HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<Member>(member, HttpStatus.UNAUTHORIZED);
 		}
 	}
 
