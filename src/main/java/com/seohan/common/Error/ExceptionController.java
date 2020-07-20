@@ -16,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @ControllerAdvice
 public class ExceptionController {
-
     @ResponseBody
     @ExceptionHandler(Exception.class)
     public Result exceptionHandler(Exception e){
@@ -27,7 +26,6 @@ public class ExceptionController {
         }else{
             result.setMessage(errorMsg);
         }
-        
         this.handleUnauth(e, result);
 
         this.handleLog(e);

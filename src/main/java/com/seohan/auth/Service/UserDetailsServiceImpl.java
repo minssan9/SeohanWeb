@@ -7,8 +7,8 @@
 //import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.stereotype.Service;
 //
-//import com.seohan.erp.general.Domain.User;
-//import com.seohan.erp.general.Mapper.UserRepository;
+//import com.seohan.auth.Domain.User;
+//import com.seohan.auth.Mapper.UserRepository;
 //
 //@Service
 //public class UserDetailsServiceImpl implements UserDetailsService {

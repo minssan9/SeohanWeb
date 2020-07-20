@@ -1,4 +1,4 @@
-package com.seohan.erp.general.Domain;
+package com.seohan.auth.Domain;
 
 import java.io.Serializable;
 
@@ -12,9 +12,9 @@ import lombok.Data;
 
 @Entity
 @Data
-@IdClass(User.class)
+@IdClass(Member.class)
 @Table(name = "GR_INSA", schema = "TPRLIB")
-public class User implements Serializable {
+public class Member implements Serializable {
 	@Id 
 	private String asabn;	
 	

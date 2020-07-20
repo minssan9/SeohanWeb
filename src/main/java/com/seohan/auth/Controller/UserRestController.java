@@ -18,11 +18,7 @@ import java.util.List;
 @RequestMapping("/base/user")
 @Slf4j 
 @RestController
-class UserRestController { 
-	
-//	@Autowired
-//	private OrgUserService orgUserService;
-
+class UserRestController {
 	@Autowired
 	private AccessHisRepository accessHisRepository;
 
@@ -31,29 +27,11 @@ class UserRestController {
  
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd"); 
-	 
-//	@GetMapping("")
-//	public @ResponseBody List<Code> getAllList() throws Exception { 
-//		return codeRepo.findAll(); 
-//	}
-//
+
 	@GetMapping("{adgub}")
 	public @ResponseBody List<Code> getUserInfo(@RequestBody OrgUserDto orgUserDto ) throws Exception { 
 		return orgUserRepository.findByCompanycode(orgUserDto.getCompanycode());
-	} 	
-//	
-//	@PutMapping("")
-//	public ResponseEntity<Code> updateCode(@RequestBody Code itDamage ) throws Exception { 		
-//		Code itDamageUpdated = codeRepo.save(itDamage ); 
-//		return new ResponseEntity<Code>(itDamageUpdated, HttpStatus.OK);
-//	}
-//
-////	@PostMapping("save")
-////	public ResponseEntity<Void> createCode(@RequestBody Code Code )  throws Exception { 		
-////		Code CodeCreated= CodeService.save(Code ); 
-////		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{rtime}"	).buildAndExpand(CodeCreated.getRtime()).toUri();
-////		return   ResponseEntity.created(uri).build();
-////	}
+	}
 
 	@PostMapping("/ip")
 	public ResponseEntity saveAccessHis(@RequestBody AccessHis accessHis ) throws Exception {

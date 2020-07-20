@@ -16,7 +16,7 @@ import com.seohan.common.Interceptor.JwtInterceptor;
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 	private static final String[] EXCLUDE_PATHS = {
-			"/member/**",
+			"/auth/**",
 			"/error/**"
 			};
 	

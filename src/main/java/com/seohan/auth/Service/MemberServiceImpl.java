@@ -1,18 +1,16 @@
-package com.seohan.erp.general.Service;
-
-import java.util.Objects;
+package com.seohan.auth.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.seohan.erp.general.Domain.User;
-import com.seohan.erp.general.Mapper.UserRepository;
+import com.seohan.auth.Domain.Member;
+import com.seohan.auth.Mapper.MemberRepository;
 
 /**
  * Created by vivie on 2017-06-08.
  */
-@Service("userService")
-public class UserServiceImpl implements UserService {
+@Service("memberService")
+public class MemberServiceImpl implements MemberService {
 
 	private static final String DEFAULT_NICKNAME = "번째러버";
 	private static final String PROFILE_DEFAULT_PATH = "/profile/0/profile_default.jpg";
@@ -22,13 +20,13 @@ public class UserServiceImpl implements UserService {
 	private static final String NICKNAME_EXIST_EXCEPTION_MSG = "이미 닉네임이 존재합니다.";
 
 	@Autowired
-	private UserRepository userRepository;
+	private MemberRepository memeberRepository;
  
  
 	@Override
 	public boolean isExist(String asabn) {
 		boolean isExist = false;
-		User member = userRepository.findByAsabn(asabn);
+		Member member = memeberRepository.findByAsabn(asabn);
 		if (member != null) {
 			isExist = true;
 		}
@@ -43,26 +41,26 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User signin(String companyCode, String asabn, String password) {
-		User user = userRepository.findByAsabnAndCo_gb(asabn, companyCode) ;
-		if(user==null){
+	public Member signin(String companyCode, String asabn, String password) {
+		Member member = memeberRepository.findByAsabnAndCo_gb(asabn, companyCode) ;
+		if(member==null){
 			throw new IllegalStateException(NOTEXIST_EXCEPTION_MSG);
 		}
-		if (!this.isAccordPassword(user, password)) {
+		if (!this.isAccordPassword(member, password)) {
 			throw new IllegalStateException(SIGNIN_EXCEPTION_MSG);
 		}
-		return user;
+		return member;
 	}
 
-	private boolean isAccordPassword(User user, String password) {
-		String encodedPassword = user.getPass().trim();
+	private boolean isAccordPassword(Member member, String password) {
+		String encodedPassword = member.getPass().trim();
 //		return BCrypt.checkpw(password, encodedPassword);
 		return password.equals(encodedPassword);
 	}
   
 	@Override
-	public User findByCompanyCodeAndAsabn(User user) {
-		return userRepository.findByAsabnAndCo_gb(user.getAsabn(), user.getCompanyCode());
+	public Member findByCompanyCodeAndAsabn(Member member) {
+		return memeberRepository.findByAsabnAndCo_gb(member.getAsabn(), member.getCompanyCode());
 	}
  
 }
