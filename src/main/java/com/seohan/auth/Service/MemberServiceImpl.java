@@ -1,14 +1,10 @@
 package com.seohan.auth.Service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.seohan.auth.Domain.Member;
 import com.seohan.auth.Mapper.MemberRepository;
-
-import javax.swing.text.html.Option;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import java.util.Optional;
-
 /**
  * Created by vivie on 2017-06-08.
  */
@@ -45,13 +41,16 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member signin(String companyCode, String asabn, String password) {
-		Optional<Member> member = memeberRepository.findByAsabnAndCo_gb(asabn, companyCode) ;
-		if(member==null){
+		Optional<Member> member = memeberRepository.findByAsabnAndCo_gb(asabn, companyCode);
+		member.ifPresent(m->{
+					if (!this.isAccordPassword(m, password)) {
+						throw new IllegalStateException(SIGNIN_EXCEPTION_MSG);
+					}
+				});
+
+		member.orElseGet(()->{
 			throw new IllegalStateException(NOTEXIST_EXCEPTION_MSG);
-		}
-		if (!this.isAccordPassword(member.get(), password)) {
-			throw new IllegalStateException(SIGNIN_EXCEPTION_MSG);
-		}
+		});
 		return member.get();
 	}
 

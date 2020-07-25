@@ -39,8 +39,9 @@ class AuthRestController {
 		Member member = reqeustEntity.getBody();
 
 		if (jwtService.isUsable(accessToken)) {
-			Optional<Member> loadedMember = memberRepository.findByAsabnAndCo_gb(member.getAsabn(), member.getCompanyCode());
-			return new ResponseEntity<Member>(loadedMember.get(), HttpStatus.OK);
+			Member loadedMember = memberRepository.findByAsabnAndCo_gb(member.getAsabn(), member.getCompanyCode()).get();
+
+			return new ResponseEntity<Member>(loadedMember, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<Member>(member, HttpStatus.UNAUTHORIZED);
 		}
