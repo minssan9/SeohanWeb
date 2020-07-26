@@ -31,17 +31,17 @@ public interface ImportPlanRepository extends JpaRepository<ImportPlan, Long> {
 	" SELECT CSTCD, WARHS, MITMNO," +
 		" SUM(CASE WHEN PDATE <> :queryDate THEN SSQTY ELSE 0 END) BSQTY, " +
 		" SUM(CASE WHEN PDATE = :queryDate THEN SSQTY ELSE 0 END) TSQTY  FROM SMLIB.PUR_PLNB " +
-	" WHERE PDATE BETWEEN '20200715' AND '20200720' GROUP BY CSTCD,WARHS, MITMNO " +
+	" WHERE PDATE BETWEEN :queryStartDate AND :queryEndDate GROUP BY CSTCD,WARHS, MITMNO " +
 ") C ON A.ITMNO = C.MITMNO AND A.CSTCD =C.CSTCD AND B.WARHS = C.WARHS " +
 " LEFT OUTER JOIN (" +
 	" SELECT  CSTCD, WARHS, ITMNO, " +
 	" (SUM(CASE WHEN LEFT(TRSCD, 1) = 'R' AND TRGAE NOT IN ('AG','SC') AND LOTNO <> 'SSSSSS' THEN QUNTY ELSE 0 END) " +
 	" - SUM(CASE WHEN LEFT(TRSCD, 1) = 'I' AND TRGAE = 'AG' AND LOTNO <> 'SSSSSS' THEN QUNTY ELSE 0 END)) PRE_QTY  FROM SMLIB.TRANSPF " +
-	" WHERE TRSDT BETWEEN '20200715' AND '20200719'  GROUP BY CSTCD,WARHS, ITMNO" +
+	" WHERE TRSDT BETWEEN :queryStartDate AND :queryEndDate  GROUP BY CSTCD,WARHS, ITMNO" +
 " ) D ON A.ITMNO = D.ITMNO AND A.CSTCD = D.CSTCD AND B.WARHS = D.WARHS " +
 " INNER JOIN SALIB.CUSTP E ON A.CSTCD= E.CODE1||E.CODE2" +
 " INNER JOIN SMLIB.ITMSTPF F ON A.ITMNO = F.ITMNO" +
 " WHERE (B.MQTY - C.BSQTY + D.PRE_QTY -  C.TSQTY) < 0 ", nativeQuery=true)
-	List<ImportPlanAlarm> findImportPlanByQuery(String queryDate, String userid);
+	List<ImportPlanAlarm> findGetOmissionItemList(String queryDate, String queryStartDate, String queryEndDate, String userid);
 
 }
