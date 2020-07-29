@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -73,13 +74,13 @@ class AuthRestController {
 	
     
     @PostMapping("/signin")
-    public Result signin(@RequestBody User user, HttpServletResponse response){
-    	Result result = Result.successInstance();
-        User loginUser= userService.signin(user.getCompanyCode(), user.getAsabn(), user.getPass());
-        String token = jwtService.create("member", loginUser, "user"); 
-        response.setHeader("Authorization", token);
-        result.setData(loginUser);
-        return result;
+    public ResponseEntity<User> signin(@RequestBody User user){
+		User loginUser= userService.signin(user.getCompanyCode(), user.getAsabn(), user.getPass());
+
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.set("Authorization", jwtService.create("member", loginUser, "user"));
+
+        return new ResponseEntity(user, httpHeaders, HttpStatus.OK);
     }
 
 //	@PostMapping("save")

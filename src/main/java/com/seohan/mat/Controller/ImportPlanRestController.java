@@ -3,11 +3,13 @@ package com.seohan.mat.Controller;
 import com.seohan.mat.Domain.ImportPlan;
 import com.seohan.mat.Dto.ImportPlanAlarm;
 import com.seohan.mat.Mapper.ImportPlanRepository;
+import com.seohan.mat.Service.ImportPlanService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -16,15 +18,14 @@ import java.util.List;
 @RestController
 class ImportPlanRestController {
 	@Autowired
-	private ImportPlanRepository importPlanRepository;
+	private ImportPlanService importPlanService;
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd"); 
 	 
 	@GetMapping("")
-	public @ResponseBody List<ImportPlanAlarm> getImportPlanList(@RequestParam String querydate, String userid) throws Exception {
-//		Date queryDate = Date querydate
-		return importPlanRepository.findImportPlanByQuery(querydate, userid);
+	public @ResponseBody List<ImportPlanAlarm> getImportPlanList(@RequestParam String userid) {
+		return importPlanService.getOmissionItemList( userid);
 	}
 
 //	@GetMapping("{udate}")

@@ -22,3 +22,11 @@ public class ImportPlanAlarm   {
     private String      dscrp	;
     private String      cusna	;
 }
+
+
+
+
+
+
+
+
