@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RequestMapping("/mat/importPlan")
@@ -22,6 +23,7 @@ class ImportPlanRestController {
 	 
 	@GetMapping("")
 	public @ResponseBody List<ImportPlanAlarm> getImportPlanList(@RequestParam String querydate, String userid) throws Exception {
+//		Date queryDate = Date querydate
 		return importPlanRepository.findImportPlanByQuery(querydate, userid);
 	}
 
