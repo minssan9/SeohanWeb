@@ -6,6 +6,8 @@ import com.seohan.mat.Mapper.ImportPlanRepository;
 import com.seohan.mat.Service.ImportPlanService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
@@ -13,7 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-@RequestMapping("/mat/importPlan")
+@RequestMapping("/mat/importplan")
 @Slf4j 
 @RestController
 class ImportPlanRestController {
@@ -23,9 +25,9 @@ class ImportPlanRestController {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd"); 
 	 
-	@GetMapping("")
-	public @ResponseBody List<ImportPlanAlarm> getImportPlanList(@RequestParam String userid) {
-		return importPlanService.getOmissionItemList( userid);
+	@GetMapping("/alarm")
+	public ResponseEntity<List<ImportPlanAlarm>> getImportPlanList(@RequestParam String userid) {
+		return new ResponseEntity<List<ImportPlanAlarm>>(importPlanService.getOmissionItemList(userid), HttpStatus.OK);
 	}
 
 //	@GetMapping("{udate}")

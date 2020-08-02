@@ -15,7 +15,6 @@ import java.util.List;
 
 @Service
 public class ImportPlanServiceImpl implements ImportPlanService {
-
     SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
     SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -27,15 +26,15 @@ public class ImportPlanServiceImpl implements ImportPlanService {
         String workDate = importPlanRepository.findMaxWorkDate(userId);
         String toDate  = "";
         String fromDate  = "";
+        Date now = new Date();
 
         Calendar calendar = Calendar.getInstance();
         try {
-            Date to = new Date();
-            toDate = sdf.format(to);
-
-            calendar.setTime(to);
+            calendar.setTime(now);
             calendar.add(Calendar.DATE,  -1);
-            fromDate = formatsdf.format(calendar.getTime());
+
+            toDate = sdf.format(now);
+            fromDate = sdf.format(calendar.getTime());
         }catch (Exception e){
             throw new IllegalStateException("날짜를 확인하세요");
         }

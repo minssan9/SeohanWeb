@@ -1,4 +1,4 @@
-package com.seohan.Config;
+package com.seohan.config;
 
 public class AuthEntryPointJwt {
 

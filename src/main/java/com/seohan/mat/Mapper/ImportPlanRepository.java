@@ -23,7 +23,7 @@ public interface ImportPlanRepository extends JpaRepository<ImportPlan, Long> {
 	String findMaxWorkDate(String empid);
 
 	@Query(value =
-" SELECT A.CSTCD, A.ITMNO, B.WARHS,B.MQTY, C.BSQTY,C.TSQTY, D.PRE_QTY, (B.MQTY - C.BSQTY + D.PRE_QTY -  C.TSQTY) EXPQTY , E.CUSNA,F.DSCRP FROM (" +
+" SELECT A.CSTCD, A.ITMNO, B.WARHS, B.MQTY, C.BSQTY,C.TSQTY, D.PRE_QTY, (B.MQTY - C.BSQTY + D.PRE_QTY -  C.TSQTY) EXPQTY , E.CUSNA,F.DSCRP FROM (" +
 	" SELECT CSTCD, ITMNO FROM SMLIB.CSTPLT WHERE ACTGB <> 'C'  AND FILL1 = :userid " +
 " ) A " +
 " Inner Join  (SELECT ITMNO, WARHS, MQTY FROM SMLIB.PUR_BALSET WHERE  GDATE = :workDate) B ON A.ITMNO = B.ITMNO" +
