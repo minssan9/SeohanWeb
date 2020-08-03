@@ -1,4 +1,4 @@
-//package com.seohan.Config; 
+//package com.seohan.config;
 //import java.sql.DriverManager;
 //
 //import javax.sql.DataSource;

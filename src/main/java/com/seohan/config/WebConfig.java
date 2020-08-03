@@ -1,4 +1,4 @@
-package com.seohan.Config;
+package com.seohan.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
