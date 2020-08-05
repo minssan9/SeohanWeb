@@ -42,7 +42,7 @@
 //		int reply = ftp.getReplyCode();
 //		if (!FTPReply.isPositiveCompletion(reply)) {
 //			ftp.disconnect();
-//			throw new IOException("Exception in connecting to FTP Server");
+//			throw new IOException("Exception in connecting to FTP ServerConfig");
 //		}
 //		System.out.println("FTP connection success!");
 //		ftp.login(ID, PASSWORD);

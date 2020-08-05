@@ -15,6 +15,7 @@ import com.seohan.common.Interceptor.JwtInterceptor;
 @Configuration
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
+
 	private static final String[] EXCLUDE_PATHS = {
 			"/member/**",
 			"/error/**"
@@ -37,7 +38,6 @@ public class WebConfig implements WebMvcConfigurer {
 
    @Bean
    public MultipartResolver multipartResolver() {
-
       StandardServletMultipartResolver multipartResolver = new StandardServletMultipartResolver();
       return multipartResolver;
    }

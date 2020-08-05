@@ -1,18 +1,19 @@
 package com.seohan.erp.general.Service;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
-
-import org.apache.commons.io.FilenameUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.seohan.file.Service.FileService;
 import com.seohan.erp.general.Domain.ItDamage;
 import com.seohan.erp.general.Domain.Report;
 import com.seohan.erp.general.Mapper.ItDamageRepository;
 import com.seohan.erp.general.Mapper.ReportRepository;
+import com.seohan.file.Service.FileService;
+import com.seohan.global.Dto.MessageDto;
+import com.seohan.global.Service.MessageService;
+import org.apache.commons.io.FilenameUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
 
 @Service
 public class ItDamageServiceImpl implements ItDamageService {
@@ -24,6 +25,9 @@ public class ItDamageServiceImpl implements ItDamageService {
     ReportRepository reportRepository; 
     @Autowired
     ItDamageRepository itDamageRepository;
+    @Autowired
+	MessageService messageService;
+
       
 	@Override
 	public List<ItDamage> itDamage() throws Exception {
@@ -38,12 +42,10 @@ public class ItDamageServiceImpl implements ItDamageService {
 		
 		itDamage.setCtime(nowDate);
 		itDamage.setStat("09");
-//		smsModel.setContent(itDamage.getRtxt() + " - 조치 완료 / 확인 후 미조치사항 전산팀 연락 바람");
-//		smsModel.setPhone(itDamage.getRtel());
-//		smsModel.setSendNo("043-530-3174");
-		Report report = new Report();
-		String docuNo[] = itDamage.getClass3().split("-");
+
 		if (itDamage.getClass3().trim().length()> 0 ) {
+			Report report = new Report();
+			String docuNo[] = itDamage.getClass3().split("-");
 			report.setUdate(docuNo[0]);
 			report.setSer((docuNo[1]));
 			report.setSgub("G");
@@ -59,11 +61,22 @@ public class ItDamageServiceImpl implements ItDamageService {
 				e.printStackTrace(); //오류 출력(방법은 여러가지)
 			}
 		}		
-		itDamageRepository.save(itDamage );	
-		
+		itDamageRepository.save(itDamage );
+
+		MessageDto messageDto = MessageDto.builder()
+				.company(itDamage.getCo_gb())
+				.recipient_num(itDamage.getRtel())
+				.accountId(itDamage.getRsabun())
+				.receiverId(itDamage.getRsabun())
+				.text(itDamage.getRtxt() + "/n" + itDamage.getCtxt() + " - 조치 완료 / 확인 후 미조치사항 전산팀 연락 바람")
+				.build();
+
+		messageService.sendMessage(messageDto);
+
 		return itDamage;
-	} 
-	
+	}
+
+
 	@Override 
 	public ItDamage save(ItDamage itDamage) throws Exception {
 		Calendar cal = Calendar.getInstance();
