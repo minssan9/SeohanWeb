@@ -1,4 +1,4 @@
-package com.seohan.mat.Mapper;
+package com.seohan.mat.Repository;
 
 import com.seohan.mat.Domain.ImportPlan;
 import com.seohan.mat.Domain.ItemBalance;

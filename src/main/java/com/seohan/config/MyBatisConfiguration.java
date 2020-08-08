@@ -21,7 +21,7 @@
 //import com.zaxxer.hikari.HikariDataSource;
 //
 //@Configuration
-//@MapperScan(basePackages = { "com.seohan.general.Mapper" })
+////@MapperScan(basePackages = { "com.seohan.mat.Mapper" })
 //@EnableTransactionManagement
 //class MyBatisConfiguration {
 //
@@ -30,7 +30,7 @@
 //
 //	@Bean
 //	@Primary
-//	@ConfigurationProperties(prefix = "spring.datasource.hikari")
+//	@ConfigurationProperties(prefix = "spring.datasource")
 //	public DataSource mainDataSource() {
 //		HikariConfig config = new HikariConfig();
 //		config.setDataSourceClassName("org.apache.commons.dbcp.BasicDataSource");

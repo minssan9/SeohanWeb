@@ -1,4 +1,4 @@
-//package com.seohan.fta.Mapper;
+//package com.seohan.fta.Repository;
 //
 //import com.seohan.fta.Domain.PoHeader;
 //import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;

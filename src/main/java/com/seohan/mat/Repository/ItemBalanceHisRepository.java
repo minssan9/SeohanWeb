@@ -1,6 +1,5 @@
-package com.seohan.mat.Mapper;
+package com.seohan.mat.Repository;
 
-import com.seohan.mat.Domain.ItemBalance;
 import com.seohan.mat.Domain.ItemBalanceHis;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

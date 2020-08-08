@@ -8,7 +8,7 @@
 //import org.springframework.stereotype.Service;
 //
 //import com.seohan.general.Domain.User;
-//import com.seohan.general.Mapper.UserRepository;
+//import com.seohan.general.Repository.UserRepository;
 //
 //@Service
 //public class UserDetailsServiceImpl implements UserDetailsService {
