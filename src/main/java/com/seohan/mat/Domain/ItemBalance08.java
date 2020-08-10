@@ -12,9 +12,9 @@ import java.io.Serializable;
 
 @Data
 @Entity
-@IdClass(ItemBalanceHis.class)
-@Table(name = "ITMBLHIS", schema = "SMLIB")
-public class ItemBalanceHis implements Serializable {
+@IdClass(ItemBalance08.class)
+@Table(name = "ITMBL0800", schema = "SMLIB")
+public class ItemBalance08 implements Serializable {
     @Id
     @Length(max=8)
     private String gdate;

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.sql.PreparedStatement;
@@ -13,22 +14,25 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Component
+@Transactional
 public class ScheduledJobs {
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
     @Autowired
     private ItemBalanceHisRepository itemBalanceHisRepo;
 
-    @Transactional
-    public void saveBalance(String savingTime) {
+    public List<ItemBalanceHis> saveBalance(String savingTime) {
         String targetTable = "";
+        String saveDate = savingTime.substring(0, 8);
+        String saveTime = savingTime.substring(8, 12);
 
-        List<ItemBalanceHis> itembalanceHis = itemBalanceHisRepo.findByGdateAndGtime(
-                savingTime.substring(0, 8), savingTime.substring(8, 12));
+        List<ItemBalanceHis> itembalanceHis = itemBalanceHisRepo.findByGdateAndGtime(saveDate, saveTime);
 
         if (itembalanceHis.isEmpty() || itembalanceHis == null) {
             targetTable = "smlib.itmbl0800";
             targetTable = "smlib.itmblhis";
+
             try {
                 jdbcTemplate.batchUpdate(
             "insert into " + targetTable + " (GDATE,GTIME,WARHS,ITMNO,QTY,TRIM,MNY) " +
@@ -125,8 +129,10 @@ public class ScheduledJobs {
 
             }catch (Exception e ){
                 //messageService.send(messageDto);
+            }finally {
             }
         }
+        return itemBalanceHisRepo.findByGdateAndGtime(saveDate, saveTime);
     }
 
 
