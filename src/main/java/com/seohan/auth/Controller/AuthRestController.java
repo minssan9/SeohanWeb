@@ -67,6 +67,7 @@ class AuthRestController {
         String token = jwtService.create("member", loginUser, "user");
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.set("Authorization", token);
+		responseHeaders.set("Authorization", jwtService.create("member", loginUser, "user"));
 		return new ResponseEntity<User>(loginUser, responseHeaders, HttpStatus.OK);
     }
 

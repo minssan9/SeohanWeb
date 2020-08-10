@@ -21,7 +21,6 @@
 //import com.zaxxer.hikari.HikariDataSource;
 //
 //@Configuration
-//@MapperScan(basePackages = { "com.seohan.erp.general.Mapper" })
 //@EnableTransactionManagement
 //class JPAConfiguration {
 //
