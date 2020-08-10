@@ -1,31 +1,19 @@
 package com.seohan.auth.Controller;
 
-import java.text.SimpleDateFormat;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.seohan.machine.Domain.SettingHis;
+import com.seohan.common.Service.Jwt.JwtService;
+import com.seohan.erp.general.Domain.User;
+import com.seohan.erp.general.Mapper.UserRepository;
+import com.seohan.erp.general.Service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.seohan.common.Domain.Result;
-import com.seohan.common.Service.jwt.JwtService;
-import com.seohan.erp.general.Domain.User;
-import com.seohan.erp.general.Mapper.UserRepository;
-import com.seohan.erp.general.Service.UserService;
-
-import lombok.extern.slf4j.Slf4j; 
+import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 
 @RequestMapping("/auth")
 @Slf4j 
