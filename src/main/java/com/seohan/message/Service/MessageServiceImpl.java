@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -18,12 +19,15 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class KakaoMessageServiceImpl implements KakaoMessageService {
+public class MessageServiceImpl implements MessageService {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+
+	@Value("${server.message}")
+	private String messageServerUrl;
 
 	@Override
 	public String sendMessage(KakaoMessageModel kakaoMessageModel) throws Exception {
-		URI uri = new URI("http://211.40.184.7:5090/kakao/save");
+		URI uri = new URI(messageServerUrl + "/kakao/save");
 
 		// RestTemplate 에 MessageConverter 세팅
 		List<HttpMessageConverter<?>> converters = new ArrayList<HttpMessageConverter<?>>();

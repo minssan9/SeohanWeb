@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.seohan.Config.FileProperties;
+import com.seohan.config.FileProperties;
 import com.seohan.file.Domain.FileDownloadException;
 import com.seohan.file.Domain.FileUploadException;
 

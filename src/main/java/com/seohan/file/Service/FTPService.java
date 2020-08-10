@@ -14,7 +14,7 @@
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Service;
 //
-//import com.seohan.Config.FTPProperties;
+//import com.seohan.config.FTPProperties;
 //
 //@Service
 //public class FTPService {

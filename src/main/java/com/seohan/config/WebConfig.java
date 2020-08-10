@@ -1,8 +1,9 @@
-package com.seohan.Config;
+package com.seohan.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -20,11 +21,30 @@ public class WebConfig implements WebMvcConfigurer {
 			"/member/**",
 			"/error/**"
 			};
-	
+
+
+	@Autowired
+	private Environment environment;
+
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
+		//방화벽에서 외부 접근 차단
+		// external access will be blocked by firewall
 		registry.addMapping("/**")
-				.allowedMethods("GET", "POST", "HEAD", "PUT", "DELETE", "OPTIONS");
+				.allowedOrigins("*")
+				.allowedMethods("GET", "POST", "PUT", "DELETE")
+				.maxAge(3600);
+
+//		registry.addMapping("/**")
+//				.allowedOrigins("http://localhost:8091", "http://localhost:8090","http://localhost","http://ind.seohan.com","http://minssan9.seohan.com")
+//				.allowedMethods("GET", "POST", "HEAD", "PUT", "DELETE", "OPTIONS")
+//				.maxAge(3600);
+
+//		String urls = environment.getProperty("cors.allowOrigin");
+//		for(String url: urls.split(",")){
+//			registry.addMapping("/**")
+//					.allowedOrigins(url);
+//		}
 
 //		registry.addMapping("/fta/**")
 //				.allowedOrigins("*")
@@ -34,7 +54,6 @@ public class WebConfig implements WebMvcConfigurer {
 //				.allowedOrigins("*")
 //				.allowedMethods("GET", "POST");
 	}
-
 
    @Bean
    public MultipartResolver multipartResolver() {
