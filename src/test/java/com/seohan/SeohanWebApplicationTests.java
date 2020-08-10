@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class SeohanWebApplicationTests {
 	
 	// @Autowired
-	// private KakaoMessageService kakaoMessageService;
+	// private MessageService MessageService;
 	 	 
 	// @Test 
 	// public void requestTest () throws Exception {	 

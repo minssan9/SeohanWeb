@@ -1,6 +1,6 @@
 package com.seohan.auth.Controller;
 
-import com.seohan.common.Service.Jwt.JwtService;
+import com.seohan.common.Service.JwtService;
 import com.seohan.erp.general.Domain.User;
 import com.seohan.erp.general.Mapper.UserRepository;
 import com.seohan.erp.general.Service.UserService;

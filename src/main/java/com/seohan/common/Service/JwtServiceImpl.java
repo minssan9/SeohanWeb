@@ -1,4 +1,4 @@
-package com.seohan.common.Service.Jwt;
+package com.seohan.common.Service;
 
 import java.io.UnsupportedEncodingException;
 

@@ -11,11 +11,11 @@
 //import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 //
 //@Configuration
-//public class SecurityConfig extends WebSecurityConfigurerAdapter { 
+//public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //
 //	@Autowired
 //	private AuthEntryPointJwt unauthorizedHandler;
-//	
+//
 //	@Override
 //	public void configure(WebSecurity web) throws Exception {
 //		web.ignoring().antMatchers("/css/**", "/script/**", "image/**", "/fonts/**", "lib/**");
@@ -26,24 +26,24 @@
 //		http
 //			.httpBasic()
 //				.and()
-//			.authorizeRequests()			
+//			.authorizeRequests()
 //				.antMatchers("/admin/**").hasRole("ADMIN")
 //				.antMatchers("/general/**", "/hello").hasRole("USER")
-//				.antMatchers("/login").permitAll() 
+//				.antMatchers("/login").permitAll()
 //				.anyRequest().authenticated();
-//		
+//
 //		http.formLogin()
 //			.loginPage("/general/auth/login")
 //			.defaultSuccessUrl("/home")
 //			.usernameParameter("id")
 //			.passwordParameter("password")	;
-//		
+//
 //		http.logout()
 //			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 //			.logoutSuccessUrl("/")
-//			.invalidateHttpSession(true); 
-//	} 
-//	
+//			.invalidateHttpSession(true);
+//	}
+//
 //	@Bean
 //	public PasswordEncoder passwordEncoder() {
 //		return PasswordEncoderFactories.createDelegatingPasswordEncoder();

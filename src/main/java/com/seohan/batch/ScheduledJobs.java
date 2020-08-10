@@ -1,12 +1,11 @@
 package com.seohan.batch;
 
 import com.seohan.mat.Domain.ItemBalanceHis;
-import com.seohan.mat.Mapper.ItemBalanceHisRepository;
+import com.seohan.mat.Repository.ItemBalanceHisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.sql.PreparedStatement;
