@@ -23,7 +23,9 @@ public class WebConfig implements WebMvcConfigurer {
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
-				.allowedMethods("GET", "POST", "HEAD", "PUT", "DELETE", "OPTIONS");
+				.allowedOrigins("http://localhost:8091", "http://localhost:8090","http://localhost","http://ind.seohan.com","http://minssan9.seohan.com")
+				.allowedMethods("GET", "POST", "HEAD", "PUT", "DELETE", "OPTIONS")
+				.maxAge(3600);
 
 //		registry.addMapping("/fta/**")
 //				.allowedOrigins("*")
@@ -33,7 +35,6 @@ public class WebConfig implements WebMvcConfigurer {
 //				.allowedOrigins("*")
 //				.allowedMethods("GET", "POST");
 	}
-
 
    @Bean
    public MultipartResolver multipartResolver() {

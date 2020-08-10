@@ -1,6 +1,8 @@
-package com.seohan;
+package com.seohan.Scheduler;
 
 import com.seohan.batch.ScheduledJobs;
+import com.seohan.mat.Domain.ItemBalanceHis;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,21 +11,20 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class BatchTest {
+public class ScheduledJobTest {
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
 
     @Autowired
     private ScheduledJobs scheduledJobs;
 
     @Test
-    public void saveBalanceJobSch() throws Exception {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
-        Date now = new Date();
-        String strDate = sdf.format(now);
-
-        scheduledJobs.saveBalance(strDate );
+    public void saveBalanceTest(){
+        String strDate = sdf.format(new Date());
+        List<ItemBalanceHis> savedItemList = scheduledJobs.saveBalance(strDate);
+        Assert.assertNotNull(savedItemList) ;
     }
 }
