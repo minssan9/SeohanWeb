@@ -1,7 +1,7 @@
 package com.seohan.scheduler;
 
-import com.seohan.mat.Domain.ItemBalanceHis;
-import com.seohan.mat.Repository.ItemBalanceHisRepository;
+import com.seohan.erp.mat.Domain.ItemBalanceHis;
+import com.seohan.erp.mat.Repository.ItemBalanceHisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.seohan.mat.mapper">
+<mapper namespace="com.seohan.erp.mat.mapper">
 
-	<select id="findGetOmissionItemList" resultType="com.seohan.mat.Dto.ImportPlanAlarm" parameterType="com.seohan.mat.Dto.ImportPlanAlarmQuery"><![CDATA[
+	<select id="findGetOmissionItemList" resultType="com.seohan.erp.mat.Dto.ImportPlanAlarm" parameterType="com.seohan.erp.mat.Dto.ImportPlanAlarmQuery"><![CDATA[
 		SELECT A.CSTCD, A.ITMNO, B.WARHS, B.MQTY, C.BSQTY, C.TSQTY, D.PRE_QTY, (B.MQTY - C.BSQTY + D.PRE_QTY -  C.TSQTY) EXPQTY , E.CUSNA,F.DSCRP FROM (
 		SELECT CSTCD, ITMNO FROM SMLIB.CSTPLT WHERE ACTGB != 'C'  AND FILL1 = #{userid}
 		) A

@@ -13,7 +13,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.seohan.base.Domain.KakaoMessageModel;
+import com.seohan.erp.base.Domain.KakaoMessageModel;
 
 import lombok.extern.slf4j.Slf4j;
 

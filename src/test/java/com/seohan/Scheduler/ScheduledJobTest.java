@@ -1,7 +1,7 @@
 package com.seohan.Scheduler;
 
 import com.seohan.batch.ScheduledJobs;
-import com.seohan.mat.Domain.ItemBalanceHis;
+import com.seohan.erp.mat.Domain.ItemBalanceHis;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
