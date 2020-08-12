@@ -1,4 +1,4 @@
-package com.seohan.batch;
+package com.seohan.scheduler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class Scheduler  {
 	@Scheduled(fixedDelay = 1000)
 	public void getStockDataSch() {
 		String strDate = sdf.format(new Date());
-		scheduledJobs.saveBalance(strDate );
+//		scheduledJobs.saveBalance(strDate );
 //		System.out.println("Java cron job expression:: " + strDate);
 	}
 }
