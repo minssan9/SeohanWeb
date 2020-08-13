@@ -3,19 +3,20 @@ package com.seohan.auth.Controller;
 import com.seohan.auth.Domain.Member;
 import com.seohan.auth.Mapper.MemberRepository;
 import com.seohan.auth.Service.MemberService;
-import com.seohan.common.Service.jwt.JwtService;
+import com.seohan.common.Service.JwtService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
-import java.util.Optional;
+
 
 @RequestMapping("/auth")
 @Slf4j 
@@ -56,6 +57,8 @@ class AuthRestController {
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.set("Authorization", token);
 		return new ResponseEntity<Member>(loginMember, responseHeaders, HttpStatus.OK);
+//		responseHeaders.set("Authorization", jwtService.create("member", loginUser, "user"));
+//		return new ResponseEntity<User>(loginUser, responseHeaders, HttpStatus.OK);
     }
 
 //	@PostMapping("save")

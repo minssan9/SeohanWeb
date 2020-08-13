@@ -9,11 +9,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class SeohanWebApplicationTests {
 	
 	// @Autowired
-	// private KakaoMessageService kakaoMessageService;
+	// private MessageService MessageService;
 	 	 
 	// @Test 
 	// public void requestTest () throws Exception {	 
-	// 	com.seohan.base.Domain.KakaoMessageModel kakaoMessageModel = new KakaoMessageModel();
+	// 	com.seohan.erp.base.Domain.KakaoMessageModel kakaoMessageModel = new KakaoMessageModel();
 	// 	kakaoMessageModel.setRecipient_num("01067766160");
 	// 	kakaoMessageModel.setContent("dksjaldjklasejksd");
 	// 	kakaoMessageModel.setSubject("dksajflsjel");

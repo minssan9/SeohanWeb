@@ -1,14 +1,12 @@
 package com.seohan.erp.general.Service;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
+import com.seohan.erp.general.Domain.Report;
+import com.seohan.erp.general.Mapper.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.seohan.erp.general.Domain.Report;
-import com.seohan.erp.general.Mapper.ReportRepository;
-import com.seohan.global.Domain.Response;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 @Service
 public class ReportServiceImpl implements ReportService {
@@ -20,8 +18,7 @@ public class ReportServiceImpl implements ReportService {
 	@Override
 	public Report save(Report report) throws Exception {
 		Calendar cal = Calendar.getInstance();
-		String nowDate = sdf.format(cal.getTime());		
-		Response<Object> response = new Response<Object>();
+		String nowDate = sdf.format(cal.getTime());
    
 		report.setUdate(nowDate);
 		report.setSer( reportRepository.getMaxSerReportByUdate(nowDate).toString());
