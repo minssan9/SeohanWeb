@@ -27,8 +27,8 @@
 //            .passwordEncoder(encoder::encode);
 // 
 //        if (user != null) {
-//            userDetails = builder.username(user.getAsabn())
-//                    .password(user.getPass())
+//            userDetails = builder.username(user.getAccountId())
+//                    .password(user.getPassword())
 //                    .roles(user.getRole())
 //                    .build();
 //        }
