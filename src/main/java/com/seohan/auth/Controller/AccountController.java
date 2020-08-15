@@ -23,7 +23,7 @@ import java.util.*;
 @RequestMapping("/auth")
 @Slf4j 
 @RestController
-class AuthRestController {  
+class AccountController {
 	@Autowired
 	private AccountService accountService;
 	@Autowired
@@ -64,9 +64,9 @@ class AuthRestController {
 		if (adapter == null) {
 			return new ResponseEntity(HttpStatus.UNAUTHORIZED);
 		}
-		if (!adapter.getAccount().getRoles().contains(AccountRoles.ADMIN)) {
-			return new ResponseEntity(HttpStatus.FORBIDDEN);
-		}
+//		if (!adapter.getAccount().getRoles().contains(AccountRoles.ADMIN)) {
+//			return new ResponseEntity(HttpStatus.FORBIDDEN);
+//		}
 		Page<Account> pages = accountRepository.findAll(pageable);
 
 		return new ResponseEntity(pages, HttpStatus.OK);
@@ -93,12 +93,6 @@ class AuthRestController {
 
 //		Account savedAccount = service.createAccount(account);
 
-//		Chat chat1 = Chat.builder()
-//				.account(savedAccount)
-//				.build();
-//
-//		chatRepository.save(chat1);
-
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
@@ -113,7 +107,8 @@ class AuthRestController {
 		Account account = reqeustEntity.getBody();
 
 		if (jwtService.isUsable(accessToken)) {
-			Account loadedAccount = accountRepository.findByAsabnAndCo_gb(account.getAccountId(), account.getCompanyCode()).get();
+//			Account loadedAccount = accountRepository.findByAsabnAndCo_gb(account.getAccountId(), account.getCompanyCode()).get();
+			Account loadedAccount = accountRepository.findByAccountId(account.getAccountId()).get();
 
 			return new ResponseEntity<Account>(loadedAccount, HttpStatus.OK);
 		} else {

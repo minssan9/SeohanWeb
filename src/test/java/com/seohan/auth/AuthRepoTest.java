@@ -3,6 +3,7 @@ package com.seohan.auth;
 import com.seohan.auth.Domain.Account;
 import com.seohan.auth.Mapper.AccountRepository;
 
+import com.seohan.auth.Service.AccountService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +17,8 @@ import javax.transaction.Transactional;
 @SpringBootTest
 @Transactional
 public class AuthRepoTest {
-    @Autowired MemberService memberService;
+    @Autowired
+    AccountService accountService;
     @Autowired
     AccountRepository accountRepository;
 
@@ -25,7 +27,7 @@ public class AuthRepoTest {
         Account account1 = new Account();
         account1.setAccountId("4150149");
         account1.setPassword("1234");
-        account1.setCompanyCode("SEOHAN");
+//        account1.setCompanyCode("SEOHAN");
 
         Account account2 = accountRepository.findByAsabnAndCo_gb("4150149","SEOHAN" ).get();
 
