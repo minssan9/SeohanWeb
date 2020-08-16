@@ -1,6 +1,7 @@
 package com.seohan.config;
 
 
+import com.seohan.auth.Service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,8 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
-
-import com.minssan9.shop.accounts.AccountService;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {

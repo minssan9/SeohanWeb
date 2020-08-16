@@ -1,9 +1,10 @@
 package com.seohan.auth;
 
-import com.seohan.auth.Domain.Member;
-import com.seohan.auth.Mapper.MemberRepository;
+import com.seohan.auth.Domain.Account;
+import com.seohan.auth.Domain.InAccount;
+import com.seohan.auth.Mapper.InAccountRepository;
 
-import com.seohan.auth.Service.MemberService;
+import com.seohan.auth.Service.AccountService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,19 +18,21 @@ import javax.transaction.Transactional;
 @SpringBootTest
 @Transactional
 public class AuthRepoTest {
-    @Autowired MemberService memberService;
-    @Autowired MemberRepository memberRepository;
+    @Autowired
+    AccountService accountService;
+    @Autowired
+    InAccountRepository inAccountRepository;
 
     @Test
     public void 로그인 (){
-        Member member1 = new Member();
-        member1.setAsabn("4150149");
-        member1.setPass("1234");
-        member1.setCompanyCode("SEOHAN");
+        InAccount account1 = new InAccount();
+        account1.setAccountId("4150149");
+        account1.setPassword("1234");
+        account1.setCompanyCode("SEOHAN");
 
-        Member member2 = memberRepository.findByAsabnAndCo_gb("4150149","SEOHAN" ).get();
+        Account account2 = inAccountRepository.findByAsabnAndCo_gb("4150149","SEOHAN" ).get();
 
-        Assert.assertEquals(member1,member2);
+        Assert.assertEquals(account1, account2);
     }
 
 }
