@@ -1,7 +1,9 @@
 package com.seohan.auth;
 
 import com.seohan.auth.Domain.Account;
-import com.seohan.auth.Mapper.AccountRepository;
+import com.seohan.auth.Domain.InAccount;
+import com.seohan.auth.Mapper.InAccountRepository;
+
 
 import com.seohan.auth.Service.AccountService;
 import org.junit.Assert;
@@ -20,16 +22,16 @@ public class AuthRepoTest {
     @Autowired
     AccountService accountService;
     @Autowired
-    AccountRepository accountRepository;
+    InAccountRepository inAccountRepository;
 
     @Test
     public void 로그인 (){
-        Account account1 = new Account();
+        InAccount account1 = new InAccount();
         account1.setAccountId("4150149");
         account1.setPassword("1234");
-//        account1.setCompanyCode("SEOHAN");
+        account1.setCompanyCode("SEOHAN");
 
-        Account account2 = accountRepository.findByAsabnAndCo_gb("4150149","SEOHAN" ).get();
+        Account account2 = inAccountRepository.findByAsabnAndCo_gb("4150149","SEOHAN" ).get();
 
         Assert.assertEquals(account1, account2);
     }
