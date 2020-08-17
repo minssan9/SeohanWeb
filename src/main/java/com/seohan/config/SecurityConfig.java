@@ -13,8 +13,6 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-
     @Autowired
     AccountService accountService;
 
@@ -27,8 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    @Override
-    // Authorization & Resource Server 에서 사용하기 위해 Bean 등록
+    @Override    // Authorization & Resource Server 에서 사용하기 위해 Bean 등록
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
