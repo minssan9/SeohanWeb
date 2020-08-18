@@ -1,6 +1,6 @@
 //package com.seohan.auth.Service;
 //
-//import com.seohan.auth.Domain.Account;
+//import com.seohan.auth.Dto.Account;
 //import com.seohan.auth.Mapper.AccountRepository;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.core.userdetails.UserDetails;

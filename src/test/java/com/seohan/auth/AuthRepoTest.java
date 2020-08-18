@@ -1,7 +1,7 @@
 package com.seohan.auth;
 
-import com.seohan.auth.Domain.Account;
-import com.seohan.auth.Mapper.AccountRepository;
+import com.seohan.auth.Dto.Account;
+import com.seohan.auth.Mapper.AccountMapper;
 import com.seohan.auth.Service.AccountService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,18 +18,29 @@ import javax.transaction.Transactional;
 public class AuthRepoTest {
     @Autowired
     AccountService accountService;
+
     @Autowired
-    AccountRepository AccountRepository;
+    AccountMapper accountMapper;
 
     @Test
     public void 로그인 (){
         Account account1 = new Account();
         account1.setAccountId("4150149");
         account1.setPassword("1234");
-        account1.setCompanyCode("SEOHAN");
+//        account1.setCompanyCode("SEOHAN");
 
-//        Account account2 = AccountRepository.findByAsabnAndCo_gb("4150149","SEOHAN" ).get();
-        Account account2 = AccountRepository.findByAccountId("4150149").get();
+        Account account2 = accountMapper.findByAccountId("4150149").get();
+
+        Assert.assertEquals(account1, account2);
+    }
+
+    @Test
+    public void 사내외사원정보(){
+        Account account1 = new Account();
+        account1.setAccountId("P909544");
+        account1.setPassword("3085");
+
+        Account account2 = accountMapper.findByAccountId("P909544").get();
 
         Assert.assertEquals(account1, account2);
     }

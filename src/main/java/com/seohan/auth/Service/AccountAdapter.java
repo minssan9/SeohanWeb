@@ -1,7 +1,7 @@
 package com.seohan.auth.Service;
 
-import com.seohan.auth.Domain.Account;
 import com.seohan.auth.Domain.AccountRoles;
+import com.seohan.auth.Dto.Account;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

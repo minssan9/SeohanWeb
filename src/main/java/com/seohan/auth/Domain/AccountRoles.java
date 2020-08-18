@@ -2,5 +2,8 @@ package com.seohan.auth.Domain;
 
 public enum AccountRoles {
     ADMIN,
-    USER
+    MANAGER,
+    USER,
+    WORKER,
+    WORKER_BOSS
 }

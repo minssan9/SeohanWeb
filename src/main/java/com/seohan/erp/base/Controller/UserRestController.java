@@ -1,10 +1,10 @@
-package com.seohan.auth.Controller;
+package com.seohan.erp.base.Controller;
 
-import com.seohan.erp.base.Domain.AccessHis;
+import com.seohan.erp.base.Domain.ExecuteHis;
 import com.seohan.erp.base.Domain.Code;
 import com.seohan.auth.Dto.OrgUserDto;
 import com.seohan.erp.base.Mapper.AccessHisRepository;
-import com.seohan.auth.Mapper.OrgUserRepository;
+import com.seohan.auth.Repository.OrgUserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,8 +34,8 @@ class UserRestController {
 	}
 
 	@PostMapping("/ip")
-	public ResponseEntity saveAccessHis(@RequestBody AccessHis accessHis ) throws Exception {
-		accessHis.setExectime( new Date());
-		return new ResponseEntity(accessHisRepository.save(accessHis), HttpStatus.OK);
+	public ResponseEntity saveAccessHis(@RequestBody ExecuteHis executeHis) throws Exception {
+		executeHis.setExectime( new Date());
+		return new ResponseEntity(accessHisRepository.save(executeHis), HttpStatus.OK);
 	}
 }

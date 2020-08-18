@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.seohan.auth.mapper">
+
+	<select id="findByAccountId" resultType="com.seohan.auth.Dto.Account" parameterType="String">
+		<![CDATA[
+			SELECT a.* , coalesce(R.ROLES,'USER') ROLES FROM (
+				SELECT a.asabn accountId, a.kname name, a.mobi_no, coalesce(em.email,'') email, 'USER' ROLES  FROM TSILIB.EMP_MST A
+				LEFT OUTER JOIN PCMLIB.ORG_USER em ON A.ASABN=em.empId
+				WHERE a.asabn = #{accountId}
+				UNION ALL
+				SELECT accountId ,  name, HTEL mobi_no,  '' email, 'WORKER' ROLES FROM SMLIB.VUSERPF A
+				WHERE ACCOUNTID =  #{accountId}
+			) A
+			LEFT OUTER JOIN TSILIB.EMP_MST_ROLES R ON A.accountId=R.ASABN
+		 ]]>
+	</select>
+</mapper>

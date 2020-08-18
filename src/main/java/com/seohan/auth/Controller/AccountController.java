@@ -1,19 +1,12 @@
 package com.seohan.auth.Controller;
 
-import com.seohan.auth.Domain.Account;
-import com.seohan.auth.Domain.AccountRoles;
-import com.seohan.auth.Domain.Account;
-import com.seohan.auth.Dto.AccountDto;
-import com.seohan.auth.Mapper.AccountRepository;
+import com.seohan.auth.Dto.Account;
 import com.seohan.auth.Service.AccountAdapter;
 import com.seohan.auth.Service.AccountService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +19,6 @@ import java.util.Optional;
 class AccountController {
 	@Autowired
 	private AccountService accountService;
-	@Autowired
-	private AccountRepository accountRepository;
 //	@Autowired
 //    private JwtService jwtService;
 
@@ -43,45 +34,22 @@ class AccountController {
 //		Optional<Account> optionalAccount = AccountRepository.findByAccountId(adapter.getAccount().getAccountId());
 //		Account account = optionalAccount.get();
 
-		Optional<Account> optionalAccount = accountRepository.findByAccountIdWithRoles(adapter.getAccount().getAccountId());
-		Account inAccount = optionalAccount.get();
-		return ResponseEntity.ok().body(inAccount);
-	}
-	@GetMapping("/manager")
-	@Description("관리자기능 - 모든 회원정보 조회")
-	public ResponseEntity getManagerAccounts(@AuthenticationPrincipal AccountAdapter adapter, Pageable pageable) {
-
-		if (adapter == null) {
-			return new ResponseEntity(HttpStatus.UNAUTHORIZED);
-		}
-		if (!adapter.getAccount().getRoles().contains(AccountRoles.ADMIN)) {
-			return new ResponseEntity(HttpStatus.FORBIDDEN);
-		}
-		Page<Account> pages = accountRepository.findAll(pageable);
-
-		return new ResponseEntity(pages, HttpStatus.OK);
+		Optional<Account> optionalAccount = accountService.findByAccountId(adapter.getAccount().getAccountId());
+		Account account = optionalAccount.get();
+		return ResponseEntity.ok().body(account);
 	}
 	@PostMapping
 	@Description("회원가입")
-	public ResponseEntity<Account> createAccount(@RequestBody AccountDto accountDto) {
+	public ResponseEntity<Account> createAccount(@RequestBody Account account) {
 
-		Optional<Account> byAccountId = accountRepository.findByAccountIdWithRoles(accountDto.getAccountId());
+		Optional<Account> byAccountId = accountService.findByAccountId(account.getAccountId());
 
 		// 이미 존재하는 아이디
 		if (byAccountId.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 
-		Account account = Account.builder()
-				.accountId(accountDto.getAccountId())
-				.password(accountDto.getPassword())
-//				.address(accountDto.getAddress())
-				.kname(accountDto.getName())
-				.mobi_no(accountDto.getPhone())
-//				.email(accountDto.getEmail())
-				.build();
-
-//		Account savedAccount = service.createAccount(account);
+//		Account savedAccount = accountService.createAccount(account);
 
 //		Chat chat1 = Chat.builder()
 //				.account(savedAccount)
@@ -103,7 +71,7 @@ class AccountController {
 //		Account account = reqeustEntity.getBody();
 //
 //		if (jwtService.isUsable(accessToken)) {
-//			Account loadedAccount = accountRepository.findByAsabnAndCo_gb(account.getAccountId(), account.getCompanyCode()).get();
+//			Account loadedAccount = accountService.findByAsabnAndCo_gb(account.getAccountId(), account.getCompanyCode()).get();
 //
 //			return new ResponseEntity<Account>(loadedAccount, HttpStatus.OK);
 //		} else {
