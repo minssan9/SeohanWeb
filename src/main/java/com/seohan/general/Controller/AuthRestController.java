@@ -1,25 +1,21 @@
 package com.seohan.general.Controller;
 
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.seohan.common.Domain.Result;
-import com.seohan.common.Service.jwt.JwtService;
+import com.seohan.common.Service.Jwt.JwtService;
 import com.seohan.general.Domain.User;
 import com.seohan.general.Mapper.UserRepository;
 import com.seohan.general.Service.UserService;
