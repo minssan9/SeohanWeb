@@ -1,4 +1,4 @@
-package com.seohan.auth.Mapper;
+package com.seohan.auth.Repository;
 
 import com.seohan.auth.Domain.InAccount;
 import org.springframework.data.domain.Page;
@@ -11,8 +11,8 @@ import java.util.Optional;
 @Repository
 public interface InAccountRepository extends JpaRepository<InAccount, String> {
 
-	Optional<InAccount> findByAsabn(String asabn);
+	Optional<InAccount> findByAccountId(String asabn);
 
-	Page<InAccount> findByName(String name, Pageable pageable);
+	Page<InAccount> findByKname(String name, Pageable pageable);
 
 }

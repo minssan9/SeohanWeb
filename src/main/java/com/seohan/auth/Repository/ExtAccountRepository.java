@@ -10,9 +10,9 @@ import java.util.Optional;
 
 @Repository
 public interface ExtAccountRepository extends JpaRepository<ExtAccount, String> {
-	Page<ExtAccount> findByAccountId(String accountId, Pageable pageable);
+
 	Page<ExtAccount> findByName(String name, Pageable pageable);
 
-	Optional<ExtAccount> findByAccountId(String asabn);
+	Optional<ExtAccount> findByAccountid(String accountid);
 
 }

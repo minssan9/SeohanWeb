@@ -1,11 +1,9 @@
 package com.seohan.auth.Service;
 
-import com.seohan.auth.Domain.ExtAccount;
-import com.seohan.auth.Domain.InAccount;
 import com.seohan.auth.Dto.Account;
 import com.seohan.auth.Mapper.AccountMapper;
-import com.seohan.auth.Mapper.InAccountRepository;
 import com.seohan.auth.Repository.ExtAccountRepository;
+import com.seohan.auth.Repository.InAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,8 +11,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
-import static org.hibernate.query.criteria.internal.ValueHandlerFactory.isNumeric;
 
 @Service
 public class AccountService implements UserDetailsService {

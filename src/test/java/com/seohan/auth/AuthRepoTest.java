@@ -40,6 +40,9 @@ public class AuthRepoTest {
         account1.setAccountId("P909544");
         account1.setPassword("3085");
 
+        account1.setAccountId("4150149");
+        account1.setPassword("1234");
+
         Account account2 = accountMapper.findByAccountId("P909544").get();
 
         Assert.assertEquals(account1, account2);

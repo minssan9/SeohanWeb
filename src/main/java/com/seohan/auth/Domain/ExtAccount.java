@@ -13,7 +13,6 @@ import java.util.Set;
 @Setter
 @Builder
 @ToString
-@IdClass(ExtAccount.class)
 @Table(name = "VUSERPF", schema = "SMLIB")
 public class ExtAccount implements Serializable {
     @Id
