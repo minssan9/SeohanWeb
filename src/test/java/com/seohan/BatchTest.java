@@ -1,6 +1,6 @@
 package com.seohan;
 
-import com.seohan.batch.ScheduledJobs;
+import com.seohan.scheduler.ScheduledJobs;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
