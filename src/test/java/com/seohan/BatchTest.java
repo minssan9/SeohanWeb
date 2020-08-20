@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 
@@ -20,10 +22,21 @@ public class BatchTest {
 
     @Test
     public void saveBalanceJobSch() throws Exception {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
-        Date now = new Date();
-        String strDate = sdf.format(now);
 
-        scheduledJobs.saveBalance(strDate );
+        LocalDateTime now = LocalDateTime.now();
+        String nowDate = now.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        String nowTime = now.format(DateTimeFormatter.ofPattern("HHmmss"));
+        nowTime = "220000";
+        scheduledJobs.saveBalance(nowDate, nowTime );
+    }
+
+    @Test
+    public void saveBalanceOldJobSch() throws Exception {
+
+        LocalDateTime now = LocalDateTime.now();
+        String nowDate = now.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        String nowTime = now.format(DateTimeFormatter.ofPattern("HHmmss"));
+        nowTime = "220000";
+        scheduledJobs.saveBalanceOld(nowDate, nowTime );
     }
 }

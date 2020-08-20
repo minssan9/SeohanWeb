@@ -3,7 +3,8 @@
 
 <mapper namespace="com.seohan.erp.mat.mapper">
 
-	<select id="findGetOmissionItemList" resultType="com.seohan.erp.mat.Dto.ImportPlanAlarm" parameterType="com.seohan.erp.mat.Dto.ImportPlanAlarmQuery"><![CDATA[
+	<select id="findGetOmissionItemList" resultType="com.seohan.erp.mat.Dto.ImportPlanAlarm" parameterType="com.seohan.erp.mat.Dto.ImportPlanAlarmQuery">
+		<![CDATA[
 		SELECT A.CSTCD, A.ITMNO, B.WARHS, B.MQTY, C.BSQTY, C.TSQTY, D.PRE_QTY, (B.MQTY - C.BSQTY + D.PRE_QTY -  C.TSQTY) EXPQTY , E.CUSNA,F.DSCRP FROM (
 		SELECT CSTCD, ITMNO FROM SMLIB.CSTPLT WHERE ACTGB != 'C'  AND FILL1 = #{userid}
 		) A

@@ -15,7 +15,12 @@ import org.springframework.stereotype.Component;
 import javax.transaction.Transactional;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+
+import static com.seohan.SeohanWebApplication.formatSdf;
 
 @Component
 @Transactional
@@ -143,38 +148,27 @@ public class ScheduledJobs {
     }
 
 
+    @Transactional
     public void saveBalanceOld(String savingDate, String savingTime) {
         String targetTable = "";
-        savingDate.DateCalculator.formatSdf
-        String oldDate =
+
+        LocalDateTime savingDateTime = LocalDateTime.parse(savingDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDateTime oldDateTime = savingDateTime.plusDays(150);
+        String oldDate =oldDateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 
         ItemBalanceSaveQuery itemBalanceSaveQuery =  ItemBalanceSaveQuery.builder()
                 .nowdate(savingDate)
                 .savingtime(savingTime)
-                .olddate()
+                .olddate(oldDate)
                 .build();
 
         List<ItemBalanceHisOld> itemBalanceHisOlds = itemBalanceHisOldRepository.findByGdateAndGtime(savingDate, savingTime);
 
         if (itemBalanceHisOlds.isEmpty() || itemBalanceHisOlds == null) {
-
-            itemBalanceHisOldMapper.getOldBalanceByDate(itembal)
-            targetTable = "smlib.itmbl0800";
-            targetTable = "smlib.itmblhis";
-            jdbcTemplate.batchUpdate("insert into " + targetTable + " (GDATE,GTIME,WARHS,ITMNO,QTY,TRIM,MNY) " +
-                            "select cast(? AS char(8) CCSID 933)  gdate, cast(? AS char(4) CCSID 833) gtime ,WARHS,ITMNO,ONHND,0,0 from smlib.itmblpf ",
-                    new BatchPreparedStatementSetter() {
-                        @Override
-                        public void setValues(PreparedStatement ps, int i) throws SQLException {
-                            ps.setString(1, savingTime.substring(0, 8));
-                            ps.setString(2, savingTime.substring(8, 12));
-                        }
-
-                        @Override
-                        public int getBatchSize() {
-                            return 1;
-                        }
-                    });
+            List<ItemBalanceHisOld> currentItemBalanceHisOlds =  itemBalanceHisOldMapper.getOldBalanceByDate(itemBalanceSaveQuery);
+            for (ItemBalanceHisOld itemBalanceHisOld: currentItemBalanceHisOlds) {
+                itemBalanceHisOldRepository.save(itemBalanceHisOld);
+            }
         }
     }
 
