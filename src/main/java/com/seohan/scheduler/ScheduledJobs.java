@@ -1,7 +1,12 @@
 package com.seohan.scheduler;
 
+import com.seohan.common.Util.DateCalculator;
 import com.seohan.erp.mat.Domain.ItemBalanceHis;
+import com.seohan.erp.mat.Domain.ItemBalanceHisOld;
+import com.seohan.erp.mat.Dto.ItemBalanceSaveQuery;
+import com.seohan.erp.mat.Mapper.ItemBalanceHisOldMapper;
 import com.seohan.erp.mat.Repository.ItemBalanceHisRepository;
+import com.seohan.erp.mat.Repository.ItemBalanceHisOldRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,14 +24,17 @@ public class ScheduledJobs {
     @Autowired
     private JdbcTemplate jdbcTemplate;
     @Autowired
-    private ItemBalanceHisRepository itemBalanceHisRepo;
+    private ItemBalanceHisRepository itemBalanceHisRepository;
 
-    public List<ItemBalanceHis> saveBalance(String savingTime) {
+    @Autowired
+    private ItemBalanceHisOldRepository itemBalanceHisOldRepository;
+    @Autowired
+    private ItemBalanceHisOldMapper itemBalanceHisOldMapper;
+
+    public List<ItemBalanceHis> saveBalance(String savingDate, String savingTime) {
         String targetTable = "";
-        String saveDate = savingTime.substring(0, 8);
-        String saveTime = savingTime.substring(8, 12);
 
-        List<ItemBalanceHis> itembalanceHis = itemBalanceHisRepo.findByGdateAndGtime(saveDate, saveTime);
+        List<ItemBalanceHis> itembalanceHis = itemBalanceHisRepository.findByGdateAndGtime(savingDate, savingTime);
 
         if (itembalanceHis.isEmpty() || itembalanceHis == null) {
             targetTable = "smlib.itmbl0800";
@@ -131,17 +139,26 @@ public class ScheduledJobs {
             }finally {
             }
         }
-        return itemBalanceHisRepo.findByGdateAndGtime(saveDate, saveTime);
+        return itemBalanceHisRepository.findByGdateAndGtime(savingDate, savingTime);
     }
 
 
-    public void saveBalanceOld(String savingTime) {
+    public void saveBalanceOld(String savingDate, String savingTime) {
         String targetTable = "";
+        savingDate.DateCalculator.formatSdf
+        String oldDate =
 
-        List<ItemBalanceHis> itembalanceHis = itemBalanceHisRepo.findByGdateAndGtime(
-                savingTime.substring(0, 8), savingTime.substring(8, 12));
+        ItemBalanceSaveQuery itemBalanceSaveQuery =  ItemBalanceSaveQuery.builder()
+                .nowdate(savingDate)
+                .savingtime(savingTime)
+                .olddate()
+                .build();
 
-        if (itembalanceHis.isEmpty() || itembalanceHis == null) {
+        List<ItemBalanceHisOld> itemBalanceHisOlds = itemBalanceHisOldRepository.findByGdateAndGtime(savingDate, savingTime);
+
+        if (itemBalanceHisOlds.isEmpty() || itemBalanceHisOlds == null) {
+
+            itemBalanceHisOldMapper.getOldBalanceByDate(itembal)
             targetTable = "smlib.itmbl0800";
             targetTable = "smlib.itmblhis";
             jdbcTemplate.batchUpdate("insert into " + targetTable + " (GDATE,GTIME,WARHS,ITMNO,QTY,TRIM,MNY) " +

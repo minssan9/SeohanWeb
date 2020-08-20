@@ -1,8 +1,13 @@
 package com.seohan.common.Util;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateCalculator {
+
+	public static final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	public static final SimpleDateFormat formatSdf = new SimpleDateFormat("yyyy-MM-dd");
+
 	private static class TIME_MAXIMUM {
 		public static final int SEC = 60;
 		public static final int MIN = 60;
