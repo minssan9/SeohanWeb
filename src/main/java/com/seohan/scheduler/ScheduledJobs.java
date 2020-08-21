@@ -153,6 +153,7 @@ public class ScheduledJobs {
 
             }catch (Exception e ){
                 //messageService.send(messageDto);
+                e.printStackTrace();
             }finally {
             }
         }
@@ -179,7 +180,11 @@ public class ScheduledJobs {
         List<ItemBalanceHisOld> itemBalanceHisOlds = itemBalanceHisOldRepository.findByGdateAndGtime(savingDateString, savingTimeString);
 
         if (itemBalanceHisOlds.isEmpty() || itemBalanceHisOlds == null) {
-            itemBalanceHisOldMapper.saveOldBalanceByDate(itemBalanceSaveQuery);
+            try {
+                itemBalanceHisOldMapper.saveOldBalanceByDate(itemBalanceSaveQuery);
+            }catch (Exception e ){
+                e.printStackTrace();
+            }
 //            List<ItemBalanceHisOld> currentItemBalanceHisOlds =  itemBalanceHisOldMapper.getOldBalanceByDate(itemBalanceSaveQuery);
 
 //            for (ItemBalanceHisOld itemBalanceHisOld: currentItemBalanceHisOlds) {
