@@ -122,34 +122,7 @@ public class ScheduledJobs {
                         });
 
                 targetTable = "SMLIB.ITMBLHISHD";
-                jdbcTemplate.batchUpdate(
-                        "insert into " + targetTable + " (GDATE,GTIME,TIMEFLAG,TYPE,TYPEDS,FACT,WARHS,WARHS_NM,QTY,MNY,REF,FILL) " +
-                                " SELECT cast(? AS char(8) CCSID 933)  gdate, cast(? AS char(4) CCSID 833) gtime, 'NOW', 'M' TYPE, '원재료' TYPEDS, LEFT(WARHS,1) FACT, WARHS, C.ASDES WARHS_NM, SUM(BL.QTY) QTY, SUM(MNY) MNY, '' REF,'' FILL  FROM SMLIB.ITMBL0800 BL " +
-                                " INNER JOIN SALIB.ACODERP C ON C.ADGUB = 'PJ' AND BL.WARHS = C.ASGUB AND AREF1 = 'SHN'  INNER JOIN SMLIB.ITMSTPF ITM ON BL.ITMNO = ITM.ITMNO  " +
-                                " where (GDATE = '20200707'  ) and WARHS in ('AB', 'BB', 'GB') AND QTY <> 0 AND GTIME = '0800'  GROUP BY GDATE, GTIME, LEFT(WARHS,1), WARHS, C.ASDES  " +
-                                " Union All SELECT GDATE, GTIME, 'NOW', 'O' TYPE, '재공품' TYPEDS, FACT, WARHS, W.WRKDS WARHS_NM, SUM(BL.QTY) QTY, SUM(MNY) MNY, '' REF,'' FILL  FROM SMLIB.ITMBL0800 BL  " +
-                                " INNER JOIN SBLIB.WRKCTPF W ON BL.WARHS = W.WRKCT " +
-                                " where (GDATE = '20200707' ) AND GTIME = '0800' AND FACT NOT IN ('D', 'F') AND ACTGB = 'A' AND MNY > 0  GROUP BY GDATE, GTIME, FACT, WARHS,  W.WRKDS     " +
-                                " Union All SELECT GDATE, GTIME, 'NOW', 'O' TYPE, '재공품' TYPEDS, left(BL.WARHS,1) FACT, WARHS, C.ASDES WARHS_NM, SUM(BL.QTY) QTY, SUM(MNY) MNY, '' REF,'' FILL  FROM SMLIB.ITMBL0800 BL " +
-                                " INNER JOIN SALIB.ACODERP C ON C.ADGUB = 'PJ' AND BL.WARHS = C.ASGUB AND AREF1 = 'SHN'  " +
-                                " where (GDATE = '20200707' ) AND RIGHT(TRIM(WARHS), 1) IN ('Q') AND  left(BL.WARHS,1) NOT IN ('D', 'F') AND LENGTH(TRIM(WARHS)) = 2 AND GTIME = '0800' AND MNY > 0  GROUP BY GDATE, GTIME, LEFT(WARHS,1), WARHS, C.ASDES      " +
-                                " Union All SELECT GDATE, GTIME, 'NOW', 'Z' TYPE, '제품' TYPEDS, left(BL.WARHS,1) FACT, WARHS, C.ASDES WARHS_NM, SUM(BL.QTY) QTY, SUM(MNY) MNY, '' REF,'' FILL  From SMLIB.ITMBL0800 BL " +
-                                " INNER JOIN SALIB.ACODERP C ON C.ADGUB = 'PJ' AND BL.WARHS = C.ASGUB AND AREF1 = 'SHN' " +
-                                " where (GDATE = '20200707'  ) AND RIGHT(TRIM(WARHS), 1) IN ('A','W') AND WARHS NOT IN ('A','FA','HA', 'DA','WA') AND LENGTH(TRIM(WARHS)) = 2 AND GTIME = '0800'  GROUP BY GDATE, GTIME, LEFT(WARHS,1), WARHS, C.ASDES " +
-                                " Union All SELECT GDATE, GTIME, 'NOW', 'Z' TYPE, '제품' TYPEDS, left(BL.WARHS,1) FACT, WARHS, C.ASDES WARHS_NM, SUM(BL.QTY) QTY, SUM(MNY) MNY, '' REF,'' FILL  From SMLIB.ITMBL0800 BL" +
-                                " INNER JOIN SALIB.ACODERP C ON C.ADGUB = 'PJ' AND BL.WARHS = C.ASGUB AND AREF1 = 'SHN' " +
-                                " where (GDATE = '20200707' ) AND LENGTH(TRIM(WARHS)) = 2   AND WARHS IN ('A','FA','HA') AND GTIME = '0800'  GROUP BY GDATE, GTIME, LEFT(WARHS,1), WARHS, C.ASDES  ",
-                        new BatchPreparedStatementSetter() {
-                            @Override
-                            public void setValues(PreparedStatement ps, int i) throws SQLException {
-                                ps.setString(1, savingTime.substring(0, 8));
-                                ps.setString(2, savingTime.substring(8, 12));
-                            }
-                            @Override
-                            public int getBatchSize() {
-                                return 1;
-                            }
-                        });
+
 
             }catch (Exception e ){
                 //messageService.send(messageDto);
@@ -166,8 +139,6 @@ public class ScheduledJobs {
         String targetTable = "";
 
         LocalDate saveDate =LocalDate.parse(savingDateString, DateTimeFormatter.BASIC_ISO_DATE);
-
-//        LocalDate savingDate = LocalDateTime.parse(savingDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         LocalDate oldDateTime = saveDate.minusDays(150);
         String oldDate =oldDateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 
@@ -185,11 +156,6 @@ public class ScheduledJobs {
             }catch (Exception e ){
                 e.printStackTrace();
             }
-//            List<ItemBalanceHisOld> currentItemBalanceHisOlds =  itemBalanceHisOldMapper.getOldBalanceByDate(itemBalanceSaveQuery);
-
-//            for (ItemBalanceHisOld itemBalanceHisOld: currentItemBalanceHisOlds) {
-//                itemBalanceHisOldRepository.save(itemBalanceHisOld);
-//            }
         }
     }
 

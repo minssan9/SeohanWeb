@@ -37,7 +37,6 @@ public class ScheduledJobTest {
     public void saveBalanceOldTest(){
         String savingDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String savingTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmss"));
-        savingTime = "0900";
         scheduledJobs.saveBalanceOld(savingDate, savingTime);
 
         List<ItemBalanceHisOld> itemBalanceHisOlds =  itemBalanceHisOldRepository.findByGdateAndGtime(savingDate, savingTime);
