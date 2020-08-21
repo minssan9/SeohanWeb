@@ -15,6 +15,6 @@ public class ItemBalanceHisMapper {
 	private SqlSession sqlSessionTemplate;
 
 	public void saveBalanceByDate(ItemBalanceSaveQuery itemBalanceSaveQuery){
-		sqlSessionTemplate.update(NAMESPACE +  "saveBalanceByDate", itemBalanceSaveQuery);
+		sqlSessionTemplate.insert(NAMESPACE +  "saveBalance", itemBalanceSaveQuery);
 	};
 }
