@@ -16,7 +16,7 @@ public class AccountAdapter extends User {
     private Account account;
 
     public AccountAdapter(Account account) {
-        super(account.getAccountId(), account.getPassword(), authorities(account.getRoles()));
+        super(account.getAccountid(), account.getPassword(), authorities(account.getRoles()));
         this.account = account;
     }
 
@@ -24,9 +24,12 @@ public class AccountAdapter extends User {
         return account;
     }
 
-    private static Collection<? extends GrantedAuthority> authorities(Set<AccountRoles> roles) {
+    private static Collection<? extends GrantedAuthority> authorities(List<AccountRoles> roles) {
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
-        roles.stream().forEach(r -> authorityList.add(new SimpleGrantedAuthority("ROLE_" + r.name())));
+        for (AccountRoles accountRoles:roles) {
+            authorityList.add(new SimpleGrantedAuthority("ROLE_" + accountRoles.getRoles()));
+        }
+//        roles.stream().forEach(r -> authorityList.add(new SimpleGrantedAuthority("ROLE_" + r.name())));
         return authorityList;
     }
 }

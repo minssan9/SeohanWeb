@@ -34,7 +34,7 @@ class AccountController {
 //		Optional<Account> optionalAccount = AccountRepository.findByAccountId(adapter.getAccount().getAccountId());
 //		Account account = optionalAccount.get();
 
-		Optional<Account> optionalAccount = accountService.findByAccountId(adapter.getAccount().getAccountId());
+		Optional<Account> optionalAccount = accountService.findByAccountId(adapter.getAccount().getAccountid());
 		Account account = optionalAccount.get();
 		return ResponseEntity.ok().body(account);
 	}
@@ -42,7 +42,7 @@ class AccountController {
 	@Description("회원가입")
 	public ResponseEntity<Account> createAccount(@RequestBody Account account) {
 
-		Optional<Account> byAccountId = accountService.findByAccountId(account.getAccountId());
+		Optional<Account> byAccountId = accountService.findByAccountId(account.getAccountid());
 
 		// 이미 존재하는 아이디
 		if (byAccountId.isPresent()) {

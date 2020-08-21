@@ -2,17 +2,19 @@ package com.seohan.auth.Dto;
 
 import com.seohan.auth.Domain.AccountRoles;
 import lombok.*;
+import org.apache.ibatis.type.Alias;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
-@EqualsAndHashCode(of = "id")
+@Alias("account")
 public class Account {
-	private String accountId;
+	private String accountid;
 	private String password;
 	private String name;
 	private String email;
@@ -22,27 +24,7 @@ public class Account {
 //	private String address;
 //	private Long socialId;
 	@ElementCollection(fetch = FetchType.EAGER)
-	@Enumerated(EnumType.STRING)
+//	@Enumerated(EnumType.STRING)
 //	@JoinColumn(name="accountid", nullable = false)
-	private Set<AccountRoles> roles;
-
-	public void setAccountId(String accountId) {
-		this.accountId = accountId;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+	private List<AccountRoles> roles;
 }

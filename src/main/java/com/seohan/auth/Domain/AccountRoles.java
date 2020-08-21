@@ -1,9 +1,11 @@
 package com.seohan.auth.Domain;
 
-public enum AccountRoles {
-    ADMIN,
-    MANAGER,
-    USER,
-    WORKER,
-    WORKER_BOSS
+import lombok.*;
+
+import javax.persistence.*;
+
+@Data
+public class AccountRoles {
+    private String accountid;
+    private String roles;
 }

@@ -15,8 +15,8 @@ public class AccountMapper  {
 
 	@Autowired SqlSession sqlSessionTemplate;
 
-	public Optional<Account> findByAccountId(String accountId){
-		Optional<Account> account = Optional.of(sqlSessionTemplate.selectOne(NAMESPACE +  "findByAccountId", accountId));
+	public Optional<Account> findByAccountId(String accountid){
+		Optional<Account> account = Optional.of(sqlSessionTemplate.selectOne(NAMESPACE +  "findByAccountId", accountid));
 		return account;
 	};
 }

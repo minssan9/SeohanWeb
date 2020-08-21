@@ -25,7 +25,7 @@ public class AuthRepoTest {
     @Test
     public void 로그인 (){
         Account account1 = new Account();
-        account1.setAccountId("4150149");
+        account1.setAccountid("4150149");
         account1.setPassword("1234");
 //        account1.setCompanyCode("SEOHAN");
 
@@ -37,13 +37,13 @@ public class AuthRepoTest {
     @Test
     public void 사내외사원정보(){
         Account account1 = new Account();
-        account1.setAccountId("P909544");
+        account1.setAccountid("P909544");
         account1.setPassword("3085");
 
-        account1.setAccountId("4150149");
+        account1.setAccountid("4150149");
         account1.setPassword("1234");
 
-        Account account2 = accountMapper.findByAccountId("P909544").get();
+        Account account2 = accountMapper.findByAccountId("4150149").get();
 
         Assert.assertEquals(account1, account2);
     }
