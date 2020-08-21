@@ -44,9 +44,9 @@ public class ScheduledJobs {
         String oldDate =oldDateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 
         ItemBalanceSaveQuery itemBalanceSaveQuery =  ItemBalanceSaveQuery.builder()
-                .nowdate(savingDate)
-                .savingtime(savingTime)
-                .olddate(oldDate)
+                .savingDate(savingDate)
+                .savingTime(savingTime)
+                .oldDate(oldDate)
                 .build();
 
         List<ItemBalanceHis> itembalanceHis = itemBalanceHisRepository.findByGdateAndGtime(savingDate, savingTime);
@@ -171,9 +171,9 @@ public class ScheduledJobs {
         String oldDate =oldDateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 
         ItemBalanceSaveQuery itemBalanceSaveQuery =  ItemBalanceSaveQuery.builder()
-                .nowdate(savingDateString)
-                .savingtime(savingTimeString)
-                .olddate(oldDate)
+                .savingDate(savingDateString)
+                .savingTime(savingTimeString)
+                .oldDate(oldDate)
                 .build();
 
         List<ItemBalanceHisOld> itemBalanceHisOlds = itemBalanceHisOldRepository.findByGdateAndGtime(savingDateString, savingTimeString);
