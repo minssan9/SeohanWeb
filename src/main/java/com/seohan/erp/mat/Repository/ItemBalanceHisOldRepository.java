@@ -11,8 +11,5 @@ public interface ItemBalanceHisOldRepository extends JpaRepository<ItemBalanceHi
 	@Override
 	List<ItemBalanceHisOld> findAll();
 
-
-	List<ItemBalanceHisOld> saveAll(List<ItemBalanceHisOld> itemBalanceHisOlds);
-
 	List<ItemBalanceHisOld> findByGdateAndGtime(String gdate, String gtime);
 }
