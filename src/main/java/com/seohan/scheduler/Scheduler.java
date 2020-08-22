@@ -6,6 +6,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Slf4j
@@ -18,9 +20,13 @@ public class Scheduler  {
 
 	@Scheduled(cron = "0 0 8 * * ?")
 	public void saveBalanceJobSch() {
-		String strDate = sdf.format(new Date());
-		scheduledJobs.saveBalance(strDate );
-		System.out.println("Java cron job expression:: " + strDate); 
+		LocalDateTime now = LocalDateTime.now();
+		String nowDate = now.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		String nowTime = now.format(DateTimeFormatter.ofPattern("HHmmss"));
+		scheduledJobs.saveBalance(nowDate, nowTime );
+
+		scheduledJobs.saveBalanceOld(nowDate, nowTime );
+		System.out.println("Java cron job expression:: " + nowDate + nowTime);
 	}
 
 	@Scheduled(fixedDelay = 1000)

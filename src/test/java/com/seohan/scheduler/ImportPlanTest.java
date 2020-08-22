@@ -1,4 +1,4 @@
-package com.seohan;
+package com.seohan.scheduler;
 
 import com.seohan.erp.mat.Dto.ImportPlanAlarm;
 import com.seohan.erp.mat.Dto.ImportPlanAlarmQuery;

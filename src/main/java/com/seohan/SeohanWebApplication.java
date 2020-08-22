@@ -18,15 +18,15 @@ import java.text.SimpleDateFormat;
 @CrossOrigin(origins = { "http://localhost:8091",  "http://localhost:8090",  "http://localhost"})
 public class SeohanWebApplication extends SpringBootServletInitializer {
 
-	public static SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-	public static SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd");
-
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(SeohanWebApplication.class);
 	}
   
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
+		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+
 		SpringApplication.run(SeohanWebApplication.class, args);
 	}
 }
