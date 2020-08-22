@@ -1,4 +1,4 @@
-package com.seohan.mes.Domain;
+package com.seohan.erp.mat.Domain;
 
 import lombok.Data;
 
@@ -15,26 +15,26 @@ import java.io.Serializable;
 public class Trans implements Serializable {
 
     @Id
-    String ITMNO;
+    String itmno;
     @Id
-    String WARHS;
+    String warhs;
     @Id
-    String TRSCD ;
+    String trscd ;
     @Id
-    String TRSDT;
+    String trsdt;
     @Id
-    String SERNO ;
-    String QUNTY;
-    String WEIGT ;
-    String MONEY;
-    String TRGAE ;
-    String LOCAT;
-    String LOTNO ;
-    String CSTCD;
-    String REF01 ;
-    String REF02;
-    String STATS ;
-    String FILL;
+    String serno ;
+    String qunty;
+    String weigt ;
+    String money;
+    String trgae ;
+    String locat;
+    String lotno ;
+    String cstcd;
+    String ref01 ;
+    String ref02;
+    String stats ;
+    String fill;
 
 
 }

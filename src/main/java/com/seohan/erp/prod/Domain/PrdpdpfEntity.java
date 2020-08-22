@@ -1,16 +1,21 @@
 package com.seohan.erp.prod.Domain;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+@Entity
+@IdClass(PrdpdpfEntity.class)
 @Table(name = "PRDPDPF", schema = "SBLIB", catalog = "")
-public class PrdpdpfEntity {
+public class PrdpdpfEntity implements Serializable{
+    @Id
     private String pldte;
+    @Id
     private String wrkct;
+    @Id
     private String wrkjo;
+    @Id
     private int seqno;
     private String itmno;
     private int plqty;

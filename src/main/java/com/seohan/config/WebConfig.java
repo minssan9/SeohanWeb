@@ -18,8 +18,8 @@ import com.seohan.common.Interceptor.JwtInterceptor;
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
-	@Value("${allowOriginList}")
-	String allowOriginList;
+//	@Value("${allowOriginList}")
+//	String allowOriginList;
 
 	private static final String[] EXCLUDE_PATHS = {
 			"/member/**",

@@ -1,4 +1,4 @@
-package com.seohan;
+package com.seohan.scheduler;
 
 import com.seohan.scheduler.ScheduledJobs;
 import org.junit.Test;

@@ -1,6 +1,6 @@
-package com.seohan.mes.Mapper;
+package com.seohan.erp.mat.Repository;
 
-import com.seohan.mes.Domain.Trans;
+import com.seohan.erp.mat.Domain.Trans;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
