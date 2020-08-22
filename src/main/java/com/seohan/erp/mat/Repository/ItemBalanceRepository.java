@@ -12,4 +12,5 @@ public interface ItemBalanceRepository extends JpaRepository<ItemBalance, Long> 
 	List<ItemBalance> findAll();
 
 	ItemBalance findByWarhsAndItmno(String warhs, String itmno);
+
 }
