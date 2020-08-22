@@ -1,15 +1,18 @@
 package com.seohan.erp.machine.Domain;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import lombok.Data;
+
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
+@Data
 @Table(name = "OEE_ERRHIS", schema = "SMLIB", catalog = "")
 public class OeeErrhisEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String line;
     private String itmno;
@@ -26,155 +29,6 @@ public class OeeErrhisEntity {
     private String ref3;
     private String stat;
 
-    @Basic
-    @Column(name = "ID", nullable = false)
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    @Basic
-    @Column(name = "LINE", nullable = false, length = 10)
-    public String getLine() {
-        return line;
-    }
-
-    public void setLine(String line) {
-        this.line = line;
-    }
-
-    @Basic
-    @Column(name = "ITMNO", nullable = false, length = 30)
-    public String getItmno() {
-        return itmno;
-    }
-
-    public void setItmno(String itmno) {
-        this.itmno = itmno;
-    }
-
-    @Basic
-    @Column(name = "KDATE", nullable = false, length = 8)
-    public String getKdate() {
-        return kdate;
-    }
-
-    public void setKdate(String kdate) {
-        this.kdate = kdate;
-    }
-
-    @Basic
-    @Column(name = "KTIME", nullable = false, length = 6)
-    public String getKtime() {
-        return ktime;
-    }
-
-    public void setKtime(String ktime) {
-        this.ktime = ktime;
-    }
-
-    @Basic
-    @Column(name = "CNT", nullable = false, precision = 0)
-    public int getCnt() {
-        return cnt;
-    }
-
-    public void setCnt(int cnt) {
-        this.cnt = cnt;
-    }
-
-    @Basic
-    @Column(name = "GAP", nullable = false, precision = 0)
-    public int getGap() {
-        return gap;
-    }
-
-    public void setGap(int gap) {
-        this.gap = gap;
-    }
-
-    @Basic
-    @Column(name = "LOG_TIME", nullable = false)
-    public Timestamp getLogTime() {
-        return logTime;
-    }
-
-    public void setLogTime(Timestamp logTime) {
-        this.logTime = logTime;
-    }
-
-    @Basic
-    @Column(name = "CLASS1", nullable = false, length = 100)
-    public String getClass1() {
-        return class1;
-    }
-
-    public void setClass1(String class1) {
-        this.class1 = class1;
-    }
-
-    @Basic
-    @Column(name = "CLASS2", nullable = false, length = 100)
-    public String getClass2() {
-        return class2;
-    }
-
-    public void setClass2(String class2) {
-        this.class2 = class2;
-    }
-
-    @Basic
-    @Column(name = "CLASS3", nullable = false, length = 100)
-    public String getClass3() {
-        return class3;
-    }
-
-    public void setClass3(String class3) {
-        this.class3 = class3;
-    }
-
-    @Basic
-    @Column(name = "REF1", nullable = false, length = 100)
-    public String getRef1() {
-        return ref1;
-    }
-
-    public void setRef1(String ref1) {
-        this.ref1 = ref1;
-    }
-
-    @Basic
-    @Column(name = "REF2", nullable = false, length = 100)
-    public String getRef2() {
-        return ref2;
-    }
-
-    public void setRef2(String ref2) {
-        this.ref2 = ref2;
-    }
-
-    @Basic
-    @Column(name = "REF3", nullable = false, length = 100)
-    public String getRef3() {
-        return ref3;
-    }
-
-    public void setRef3(String ref3) {
-        this.ref3 = ref3;
-    }
-
-    @Basic
-    @Column(name = "STAT", nullable = false, length = 6)
-    public String getStat() {
-        return stat;
-    }
-
-    public void setStat(String stat) {
-        this.stat = stat;
-    }
 
     @Override
     public boolean equals(Object o) {

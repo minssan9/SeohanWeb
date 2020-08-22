@@ -22,7 +22,7 @@ public class ImportPlanAlarm   {
         this.cstcd = cstcd;
         this.itmno = itmno;
         this.warhs = warhs;
-        this.mqty = mqty;
+        this.mqty  = mqty;
         this.bsqty = bsqty;
         this.tsqty = tsqty;
         this.preqty = preqty;
@@ -31,3 +31,4 @@ public class ImportPlanAlarm   {
         this.cusna = cusna;
     }
 }
+

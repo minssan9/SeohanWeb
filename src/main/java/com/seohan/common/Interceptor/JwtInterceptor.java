@@ -22,7 +22,10 @@ public class JwtInterceptor implements HandlerInterceptor{
 			throws Exception {
 		final String token = request.getHeader(HEADER_AUTH);
 
-		if(token != null && jwtService.isUsable(token)){
+		if (request.getRequestURI().equals("/auth/signin")) {
+			return  true;
+		}
+		if(token != null && jwtService.isUsable(token) ){
 			return true;
 		}else{
 			throw new UnauthorizedException();

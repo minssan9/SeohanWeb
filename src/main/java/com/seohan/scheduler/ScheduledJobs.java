@@ -1,50 +1,102 @@
 package com.seohan.scheduler;
 
+import com.seohan.erp.mat.Domain.ItemBalance;
+import com.seohan.erp.mat.Domain.ItemBalanceHeader;
 import com.seohan.erp.mat.Domain.ItemBalanceHis;
+import com.seohan.erp.mat.Domain.ItemBalanceHisOld;
+import com.seohan.erp.mat.Dto.ItemBalanceSaveQuery;
+import com.seohan.erp.mat.Mapper.ItemBalanceHeaderMapper;
+import com.seohan.erp.mat.Mapper.ItemBalanceHisMapper;
+import com.seohan.erp.mat.Mapper.ItemBalanceHisOldMapper;
+import com.seohan.erp.mat.Repository.ItemBalanceHeaderRepository;
+import com.seohan.erp.mat.Repository.ItemBalanceHisOldRepository;
 import com.seohan.erp.mat.Repository.ItemBalanceHisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Component
 public class ScheduledJobs {
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    private ItemBalanceHisRepository itemBalanceHisRepo;
+    private ItemBalanceHisMapper itemBalanceHisMapper;
+    @Autowired
+    private ItemBalanceHisRepository itemBalanceHisRepository;
 
-    public void saveBalance(String savingTime) {
-        String targetTable = "";
+    @Autowired
+    private ItemBalanceHeaderMapper itemBalanceHeaderMapper;
+    @Autowired
+    private ItemBalanceHeaderRepository itemBalanceHeaderRepository;
 
-        List<ItemBalanceHis> itembalanceHis = itemBalanceHisRepo.findByGdateAndGtime(
-                savingTime.substring(0, 8), savingTime.substring(8, 12));
+    @Autowired
+    private ItemBalanceHisOldRepository itemBalanceHisOldRepository;
+    @Autowired
+    private ItemBalanceHisOldMapper itemBalanceHisOldMapper;
 
-        if (itembalanceHis.isEmpty() || itembalanceHis == null) {
-            targetTable = "smlib.itmbl0800";
-            targetTable = "smlib.itmblhis";
-            jdbcTemplate.batchUpdate("insert into " + targetTable + " (GDATE,GTIME,WARHS,ITMNO,QTY,TRIM,MNY) " +
-                            "select cast(? AS char(8) CCSID 933)  gdate, cast(? AS char(4) CCSID 833) gtime ,WARHS,ITMNO,ONHND,0,0 from smlib.itmblpf ",
-                    new BatchPreparedStatementSetter() {
-                        @Override
-                        public void setValues(PreparedStatement ps, int i) throws SQLException {
-                            ps.setString(1, savingTime.substring(0, 8));
-                            ps.setString(2, savingTime.substring(8, 12));
-                        }
+    @Transactional
+    public Boolean saveBalance(String savingDateString, String savingTimeString) {
 
-                        @Override
-                        public int getBatchSize() {
-                            return 1;
-                        }
-                    });
+        LocalDate savingDateTime = LocalDate.parse(savingDateString, DateTimeFormatter.BASIC_ISO_DATE);
+        LocalDate oldDateTime = savingDateTime.plusDays(150);
+        String oldDate = oldDateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+        ItemBalanceSaveQuery itemBalanceSaveQuery = ItemBalanceSaveQuery.builder()
+                .savingDate(savingDateString)
+                .savingTime(savingTimeString)
+                .oldDate(oldDate)
+                .build();
+
+        try {
+            List<ItemBalanceHis> itembalanceHis = itemBalanceHisRepository.findByGdateAndGtime(savingDateString, savingTimeString);
+            if (itembalanceHis.isEmpty() || itembalanceHis == null) {
+                itemBalanceHisMapper.saveBalanceByDate(itemBalanceSaveQuery);
+                itemBalanceHisMapper.saveBalanceHisLot(itemBalanceSaveQuery);
+            }
+
+            List<ItemBalanceHeader> itembalanceHeader = itemBalanceHeaderRepository.findByGdateAndGtime(savingDateString, savingTimeString);
+            if (itembalanceHeader.isEmpty() || itembalanceHeader == null) {
+                itemBalanceHeaderMapper.saveBalanceHisHeader(itemBalanceSaveQuery);
+            }
+
+
+            List<ItemBalanceHisOld> itemBalanceHisOlds = itemBalanceHisOldRepository.findByGdateAndGtime(savingDateString, savingTimeString);
+
+            if (itemBalanceHisOlds.isEmpty() || itemBalanceHisOlds == null) {
+                itemBalanceHisOldMapper.saveOldBalanceByDate(itemBalanceSaveQuery);
+            }
+            return true;
+        } catch (Exception e) {
+            //messageService.send(messageDto);
+
+            e.printStackTrace();
+            return false;
+        } finally {
+//            return true;
         }
     }
 
-    ;
+
+    @Transactional
+    public void saveBalanceOld(String savingDateString, String savingTimeString) {
+        String targetTable = "";
+
+        LocalDate saveDate = LocalDate.parse(savingDateString, DateTimeFormatter.BASIC_ISO_DATE);
+        LocalDate oldDateTime = saveDate.minusDays(150);
+        String oldDate = oldDateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+        ItemBalanceSaveQuery itemBalanceSaveQuery = ItemBalanceSaveQuery.builder()
+                .savingDate(savingDateString)
+                .savingTime(savingTimeString)
+                .oldDate(oldDate)
+                .build();
+    }
 
 }
