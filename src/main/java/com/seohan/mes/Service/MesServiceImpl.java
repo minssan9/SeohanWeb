@@ -1,7 +1,5 @@
 package com.seohan.mes.Service;
 
-import com.seohan.general.Domain.FoodTable;
-import com.seohan.general.Mapper.FoodTableRepository;
 import com.seohan.mes.Domain.Trans;
 import com.seohan.mes.Mapper.TransRepository;
 import org.springframework.beans.factory.annotation.Autowired;

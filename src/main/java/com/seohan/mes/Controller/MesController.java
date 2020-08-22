@@ -1,6 +1,5 @@
 package com.seohan.mes.Controller;
 
-import com.seohan.general.Domain.User;
 import com.seohan.mes.Domain.Trans;
 import com.seohan.mes.Mapper.ProdPlanRepository;
 import com.seohan.mes.Mapper.TransRepository;
@@ -9,10 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
 import java.text.SimpleDateFormat;
 
 @RequestMapping("/mes")

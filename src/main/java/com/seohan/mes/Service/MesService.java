@@ -1,6 +1,5 @@
 package com.seohan.mes.Service;
 
-import com.seohan.general.Domain.FoodTable;
 import com.seohan.mes.Domain.Trans;
 
 import java.util.List;
