@@ -23,9 +23,6 @@ public class ImportPlanTest {
     @Autowired
     ImportPlanService importPlanService;
 
-    @Autowired
-    ImportPlanMapper importPlanMapper;
-
     @Test
     public void importPlanAlarmsTest() {
         Assert.assertNotNull(importPlanService.getOmissionItemList("4060066"));
@@ -33,16 +30,11 @@ public class ImportPlanTest {
 
     @Test
     public void importPlanAlarmsMybatisTest() {
-        ImportPlanAlarmQuery importPlanAlarmQuery
-                = ImportPlanAlarmQuery.builder()
-                .workdate("20200729")
-                .fromdate("20200723")
-                .todate("20200807")
-                .userid("4060066")
-                .build();
+        String testUserId ="4060066";
 
-        List<ImportPlanAlarm> importPlanAlarms = importPlanMapper.findGetOmissionItemList(importPlanAlarmQuery);
-        Trace.println(importPlanAlarms.toString());
-        Assert.assertNotNull(importPlanMapper.findGetOmissionItemList(importPlanAlarmQuery));
+        List<ImportPlanAlarm> importPlanAlarms = importPlanService.getOmissionItemList(testUserId );
+
+        System.out.println(importPlanAlarms.toString());
+        Assert.assertNotNull(importPlanAlarms);
     }
 }
