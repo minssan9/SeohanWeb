@@ -72,14 +72,14 @@ public class ScheduledJobs {
             if (itemBalanceHisOlds.isEmpty() || itemBalanceHisOlds == null) {
                 itemBalanceHisOldMapper.saveOldBalanceByDate(itemBalanceSaveQuery);
             }
-
+            return true;
         } catch (Exception e) {
             //messageService.send(messageDto);
 
             e.printStackTrace();
             return false;
         } finally {
-            return true;
+//            return true;
         }
     }
 
