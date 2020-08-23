@@ -1,5 +1,6 @@
 package com.seohan;
 
+import com.seohan.config.PasswordEncoderCustom;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -24,7 +25,9 @@ public class SeohanWebApplication extends SpringBootServletInitializer {
 
 	@Bean
 	PasswordEncoder passwordEncoder() {
-		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+
+//		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		return new PasswordEncoderCustom();
 	}
 
 	public static void main(String[] args) {

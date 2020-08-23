@@ -19,10 +19,10 @@ public class AuthConfig  extends AuthorizationServerConfigurerAdapter {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    PasswordEncoderCustom passwordEncoder;
 
     @Autowired
-    AccountService memberService;
+    AccountService accountService;
 
     @Autowired
     TokenStore tokenStore;
@@ -47,7 +47,7 @@ public class AuthConfig  extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.authenticationManager(authenticationManager)
-                .userDetailsService(memberService)
+                .userDetailsService(accountService)
                 .tokenStore(tokenStore);
     }
 }

@@ -17,7 +17,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     AccountService accountService;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    PasswordEncoderCustom passwordEncoder;
 
     @Bean
     public TokenStore tokenStore() {
