@@ -10,18 +10,12 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-
-import java.text.SimpleDateFormat;
 
 @SpringBootApplication
 @EnableScheduling
 @Configuration
 @PropertySource(value = {"classpath:account.properties" })
 public class SeohanWebApplication extends SpringBootServletInitializer {
-
-	public static SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-	public static SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd");
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {

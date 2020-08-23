@@ -14,7 +14,7 @@ public class Scheduler  {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
 
 	@Autowired
-	private ScheduledJobs scheduledJobs;
+	private com.seohan.scheduler.ScheduledJobs scheduledJobs;
 
 	@Scheduled(cron = "0 0 8 * * ?")
 	public void saveBalanceJobSch() {
@@ -25,8 +25,6 @@ public class Scheduler  {
 
 	@Scheduled(fixedDelay = 1000)
 	public void getStockDataSch() {
-		String strDate = sdf.format(new Date());
-//		scheduledJobs.saveBalance(strDate );
-//		System.out.println("Java cron job expression:: " + strDate);
+
 	}
 }
