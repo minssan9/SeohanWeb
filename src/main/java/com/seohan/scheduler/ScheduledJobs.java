@@ -1,6 +1,5 @@
 package com.seohan.scheduler;
 
-import com.seohan.erp.mat.Domain.ItemBalance;
 import com.seohan.erp.mat.Domain.ItemBalanceHeader;
 import com.seohan.erp.mat.Domain.ItemBalanceHis;
 import com.seohan.erp.mat.Domain.ItemBalanceHisOld;
@@ -59,6 +58,7 @@ public class ScheduledJobs {
             if (itembalanceHis.isEmpty() || itembalanceHis == null) {
                 itemBalanceHisMapper.saveBalanceByDate(itemBalanceSaveQuery);
                 itemBalanceHisMapper.saveBalanceHisLot(itemBalanceSaveQuery);
+
             }
 
             List<ItemBalanceHeader> itembalanceHeader = itemBalanceHeaderRepository.findByGdateAndGtime(savingDateString, savingTimeString);
@@ -78,8 +78,6 @@ public class ScheduledJobs {
 
             e.printStackTrace();
             return false;
-        } finally {
-//            return true;
         }
     }
 
