@@ -1,10 +1,7 @@
 package com.seohan.scheduler;
 
 import com.seohan.erp.mat.Dto.ImportPlanAlarm;
-import com.seohan.erp.mat.Dto.ImportPlanAlarmQuery;
-import com.seohan.erp.mat.Mapper.ImportPlanMapper;
 import com.seohan.erp.mat.Service.ImportPlanService;
-import com.sun.deploy.trace.Trace;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
