@@ -1,7 +1,6 @@
 package com.seohan;
-import com.seohan.fta.Domain.PoDto;
-import com.seohan.fta.Domain.PoHeader;
-import com.seohan.fta.Mapper.PoHeaderRepository;
+import com.seohan.erp.fta.Domain.PoDto;
+import com.seohan.erp.fta.Mapper.PoHeaderRepository;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

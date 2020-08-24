@@ -1,51 +1,58 @@
 package com.seohan.scheduler;
 
-import com.seohan.mat.Domain.ItemBalance;
-import com.seohan.mat.Domain.ItemBalanceHis;
-import com.seohan.mat.Mapper.ItemBalanceHisRepository;
+import com.seohan.erp.mat.Domain.ItemBalance;
+import com.seohan.erp.mat.Domain.ItemBalanceHeader;
+import com.seohan.erp.mat.Domain.ItemBalanceHis;
+import com.seohan.erp.mat.Domain.ItemBalanceHisOld;
+import com.seohan.erp.mat.Dto.ItemBalanceSaveQuery;
+import com.seohan.erp.mat.Mapper.ItemBalanceHeaderMapper;
+import com.seohan.erp.mat.Mapper.ItemBalanceHisMapper;
+import com.seohan.erp.mat.Mapper.ItemBalanceHisOldMapper;
+import com.seohan.erp.mat.Repository.ItemBalanceHeaderRepository;
+import com.seohan.erp.mat.Repository.ItemBalanceHisOldRepository;
+import com.seohan.erp.mat.Repository.ItemBalanceHisRepository;
+import com.seohan.erp.mat.Service.ItemBalanceService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Component
+@Slf4j
 public class ScheduledJobs {
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    private ItemBalanceHisRepository itemBalanceHisRepo;
+    ItemBalanceService itemBalanceService;
 
-    public void saveBalance(String savingTime) {
-        String targetTable = "";
-
-        List<ItemBalanceHis> itembalanceHis = itemBalanceHisRepo.findByGdateAndGtime(
-                savingTime.substring(0, 8), savingTime.substring(8, 12));
-
-        if (itembalanceHis.isEmpty() || itembalanceHis == null) {
-            targetTable = "smlib.itmbl0800";
-            targetTable = "smlib.itmblhis";
-            jdbcTemplate.batchUpdate("insert into " + targetTable + " (GDATE,GTIME,WARHS,ITMNO,QTY,TRIM,MNY) " +
-                            "select cast(? AS char(8) CCSID 933)  gdate, cast(? AS char(4) CCSID 833) gtime ,WARHS,ITMNO,ONHND,0,0 from smlib.itmblpf ",
-                    new BatchPreparedStatementSetter() {
-                        @Override
-                        public void setValues(PreparedStatement ps, int i) throws SQLException {
-                            ps.setString(1, savingTime.substring(0, 8));
-                            ps.setString(2, savingTime.substring(8, 12));
-                        }
-
-                        @Override
-                        public int getBatchSize() {
-                            return 1;
-                        }
-                    });
-        }
+    @Transactional
+    public Boolean saveBalance()  {
+        return itemBalanceService.saveBalance() ;
     }
 
-    ;
+
+    @Transactional
+    public void saveBalanceOldByDate(String savingDateString, String savingTimeString) {
+        String targetTable = "";
+
+        LocalDate saveDate = LocalDate.parse(savingDateString, DateTimeFormatter.BASIC_ISO_DATE);
+        LocalDate oldDateTime = saveDate.minusDays(150);
+        String oldDate = oldDateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+        ItemBalanceSaveQuery itemBalanceSaveQuery = ItemBalanceSaveQuery.builder()
+                .savingDate(savingDateString)
+                .savingTime(savingTimeString)
+                .oldDate(oldDate)
+                .build();
+    }
+
+
 
 }
