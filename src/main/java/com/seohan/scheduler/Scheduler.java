@@ -22,9 +22,9 @@ public class Scheduler  {
 		LocalDateTime now = LocalDateTime.now();
 		String nowDate = now.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 		String nowTime = now.format(DateTimeFormatter.ofPattern("HHmmss"));
-		scheduledJobs.saveBalance(nowDate, nowTime );
+		scheduledJobs.saveBalance();
 
-		scheduledJobs.saveBalanceOldByDate(nowDate, nowTime );
+//		scheduledJobs.saveBalanceOldByDate(nowDate, nowTime );
 		System.out.println("Java cron job expression:: " + nowDate + nowTime);
 	}
 

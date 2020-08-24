@@ -1,5 +1,6 @@
 package com.seohan.scheduler;
 
+import com.seohan.erp.mat.Domain.ItemBalance;
 import com.seohan.erp.mat.Domain.ItemBalanceHeader;
 import com.seohan.erp.mat.Domain.ItemBalanceHis;
 import com.seohan.erp.mat.Domain.ItemBalanceHisOld;
@@ -10,6 +11,7 @@ import com.seohan.erp.mat.Mapper.ItemBalanceHisOldMapper;
 import com.seohan.erp.mat.Repository.ItemBalanceHeaderRepository;
 import com.seohan.erp.mat.Repository.ItemBalanceHisOldRepository;
 import com.seohan.erp.mat.Repository.ItemBalanceHisRepository;
+import com.seohan.erp.mat.Service.ItemBalanceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -28,63 +30,11 @@ public class ScheduledJobs {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    private ItemBalanceHisMapper itemBalanceHisMapper;
-    @Autowired
-    private ItemBalanceHisRepository itemBalanceHisRepository;
-
-    @Autowired
-    private ItemBalanceHeaderMapper itemBalanceHeaderMapper;
-    @Autowired
-    private ItemBalanceHeaderRepository itemBalanceHeaderRepository;
-
-    @Autowired
-    private ItemBalanceHisOldRepository itemBalanceHisOldRepository;
-    @Autowired
-    private ItemBalanceHisOldMapper itemBalanceHisOldMapper;
+    ItemBalanceService itemBalanceService;
 
     @Transactional
-    public Boolean saveBalance(String savingDateString, String savingTimeString) {
-
-        LocalDate savingDateTime = LocalDate.parse(savingDateString, DateTimeFormatter.BASIC_ISO_DATE);
-        LocalDate oldDateTime = savingDateTime.plusDays(150);
-        String oldDate = oldDateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-
-        ItemBalanceSaveQuery itemBalanceSaveQuery = ItemBalanceSaveQuery.builder()
-                .savingDate(savingDateString)
-                .savingTime(savingTimeString)
-                .oldDate(oldDate)
-                .build();
-
-        try {
-            List<ItemBalanceHis> itembalanceHis = itemBalanceHisRepository.findByGdateAndGtime(savingDateString, savingTimeString);
-            if (itembalanceHis.isEmpty() || itembalanceHis == null) {
-                itemBalanceHisMapper.saveBalanceByDate(itemBalanceSaveQuery);
-                itemBalanceHisMapper.saveBalanceHisLot(itemBalanceSaveQuery);
-
-            }
-
-            List<ItemBalanceHeader> itembalanceHeader = itemBalanceHeaderRepository.findByGdateAndGtime(savingDateString, savingTimeString);
-            if (itembalanceHeader.isEmpty() || itembalanceHeader == null) {
-                itemBalanceHeaderMapper.saveBalanceHisHeader(itemBalanceSaveQuery);
-            }
-
-            List<ItemBalanceHisOld> itemBalanceHisOldDates = itemBalanceHisOldRepository.findByGdateAndGtimeAndBltype(savingDateString, savingTimeString, "OLDDATE");
-            if (itemBalanceHisOldDates.isEmpty() || itemBalanceHisOldDates == null) {
-                itemBalanceHisOldMapper.saveOldBalanceByDate(itemBalanceSaveQuery);
-                log.trace("");
-            }
-
-            List<ItemBalanceHisOld> itemBalanceHisOldLots = itemBalanceHisOldRepository.findByGdateAndGtimeAndBltype(savingDateString, savingTimeString, "OLDLOT");
-            if (itemBalanceHisOldLots.isEmpty() || itemBalanceHisOldLots == null) {
-                itemBalanceHisOldMapper.saveOldBalanceByLot(itemBalanceSaveQuery);
-            }
-            return true;
-        } catch (Exception e) {
-            //messageService.send(messageDto);
-
-            e.printStackTrace();
-            return false;
-        }
+    public Boolean saveBalance()  {
+        return itemBalanceService.saveBalance() ;
     }
 
 
