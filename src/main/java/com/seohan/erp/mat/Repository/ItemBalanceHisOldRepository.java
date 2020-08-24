@@ -12,4 +12,6 @@ public interface ItemBalanceHisOldRepository extends JpaRepository<ItemBalanceHi
 	List<ItemBalanceHisOld> findAll();
 
 	List<ItemBalanceHisOld> findByGdateAndGtime(String gdate, String gtime);
+
+	List<ItemBalanceHisOld> findByGdateAndGtimeAndBltype(String gdate, String gtime, String bltype);
 }

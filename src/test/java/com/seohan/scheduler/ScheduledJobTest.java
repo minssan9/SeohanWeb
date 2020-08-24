@@ -1,6 +1,5 @@
 package com.seohan.scheduler;
 
-import com.seohan.erp.mat.Domain.ItemBalanceHis;
 import com.seohan.erp.mat.Domain.ItemBalanceHisOld;
 import com.seohan.erp.mat.Repository.ItemBalanceHisOldRepository;
 import com.seohan.erp.mat.Repository.ItemBalanceHisRepository;
@@ -46,7 +45,7 @@ public class ScheduledJobTest {
     public void saveBalanceOldTest(){
         String savingDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String savingTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmss"));
-        scheduledJobs.saveBalanceOld(savingDate, savingTime);
+        scheduledJobs.saveBalanceOldByDate(savingDate, savingTime);
 
         List<ItemBalanceHisOld> itemBalanceHisOlds =  itemBalanceHisOldRepository.findByGdateAndGtime(savingDate, savingTime);
         Assert.assertNotNull(itemBalanceHisOlds) ;

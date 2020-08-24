@@ -10,6 +10,7 @@ import com.seohan.erp.mat.Mapper.ItemBalanceHisOldMapper;
 import com.seohan.erp.mat.Repository.ItemBalanceHeaderRepository;
 import com.seohan.erp.mat.Repository.ItemBalanceHisOldRepository;
 import com.seohan.erp.mat.Repository.ItemBalanceHisRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Component
+@Slf4j
 public class ScheduledJobs {
 
     @Autowired
@@ -66,11 +68,15 @@ public class ScheduledJobs {
                 itemBalanceHeaderMapper.saveBalanceHisHeader(itemBalanceSaveQuery);
             }
 
-
-            List<ItemBalanceHisOld> itemBalanceHisOlds = itemBalanceHisOldRepository.findByGdateAndGtime(savingDateString, savingTimeString);
-
-            if (itemBalanceHisOlds.isEmpty() || itemBalanceHisOlds == null) {
+            List<ItemBalanceHisOld> itemBalanceHisOldDates = itemBalanceHisOldRepository.findByGdateAndGtimeAndBltype(savingDateString, savingTimeString, "OLDDATE");
+            if (itemBalanceHisOldDates.isEmpty() || itemBalanceHisOldDates == null) {
                 itemBalanceHisOldMapper.saveOldBalanceByDate(itemBalanceSaveQuery);
+                log.trace("");
+            }
+
+            List<ItemBalanceHisOld> itemBalanceHisOldLots = itemBalanceHisOldRepository.findByGdateAndGtimeAndBltype(savingDateString, savingTimeString, "OLDLOT");
+            if (itemBalanceHisOldLots.isEmpty() || itemBalanceHisOldLots == null) {
+                itemBalanceHisOldMapper.saveOldBalanceByLot(itemBalanceSaveQuery);
             }
             return true;
         } catch (Exception e) {
@@ -83,7 +89,7 @@ public class ScheduledJobs {
 
 
     @Transactional
-    public void saveBalanceOld(String savingDateString, String savingTimeString) {
+    public void saveBalanceOldByDate(String savingDateString, String savingTimeString) {
         String targetTable = "";
 
         LocalDate saveDate = LocalDate.parse(savingDateString, DateTimeFormatter.BASIC_ISO_DATE);
@@ -96,5 +102,7 @@ public class ScheduledJobs {
                 .oldDate(oldDate)
                 .build();
     }
+
+
 
 }

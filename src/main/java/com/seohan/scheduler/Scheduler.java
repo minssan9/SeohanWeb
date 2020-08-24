@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 @Slf4j
 @Component
@@ -25,7 +24,7 @@ public class Scheduler  {
 		String nowTime = now.format(DateTimeFormatter.ofPattern("HHmmss"));
 		scheduledJobs.saveBalance(nowDate, nowTime );
 
-		scheduledJobs.saveBalanceOld(nowDate, nowTime );
+		scheduledJobs.saveBalanceOldByDate(nowDate, nowTime );
 		System.out.println("Java cron job expression:: " + nowDate + nowTime);
 	}
 
