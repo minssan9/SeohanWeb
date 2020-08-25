@@ -13,14 +13,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@RequestMapping("/auth")
+@RequestMapping("/accounts")
 @Slf4j 
 @RestController
 class AccountController {
 	@Autowired
 	private AccountService accountService;
-//	@Autowired
-//    private JwtService jwtService;
 
 
 	@GetMapping

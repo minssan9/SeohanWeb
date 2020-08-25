@@ -17,7 +17,7 @@ ResourceConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-        resources.resourceId("seohanWeb");
+        resources.resourceId("seohan");
     }
 
     @Override
@@ -30,8 +30,8 @@ ResourceConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/websockethandler/**").permitAll()
                 .antMatchers("/app/**").permitAll()
                 .mvcMatchers(HttpMethod.GET, "/api/**").permitAll()  // 해당 요청은 누구나 가능하며
-                .mvcMatchers(HttpMethod.POST, "/api/auth").permitAll()
-                .mvcMatchers(HttpMethod.POST, "/api/auth/join/check").permitAll()
+                .mvcMatchers(HttpMethod.POST, "/auth").permitAll()
+                .mvcMatchers(HttpMethod.POST, "/auth/join/check").permitAll()
                 .anyRequest().authenticated()       //  나머지 요청은 권한이 필요합니다.
                 .and()
                 .exceptionHandling()
