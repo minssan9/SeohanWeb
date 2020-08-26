@@ -64,12 +64,6 @@ public class ItemBalanceServiceImpl implements ItemBalanceService{
                 log.trace("재고 LOT 기준 OK ");
             }
 
-            List<ItemBalanceHeader> itembalanceHeader = itemBalanceHeaderRepository.findByGdateAndGtime(savingDateString, savingTimeString);
-            if (itembalanceHeader.isEmpty() || itembalanceHeader == null) {
-                itemBalanceHeaderMapper.saveBalanceHisHeader(itemBalanceSaveQuery);
-                log.trace("재고 Header 기준 OK ");
-            }
-
             List<ItemBalanceHisOld> itemBalanceHisOldDates = itemBalanceHisOldRepository.findByGdateAndGtimeAndBltype(savingDateString, savingTimeString, "OLDDATE");
             if (itemBalanceHisOldDates.isEmpty() || itemBalanceHisOldDates == null) {
                 itemBalanceHisOldMapper.saveOldBalanceByDate(itemBalanceSaveQuery);
@@ -81,6 +75,13 @@ public class ItemBalanceServiceImpl implements ItemBalanceService{
                 itemBalanceHisOldMapper.saveOldBalanceByLot(itemBalanceSaveQuery);
                 log.trace("장기재고 LOT 기준 OK ");
             }
+
+            List<ItemBalanceHeader> itembalanceHeader = itemBalanceHeaderRepository.findByGdateAndGtime(savingDateString, savingTimeString);
+            if (itembalanceHeader.isEmpty() || itembalanceHeader == null) {
+                itemBalanceHeaderMapper.saveBalanceHisHeader(itemBalanceSaveQuery);
+                log.trace("재고 Header 기준 OK ");
+            }
+
             return true;
         } catch (Exception e) {
             //messageService.send(messageDto);

@@ -42,7 +42,7 @@ public class SeohanWebApplication extends SpringBootServletInitializer {
 
 			@Override
 			public void run(ApplicationArguments args) throws Exception {
-//				itemBalanceService.saveBalance();
+				itemBalanceService.saveBalance();
 			}
 		};
 	}
