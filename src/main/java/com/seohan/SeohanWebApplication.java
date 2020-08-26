@@ -1,6 +1,7 @@
 package com.seohan;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.SpringApplicationRunListener;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -25,8 +26,7 @@ public class SeohanWebApplication extends SpringBootServletInitializer {
   
 	public static void main(String[] args)
 	{
-		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-
 		SpringApplication.run(SeohanWebApplication.class, args);
 	}
+
 }

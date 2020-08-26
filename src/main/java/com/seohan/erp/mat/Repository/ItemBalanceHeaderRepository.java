@@ -14,5 +14,7 @@ public interface ItemBalanceHeaderRepository extends JpaRepository<ItemBalanceHe
 
 //	ItemBalanceHeader findByWarhsAndItmno(String warhs, String itmno);
 
+	List<ItemBalanceHeader> findByGdateAndGtimeAndBltype(String gdate, String gtime, String bltype);
+
 	List<ItemBalanceHeader> findByGdateAndGtime(String gdate, String gtime);
 }

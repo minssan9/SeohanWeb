@@ -61,25 +61,19 @@ public class ScheduledJobs {
                 itemBalanceHisMapper.saveBalanceHisLot(itemBalanceSaveQuery);
             }
 
-            List<ItemBalanceHeader> itembalanceHeader = itemBalanceHeaderRepository.findByGdateAndGtime(savingDateString, savingTimeString);
-            if (itembalanceHeader.isEmpty() || itembalanceHeader == null) {
-                itemBalanceHeaderMapper.saveBalanceHisHeader(itemBalanceSaveQuery);
-            }
-
-
             List<ItemBalanceHisOld> itemBalanceHisOlds = itemBalanceHisOldRepository.findByGdateAndGtime(savingDateString, savingTimeString);
-
             if (itemBalanceHisOlds.isEmpty() || itemBalanceHisOlds == null) {
                 itemBalanceHisOldMapper.saveOldBalanceByDate(itemBalanceSaveQuery);
             }
 
+            List<ItemBalanceHeader> itembalanceHeader = itemBalanceHeaderRepository.findByGdateAndGtime(savingDateString, savingTimeString);
+            if (itembalanceHeader.isEmpty() || itembalanceHeader == null) {
+                itemBalanceHeaderMapper.saveBalanceHisHeader(itemBalanceSaveQuery);
+            }
+            return true;
         } catch (Exception e) {
-            //messageService.send(messageDto);
-
             e.printStackTrace();
             return false;
-        } finally {
-            return true;
         }
     }
 

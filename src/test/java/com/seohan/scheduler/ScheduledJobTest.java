@@ -2,6 +2,7 @@ package com.seohan.scheduler;
 
 import com.seohan.erp.mat.Domain.ItemBalanceHis;
 import com.seohan.erp.mat.Domain.ItemBalanceHisOld;
+import com.seohan.erp.mat.Mapper.ItemBalanceHeaderMapper;
 import com.seohan.erp.mat.Repository.ItemBalanceHisOldRepository;
 import com.seohan.erp.mat.Repository.ItemBalanceHisRepository;
 import org.junit.Assert;
@@ -30,6 +31,9 @@ public class ScheduledJobTest {
     @Autowired
     private ItemBalanceHisOldRepository itemBalanceHisOldRepository;
 
+    @Autowired
+    private ItemBalanceHeaderMapper itemBalanceHeaderMapper;
+
     @Test
     public void saveBalanceTest(){
         String savingDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
@@ -51,6 +55,5 @@ public class ScheduledJobTest {
         List<ItemBalanceHisOld> itemBalanceHisOlds =  itemBalanceHisOldRepository.findByGdateAndGtime(savingDate, savingTime);
         Assert.assertNotNull(itemBalanceHisOlds) ;
     }
-
 
 }
