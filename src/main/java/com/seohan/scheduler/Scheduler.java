@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 @Slf4j
 @Component
@@ -16,23 +15,21 @@ public class Scheduler  {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
 
 	@Autowired
-	private ScheduledJobs scheduledJobs;
+	private com.seohan.scheduler.ScheduledJobs scheduledJobs;
 
 	@Scheduled(cron = "0 0 8 * * ?")
 	public void saveBalanceJobSch() {
 		LocalDateTime now = LocalDateTime.now();
 		String nowDate = now.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 		String nowTime = now.format(DateTimeFormatter.ofPattern("HHmmss"));
-		scheduledJobs.saveBalance(nowDate, nowTime );
+		scheduledJobs.saveBalance();
 
-		scheduledJobs.saveBalanceOld(nowDate, nowTime );
+//		scheduledJobs.saveBalanceOldByDate(nowDate, nowTime );
 		System.out.println("Java cron job expression:: " + nowDate + nowTime);
 	}
 
 	@Scheduled(fixedDelay = 1000)
 	public void getStockDataSch() {
-		String strDate = sdf.format(new Date());
-//		scheduledJobs.saveBalance(strDate );
-//		System.out.println("Java cron job expression:: " + strDate);
+
 	}
 }

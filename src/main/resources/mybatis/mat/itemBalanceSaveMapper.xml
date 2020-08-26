@@ -50,6 +50,7 @@
 			SELECT cast(#{savingDate} AS char(8) CCSID 933)  gdate, cast(#{savingTime} AS char(4) CCSID 833) gtime,
 			 	TRIM(A.WARHS) || '-L' , A.ITMNO, SUM(QTY), 0
 			FROM SMLIB.ITMBLPFSUB A
+
 			INNER JOIN SMLIB.ITMSTPF B ON A.ITMNO = B.ITMNO
 			WHERE  QTY <> 0 GROUP BY A.ITMNO, A.WARHS ORDER BY ITMNO
 		]]>

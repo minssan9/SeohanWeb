@@ -20,5 +20,9 @@ public class ItemBalanceHisOldMapper {
 
 	public void saveOldBalanceByDate(ItemBalanceSaveQuery itemBalanceSaveQuery){
 		sqlSessionTemplate.update(NAMESPACE +  "saveOldBalanceByDate", itemBalanceSaveQuery);
-	};
+	}
+
+	public void saveOldBalanceByLot(ItemBalanceSaveQuery itemBalanceSaveQuery){
+//		sqlSessionTemplate.update(NAMESPACE +  "saveOldBalanceByLot", itemBalanceSaveQuery);
+	}
 }
