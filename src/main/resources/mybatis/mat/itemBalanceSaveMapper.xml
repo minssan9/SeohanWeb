@@ -5,7 +5,7 @@
 	<!-- 코드 관련 쿼리 -->
 	<update id="saveBalance" parameterType="com.seohan.erp.mat.Dto.ItemBalanceSaveQuery">
 		<![CDATA[
-		insert into SMLIB.ITMBLHIS (GDATE,GTIME,WARHS,ITMNO,QTY,TRIM,MNY)
+			insert into SMLIB.ITMBLHIS (GDATE,GTIME,WARHS,ITMNO,QTY,TRIM,MNY)
 			select cast(#{savingDate} as char(8))  gdate, cast(#{savingTime} as char(4)) gtime, WARHS,ITMNO,SUM(QTY) QTY, TRIM, SUM(MNY) MNY from (
 				SELECT DISTINCT  A.WARHS, A.ITMNO, SUM(A.ONHND) QTY, 0 TRIM, SUM(A.ONHND) *coalesce(CASE WHEN RIGHT(TRIM(A.WARHS),1) = 'B' AND GUBN = 'B' THEN FDANGA  ELSE PURDANGA END, 0) MNY  FROM SMLIB.ITMBLPF A
 				INNER JOIN SMLIB.ITMSTPF ITM ON A.ITMNO = ITM.ITMNO  INNER JOIN SALIB.ACODERP C ON C.ADGUB = 'PJ' AND A.WARHS = C.ASGUB AND AREF1 = 'SHN'
@@ -61,8 +61,6 @@
 			WHERE  QTY <> 0 GROUP BY A.ITMNO, A.WARHS ORDER BY ITMNO
 		]]>
 	</update>
-
-
 	<update id="saveOldBalanceByDate" parameterType="com.seohan.erp.mat.Dto.ItemBalanceSaveQuery">
 		<![CDATA[
 		insert into smlib.ITMBL08_OLD (GDATE,GTIME,WARHS,ITMNO,LOCAT,LOTNO,INDATE,INTIME,QTY,PRICE,STS,BLTYPE)
@@ -70,7 +68,7 @@
 		coalesce(CASE WHEN GUBN = 'B' THEN FDANGA  ELSE PURDANGA END, 0) PRICE, 'O' STS, 'OLDDATE' BLTYPE
 		FROM (
 		select * From SMLIB.ITMBLPFSUB A
-		where  WARHS in ('AB', 'BB', 'GB') AND INTIME < cast(#{oldDate} as char(8))
+		where  WARHS in ('AB', 'BB', 'GB') AND INDATE < cast(#{oldDate} as char(8))
 		) BL
 		EXCEPTION JOIN (
 			SELECT  DISTINCT A.WARHS, A.ITMNO FROM 						SMLIB.TRANSPF A
@@ -124,12 +122,14 @@
 
 			 SELECT GDATE, GTIME, 'NOW' TIMEFLAG, 'M' TYPE, '원재료' TYPEDS, LEFT(WARHS,1) FACT, WARHS, C.ASDES WARHS_NM, SUM(BL.QTY) QTY, SUM(MNY) MNY, '' REF,'' FILL, '' BLTYPE
 			 FROM SMLIB.ITMBL0800 BL
+
 			 INNER JOIN SALIB.ACODERP C ON C.ADGUB = 'PJ' AND BL.WARHS = C.ASGUB AND AREF1 = 'SHN'  INNER JOIN SMLIB.ITMSTPF ITM ON BL.ITMNO = ITM.ITMNO
 			 where (GDATE = cast(#{savingDate} AS char(8) CCSID 933)  ) and WARHS in ('AB', 'BB', 'GB') AND QTY != 0 AND GTIME = cast(#{savingTime} AS char(4) CCSID 833)
 			 GROUP BY GDATE, GTIME, LEFT(WARHS,1), WARHS, C.ASDES
 			 Union All
 			 SELECT GDATE, GTIME, 'NOW' TIMEFLAG, 'O' TYPE, '재공품' TYPEDS, FACT, WARHS, W.WRKDS WARHS_NM, SUM(BL.QTY) QTY, SUM(MNY) MNY, '' REF,'' FILL, '' BLTYPE
 			 FROM SMLIB.ITMBL0800 BL
+
 			 INNER JOIN SBLIB.WRKCTPF W ON BL.WARHS = W.WRKCT
 			 where (GDATE = cast(#{savingDate} AS char(8) CCSID 933) ) AND GTIME = cast(#{savingTime} AS char(4) CCSID 833) AND FACT NOT IN ('D', 'F') AND ACTGB = 'A' AND MNY > 0
 			 GROUP BY GDATE, GTIME, FACT, WARHS,  W.WRKDS
