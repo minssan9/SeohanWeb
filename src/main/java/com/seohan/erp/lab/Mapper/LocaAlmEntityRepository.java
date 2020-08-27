@@ -14,5 +14,5 @@ public interface LocaAlmEntityRepository extends JpaRepository<LocaAlmEntity, Lo
 
 	LocaAlmEntity findLocaAlmEntityById(long id);
 
-	List<LocaAlmEntity> findLocaAlmEntityBySts(String sts);
+	List<LocaAlmEntity> findLocaAlmEntityByGubnAndSts(String gubn, String sts);
 }
