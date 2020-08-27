@@ -16,16 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-@RequestMapping("/lab/locaalm")
+@RequestMapping("/erp/lab/locaalm")
 @Slf4j 
 @RestController
 class LocaAlmRestController {
 	@Autowired
 	private LocaAlmEntityRepository locaAlmEntityRepository;
 
-	@GetMapping("")
-	public ResponseEntity<List<LocaAlmEntity>> getImportPlanList(@RequestParam String userid) {
-		;
-		return new ResponseEntity<List<LocaAlmEntity>>(locaAlmEntityRepository.findLocaAlmEntityBySts("1"), HttpStatus.OK);
+	@GetMapping
+	public ResponseEntity<List<LocaAlmEntity>> getLocaAlmList() {
+		return new ResponseEntity<List<LocaAlmEntity>>(locaAlmEntityRepository.findLocaAlmEntityByGubnAndSts("A2","1"), HttpStatus.OK);
 	}
 }
