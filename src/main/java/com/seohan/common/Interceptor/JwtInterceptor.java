@@ -25,11 +25,11 @@ public class JwtInterceptor implements HandlerInterceptor{
 		if (request.getRequestURI().equals("/auth/signin")) {
 			return  true;
 		}
-		if(token != null && jwtService.isUsable(token) ){
+//		if(token != null && jwtService.isUsable(token) ){
 			return true;
-		}else{
-			throw new UnauthorizedException();
-		}
+//		}else{
+//			throw new UnauthorizedException();
+//		}
 
 	}
 }

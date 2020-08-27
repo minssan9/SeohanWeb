@@ -99,6 +99,7 @@ public class ScheduledJobs {
                 .savingTime(savingTimeString)
                 .oldDate(oldDate)
                 .build();
+        itemBalanceHisOldMapper.saveOldBalanceByDate(itemBalanceSaveQuery);
     }
 
 

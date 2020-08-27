@@ -1,5 +1,8 @@
 package com.seohan;
 
+import com.seohan.erp.mat.Dto.ItemBalanceSaveQuery;
+import com.seohan.erp.mat.Mapper.ItemBalanceHeaderMapper;
+import com.seohan.erp.mat.Mapper.ItemBalanceHisOldMapper;
 import com.seohan.erp.mat.Service.ItemBalanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -16,6 +19,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @SpringBootApplication
 @EnableScheduling
@@ -40,9 +45,26 @@ public class SeohanWebApplication extends SpringBootServletInitializer {
 			@Autowired
 			ItemBalanceService itemBalanceService;
 
+			@Autowired
+			ItemBalanceHeaderMapper itemBalanceHeaderMapper;
+
+			@Autowired
+			ItemBalanceHisOldMapper itemBalanceHisOldMapper;
+
 			@Override
 			public void run(ApplicationArguments args) throws Exception {
-				itemBalanceService.saveBalance();
+				LocalDateTime oldDateTime = LocalDateTime.now().minusDays(150);
+				String oldDate = oldDateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+				String savingDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+				String savingTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmm"));
+				ItemBalanceSaveQuery itemBalanceSaveQuery = ItemBalanceSaveQuery.builder()
+						.savingDate(savingDate)
+						.savingTime(savingTime)
+						.oldDate(oldDate)
+						.build();
+				itemBalanceService.saveBalanceOldByDate(itemBalanceSaveQuery);
+//				itemBalanceHeaderMapper.saveBalanceHisHeader(itemBalanceSaveQuery);
 			}
 		};
 	}
