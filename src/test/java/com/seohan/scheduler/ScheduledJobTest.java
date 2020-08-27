@@ -1,6 +1,10 @@
 package com.seohan.scheduler;
 
+import com.seohan.erp.mat.Domain.ItemBalanceHeader;
 import com.seohan.erp.mat.Domain.ItemBalanceHisOld;
+import com.seohan.erp.mat.Dto.ItemBalanceSaveQuery;
+import com.seohan.erp.mat.Mapper.ItemBalanceHeaderMapper;
+import com.seohan.erp.mat.Repository.ItemBalanceHeaderRepository;
 import com.seohan.erp.mat.Repository.ItemBalanceHisOldRepository;
 import com.seohan.erp.mat.Repository.ItemBalanceHisRepository;
 import org.junit.Assert;
@@ -29,12 +33,17 @@ public class ScheduledJobTest {
     @Autowired
     private ItemBalanceHisOldRepository itemBalanceHisOldRepository;
 
+    @Autowired
+    private ItemBalanceHeaderRepository itemBalanceHeaderRepository;
+    @Autowired
+    private ItemBalanceHeaderMapper itemBalanceHeaderMapper;
+
     @Test
     public void saveBalanceTest(){
         String savingDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String savingTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmss"));
         savingTime = "0900";
-        boolean successSaveFlag = scheduledJobs.saveBalance();
+        boolean successSaveFlag = scheduledJobs.saveBalance(savingDate, savingTime);
 
 //        List<ItemBalanceHis> savedItemList=  itemBalanceHisRepository.findByGdateAndGtime(savingDate, savingTime);
 
@@ -45,11 +54,26 @@ public class ScheduledJobTest {
     public void saveBalanceOldTest(){
         String savingDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String savingTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmss"));
+
         scheduledJobs.saveBalanceOldByDate(savingDate, savingTime);
 
-        List<ItemBalanceHisOld> itemBalanceHisOlds =  itemBalanceHisOldRepository.findByGdateAndGtime(savingDate, savingTime);
+//        List<ItemBalanceHisOld> itemBalanceHisOlds =  itemBalanceHisOldRepository.findByGdateAndGtime(savingDate, savingTime);
+        List<ItemBalanceHisOld> itemBalanceHisOlds =  itemBalanceHisOldRepository.findByGdateAndGtimeAndBltypeAndAndIndateGreaterThan (savingDate, savingTime,"OLDDATE", "20200327");
         Assert.assertNotNull(itemBalanceHisOlds) ;
     }
 
+    @Test
+    public void saveBalanceHeaderTest(){
+        String savingDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        String savingTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmss"));
+        ItemBalanceSaveQuery itemBalanceSaveQuery = ItemBalanceSaveQuery.builder()
+                .savingDate(savingDate)
+                .savingTime("0800")
+                .oldDate("")
+                .build();
+        itemBalanceHeaderMapper.saveBalanceHisHeader(itemBalanceSaveQuery);
 
+        List<ItemBalanceHeader> itemBalanceHeaders =  itemBalanceHeaderRepository.findByGdateAndGtime(savingDate, savingTime);
+        Assert.assertNotNull(itemBalanceHeaders) ;
+    }
 }

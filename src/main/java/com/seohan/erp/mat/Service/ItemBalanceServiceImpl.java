@@ -39,12 +39,13 @@ public class ItemBalanceServiceImpl implements ItemBalanceService{
     @Autowired
     private ItemBalanceHisOldMapper itemBalanceHisOldMapper;
 
+
     @Override
     @Transactional
-    public Boolean saveBalance() {
+    public void saveBalance() {
 //        LocalDate savingDateTime = LocalDate.parse(savingDateString, DateTimeFormatter.BASIC_ISO_DATE);
         LocalDateTime savingDateTime = LocalDateTime.now();
-        LocalDateTime oldDateTime = savingDateTime.plusDays(150);
+        LocalDateTime oldDateTime = savingDateTime.minusDays(150);
         String oldDate = oldDateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String savingDateString = savingDateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String savingTimeString = savingDateTime.format(DateTimeFormatter.ofPattern("HHmm"));
@@ -55,38 +56,74 @@ public class ItemBalanceServiceImpl implements ItemBalanceService{
                 .oldDate(oldDate)
                 .build();
 
+        saveBalanceNow(itemBalanceSaveQuery);
+        saveBalanceOldByLot(itemBalanceSaveQuery);
+        saveBalanceOldByDate(itemBalanceSaveQuery);
+        saveBalanceHeader(itemBalanceSaveQuery);
+    }
+
+    @Override
+    @Transactional
+    public void saveBalanceNow(ItemBalanceSaveQuery itemBalanceSaveQuery) {
         try {
-            List<ItemBalanceHis> itembalanceHis = itemBalanceHisRepository.findByGdateAndGtime(savingDateString, savingTimeString);
+            List<ItemBalanceHis> itembalanceHis
+                    = itemBalanceHisRepository.findByGdateAndGtime(itemBalanceSaveQuery.getSavingDate(), itemBalanceSaveQuery.getSavingTime());
             if (itembalanceHis.isEmpty() || itembalanceHis == null) {
                 itemBalanceHisMapper.saveBalanceByDate(itemBalanceSaveQuery);
                 log.trace("재고 날짜 기준 OK ");
                 itemBalanceHisMapper.saveBalanceHisLot(itemBalanceSaveQuery);
                 log.trace("재고 LOT 기준 OK ");
             }
+        } catch (Exception e) {
+            //messageService.send(messageDto);
+            e.printStackTrace();
+        }
+    }
 
-            List<ItemBalanceHeader> itembalanceHeader = itemBalanceHeaderRepository.findByGdateAndGtime(savingDateString, savingTimeString);
-            if (itembalanceHeader.isEmpty() || itembalanceHeader == null) {
-                itemBalanceHeaderMapper.saveBalanceHisHeader(itemBalanceSaveQuery);
-                log.trace("재고 Header 기준 OK ");
-            }
+    @Override
+    public void saveBalanceOldByLot(ItemBalanceSaveQuery itemBalanceSaveQuery) {
 
-            List<ItemBalanceHisOld> itemBalanceHisOldDates = itemBalanceHisOldRepository.findByGdateAndGtimeAndBltype(savingDateString, savingTimeString, "OLDDATE");
-            if (itemBalanceHisOldDates.isEmpty() || itemBalanceHisOldDates == null) {
-                itemBalanceHisOldMapper.saveOldBalanceByDate(itemBalanceSaveQuery);
-                log.trace("장기재고 날짜 기준 OK ");
-            }
-
-            List<ItemBalanceHisOld> itemBalanceHisOldLots = itemBalanceHisOldRepository.findByGdateAndGtimeAndBltype(savingDateString, savingTimeString, "OLDLOT");
+        try {
+            List<ItemBalanceHisOld> itemBalanceHisOldLots =
+                    itemBalanceHisOldRepository.findByGdateAndGtimeAndBltype(itemBalanceSaveQuery.getSavingDate(), itemBalanceSaveQuery.getSavingTime(), "OLDLOT");
             if (itemBalanceHisOldLots.isEmpty() || itemBalanceHisOldLots == null) {
                 itemBalanceHisOldMapper.saveOldBalanceByLot(itemBalanceSaveQuery);
                 log.trace("장기재고 LOT 기준 OK ");
             }
-            return true;
         } catch (Exception e) {
             //messageService.send(messageDto);
-
             e.printStackTrace();
-            return false;
+        }
+    }
+
+    @Override
+    public void saveBalanceOldByDate(ItemBalanceSaveQuery itemBalanceSaveQuery) {
+
+        try {
+            List<ItemBalanceHisOld> itemBalanceHisOldLots =
+                    itemBalanceHisOldRepository.findByGdateAndGtimeAndBltype(itemBalanceSaveQuery.getSavingDate(), itemBalanceSaveQuery.getSavingTime(), "OLDDATE");
+            if (itemBalanceHisOldLots.isEmpty() || itemBalanceHisOldLots == null) {
+                itemBalanceHisOldMapper.saveOldBalanceByDate(itemBalanceSaveQuery);
+                log.trace("장기재고 일자 기준 OK ");
+            }
+        } catch (Exception e) {
+            //messageService.send(messageDto);
+            e.printStackTrace();
+        }
+    }
+    @Override
+    public void saveBalanceHeader(ItemBalanceSaveQuery itemBalanceSaveQuery) {
+
+        try {
+            List<ItemBalanceHeader> itembalanceHeader
+                    = itemBalanceHeaderRepository.findByGdateAndGtime(itemBalanceSaveQuery.getSavingDate(), itemBalanceSaveQuery.getSavingTime());
+            if (itembalanceHeader.isEmpty() || itembalanceHeader == null) {
+                itemBalanceHeaderMapper.saveBalanceHisHeader(itemBalanceSaveQuery);
+                log.trace("재고 Header 기준 OK ");
+            }
+        } catch (Exception e) {
+            //messageService.send(messageDto);
+            e.printStackTrace();
         }
     }
 }

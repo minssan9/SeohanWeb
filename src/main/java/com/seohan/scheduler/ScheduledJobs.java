@@ -32,11 +32,59 @@ public class ScheduledJobs {
     @Autowired
     ItemBalanceService itemBalanceService;
 
-    @Transactional
-    public Boolean saveBalance()  {
-        return itemBalanceService.saveBalance() ;
-    }
+    @Autowired
+    private ItemBalanceHisRepository itemBalanceHisRepository;
 
+    @Autowired
+    private ItemBalanceHisMapper itemBalanceHisMapper;
+
+    @Autowired
+    private ItemBalanceHisOldRepository itemBalanceHisOldRepository;
+
+    @Autowired
+    private ItemBalanceHisOldMapper itemBalanceHisOldMapper;
+
+    @Autowired
+    private ItemBalanceHeaderRepository itemBalanceHeaderRepository;
+
+    @Autowired
+    private ItemBalanceHeaderMapper itemBalanceHeaderMapper;
+
+    @Transactional
+    public Boolean saveBalance(String savingDateString, String savingTimeString) {
+
+        LocalDate savingDateTime = LocalDate.parse(savingDateString, DateTimeFormatter.BASIC_ISO_DATE);
+        LocalDate oldDateTime = savingDateTime.plusDays(150);
+        String oldDate = oldDateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+        ItemBalanceSaveQuery itemBalanceSaveQuery = ItemBalanceSaveQuery.builder()
+                .savingDate(savingDateString)
+                .savingTime(savingTimeString)
+                .oldDate(oldDate)
+                .build();
+
+        try {
+            List<ItemBalanceHis> itembalanceHis = itemBalanceHisRepository.findByGdateAndGtime(savingDateString, savingTimeString);
+            if (itembalanceHis.isEmpty() || itembalanceHis == null) {
+                itemBalanceHisMapper.saveBalanceByDate(itemBalanceSaveQuery);
+                itemBalanceHisMapper.saveBalanceHisLot(itemBalanceSaveQuery);
+            }
+
+            List<ItemBalanceHisOld> itemBalanceHisOlds = itemBalanceHisOldRepository.findByGdateAndGtime(savingDateString, savingTimeString);
+            if (itemBalanceHisOlds.isEmpty() || itemBalanceHisOlds == null) {
+                itemBalanceHisOldMapper.saveOldBalanceByDate(itemBalanceSaveQuery);
+            }
+
+            List<ItemBalanceHeader> itembalanceHeader = itemBalanceHeaderRepository.findByGdateAndGtime(savingDateString, savingTimeString);
+            if (itembalanceHeader.isEmpty() || itembalanceHeader == null) {
+                itemBalanceHeaderMapper.saveBalanceHisHeader(itemBalanceSaveQuery);
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     @Transactional
     public void saveBalanceOldByDate(String savingDateString, String savingTimeString) {
@@ -51,6 +99,7 @@ public class ScheduledJobs {
                 .savingTime(savingTimeString)
                 .oldDate(oldDate)
                 .build();
+        itemBalanceHisOldMapper.saveOldBalanceByDate(itemBalanceSaveQuery);
     }
 
 

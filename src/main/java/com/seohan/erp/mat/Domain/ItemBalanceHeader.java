@@ -32,5 +32,5 @@ public class ItemBalanceHeader implements Serializable {
     private double 	mny;
     private String 	ref;
     private String 	fill;
-
+    private String 	bltype;
 }
