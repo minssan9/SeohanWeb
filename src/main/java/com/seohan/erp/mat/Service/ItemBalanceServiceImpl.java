@@ -119,6 +119,7 @@ public class ItemBalanceServiceImpl implements ItemBalanceService{
                     = itemBalanceHeaderRepository.findByGdateAndGtime(itemBalanceSaveQuery.getSavingDate(), itemBalanceSaveQuery.getSavingTime());
             if (itembalanceHeader.isEmpty() || itembalanceHeader == null) {
                 itemBalanceHeaderMapper.saveBalanceHisHeader(itemBalanceSaveQuery);
+                itemBalanceHeaderMapper.saveBalanceOldHeader(itemBalanceSaveQuery);
                 log.trace("재고 Header 기준 OK ");
             }
         } catch (Exception e) {
