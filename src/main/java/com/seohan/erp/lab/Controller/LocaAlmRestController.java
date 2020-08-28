@@ -29,7 +29,7 @@ class LocaAlmRestController {
 	}
 
 	@PutMapping
-	public ResponseEntity<List<LocaAlmEntity>> endLocaAlmEntity(List<LocaAlmEntity> locaAlmEntitys) {
+	public ResponseEntity<List<LocaAlmEntity>> endLocaAlmEntity(@RequestBody List<LocaAlmEntity> locaAlmEntitys) {
 		return new ResponseEntity<List<LocaAlmEntity>>(locaAlmEntityService.endLocaAlmEntity(locaAlmEntitys), HttpStatus.OK);
 	}
 }
