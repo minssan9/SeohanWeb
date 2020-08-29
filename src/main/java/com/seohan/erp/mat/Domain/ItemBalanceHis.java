@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Data
 @Entity
 @IdClass(ItemBalanceHis.class)
-@Table(name = "ITMBLHIS", schema = "SMLIB")
+@Table(name = "ITMBL0800", schema = "SMLIB")
 public class ItemBalanceHis implements Serializable {
     @Id
     @Length(max=8)

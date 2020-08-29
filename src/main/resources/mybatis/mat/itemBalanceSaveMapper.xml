@@ -5,7 +5,7 @@
 	<!-- 코드 관련 쿼리 -->
 	<update id="saveBalance" parameterType="com.seohan.erp.mat.Dto.ItemBalanceSaveQuery">
 		<![CDATA[
-			insert into SMLIB.ITMBLHIS (GDATE,GTIME,WARHS,ITMNO,QTY,TRIM,MNY)
+			insert into SMLIB.ITMBL0800 (GDATE,GTIME,WARHS,ITMNO,QTY,TRIM,MNY)
 			select cast(#{savingDate} as char(8))  gdate, cast(#{savingTime} as char(4)) gtime, WARHS,ITMNO,SUM(QTY) QTY, TRIM, SUM(MNY) MNY from (
 				SELECT DISTINCT  A.WARHS, A.ITMNO, SUM(A.ONHND) QTY, 0 TRIM, SUM(A.ONHND) *coalesce(CASE WHEN RIGHT(TRIM(A.WARHS),1) = 'B' AND GUBN = 'B' THEN FDANGA  ELSE PURDANGA END, 0) MNY  FROM SMLIB.ITMBLPF A
 				INNER JOIN SMLIB.ITMSTPF ITM ON A.ITMNO = ITM.ITMNO  INNER JOIN SALIB.ACODERP C ON C.ADGUB = 'PJ' AND A.WARHS = C.ASGUB AND AREF1 = 'SHN'
@@ -52,7 +52,7 @@
 
 	<update id="saveBalanceHisLot" parameterType="com.seohan.erp.mat.Dto.ItemBalanceSaveQuery" >
 		<![CDATA[
-			insert into SMLIB.ITMBLHIS (GDATE,GTIME,WARHS,ITMNO,QTY,TRIM)
+			insert into SMLIB.ITMBL0800 (GDATE,GTIME,WARHS,ITMNO,QTY,TRIM)
 			SELECT cast(#{savingDate} AS char(8) CCSID 933)  gdate, cast(#{savingTime} AS char(4) CCSID 833) gtime,
 			 	TRIM(A.WARHS) || '-L' , A.ITMNO, SUM(QTY), 0
 			FROM SMLIB.ITMBLPFSUB A
@@ -151,8 +151,13 @@
 			 INNER JOIN SALIB.ACODERP C ON C.ADGUB = 'PJ' AND BL.WARHS = C.ASGUB AND AREF1 = 'SHN'
 			 where (GDATE = cast(#{savingDate} AS char(8) CCSID 933) ) AND LENGTH(TRIM(WARHS)) = 2   AND WARHS IN ('A','FA','HA') AND GTIME = cast(#{savingTime} AS char(4) CCSID 833)
 			 GROUP BY GDATE, GTIME, LEFT(WARHS,1), WARHS, C.ASDES
-          
-            Union All
+		]]>
+	</update>
+
+
+	<update id="saveBalanceOldHeader" parameterType="com.seohan.erp.mat.Dto.ItemBalanceSaveQuery">
+		<![CDATA[
+			insert into SMLIB.ITMBL08_HD ( GDATE,GTIME,TIMEFLAG,TYPE,TYPEDS,FACT,WARHS,WARHS_NM,QTY,MNY,REF,FILL, BLTYPE)
 			SELECT GDATE, GTIME, 'OLD', 'M' TYPE, '원재료' TYPEDS, LEFT(WARHS,1) FACT, WARHS, C.ASDES WARHS_NM, SUM(BL.QTY) QTY, SUM(PRICE*QTY) MNY, '' REF,'' FILL, BLTYPE
 			FROM SMLIB.ITMBL08_OLD BL
 			INNER JOIN SALIB.ACODERP C ON C.ADGUB = 'PJ' AND BL.WARHS = C.ASGUB AND AREF1 = 'SHN'
@@ -184,7 +189,6 @@
 			where (GDATE = cast(#{savingDate} AS char(8) CCSID 933) ) AND LENGTH(TRIM(WARHS)) = 2   AND WARHS IN ('A','FA','HA')
 				AND GTIME = cast(#{savingTime} AS char(4) CCSID 833)
 			GROUP BY GDATE, GTIME, LEFT(WARHS,1), WARHS, C.ASDES, BLTYPE
-
 		]]>
 	</update>
 </mapper>

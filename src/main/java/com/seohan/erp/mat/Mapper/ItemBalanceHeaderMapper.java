@@ -19,8 +19,8 @@ public class ItemBalanceHeaderMapper {
 		sqlSessionTemplate.update(NAMESPACE +  "saveBalanceHisHeader", itemBalanceSaveQuery);
 	};
 
-//	public void saveBalanceHisOldHeader(ItemBalanceSaveQuery itemBalanceSaveQuery){
-//		sqlSessionTemplate.update(NAMESPACE +  "saveBalanceHisOldHeader", itemBalanceSaveQuery);
-//	};
+	public void saveBalanceOldHeader(ItemBalanceSaveQuery itemBalanceSaveQuery){
+		sqlSessionTemplate.update(NAMESPACE +  "saveBalanceOldHeader", itemBalanceSaveQuery);
+	};
 
 }
