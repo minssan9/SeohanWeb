@@ -1,9 +1,9 @@
 package com.seohan.auth.Controller;
 
-import com.seohan.base.Domain.AccessHis;
-import com.seohan.base.Domain.Code;
+import com.seohan.erp.base.Domain.AccessHis;
+import com.seohan.erp.base.Domain.Code;
 import com.seohan.auth.Dto.OrgUserDto;
-import com.seohan.base.Mapper.AccessHisRepository;
+import com.seohan.erp.base.Mapper.AccessHisRepository;
 import com.seohan.auth.Mapper.OrgUserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
