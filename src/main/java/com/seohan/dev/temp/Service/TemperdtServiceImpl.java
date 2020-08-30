@@ -1,6 +1,6 @@
 package com.seohan.dev.temp.Service;
 
-import com.seohan.dev.Dto.TemperdtDto;
+import com.seohan.dev.temp.Dto.TemperdtDto;
 import com.seohan.dev.temp.Domain.TemperdtEntity;
 import com.seohan.dev.temp.Domain.TemperhdEntity;
 import com.seohan.dev.temp.Mapper.TemperdtRepository;
