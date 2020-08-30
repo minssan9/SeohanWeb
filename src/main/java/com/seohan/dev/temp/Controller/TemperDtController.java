@@ -1,7 +1,7 @@
 package com.seohan.dev.temp.Controller;
 
-import com.seohan.dev.Dto.TemperdtDto;
 import com.seohan.dev.temp.Domain.TemperdtEntity;
+import com.seohan.dev.temp.Dto.TemperdtDto;
 import com.seohan.dev.temp.Mapper.TemperdtRepository;
 import com.seohan.dev.temp.Service.TemperdtService;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,7 @@ class TemperDtController {
 	@Autowired
 	private TemperdtRepository temperdtRepository;
     
-	@PostMapping()
+	@PostMapping
 	public ResponseEntity<TemperdtEntity> createTemperdtEntity(@RequestBody TemperdtDto temperdtDto)  throws Exception {
 		return new ResponseEntity<TemperdtEntity>(temperdtService.save(temperdtDto), HttpStatus.OK);
 	}	 
