@@ -1,7 +1,7 @@
 package com.seohan.erp.lab;
 
-import com.seohan.erp.lab.Domain.LocaAlmEntity;
-import com.seohan.erp.lab.Mapper.LocaAlmEntityRepository;
+import com.seohan.erp.mat.Domain.LocaAlmEntity;
+import com.seohan.erp.mat.Repository.LocaAlmEntityRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
