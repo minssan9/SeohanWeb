@@ -1,7 +1,6 @@
 package com.seohan.erp.prod.Repository;
 
 import com.seohan.erp.prod.Domain.PrdpdpfEntity;
-import com.seohan.erp.prod.Dto.ProdPlanDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PrdpdpfEntityRepository extends JpaRepository<PrdpdpfEntity, String> {
+public interface PrdpdpfRepository extends JpaRepository<PrdpdpfEntity, String> {
 	@Override
 	List<PrdpdpfEntity> findAll();
 
