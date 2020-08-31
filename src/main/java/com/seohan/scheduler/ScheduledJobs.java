@@ -64,43 +64,28 @@ public class ScheduledJobs {
                 .build();
 
         try {
-            List<ItemBalanceHis> itembalanceHis = itemBalanceHisRepository.findByGdateAndGtime(savingDateString, savingTimeString);
-            if (itembalanceHis.isEmpty() || itembalanceHis == null) {
-                itemBalanceHisMapper.saveBalanceByDate(itemBalanceSaveQuery);
-                itemBalanceHisMapper.saveBalanceHisLot(itemBalanceSaveQuery);
-            }
-
-            List<ItemBalanceHisOld> itemBalanceHisOlds = itemBalanceHisOldRepository.findByGdateAndGtime(savingDateString, savingTimeString);
-            if (itemBalanceHisOlds.isEmpty() || itemBalanceHisOlds == null) {
-                itemBalanceHisOldMapper.saveOldBalanceByDate(itemBalanceSaveQuery);
-            }
-
-            List<ItemBalanceHeader> itembalanceHeader = itemBalanceHeaderRepository.findByGdateAndGtime(savingDateString, savingTimeString);
-            if (itembalanceHeader.isEmpty() || itembalanceHeader == null) {
-                itemBalanceHeaderMapper.saveBalanceHisHeader(itemBalanceSaveQuery);
-            }
+            itemBalanceService.saveBalance();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
-
-    @Transactional
-    public void saveBalanceOldByDate(String savingDateString, String savingTimeString) {
-        String targetTable = "";
-
-        LocalDate saveDate = LocalDate.parse(savingDateString, DateTimeFormatter.BASIC_ISO_DATE);
-        LocalDate oldDateTime = saveDate.minusDays(150);
-        String oldDate = oldDateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-
-        ItemBalanceSaveQuery itemBalanceSaveQuery = ItemBalanceSaveQuery.builder()
-                .savingDate(savingDateString)
-                .savingTime(savingTimeString)
-                .oldDate(oldDate)
-                .build();
-        itemBalanceHisOldMapper.saveOldBalanceByDate(itemBalanceSaveQuery);
-    }
+//    @Transactional
+//    public void saveBalanceOldByDate(String savingDateString, String savingTimeString) {
+//        String targetTable = "";
+//
+//        LocalDate saveDate = LocalDate.parse(savingDateString, DateTimeFormatter.BASIC_ISO_DATE);
+//        LocalDate oldDateTime = saveDate.minusDays(150);
+//        String oldDate = oldDateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+//
+//        ItemBalanceSaveQuery itemBalanceSaveQuery = ItemBalanceSaveQuery.builder()
+//                .savingDate(savingDateString)
+//                .savingTime(savingTimeString)
+//                .oldDate(oldDate)
+//                .build();
+//        itemBalanceHisOldMapper.saveOldBalanceByDate(itemBalanceSaveQuery);
+//    }
 
 
 
