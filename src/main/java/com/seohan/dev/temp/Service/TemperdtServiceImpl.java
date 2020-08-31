@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 @Service
 public class TemperdtServiceImpl implements TemperdtService {
@@ -19,19 +20,27 @@ public class TemperdtServiceImpl implements TemperdtService {
     @Autowired
     TemperdtRepository temperdtRepository;
 
-    public TemperdtEntity save(TemperdtDto temperdtDto){
+    public TemperdtEntity save(TemperdtDto temperdtDto) throws NullPointerException{
+        TemperdtEntity saveTemperdtEntity = null;
+        TemperdtEntity temperdtEntity;
+
         String savingDateString = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
 
-        TemperhdEntity temperhdEntity = temperhdRepository.findByIpAddress(temperdtDto.getIpaddress());
-        TemperdtEntity temperdtEntity =  TemperdtEntity.builder()
-                .co_gb(temperhdEntity.getCoGb())
-                .line(temperhdEntity.getLine())
-                .warhs(temperhdEntity.getWarhs())
-                .humidity(temperdtDto.getHumidity())
-                .temper(temperdtDto.getTemper())
-                .dtime(savingDateString)
-                .build();
-        return temperdtRepository.save(temperdtEntity);
+        Optional<TemperhdEntity> optionalTemperhdEntity = temperhdRepository.findByIpAddress(temperdtDto.getIpaddress());
+        TemperhdEntity temperhdEntity = optionalTemperhdEntity.get();
+        if (optionalTemperhdEntity.isPresent()) {
+            temperdtEntity = TemperdtEntity.builder()
+                    .co_gb(temperhdEntity.getCoGb())
+                    .line(temperhdEntity.getLine())
+                    .warhs(temperhdEntity.getWarhs())
+                    .humidity(temperdtDto.getHumidity())
+                    .temper(temperdtDto.getTemper())
+                    .dtime(savingDateString)
+                    .build();
+
+            saveTemperdtEntity = temperdtRepository.save(temperdtEntity);
+        }
+        return saveTemperdtEntity ;
     }
 }
 
