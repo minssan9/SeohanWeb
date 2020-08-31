@@ -15,5 +15,8 @@ public class ItemBalanceSaveQuery {
     private String      savingTime;
     @Length(max = 8)
     private String      oldDate;
-
+    @Length(max = 8)
+    private String      bltype;
+    @Length(max = 8)
+    private String      timeflag;
 }

@@ -57,7 +57,7 @@ public class SeohanWebApplication extends SpringBootServletInitializer {
 				String oldDate = oldDateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 
 				String savingDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-				String savingTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmm"));
+				String savingTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("0800"));
 				ItemBalanceSaveQuery itemBalanceSaveQuery = ItemBalanceSaveQuery.builder()
 						.savingDate(savingDate)
 						.savingTime(savingTime)
@@ -67,6 +67,7 @@ public class SeohanWebApplication extends SpringBootServletInitializer {
 //				itemBalanceService.saveBalanceOldByDate(itemBalanceSaveQuery);
 //				itemBalanceHeaderMapper.saveBalanceHisHeader(itemBalanceSaveQuery);
 //				itemBalanceHeaderMapper.saveBalanceOldHeader(itemBalanceSaveQuery);
+//				itemBalanceService.saveBalanceHeader(itemBalanceSaveQuery);
 			}
 		};
 	}
