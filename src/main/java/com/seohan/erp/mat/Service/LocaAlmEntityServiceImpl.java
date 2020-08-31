@@ -1,13 +1,10 @@
-package com.seohan.erp.lab.Service;
+package com.seohan.erp.mat.Service;
 
-import com.seohan.erp.general.Domain.FoodTable;
-import com.seohan.erp.general.Mapper.FoodTableRepository;
-import com.seohan.erp.lab.Domain.LocaAlmEntity;
-import com.seohan.erp.lab.Mapper.LocaAlmEntityRepository;
+import com.seohan.erp.mat.Domain.LocaAlmEntity;
+import com.seohan.erp.mat.Repository.LocaAlmEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Service

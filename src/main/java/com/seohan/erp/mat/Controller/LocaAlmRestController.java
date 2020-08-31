@@ -1,20 +1,17 @@
-package com.seohan.erp.lab.Controller;
+package com.seohan.erp.mat.Controller;
 
-import com.seohan.erp.lab.Domain.LocaAlmEntity;
-import com.seohan.erp.lab.Mapper.LocaAlmEntityRepository;
-import com.seohan.erp.lab.Service.LocaAlmEntityService;
-import com.seohan.erp.mat.Dto.ImportPlanAlarm;
-import com.seohan.erp.mat.Service.ImportPlanService;
+import com.seohan.erp.mat.Domain.LocaAlmEntity;
+import com.seohan.erp.mat.Repository.LocaAlmEntityRepository;
+import com.seohan.erp.mat.Service.LocaAlmEntityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
-@RequestMapping("/erp/lab/locaalm")
+@RequestMapping("/erp/mat/locaalm")
 @Slf4j 
 @RestController
 class LocaAlmRestController {

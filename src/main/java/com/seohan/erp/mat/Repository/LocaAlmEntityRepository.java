@@ -1,7 +1,6 @@
-package com.seohan.erp.lab.Mapper;
+package com.seohan.erp.mat.Repository;
 
-import com.seohan.erp.lab.Domain.LocaAlmEntity;
-import com.seohan.erp.machine.Domain.OeeErrhisEntity;
+import com.seohan.erp.mat.Domain.LocaAlmEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
