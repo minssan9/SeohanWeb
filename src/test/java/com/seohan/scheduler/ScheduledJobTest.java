@@ -55,7 +55,7 @@ public class ScheduledJobTest {
         String savingDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String savingTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmss"));
 
-        scheduledJobs.saveBalanceOldByDate(savingDate, savingTime);
+//        scheduledJobs.saveBalanceOldByDate(savingDate, savingTime);
 
 //        List<ItemBalanceHisOld> itemBalanceHisOlds =  itemBalanceHisOldRepository.findByGdateAndGtime(savingDate, savingTime);
         List<ItemBalanceHisOld> itemBalanceHisOlds =  itemBalanceHisOldRepository.findByGdateAndGtimeAndBltypeAndAndIndateGreaterThan (savingDate, savingTime,"OLDDATE", "20200327");
