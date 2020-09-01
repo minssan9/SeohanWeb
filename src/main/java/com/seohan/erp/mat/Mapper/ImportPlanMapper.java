@@ -18,6 +18,6 @@ public class ImportPlanMapper {
 	private SqlSession sqlSessionTemplate;
 
 	public List<ImportPlanAlarm> findGetOmissionItemList(ImportPlanAlarmQuery importPlanAlarmQuery){
-		return sqlSessionTemplate .selectList(NAMESPACE +  "findGetOmissionItemList", importPlanAlarmQuery);
+		return sqlSessionTemplate.selectList(NAMESPACE +  "findGetOmissionItemList", importPlanAlarmQuery);
 	};
 }

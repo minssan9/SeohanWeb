@@ -1,10 +1,7 @@
-package com.seohan;
+package com.seohan.scheduler;
 
 import com.seohan.erp.mat.Dto.ImportPlanAlarm;
-import com.seohan.erp.mat.Dto.ImportPlanAlarmQuery;
-import com.seohan.erp.mat.Mapper.ImportPlanMapper;
 import com.seohan.erp.mat.Service.ImportPlanService;
-import com.sun.deploy.trace.Trace;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
@@ -23,9 +20,6 @@ public class ImportPlanTest {
     @Autowired
     ImportPlanService importPlanService;
 
-    @Autowired
-    ImportPlanMapper importPlanMapper;
-
     @Test
     public void importPlanAlarmsTest() {
         Assert.assertNotNull(importPlanService.getOmissionItemList("4060066"));
@@ -33,16 +27,11 @@ public class ImportPlanTest {
 
     @Test
     public void importPlanAlarmsMybatisTest() {
-        ImportPlanAlarmQuery importPlanAlarmQuery
-                = ImportPlanAlarmQuery.builder()
-                .workdate("20200729")
-                .fromdate("20200723")
-                .todate("20200807")
-                .userid("4060066")
-                .build();
+        String testUserId ="4060066";
 
-        List<ImportPlanAlarm> importPlanAlarms = importPlanMapper.findGetOmissionItemList(importPlanAlarmQuery);
-        Trace.println(importPlanAlarms.toString());
-        Assert.assertNotNull(importPlanMapper.findGetOmissionItemList(importPlanAlarmQuery));
+        List<ImportPlanAlarm> importPlanAlarms = importPlanService.getOmissionItemList(testUserId );
+
+        System.out.println(importPlanAlarms.toString());
+        Assert.assertNotNull(importPlanAlarms);
     }
 }
