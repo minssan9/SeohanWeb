@@ -18,7 +18,9 @@ public interface ItemRepository extends JpaRepository<ItemView, Long> {
 	@Query(value="select distinct a.* from SMLIB.ITMSTPF_VW A WHERE ACTGB=:actgb", nativeQuery=true)
 	Page<ItemView> findByActgb(String actgb, Pageable pageable);
 
-	Page<ItemView> findByItmnoContainsOrpOrPumgbContains(String itmno, String pumgb, Pageable pageable);
+	Page<ItemView> findByItmnoContains(String itmno, Pageable pageable);
+
+	Page<ItemView> findByItmnoContainsOrPumgbContains(String itmno, String pumgb, Pageable pageable);
 
 
 	@Query(value="select distinct a.* from SMLIB.ITMSTPF_VW A WHERE pumgb=:pumgb", nativeQuery=true)

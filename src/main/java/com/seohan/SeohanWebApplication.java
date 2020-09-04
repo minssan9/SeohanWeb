@@ -29,6 +29,9 @@ import java.time.format.DateTimeFormatter;
 @CrossOrigin(origins = { "http://localhost:8091",  "http://localhost:8090",  "http://localhost"})
 public class SeohanWebApplication extends SpringBootServletInitializer {
 
+	public static DateTimeFormatter dateFormatString = DateTimeFormatter.ofPattern("yyyyMMdd");
+	public static DateTimeFormatter timeFormatString = DateTimeFormatter.ofPattern("HHmm");
+
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(SeohanWebApplication.class);

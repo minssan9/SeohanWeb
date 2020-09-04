@@ -22,6 +22,7 @@ public class LabTest {
     @Autowired
     ItmblpfsubRepository itmblpfsubRepository;
 
+
     @Test
     public void LocaAlmTest (){
         List<LocaAlmEntity> locaAlmEntityList = locaAlmEntityRepository.findLocaAlmEntityByGubnAndSts("A2", "1");

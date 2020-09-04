@@ -16,5 +16,6 @@ public interface ItmblpfsubRepository extends JpaRepository<ItmblpfsubEntity, Lo
 
 	List<ItmblpfsubEntity> findByWarhsAndItmnoContains(String warhs, String itmno);
 
+	ItmblpfsubEntity findByWarhsAndLocatAndItmno(String warhs , String locat, String itmno);
 
 }

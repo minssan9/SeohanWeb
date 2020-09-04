@@ -1,23 +1,17 @@
 package com.seohan.erp.mat.Domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Data
 @Entity
-@Builder
-@Table(name = "ITMBLPFSUB", schema = "SMLIB")
-@NoArgsConstructor
-@AllArgsConstructor
-public class ItmblpfsubEntity {
+@Table(name = "ITMBLPFSUB_VW", schema = "SMLIB", catalog = "")
+public class ItmblpfsubView {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String itmno;
     private String warhs;
     private String locat;
@@ -27,4 +21,7 @@ public class ItmblpfsubEntity {
     private int qty;
     private int jqty;
     private String sts;
+    private String dscrp;
+    private String spcds;
+
 }

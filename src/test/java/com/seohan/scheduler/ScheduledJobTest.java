@@ -19,6 +19,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import static com.seohan.SeohanWebApplication.dateFormatString;
+import static com.seohan.SeohanWebApplication.timeFormatString;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
@@ -40,8 +43,8 @@ public class ScheduledJobTest {
 
     @Test
     public void saveBalanceTest(){
-        String savingDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        String savingTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmss"));
+        String savingDate = LocalDateTime.now().format(dateFormatString);
+        String savingTime = LocalDateTime.now().format(timeFormatString);
         savingTime = "0900";
         boolean successSaveFlag = scheduledJobs.saveBalance(savingDate, savingTime);
 
