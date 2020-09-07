@@ -7,6 +7,7 @@ import com.seohan.erp.mat.Mapper.ItemBalanceHeaderMapper;
 import com.seohan.erp.mat.Repository.ItemBalanceHeaderRepository;
 import com.seohan.erp.mat.Repository.ItemBalanceHisOldRepository;
 import com.seohan.erp.mat.Repository.ItemBalanceHisRepository;
+import com.seohan.erp.mat.Service.ItemBalanceService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,14 +26,12 @@ import java.util.List;
 public class ScheduledJobTest {
 
     @Autowired
-    private ScheduledJobs scheduledJobs;
-
-    @Autowired
     private ItemBalanceHisRepository itemBalanceHisRepository;
 
     @Autowired
+    private ItemBalanceService itemBalanceService;
+    @Autowired
     private ItemBalanceHisOldRepository itemBalanceHisOldRepository;
-
     @Autowired
     private ItemBalanceHeaderRepository itemBalanceHeaderRepository;
     @Autowired
@@ -43,11 +42,10 @@ public class ScheduledJobTest {
         String savingDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String savingTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmss"));
         savingTime = "0900";
-        boolean successSaveFlag = scheduledJobs.saveBalance(savingDate, savingTime);
+        itemBalanceService.saveBalanceNow();
 
 //        List<ItemBalanceHis> savedItemList=  itemBalanceHisRepository.findByGdateAndGtime(savingDate, savingTime);
-
-        Assert.assertEquals (successSaveFlag , true); ;
+//        Assert.assertNotNull(itemBalanceHisOlds) ;
     }
 
     @Test
