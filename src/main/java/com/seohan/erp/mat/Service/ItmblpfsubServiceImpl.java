@@ -37,8 +37,13 @@ public class ItmblpfsubServiceImpl implements ItmblpfsubService {
         if (originItmblpfsub.getJqty() < itmblpfsubDto.getChangedQty()) throw new ArithmeticException("재고 수량이 부족합니다. 가능재고 : "+ originItmblpfsub.getJqty());
 
         // 기존 재고 차감
-        originItmblpfsub.setJqty( originItmblpfsub.getJqty() - itmblpfsubDto.getChangedQty());
-        itmblpfsubRepository.save(originItmblpfsub);
+        if ( originItmblpfsub.getJqty() - itmblpfsubDto.getChangedQty()== 0  ){
+            itmblpfsubRepository.delete(originItmblpfsub);
+        }else{
+            originItmblpfsub.setJqty( originItmblpfsub.getJqty() - itmblpfsubDto.getChangedQty());
+            itmblpfsubRepository.save(originItmblpfsub);
+        }
+
 
         // 이동한 위치에 존재하면 더하기, 없으면 신규 생성
         ItmblpfsubEntity newItmblpfsub =ItmblpfsubEntity.builder()
@@ -53,7 +58,7 @@ public class ItmblpfsubServiceImpl implements ItmblpfsubService {
                 .sts("1")
                 .build();
 
-        ItmblpfsubEntity destItmblpfsub = itmblpfsubRepository.findByWarhsAndLocatAndItmno(itmblpfsubDto.getWarhs(), itmblpfsubDto.getLocat(), itmblpfsubDto.getItmno());
+        ItmblpfsubEntity destItmblpfsub = itmblpfsubRepository.findByWarhsAndLocatAndItmno(itmblpfsubDto.getWarhs(), itmblpfsubDto.getChangedLocat(), itmblpfsubDto.getItmno());
         if (destItmblpfsub!=null) {
             newItmblpfsub.setId(destItmblpfsub.getId());
             newItmblpfsub.setJqty(destItmblpfsub.getJqty() + newItmblpfsub.getJqty());

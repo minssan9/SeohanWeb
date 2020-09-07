@@ -31,9 +31,13 @@ class WarehouseRestController {
 	}
 
 	@PutMapping
-	public ResponseEntity moveLocation(@RequestBody ItmblpfsubDto itmblpfsubDto ) throws Exception {
-		ItmblpfsubEntity itmblpfsubEntity = itmblpfsubService.moveLocation(itmblpfsubDto);
-		return new ResponseEntity(itmblpfsubEntity, HttpStatus.OK);
+	public ResponseEntity moveLocation(@RequestBody ItmblpfsubDto itmblpfsubDto )  {
+		try {
+			ItmblpfsubEntity itmblpfsubEntity = itmblpfsubService.moveLocation(itmblpfsubDto);
+			return new ResponseEntity(itmblpfsubEntity, HttpStatus.OK);
+		}catch (Exception e){
+			return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
 	}
 
 

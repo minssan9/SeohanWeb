@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.SpringApplicationRunListener;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -18,7 +17,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -66,7 +64,7 @@ public class SeohanWebApplication extends SpringBootServletInitializer {
 						.savingTime(savingTime)
 						.oldDate(oldDate)
 						.build();
-//				itemBalanceService.saveBalance();
+//				itemBalanceService.saveBalance(itemBalanceSaveQuery );
 //				itemBalanceService.saveBalanceNow(itemBalanceSaveQuery);
 //				itemBalanceService.saveBalanceOldByDate(itemBalanceSaveQuery);
 //				itemBalanceHeaderMapper.saveBalanceHisHeader(itemBalanceSaveQuery);
