@@ -41,7 +41,4 @@ class WarehouseRestController {
 	}
 
 
-//	@PostMapping
-////	public
-
 }

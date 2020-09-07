@@ -3,6 +3,7 @@ package com.seohan.scheduler;
 import com.seohan.erp.mat.Service.ItemBalanceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -12,9 +13,8 @@ import java.time.format.DateTimeFormatter;
 
 @Slf4j
 @Component
+@Profile("prod")
 public class Scheduler  {
-	@Autowired
-	private com.seohan.scheduler.ScheduledJobs scheduledJobs;
 
 	@Autowired
 	private ItemBalanceService itemBalanceService;
@@ -25,9 +25,7 @@ public class Scheduler  {
 		String nowDate = now.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 		String nowTime = now.format(DateTimeFormatter.ofPattern("HHmmss"));
 
-
-//		scheduledJobs.saveBalance(nowDate, nowTime);
-		itemBalanceService.saveBalance();
+		itemBalanceService.saveBalanceNow();
 
 //		scheduledJobs.saveBalanceOldByDate(nowDate, nowTime );
 		System.out.println("Java cron job expression:: " + nowDate + nowTime);

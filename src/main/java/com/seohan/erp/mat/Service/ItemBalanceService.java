@@ -5,8 +5,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface ItemBalanceService {
-    void saveBalance();
-    void saveBalanceNow(ItemBalanceSaveQuery itemBalanceSaveQuery);
+    void saveBalanceNow();
+    void saveBalance(ItemBalanceSaveQuery itemBalanceSaveQuery);
+    void saveBalanceCurrentBalance(ItemBalanceSaveQuery itemBalanceSaveQuery);
     void saveBalanceOldByLot(ItemBalanceSaveQuery itemBalanceSaveQuery);
     void saveBalanceOldByDate(ItemBalanceSaveQuery itemBalanceSaveQuery);
     void saveBalanceHeader(ItemBalanceSaveQuery itemBalanceSaveQuery);
