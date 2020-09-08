@@ -28,7 +28,7 @@ class ItemRestController {
 	 @GetMapping("params" )
 	 public ResponseEntity searchItems(Pageable pageable, @RequestParam String itmno, @RequestParam String itemtype) {
 //		 return new ResponseEntity(itemRepository.findByItmnoContains(itmno,  pageable), HttpStatus.OK);
-		 return new ResponseEntity(itemRepository.findByItmnoContainsAndPumgbContains(itmno, itemtype, pageable), HttpStatus.OK);
+		 return new ResponseEntity(itemRepository.findByItmnoContainsOrPumgb(itmno, itemtype, pageable), HttpStatus.OK);
 	 }
 
 //	@GetMapping(path= {"/search"})
