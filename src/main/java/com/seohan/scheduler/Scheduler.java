@@ -1,37 +1,50 @@
 package com.seohan.scheduler;
 
-import com.seohan.mat.Mapper.ItemBalanceHisRepository;
-import com.seohan.mat.Mapper.ItemBalanceRepository;
+import com.seohan.erp.mat.Service.ItemBalanceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Slf4j
 @Component
+@Profile("prod")
 public class Scheduler  {
+
 	@Autowired
-	private ScheduledJobs scheduledJobs;
+	private ItemBalanceService itemBalanceService;
 
 	@Scheduled(cron = "0 0 8 * * ?")
-	public void saveBalanceJobSch() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
-		Date now = new Date();
-		String strDate = sdf.format(now);
+	public void saveBalance08JobSch() {
+		LocalDateTime now = LocalDateTime.now();
+		String nowDate = now.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		String nowTime = now.format(DateTimeFormatter.ofPattern("HHmmss"));
 
-		scheduledJobs.saveBalance(strDate );
-		System.out.println("Java cron job expression:: " + strDate); 
+		itemBalanceService.saveBalanceNow();
+
+//		scheduledJobs.saveBalanceOldByDate(nowDate, nowTime );
+		System.out.println("Java cron job expression:: " + nowDate + nowTime);
+	}
+
+	@Scheduled(cron = "0 0 0 * * ?")
+	public void saveBalance00JobSch() {
+		LocalDateTime now = LocalDateTime.now();
+		String nowDate = now.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		String nowTime = now.format(DateTimeFormatter.ofPattern("HHmmss"));
+
+		itemBalanceService.saveBalanceNow();
+
+//		scheduledJobs.saveBalanceOldByDate(nowDate, nowTime );
+		System.out.println("Java cron job expression:: " + nowDate + nowTime);
 	}
 
 	@Scheduled(fixedDelay = 1000)
 	public void getStockDataSch() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-		Date now = new Date();
-		String strDate = sdf.format(now);
-//		System.out.println("Java cron job expression:: " + strDate);
+
 	}
 }
