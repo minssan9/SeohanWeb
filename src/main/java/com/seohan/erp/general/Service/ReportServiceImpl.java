@@ -1,7 +1,7 @@
 package com.seohan.erp.general.Service;
 
 import com.seohan.erp.general.Domain.Report;
-import com.seohan.erp.general.Mapper.ReportRepository;
+import com.seohan.erp.general.Repository.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

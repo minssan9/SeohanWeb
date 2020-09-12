@@ -1,12 +1,10 @@
 package com.seohan.erp.general.Service;
 
-import java.util.Objects;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.seohan.erp.general.Domain.User;
-import com.seohan.erp.general.Mapper.UserRepository;
+import com.seohan.erp.general.Repository.UserRepository;
 
 /**
  * Created by vivie on 2017-06-08.

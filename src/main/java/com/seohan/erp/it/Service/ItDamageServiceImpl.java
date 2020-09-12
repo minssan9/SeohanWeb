@@ -1,25 +1,21 @@
-package com.seohan.erp.general.Service;
+package com.seohan.erp.it.Service;
+
+import com.seohan.erp.general.Domain.ItDamage;
+import com.seohan.erp.general.Domain.Report;
+import com.seohan.erp.general.Repository.ReportRepository;
+import com.seohan.erp.it.Repository.ItDamageRepository;
+import org.apache.commons.io.FilenameUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import org.apache.commons.io.FilenameUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.seohan.file.Service.FileService;
-import com.seohan.erp.general.Domain.ItDamage;
-import com.seohan.erp.general.Domain.Report;
-import com.seohan.erp.general.Mapper.ItDamageRepository;
-import com.seohan.erp.general.Mapper.ReportRepository;
-
 @Service
 public class ItDamageServiceImpl implements ItDamageService {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 
-	@Autowired
-	FileService fileService;
 	@Autowired
     ReportRepository reportRepository; 
     @Autowired
@@ -41,6 +37,7 @@ public class ItDamageServiceImpl implements ItDamageService {
 //		smsModel.setContent(itDamage.getRtxt() + " - 조치 완료 / 확인 후 미조치사항 전산팀 연락 바람");
 //		smsModel.setPhone(itDamage.getRtel());
 //		smsModel.setSendNo("043-530-3174");
+
 		Report report = new Report();
 		String docuNo[] = itDamage.getClass3().split("-");
 		if (itDamage.getClass3().trim().length()> 0 ) {
@@ -52,6 +49,8 @@ public class ItDamageServiceImpl implements ItDamageService {
 			report.setEdate(nowDate.substring(8));
 			report.setEtime(nowDate.substring(8, 14));
 			report.setStat("9");
+
+
 			try{
 				reportRepository.save(report);			
 			}

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.seohan.erp.general.Domain.Report;
-import com.seohan.erp.general.Mapper.ReportRepository;
+import com.seohan.erp.general.Repository.ReportRepository;
 import com.seohan.erp.general.Service.ReportService;
 
 import lombok.extern.slf4j.Slf4j; 

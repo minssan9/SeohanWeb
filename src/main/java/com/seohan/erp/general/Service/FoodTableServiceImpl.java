@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.seohan.erp.general.Domain.FoodTable;
-import com.seohan.erp.general.Mapper.FoodTableRepository;
+import com.seohan.erp.general.Repository.FoodTableRepository;
 
 @Service
 public class FoodTableServiceImpl implements FoodTableService {

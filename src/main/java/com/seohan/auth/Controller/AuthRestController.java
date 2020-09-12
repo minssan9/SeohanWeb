@@ -2,7 +2,7 @@ package com.seohan.auth.Controller;
 
 import com.seohan.common.Service.JwtService;
 import com.seohan.erp.general.Domain.User;
-import com.seohan.erp.general.Mapper.UserRepository;
+import com.seohan.erp.general.Repository.UserRepository;
 import com.seohan.erp.general.Service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

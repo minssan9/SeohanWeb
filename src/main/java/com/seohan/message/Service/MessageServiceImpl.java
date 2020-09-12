@@ -1,7 +1,6 @@
 package com.seohan.message.Service;
 
 import java.net.URI;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,21 +12,20 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.seohan.erp.base.Domain.KakaoMessageModel;
+import com.seohan.message.Dto.MessageModel;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
 public class MessageServiceImpl implements MessageService {
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 
 	@Value("${server.message}")
 	private String messageServerUrl;
 
 	@Override
-	public String sendMessage(KakaoMessageModel kakaoMessageModel) throws Exception {
-		URI uri = new URI(messageServerUrl + "/kakao/save");
+	public String sendMessage(MessageModel messageModel) throws Exception {
+		URI uri = new URI(messageServerUrl + "/message");
 
 		// RestTemplate 에 MessageConverter 세팅
 		List<HttpMessageConverter<?>> converters = new ArrayList<HttpMessageConverter<?>>();
@@ -39,10 +37,11 @@ public class MessageServiceImpl implements MessageService {
 		restTemplate.setMessageConverters(converters); 
 
 		// REST API 호출
-		String result = restTemplate.postForObject(uri, kakaoMessageModel, String.class);
+		String result = restTemplate.postForObject(uri, messageModel, String.class);
+
+
 		System.out.println("------------------ TEST 결과 ------------------");
 		System.out.println(result);
-
 		return result;
 	}
 

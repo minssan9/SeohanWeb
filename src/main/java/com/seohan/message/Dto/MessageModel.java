@@ -1,11 +1,11 @@
-package com.seohan.erp.base.Domain;
+package com.seohan.message.Dto;
 
 import java.sql.Date;
 
 import lombok.Data;
 
 @Data 
-public class KakaoMessageModel { 
+public class MessageModel {
 	private int mt_pr;
 	private String mt_refkey;
 	private String priority;

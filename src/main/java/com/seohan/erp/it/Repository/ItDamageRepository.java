@@ -1,4 +1,4 @@
-package com.seohan.erp.general.Mapper;
+package com.seohan.erp.it.Repository;
 
 import java.util.List;
 

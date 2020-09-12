@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.seohan.erp.general.Domain.FoodTable;
 import com.seohan.erp.general.Domain.FoodTableKamtec;
 import com.seohan.erp.general.Domain.FoodTableLab;
-import com.seohan.erp.general.Domain.TemperatureData;
-import com.seohan.erp.general.Mapper.FoodTableKamtecRepository;
-import com.seohan.erp.general.Mapper.FoodTableLabRepository;
-import com.seohan.erp.general.Mapper.FoodTableRepository;
-import com.seohan.erp.general.Mapper.TemperatureRepository;
+import com.seohan.erp.general.Repository.FoodTableKamtecRepository;
+import com.seohan.erp.general.Repository.FoodTableLabRepository;
+import com.seohan.erp.general.Repository.FoodTableRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,9 +30,6 @@ class ETCRestController {
 	private FoodTableKamtecRepository foodTableKamtecRepo;
 	@Autowired
 	private FoodTableLabRepository foodTableLabRepo;
-	@Autowired
-	private TemperatureRepository temperatureRepo;
-
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -57,8 +52,4 @@ class ETCRestController {
 		return foodTableLabRepo.findByGdate(foodTable.getGdate());
 	}
 
-	@GetMapping("/temperature")
-	public @ResponseBody List<TemperatureData> TemperatureList(TemperatureData temperatureData) throws Exception {
-		return temperatureRepo.TemperatureDataList(temperatureData.getCO_GB(), temperatureData.getCO_GB());
-	} 
 }
