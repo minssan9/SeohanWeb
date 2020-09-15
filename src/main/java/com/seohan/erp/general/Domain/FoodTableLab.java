@@ -7,13 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
-import lombok.Data; 
+import lombok.Data;
 
 @Data
-@Entity 
-@IdClass(FoodTableLab.class) 
+@Entity
+@IdClass(FoodTableLab.class)
 @Table(name="SFOODTABLE", schema="SITLIB")
-public class FoodTableLab implements Serializable { 
+public class FoodTableLab  extends Food implements Serializable {
 	@Id
 	String gdate;
 	@Id
@@ -22,5 +22,5 @@ public class FoodTableLab implements Serializable {
 	long ser;
 	String menu;
 	String bigo;
-	
+
 }

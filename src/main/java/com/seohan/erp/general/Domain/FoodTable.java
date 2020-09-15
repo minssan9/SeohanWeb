@@ -1,26 +1,25 @@
 package com.seohan.erp.general.Domain;
 
-import java.io.Serializable;
+import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
-
-import lombok.Data; 
+import java.io.Serializable;
 
 @Data
-@Entity 
-@IdClass(FoodTable.class) 
+@Entity
+@IdClass(FoodTable.class)
 @Table(name="FOODTABLE", schema="SITLIB")
-public class FoodTable implements Serializable { 
+public class FoodTable extends Food implements Serializable {
 	@Id
-	String gdate;
+	private String gdate;
 	@Id
-	String gubn;
+	private String gubn;
 	@Id
-	long ser;
-	String menu;
-	String bigo;
-	
+	private long ser;
+	private String menu;
+	private String bigo;
+
 }

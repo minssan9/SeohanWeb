@@ -1,26 +1,18 @@
 package com.seohan.erp.general.Domain;
 
-import java.io.Serializable;
+import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
-
-import lombok.Data;
+import java.io.Serializable;
 
 @Data
-@Entity
-@IdClass(FoodTableKamtec.class)
-@Table(name="FOODTABLE", schema="KITLIB")
-public class FoodTableKamtec  extends Food implements Serializable {
-	@Id
+public class Food {
 	String gdate;
-	@Id
 	String gubn;
-	@Id
 	long ser;
 	String menu;
 	String bigo;
-
 }
