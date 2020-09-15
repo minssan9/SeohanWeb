@@ -14,8 +14,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.seohan.config.FileProperties;
-import com.seohan.file.Domain.FileDownloadException;
-import com.seohan.file.Domain.FileUploadException;
 
 import static com.seohan.config.FileProperties.FILE_FOLDER_ROOT_PATH;
 

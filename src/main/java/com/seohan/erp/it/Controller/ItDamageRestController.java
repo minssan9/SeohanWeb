@@ -40,12 +40,12 @@ class ItDamageRestController {
 	private FileService fileService;
 
 	@GetMapping("/params")
-	public @ResponseBody ResponseEntity getAllList(@RequestParam String stat) throws Exception {
+	public ResponseEntity getAllList(@RequestParam String stat) throws Exception {
 		return new ResponseEntity(itDamageRepo.findItDamageByStat(stat), HttpStatus.OK);
 	}
 
 	@GetMapping("{rtime}")
-	public @ResponseBody ResponseEntity getOneItDamage(@PathVariable String rtime) throws Exception {
+	public  ResponseEntity getOneItDamage(@PathVariable String rtime) throws Exception {
 		return new ResponseEntity(itDamageRepo.findItDamageByRtime("SEOHAN", rtime), HttpStatus.OK);
 	}
 	@PutMapping

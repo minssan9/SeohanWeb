@@ -28,7 +28,8 @@ public class Scheduler  {
 		itemBalanceService.saveBalanceNow();
 
 //		scheduledJobs.saveBalanceOldByDate(nowDate, nowTime );
-		System.out.println("Java cron job expression:: " + nowDate + nowTime);
+		log.info("Java cron job expression:: " + nowDate + nowTime);
+//		System.out.println("Java cron job expression:: " + nowDate + nowTime);
 	}
 
 	@Scheduled(fixedDelay = 1000)
