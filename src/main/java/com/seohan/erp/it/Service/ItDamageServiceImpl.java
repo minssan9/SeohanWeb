@@ -1,6 +1,6 @@
 package com.seohan.erp.it.Service;
 
-import com.seohan.erp.general.Domain.ItDamage;
+import com.seohan.erp.it.Domain.ItDamage;
 import com.seohan.erp.general.Domain.Report;
 import com.seohan.erp.general.Repository.ReportRepository;
 import com.seohan.erp.it.Repository.ItDamageRepository;
@@ -8,14 +8,15 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.List;
 
+import static com.seohan.SeohanWebApplication.dateFormatString;
+import static com.seohan.SeohanWebApplication.timeFormatString;
+
 @Service
 public class ItDamageServiceImpl implements ItDamageService {
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-
 	@Autowired
     ReportRepository reportRepository; 
     @Autowired
@@ -29,14 +30,11 @@ public class ItDamageServiceImpl implements ItDamageService {
 	@Override
 //	@Transactional
 	public ItDamage update(ItDamage itDamage) throws Exception {
-		Calendar cal = Calendar.getInstance();
-		String nowDate = sdf.format(cal.getTime());	 
+		String nowDate =  LocalDateTime.now().format(dateFormatString);
+		String nowTime = LocalDateTime.now().format(timeFormatString);
 		
 		itDamage.setCtime(nowDate);
 		itDamage.setStat("09");
-//		smsModel.setContent(itDamage.getRtxt() + " - 조치 완료 / 확인 후 미조치사항 전산팀 연락 바람");
-//		smsModel.setPhone(itDamage.getRtel());
-//		smsModel.setSendNo("043-530-3174");
 
 		Report report = new Report();
 		String docuNo[] = itDamage.getClass3().split("-");
@@ -65,12 +63,12 @@ public class ItDamageServiceImpl implements ItDamageService {
 	
 	@Override 
 	public ItDamage save(ItDamage itDamage) throws Exception {
-		Calendar cal = Calendar.getInstance();
-		String nowDate = sdf.format(cal.getTime());	 
-		
+		String nowDate =  LocalDateTime.now().format(dateFormatString);
+		String nowTime = LocalDateTime.now().format(timeFormatString);
+
 		itDamage.setCo_gb("SEOHAN");
 		itDamage.setStat("01");
-		itDamage.setRtime(nowDate); 
+		itDamage.setRtime(nowDate + nowTime);
 		itDamage.setClass1(itDamage.getClass1().replace(" ",""));
 		if(!itDamage.getAttach().equals("")) {
 			String ext = FilenameUtils.getExtension(itDamage.getAttach());

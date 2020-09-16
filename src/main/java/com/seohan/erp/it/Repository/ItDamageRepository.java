@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.seohan.erp.general.Domain.ItDamage;
+import com.seohan.erp.it.Domain.ItDamage;
 
 @Repository
 public interface ItDamageRepository extends JpaRepository<ItDamage, Long> {

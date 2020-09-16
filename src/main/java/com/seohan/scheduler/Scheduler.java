@@ -7,9 +7,11 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import static com.seohan.SeohanWebApplication.dateFormatString;
+import static com.seohan.SeohanWebApplication.timeFormatString;
 
 @Slf4j
 @Component
@@ -21,9 +23,8 @@ public class Scheduler  {
 
 	@Scheduled(cron = "0 0 8 * * ?")
 	public void saveBalanceJobSch() {
-		LocalDateTime now = LocalDateTime.now();
-		String nowDate = now.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-		String nowTime = now.format(DateTimeFormatter.ofPattern("HHmmss"));
+		String nowDate = LocalDateTime.now().format(dateFormatString);
+		String nowTime = LocalDateTime.now().format(timeFormatString);
 
 		itemBalanceService.saveBalanceNow();
 

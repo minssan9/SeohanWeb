@@ -1,7 +1,6 @@
 package com.seohan.erp.it.Domain;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.seohan.erp.general.Domain.ItDamage;
 import lombok.*;
 
 import javax.persistence.Entity;

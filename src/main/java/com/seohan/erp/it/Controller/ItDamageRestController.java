@@ -1,6 +1,6 @@
 package com.seohan.erp.it.Controller;
 
-import com.seohan.erp.general.Domain.ItDamage;
+import com.seohan.erp.it.Domain.ItDamage;
 import com.seohan.erp.it.Domain.ItDamageFile;
 import com.seohan.erp.it.Repository.ItDamageRepository;
 import com.seohan.erp.it.Service.ItDamageService;
