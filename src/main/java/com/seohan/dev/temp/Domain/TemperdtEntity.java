@@ -1,7 +1,9 @@
 package com.seohan.dev.temp.Domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -9,6 +11,7 @@ import java.util.Objects;
 @Entity
 @Data
 @Builder
+@AllArgsConstructor
 @Table(name = "TEMPERDT", schema = "GMLIB", catalog = "")
 public class TemperdtEntity {
     @Id
