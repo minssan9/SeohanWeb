@@ -12,6 +12,7 @@ import java.util.Objects;
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "TEMPERDT", schema = "GMLIB", catalog = "")
 public class TemperdtEntity {
     @Id

@@ -1,4 +1,4 @@
-package com.seohan.erp.general.Domain.Food;
+package com.seohan.erp.general.Domain;
 
 import lombok.Data;
 
@@ -11,9 +11,9 @@ import java.io.Serializable;
 
 @Data
 @Entity
-@IdClass(Food.class)
+@IdClass(MngFood.class)
 @Table(name="FOOD_VW", schema="AALIB")
-public class Food implements Serializable {
+public class MngFood implements Serializable {
 	@Id
 	String companycode;
 	@Id

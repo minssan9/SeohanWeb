@@ -2,7 +2,7 @@ package com.seohan.erp.general.Controller;
 
 import java.util.List;
 
-import com.seohan.erp.general.Domain.Food.Food;
+import com.seohan.erp.general.Domain.MngFood;
 import com.seohan.erp.general.Repository.FoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +21,8 @@ class FoodRestController {
 	private FoodRepository foodRepo;
 
 	@GetMapping
-	public @ResponseBody List<Food> FoodTable(@RequestParam String gdate, @RequestParam String companycode) {
-		List<Food> foods = foodRepo.findByCompanycodeAndGdate(companycode, gdate);
+	public @ResponseBody List<MngFood> FoodTable(@RequestParam String gdate, @RequestParam String companycode) {
+		List<MngFood> foods = foodRepo.findByCompanycodeAndGdate(companycode, gdate);
 
 //		switch (companycode) {
 //			case "KAMTEC":
