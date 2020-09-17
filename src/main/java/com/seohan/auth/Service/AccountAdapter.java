@@ -27,7 +27,7 @@ public class AccountAdapter extends User {
     private static Collection<? extends GrantedAuthority> authorities(List<AccountRoles> roles) {
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
         for (AccountRoles accountRoles:roles) {
-            authorityList.add(new SimpleGrantedAuthority("ROLE_" + accountRoles.getRoles()));
+            authorityList.add(new SimpleGrantedAuthority("ROLE_" + accountRoles));
         }
 //        roles.stream().forEach(r -> authorityList.add(new SimpleGrantedAuthority("ROLE_" + r.name())));
         return authorityList;

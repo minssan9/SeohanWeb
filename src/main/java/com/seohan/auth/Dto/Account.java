@@ -27,4 +27,5 @@ public class Account {
 //	@Enumerated(EnumType.STRING)
 //	@JoinColumn(name="accountid", nullable = false)
 	private List<AccountRoles> roles;
+
 }

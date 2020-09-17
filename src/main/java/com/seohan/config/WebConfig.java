@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -24,6 +25,10 @@ public class WebConfig implements WebMvcConfigurer {
 			"/error/**"
 			};
 
+	@Bean
+	public RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
 
 	@Autowired
 	private Environment environment;
@@ -35,6 +40,8 @@ public class WebConfig implements WebMvcConfigurer {
 		registry.addMapping("/**")
 				.allowedOrigins("*")
 				.allowedMethods("GET", "POST", "PUT", "DELETE")
+				.allowedHeaders("*")
+				.allowCredentials(true)
 				.maxAge(3600);
 
 //		registry.addMapping(EXCLUDE_PATHS.toString())
@@ -93,6 +100,6 @@ public class WebConfig implements WebMvcConfigurer {
 //        source.registerCorsConfiguration("/**", config);
 //        return new CorsFilter(source);
 //    }
-    
-    
+
+
 }

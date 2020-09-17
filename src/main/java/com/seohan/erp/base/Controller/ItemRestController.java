@@ -1,5 +1,5 @@
 package com.seohan.erp.base.Controller;
- 
+
 import com.seohan.erp.base.Mapper.BomAssyRepository;
 import com.seohan.erp.base.Mapper.BomRepository;
 import com.seohan.erp.base.Mapper.ItemRepository;
@@ -25,7 +25,7 @@ class ItemRestController {
 	@Autowired
 	private BomAssyRepository bomAssyRepository;
 
-	 @GetMapping("search" )
+	 @GetMapping("params" )
 	 public ResponseEntity searchItems(Pageable pageable, @RequestParam String itmno, @RequestParam String pumgb) {
 //		 return new ResponseEntity(itemRepository.findByItmnoContains(itmno,  pageable), HttpStatus.OK);
 		 return new ResponseEntity(itemRepository.findByItmnoContainsOrPumgbContains(itmno, pumgb, pageable), HttpStatus.OK);
@@ -44,4 +44,3 @@ class ItemRestController {
 
 }
 
- 
