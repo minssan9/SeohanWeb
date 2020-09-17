@@ -39,11 +39,9 @@ public class ItemBalanceServiceImpl implements ItemBalanceService{
     @Autowired
     private ItemBalanceHisOldMapper itemBalanceHisOldMapper;
 
-
     @Override
     @Transactional
-    public void saveBalance() {
-//        LocalDate savingDateTime = LocalDate.parse(savingDateString, DateTimeFormatter.BASIC_ISO_DATE);
+    public void saveBalanceNow() {
         LocalDateTime savingDateTime = LocalDateTime.now();
         LocalDateTime oldDateTime = savingDateTime.minusDays(150);
         String oldDate = oldDateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
@@ -55,8 +53,15 @@ public class ItemBalanceServiceImpl implements ItemBalanceService{
                 .savingTime(savingTimeString)
                 .oldDate(oldDate)
                 .build();
+        saveBalance(itemBalanceSaveQuery);
+    }
 
-        saveBalanceNow(itemBalanceSaveQuery);
+    @Override
+    @Transactional
+    public void saveBalance(ItemBalanceSaveQuery itemBalanceSaveQuery) {
+//        LocalDate savingDateTime = LocalDate.parse(savingDateString, DateTimeFormatter.BASIC_ISO_DATE);
+
+        saveBalanceCurrentBalance(itemBalanceSaveQuery);
         saveBalanceOldByLot(itemBalanceSaveQuery);
         saveBalanceOldByDate(itemBalanceSaveQuery);
         saveBalanceHeader(itemBalanceSaveQuery);
@@ -64,14 +69,14 @@ public class ItemBalanceServiceImpl implements ItemBalanceService{
 
     @Override
     @Transactional
-    public void saveBalanceNow(ItemBalanceSaveQuery itemBalanceSaveQuery) {
+    public void saveBalanceCurrentBalance(ItemBalanceSaveQuery itemBalanceSaveQuery) {
         try {
             List<ItemBalanceHis> itembalanceHis
                     = itemBalanceHisRepository.findByGdateAndGtime(itemBalanceSaveQuery.getSavingDate(), itemBalanceSaveQuery.getSavingTime());
             if (itembalanceHis.isEmpty() || itembalanceHis == null) {
                 itemBalanceHisMapper.saveBalanceByDate(itemBalanceSaveQuery);
                 log.trace("재고 날짜 기준 OK ");
-                itemBalanceHisMapper.saveBalanceHisLot(itemBalanceSaveQuery);
+//                itemBalanceHisMapper.saveBalanceHisLot(itemBalanceSaveQuery);
                 log.trace("재고 LOT 기준 OK ");
             }
         } catch (Exception e) {

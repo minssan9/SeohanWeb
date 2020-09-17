@@ -26,6 +26,8 @@ import java.time.format.DateTimeFormatter;
 @Configuration
 @PropertySource(value = {"classpath:account.properties" })
 public class SeohanWebApplication extends SpringBootServletInitializer {
+	public static DateTimeFormatter dateFormatString = DateTimeFormatter.ofPattern("yyyyMMdd");
+	public static DateTimeFormatter timeFormatString = DateTimeFormatter.ofPattern("HHmm");
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
@@ -66,8 +68,9 @@ public class SeohanWebApplication extends SpringBootServletInitializer {
 						.savingTime(savingTime)
 						.oldDate(oldDate)
 						.build();
-//				itemBalanceService.saveBalance();
-//				itemBalanceService.saveBalanceNow(itemBalanceSaveQuery);
+
+//				itemBalanceService.saveBalance(itemBalanceSaveQuery );
+//				itemBalanceService.saveBalanceNow();
 //				itemBalanceService.saveBalanceOldByDate(itemBalanceSaveQuery);
 //				itemBalanceHeaderMapper.saveBalanceHisHeader(itemBalanceSaveQuery);
 //				itemBalanceHeaderMapper.saveBalanceOldHeader(itemBalanceSaveQuery);
