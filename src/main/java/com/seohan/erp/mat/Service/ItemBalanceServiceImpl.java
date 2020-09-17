@@ -76,7 +76,7 @@ public class ItemBalanceServiceImpl implements ItemBalanceService{
             if (itembalanceHis.isEmpty() || itembalanceHis == null) {
                 itemBalanceHisMapper.saveBalanceByDate(itemBalanceSaveQuery);
                 log.trace("재고 날짜 기준 OK ");
-                itemBalanceHisMapper.saveBalanceHisLot(itemBalanceSaveQuery);
+//                itemBalanceHisMapper.saveBalanceHisLot(itemBalanceSaveQuery);
                 log.trace("재고 LOT 기준 OK ");
             }
         } catch (Exception e) {

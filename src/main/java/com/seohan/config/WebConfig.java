@@ -5,14 +5,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import com.seohan.common.Interceptor.JwtInterceptor;
 
 @Configuration
 @EnableWebMvc
@@ -22,10 +21,14 @@ public class WebConfig implements WebMvcConfigurer {
 //	String allowOriginList;
 
 	private static final String[] EXCLUDE_PATHS = {
-			"/member/**",
+			"/auth/**",
 			"/error/**"
 			};
 
+	@Bean
+	public RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
 
 	@Autowired
 	private Environment environment;
@@ -37,7 +40,14 @@ public class WebConfig implements WebMvcConfigurer {
 		registry.addMapping("/**")
 				.allowedOrigins("*")
 				.allowedMethods("GET", "POST", "PUT", "DELETE")
+				.allowedHeaders("*")
+				.allowCredentials(true)
 				.maxAge(3600);
+
+//		registry.addMapping(EXCLUDE_PATHS.toString())
+//				.allowedOrigins("*")
+//				.allowedMethods("GET", "POST", "PUT", "DELETE")
+//				.maxAge(3600);
 
 //		registry.addMapping("/**")
 //				.allowedOrigins("http://localhost:8091", "http://localhost:8090","http://localhost","http://ind.seohan.com","http://minssan9.seohan.com")
@@ -67,15 +77,15 @@ public class WebConfig implements WebMvcConfigurer {
    }
 
 
-	@Autowired
-	private JwtInterceptor jwtInterceptor;
-
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
+//	@Autowired
+//	private JwtInterceptor jwtInterceptor;
+//
+//	@Override
+//	public void addInterceptors(InterceptorRegistry registry) {
 //		registry.addInterceptor(jwtInterceptor)
 //						.addPathPatterns("/**")
 //						.excludePathPatterns(EXCLUDE_PATHS);
-	}
+//	}
 
 
 //    @Bean
@@ -90,6 +100,6 @@ public class WebConfig implements WebMvcConfigurer {
 //        source.registerCorsConfiguration("/**", config);
 //        return new CorsFilter(source);
 //    }
-    
-    
+
+
 }

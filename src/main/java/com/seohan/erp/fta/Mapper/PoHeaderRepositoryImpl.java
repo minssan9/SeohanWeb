@@ -6,8 +6,6 @@ import lombok.RequiredArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.querydsl.core.group.GroupBy.groupBy;
-
 @RequiredArgsConstructor
 public class PoHeaderRepositoryImpl implements PoHeaderRepositoryCustom {
 //    private final JPAQueryFactory queryFactory;

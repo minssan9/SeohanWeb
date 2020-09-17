@@ -34,13 +34,21 @@ class CodeRestController {
 	@GetMapping("{adgub}")
 	public @ResponseBody List<Code> getCodeByAdgub(@PathVariable String adgub) throws Exception {
 		return codeRepo.findByAdgub(adgub);
+
 	}
 
 	@PutMapping
-	public ResponseEntity<Code> updateCode(@RequestBody Code code ) throws Exception {
-		Code codeUpdated = codeRepo.save(code);
-		return new ResponseEntity<Code>(codeUpdated, HttpStatus.OK);
+	public ResponseEntity<Code> updateCode(@RequestBody Code itDamage ) throws Exception {
+		Code itDamageUpdated = codeRepo.save(itDamage );
+		return new ResponseEntity<Code>(itDamageUpdated, HttpStatus.OK);
 	}
+
+//	@PostMapping("save")
+//	public ResponseEntity<Void> createCode(@RequestBody Code Code )  throws Exception {
+//		Code CodeCreated= CodeService.save(Code );
+//		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{rtime}"	).buildAndExpand(CodeCreated.getRtime()).toUri();
+//		return   ResponseEntity.created(uri).build();
+//	}
 
 	@GetMapping("/fact")
 	public @ResponseBody List<Code> getFact() throws Exception {

@@ -1,5 +1,6 @@
 package com.seohan;
 
+import com.seohan.config.PasswordEncoderCustom;
 import com.seohan.erp.mat.Dto.ItemBalanceSaveQuery;
 import com.seohan.erp.mat.Mapper.ItemBalanceHeaderMapper;
 import com.seohan.erp.mat.Mapper.ItemBalanceHisOldMapper;
@@ -17,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.time.LocalDateTime;
@@ -31,6 +33,11 @@ public class SeohanWebApplication extends SpringBootServletInitializer {
     public static DateTimeFormatter dateFormatString = DateTimeFormatter.ofPattern("yyyyMMdd");
     public static DateTimeFormatter timeFormatString = DateTimeFormatter.ofPattern("HHmm");
 
+	@Bean
+	PasswordEncoder passwordEncoder() {
+//		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		return new PasswordEncoderCustom();
+	}
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
@@ -67,7 +74,7 @@ public class SeohanWebApplication extends SpringBootServletInitializer {
                         .oldDate(oldDate)
                         .build();
 //				itemBalanceService.saveBalance(itemBalanceSaveQuery );
-//				itemBalanceService.saveBalanceNow(itemBalanceSaveQuery);
+//				itemBalanceService.saveBalanceNow();
 //				itemBalanceService.saveBalanceOldByDate(itemBalanceSaveQuery);
 //				itemBalanceHeaderMapper.saveBalanceHisHeader(itemBalanceSaveQuery);
 //				itemBalanceHeaderMapper.saveBalanceOldHeader(itemBalanceSaveQuery);

@@ -22,9 +22,22 @@ public class Scheduler  {
 	private ItemBalanceService itemBalanceService;
 
 	@Scheduled(cron = "0 0 8 * * ?")
-	public void saveBalanceJobSch() {
-		String nowDate = LocalDateTime.now().format(dateFormatString);
-		String nowTime = LocalDateTime.now().format(timeFormatString);
+	public void saveBalance08JobSch() {
+		LocalDateTime now = LocalDateTime.now();
+		String nowDate = now.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		String nowTime = now.format(DateTimeFormatter.ofPattern("HHmmss"));
+
+		itemBalanceService.saveBalanceNow();
+
+//		scheduledJobs.saveBalanceOldByDate(nowDate, nowTime );
+		System.out.println("Java cron job expression:: " + nowDate + nowTime);
+	}
+
+	@Scheduled(cron = "0 0 0 * * ?")
+	public void saveBalance00JobSch() {
+		LocalDateTime now = LocalDateTime.now();
+		String nowDate = now.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		String nowTime = now.format(DateTimeFormatter.ofPattern("HHmmss"));
 
 		itemBalanceService.saveBalanceNow();
 

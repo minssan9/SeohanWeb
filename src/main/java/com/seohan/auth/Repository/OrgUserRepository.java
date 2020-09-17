@@ -1,4 +1,4 @@
-package com.seohan.auth.Mapper;
+package com.seohan.auth.Repository;
 
 import java.util.List;
 
