@@ -35,7 +35,6 @@ public class SeohanWebApplication extends SpringBootServletInitializer {
 	}
 	@Bean
 	PasswordEncoder passwordEncoder() {
-
 //		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		return new PasswordEncoderCustom();
 	}

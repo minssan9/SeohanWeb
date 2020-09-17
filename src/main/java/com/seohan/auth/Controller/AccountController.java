@@ -1,20 +1,19 @@
 package com.seohan.auth.Controller;
 
 import com.seohan.auth.Dto.Account;
-import com.seohan.auth.Dto.OrgUserDto;
 import com.seohan.auth.Repository.OrgUserRepository;
 import com.seohan.auth.Service.AccountAdapter;
 import com.seohan.auth.Service.AccountService;
-import com.seohan.erp.base.Domain.Code;
+import com.seohan.common.Service.JwtService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RequestMapping("/accounts")
@@ -22,18 +21,35 @@ import java.util.Optional;
 @RestController
 class AccountController {
 	@Autowired
+	private JwtService jwtService;
+
+	@Autowired
 	private AccountService accountService;
 
 	@Autowired
 	private OrgUserRepository orgUserRepository;
 
 
-	@PostMapping("userinfo")
-	public @ResponseBody
-	List<Code> getUserInfo(@RequestBody OrgUserDto orgUserDto ) throws Exception {
-		return orgUserRepository.findByCompanycode(orgUserDto.getCompanycode());
-	}
+//	@PostMapping("userinfo")
+//	public @ResponseBody
+//	List<Code> getUserInfo(@RequestBody OrgUserDto orgUserDto ) throws Exception {
+//		return orgUserRepository.findByCompanycode(orgUserDto.getCompanycode());
+//	}
 
+	@PostMapping("userinfo")
+	@ResponseBody
+	public ResponseEntity<Account> getOneMember(RequestEntity<Account> reqeustEntity) {
+		String accessToken = reqeustEntity.getHeaders().get("Authorization").toString();
+		Account account = reqeustEntity.getBody();
+
+		if (jwtService.isUsable(accessToken)) {
+			Account loadedAccount = accountService.findByAccountId(account.getAccountid()).get();
+
+			return new ResponseEntity<Account>(loadedAccount, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Account>(account, HttpStatus.UNAUTHORIZED);
+		}
+	}
 
 	@GetMapping
 	@Description("로그인 사용자 정보가져오기")
@@ -76,20 +92,6 @@ class AccountController {
 
 
 
-//	@PostMapping("/userinfo")
-//	@ResponseBody
-//	public ResponseEntity<Account> getOneMember(RequestEntity<Account> reqeustEntity) {
-//		String accessToken = reqeustEntity.getHeaders().get("Authorization").toString();
-//		Account account = reqeustEntity.getBody();
-//
-//		if (jwtService.isUsable(accessToken)) {
-//			Account loadedAccount = accountService.findByAsabnAndCo_gb(account.getAccountId(), account.getCompanyCode()).get();
-//
-//			return new ResponseEntity<Account>(loadedAccount, HttpStatus.OK);
-//		} else {
-//			return new ResponseEntity<Account>(account, HttpStatus.UNAUTHORIZED);
-//		}
-//	}
 //    @PostMapping("/signin")
 //	@ResponseBody
 //    public ResponseEntity<Account> signin(RequestEntity<Account> reqeustEntity){
