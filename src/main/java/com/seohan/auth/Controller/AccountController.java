@@ -1,8 +1,11 @@
 package com.seohan.auth.Controller;
 
 import com.seohan.auth.Dto.Account;
+import com.seohan.auth.Dto.OrgUserDto;
+import com.seohan.auth.Repository.OrgUserRepository;
 import com.seohan.auth.Service.AccountAdapter;
 import com.seohan.auth.Service.AccountService;
+import com.seohan.erp.base.Domain.Code;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
@@ -11,14 +14,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequestMapping("/accounts")
-@Slf4j 
+@Slf4j
 @RestController
 class AccountController {
 	@Autowired
 	private AccountService accountService;
+
+	@Autowired
+	private OrgUserRepository orgUserRepository;
+
+
+	@PostMapping("userinfo")
+	public @ResponseBody
+	List<Code> getUserInfo(@RequestBody OrgUserDto orgUserDto ) throws Exception {
+		return orgUserRepository.findByCompanycode(orgUserDto.getCompanycode());
+	}
 
 
 	@GetMapping
@@ -92,9 +106,9 @@ class AccountController {
 //	@PostMapping("save")
 //	public ResponseEntity<Account> createMember(@RequestBody Account member)  throws Exception {
 //		Account memberCreated= memberService.save(member );
-//		
+//
 //		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/"+memberCreated.getRtime()	).buildAndExpand(memberCreated.getRtime()).toUri();
 ////		return   ResponseEntity.created(uri).build();
 //		return new ResponseEntity<Account>(memberCreated, HttpStatus.OK);
-//	}	 
+//	}
 }
