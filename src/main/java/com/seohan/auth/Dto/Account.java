@@ -14,6 +14,7 @@ import java.util.Set;
 @Data
 @Alias("account")
 public class Account {
+	private String companycode;
 	private String accountid;
 	private String password;
 	private String name;

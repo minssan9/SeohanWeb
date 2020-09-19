@@ -36,20 +36,6 @@ class AccountController {
 //		return orgUserRepository.findByCompanycode(orgUserDto.getCompanycode());
 //	}
 
-	@PostMapping("userinfo")
-	@ResponseBody
-	public ResponseEntity<Account> getOneMember(RequestEntity<Account> reqeustEntity) {
-		String accessToken = reqeustEntity.getHeaders().get("Authorization").toString();
-		Account account = reqeustEntity.getBody();
-
-		if (jwtService.isUsable(accessToken)) {
-			Account loadedAccount = accountService.findByAccountId(account.getAccountid()).get();
-
-			return new ResponseEntity<Account>(loadedAccount, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<Account>(account, HttpStatus.UNAUTHORIZED);
-		}
-	}
 
 	@GetMapping
 	@Description("로그인 사용자 정보가져오기")
@@ -58,9 +44,6 @@ class AccountController {
 		if (adapter == null) {
 			return new ResponseEntity(HttpStatus.UNAUTHORIZED);
 		}
-
-//		Optional<Account> optionalAccount = AccountRepository.findByAccountId(adapter.getAccount().getAccountId());
-//		Account account = optionalAccount.get();
 
 		Optional<Account> optionalAccount = accountService.findByAccountId(adapter.getAccount().getAccountid());
 		Account account = optionalAccount.get();
