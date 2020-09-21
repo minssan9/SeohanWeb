@@ -11,7 +11,7 @@ import java.util.Objects;
 public class MngInworksubEntity {
     @Id @GeneratedValue
     @Column(name = "INWORKSUB_ID")
-    private long id;
+    private Long id;
 
     private String company;
     private String docutype;
@@ -41,7 +41,7 @@ public class MngInworksubEntity {
     private String ref02;
     private String ref03;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "DOCUNO", updatable = false, insertable = false)
     private MngInworkmstEntity mngInworkmstEntity;
 }
