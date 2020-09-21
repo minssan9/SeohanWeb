@@ -25,5 +25,4 @@ class MngInworkRestController {
         return mngInworkRepository.findAll();
     }
 
-
 }

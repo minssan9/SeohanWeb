@@ -8,6 +8,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.List;
@@ -18,50 +19,51 @@ import static com.seohan.SeohanWebApplication.timeFormatString;
 @Service
 public class ItDamageServiceImpl implements ItDamageService {
 	@Autowired
-    ReportRepository reportRepository; 
+    ReportRepository reportRepository;
     @Autowired
     ItDamageRepository itDamageRepository;
-      
+
 	@Override
 	public List<ItDamage> itDamage() throws Exception {
 		return itDamageRepository.findItDamageByStat("01");
 	}
 
 	@Override
-//	@Transactional
+	@Transactional
 	public ItDamage update(ItDamage itDamage) throws Exception {
 		String nowDate =  LocalDateTime.now().format(dateFormatString);
 		String nowTime = LocalDateTime.now().format(timeFormatString);
-		
-		itDamage.setCtime(nowDate);
-		itDamage.setStat("09");
 
-		Report report = new Report();
-		String docuNo[] = itDamage.getClass3().split("-");
-		if (itDamage.getClass3().trim().length()> 0 ) {
-			report.setUdate(docuNo[0]);
-			report.setSer((docuNo[1]));
-			report.setSgub("G");
-			report.setSdate(nowDate.substring(8));
-			report.setStime(nowDate.substring(8, 14));
-			report.setEdate(nowDate.substring(8));
-			report.setEtime(nowDate.substring(8, 14));
-			report.setStat("9");
+		ItDamage updateItDamage = itDamageRepository.findById(itDamage.getId()).get();
+		updateItDamage.setCtime(nowDate);
+		updateItDamage.setStat("09");
 
+//		Report report = new Report();
+//		String docuNo[] = itDamage.getClass3().split("-");
+//		if (itDamage.getClass3().trim().length()> 0 ) {
+//			report.setUdate(docuNo[0]);
+//			report.setSer((docuNo[1]));
+//			report.setSgub("G");
+//			report.setSdate(nowDate.substring(8));
+//			report.setStime(nowDate.substring(8, 14));
+//			report.setEdate(nowDate.substring(8));
+//			report.setEtime(nowDate.substring(8, 14));
+//			report.setStat("9");
+//
+//
+//			try{
+//				reportRepository.save(report);
+//			}
+//			catch(Exception e){
+//				e.printStackTrace(); //오류 출력(방법은 여러가지)
+//			}
+//		}
+//		itDamageRepository.save(itDamage );
 
-			try{
-				reportRepository.save(report);			
-			}
-			catch(Exception e){
-				e.printStackTrace(); //오류 출력(방법은 여러가지)
-			}
-		}		
-		itDamageRepository.save(itDamage );	
-		
-		return itDamage;
-	} 
-	
-	@Override 
+		return updateItDamage;
+	}
+
+	@Override
 	public ItDamage save(ItDamage itDamage) throws Exception {
 		String nowDate =  LocalDateTime.now().format(dateFormatString);
 		String nowTime = LocalDateTime.now().format(timeFormatString);
@@ -77,8 +79,8 @@ public class ItDamageServiceImpl implements ItDamageService {
 //		smsModel.setContent(itDamage.getRtxt() + " - 조치 완료 / 확인 후 미조치사항 전산팀 연락 바람");
 //		smsModel.setPhone(itDamage.getRtel());
 //		smsModel.setSendNo("043-530-3174");
-		itDamageRepository.save(itDamage );	
-		
+		itDamageRepository.save(itDamage );
+
 		return itDamage;
-	} 
+	}
 }
