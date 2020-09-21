@@ -4,8 +4,6 @@ import lombok.Getter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -13,9 +11,10 @@ import java.util.Objects;
 public class MngInworkmstEntity {
     @Id @GeneratedValue
     @Column(name = "INWORKMST_ID")
-    private long id;
+    private Long id;
     private String company;
 
+    @Column(name = "DOCUNO")
     private String docuno;
     private String docutype;
     private String rdate;
@@ -27,6 +26,6 @@ public class MngInworkmstEntity {
     private String ref01;
 
 
-    @OneToMany(mappedBy = "mngInworkmstEntity", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "mngInworkmstEntity", cascade = CascadeType.ALL)
     private List<MngInworksubEntity>  mngInworksubEntities = new ArrayList<>();
 }
