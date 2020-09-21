@@ -16,10 +16,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
-
-//	@Value("${allowOriginList}")
-//	String allowOriginList;
-
 	private static final String[] EXCLUDE_PATHS = {
 			"/auth/**",
 			"/accounts/**",
@@ -42,7 +38,6 @@ public class WebConfig implements WebMvcConfigurer {
 				.allowedOrigins("*")
 				.allowedMethods("GET", "POST", "PUT", "DELETE")
 				.allowedHeaders("*")
-				.allowCredentials(true)
 				.maxAge(3600);
 
 		registry.addMapping(EXCLUDE_PATHS.toString())
@@ -50,6 +45,9 @@ public class WebConfig implements WebMvcConfigurer {
 				.allowedMethods("GET", "POST", "PUT", "DELETE")
 				.maxAge(3600);
 
+		registry.addMapping("/**")
+				.allowedOrigins("http://ind.seohan.com"
+						,"http://localhost");
 //		registry.addMapping("/**")
 //				.allowedOrigins("http://localhost:8091", "http://localhost:8090","http://localhost","http://ind.seohan.com","http://minssan9.seohan.com")
 //				.allowedMethods("GET", "POST", "HEAD", "PUT", "DELETE", "OPTIONS")
