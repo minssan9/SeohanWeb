@@ -42,17 +42,24 @@ public class ScheduledJobTest {
 
     @Test
     public void saveBalanceTest(){
-        String savingDate = LocalDateTime.now().format(dateFormatString);
-        String savingTime = LocalDateTime.now().format(timeFormatString);
-        savingTime = "0900";
-        itemBalanceService.saveBalanceNow();
+        LocalDateTime oldDateTime = LocalDateTime.now().minusDays(150);
+        String oldDate = oldDateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 
+        String savingDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        String savingTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("0800"));
+        ItemBalanceSaveQuery itemBalanceSaveQuery = ItemBalanceSaveQuery.builder()
+                .savingDate(savingDate)
+                .savingTime(savingTime)
+                .oldDate(oldDate)
+                .build();
+//        itemBalanceService.saveBalance(itemBalanceSaveQuery );
+        itemBalanceService.saveBalanceNow();
 //        List<ItemBalanceHis> savedItemList=  itemBalanceHisRepository.findByGdateAndGtime(savingDate, savingTime);
 //        Assert.assertNotNull(itemBalanceHisOlds) ;
     }
 
     @Test
-    public void saveBalanceOldTest(){
+    public void saveBalanceOldTest() {
         String savingDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String savingTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmss"));
 

@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "EXECHIS", schema = "SITLIB")
-public class AccessHis implements Serializable {
+public class ExecuteHis implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

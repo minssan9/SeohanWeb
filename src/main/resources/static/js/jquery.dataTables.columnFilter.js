@@ -480,7 +480,7 @@
 					"sName" : "column_filter_" + i
 				});
 			}
-			// Regardless of the Ajax state, build the select on first pass
+			// Regardless of the Ajax state, build the select on first password
 			fnCreateColumnSelect(oTable, typeof (aData) == 'function' ? null
 					: aData, _fnColumnIndex(i), th, label, bRegex, oSelected,
 					bMultiselect); // Issue 37

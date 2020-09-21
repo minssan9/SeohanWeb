@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.seohan.auth.mapper">
+
+	<resultMap type="com.seohan.auth.Dto.Account" id="Account">
+		<result column="accountid" property="accountid"/>
+		<result column="name" property="name"/>
+		<result column="password" property="password"/>
+		<result column="phone" property="phone"/>
+		<result column="email" property="email"/>
+		<collection property="roles" resultMap="AccountRoles"/>
+	</resultMap>
+
+	<resultMap type="com.seohan.auth.Domain.AccountRoles" id="AccountRoles">
+		<result column="accountid" property="accountid"/>
+		<result column="roles" property="roles"/>
+	</resultMap>
+
+	<select id="findByAccountId" resultMap="Account" parameterType="String">
+		<![CDATA[
+			SELECT a.* , coalesce(R.ROLES,'USER') ROLES FROM (
+				SELECT a.co_gb companycode, a.asabn accountid, passwd password, a.kname name, a.mobi_no phone, coalesce(em.email,'') email  FROM TSILIB.EMP_MST A
+				LEFT OUTER JOIN PCMLIB.ORG_USER em ON A.ASABN=em.empId
+				WHERE a.asabn = #{accountId}
+				UNION ALL
+				SELECT 'SEOHAN' companycode, accountid, pswd password,  name, HTEL  phone,  '' email FROM SMLIB.VUSERPF A
+				WHERE ACCOUNTID =  #{accountId}
+
+			) A
+			LEFT OUTER JOIN TSILIB.EMP_MST_ROLES R ON A.accountId=R.accountid
+		 ]]>
+	</select>
+</mapper>
