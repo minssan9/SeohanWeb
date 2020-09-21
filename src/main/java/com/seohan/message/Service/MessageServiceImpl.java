@@ -1,7 +1,6 @@
 package com.seohan.message.Service;
 
 import java.net.URI;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,15 +12,13 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.seohan.erp.base.Domain.KakaoMessageModel;
+import com.seohan.message.Domain.KakaoMessageModel;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
 public class MessageServiceImpl implements MessageService {
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-
 	@Value("${server.message}")
 	private String messageServerUrl;
 

@@ -1,4 +1,4 @@
-package com.seohan.erp.base.Domain;
+package com.seohan.message.Domain;
 
 import java.sql.Date;
 
