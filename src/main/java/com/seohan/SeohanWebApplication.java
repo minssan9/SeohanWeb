@@ -1,5 +1,6 @@
 package com.seohan;
 
+import com.seohan.config.PasswordEncoderCustom;
 import com.seohan.erp.mat.Dto.ItemBalanceSaveQuery;
 import com.seohan.erp.mat.Mapper.ItemBalanceHeaderMapper;
 import com.seohan.erp.mat.Mapper.ItemBalanceHisOldMapper;
@@ -15,7 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,7 +25,6 @@ import java.time.format.DateTimeFormatter;
 @EnableScheduling
 @Configuration
 @PropertySource(value = {"classpath:account.properties" })
-@CrossOrigin(origins = { "http://localhost:8091",  "http://localhost:8090",  "http://localhost"})
 public class SeohanWebApplication extends SpringBootServletInitializer {
 	public static DateTimeFormatter dateFormatString = DateTimeFormatter.ofPattern("yyyyMMdd");
 	public static DateTimeFormatter timeFormatString = DateTimeFormatter.ofPattern("HHmm");
@@ -33,9 +33,13 @@ public class SeohanWebApplication extends SpringBootServletInitializer {
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(SeohanWebApplication.class);
 	}
-  
-	public static void main(String[] args)
-	{
+	@Bean
+	PasswordEncoder passwordEncoder() {
+//		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		return new PasswordEncoderCustom();
+	}
+
+	public static void main(String[] args) {
 		SpringApplication.run(SeohanWebApplication.class, args);
 	}
 

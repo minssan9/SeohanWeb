@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/erp/mat/locaalm")
-@Slf4j 
+@RequestMapping("/mat/locaalm")
+@Slf4j
 @RestController
 class LocaAlmRestController {
 	@Autowired

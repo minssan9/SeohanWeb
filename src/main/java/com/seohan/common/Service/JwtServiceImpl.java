@@ -1,21 +1,18 @@
 package com.seohan.common.Service;
 
-import java.io.UnsupportedEncodingException;
-
-import org.springframework.stereotype.Service;
-
 import com.seohan.common.Error.UnauthorizedException;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.io.UnsupportedEncodingException;
 
 @Slf4j
-@Service("jwtService")
+@Service
 public class JwtServiceImpl implements JwtService {
-
 	private static final String SALT = "luvookSecret";
 
 	@Override
@@ -36,7 +33,6 @@ public class JwtServiceImpl implements JwtService {
 				log.error("Making JWT Key Error ::: {}", e.getMessage());
 			}
 		}
-
 		return key;
 	}
 
@@ -47,17 +43,13 @@ public class JwtServiceImpl implements JwtService {
 								.setSigningKey(this.generateKey())
 								.parseClaimsJws(jwt);
 			return true;
-
 		} catch (Exception e) {
-
 			if (log.isInfoEnabled()) {
 				e.printStackTrace();
 			} else {
 				log.error(e.getMessage());
 			}
 			throw new UnauthorizedException();
- 
-
 		}
 	}
 }
