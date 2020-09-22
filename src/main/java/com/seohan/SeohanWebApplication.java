@@ -33,6 +33,9 @@ public class SeohanWebApplication extends SpringBootServletInitializer {
     public static DateTimeFormatter dateFormatString = DateTimeFormatter.ofPattern("yyyyMMdd");
     public static DateTimeFormatter timeFormatString = DateTimeFormatter.ofPattern("HHmm");
 
+    public static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
+
 	@Bean
 	PasswordEncoder passwordEncoder() {
 //		return PasswordEncoderFactories.createDelegatingPasswordEncoder();

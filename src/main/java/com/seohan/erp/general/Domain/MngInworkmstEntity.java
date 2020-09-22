@@ -4,6 +4,7 @@ import lombok.Getter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,5 +28,5 @@ public class MngInworkmstEntity {
 
 
     @OneToMany(mappedBy = "mngInworkmstEntity", cascade = CascadeType.ALL)
-    private List<MngInworksubEntity>  mngInworksubEntities = new ArrayList<>();
+    private List<MngInworksubEntity> mngInworksubEntities = new ArrayList<>();
 }

@@ -35,7 +35,7 @@ public class ItDamageServiceImpl implements ItDamageService {
 		String nowTime = LocalDateTime.now().format(timeFormatString);
 
 		ItDamage updateItDamage = itDamageRepository.findById(itDamage.getId()).get();
-		updateItDamage.setCtime(nowDate);
+		updateItDamage.setCtime(nowDate + nowTime);
 		updateItDamage.setStat("09");
 
 //		Report report = new Report();
