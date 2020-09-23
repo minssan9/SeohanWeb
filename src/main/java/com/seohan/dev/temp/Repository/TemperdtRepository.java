@@ -1,4 +1,4 @@
-package com.seohan.dev.temp.Mapper;
+package com.seohan.dev.temp.Repository;
 
 import com.seohan.dev.temp.Domain.TemperdtEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

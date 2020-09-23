@@ -1,15 +1,16 @@
-package com.seohan.erp.base.Domain;
+package com.seohan.dev.access.Domain;
 
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "EXECHIS", schema = "SITLIB")
-public class ExecuteHis implements Serializable {
+@Table(name = "MES_LOGINHIS", schema = "SMLIB")
+public class AccessHistory implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +23,6 @@ public class ExecuteHis implements Serializable {
 	private String  	prgname		;
 	private String  	ip			;
 	private String  	line		;
-	private Date		exectime	;
+	private LocalDateTime exectime	;
 
 }
