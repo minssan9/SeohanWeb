@@ -20,9 +20,6 @@ class FTARestController {
 //	@Autowired
 //	private PoDetailRepository PoDetailRepo;
 
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd");
-
 	@GetMapping("/po")
 	public ResponseEntity po(@RequestParam String company, @RequestParam String pono) throws Exception {
 //		return new ResponseEntity( PoRepo.findByCogbAndPono(company, pono), HttpStatus.OK);

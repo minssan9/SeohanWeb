@@ -1,8 +1,8 @@
-package com.seohan.erp.general.Service;
+package com.seohan.erp.it.Service;
 
 import java.util.List;
 
-import com.seohan.erp.general.Domain.ItDamage;
+import com.seohan.erp.it.Domain.ItDamage;
 
 public interface ItDamageService {
 	List<ItDamage> itDamage() throws Exception;

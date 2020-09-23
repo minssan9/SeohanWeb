@@ -19,17 +19,11 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/base/line")
 @Slf4j 
 @RestController
-class LineRestController { 
-	
-//	@Autowired
-//	private LineService lineService;
+class LineRestController {
 	@Autowired
 	private LineRepository lineRepository; 
-	
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-	SimpleDateFormat formatsdf = new SimpleDateFormat("yyyy-MM-dd"); 
-	 
-	@GetMapping("")
+
+	@GetMapping
 	public @ResponseBody List<LineView> getAllList(@RequestParam String actgb) throws Exception {  
 		return lineRepository.findByActgb(actgb);
 	}
