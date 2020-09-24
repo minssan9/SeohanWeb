@@ -28,8 +28,7 @@ ResourceConfig extends ResourceServerConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/websockethandler/**").permitAll()
-                .antMatchers("/app/**").permitAll()
-                .mvcMatchers(HttpMethod.GET, "/**").permitAll()  // 해당 요청은 누구나 가능하며
+                .mvcMatchers(HttpMethod.GET, "/**/*").permitAll()  // 해당 요청은 누구나 가능하며
                 .mvcMatchers(HttpMethod.POST, "/erp/**").permitAll()        //  현재는 전체 허용
                 .mvcMatchers(HttpMethod.POST, "/dev/**").permitAll()
                 .mvcMatchers(HttpMethod.POST, "/oauth").permitAll()

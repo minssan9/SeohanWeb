@@ -1,12 +1,12 @@
 package com.seohan.erp.base.Controller;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import com.seohan.erp.base.Domain.Code;
-import com.seohan.erp.base.Mapper.CodeRepository;
+import com.seohan.erp.base.Repository.CodeRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
+
+import javax.xml.ws.Response;
 
 @RequestMapping("/base/code")
 @Slf4j
@@ -32,15 +34,19 @@ class CodeRestController {
 	}
 
 	@GetMapping("{adgub}")
-	public @ResponseBody List<Code> getCodeByAdgub(@PathVariable String adgub) throws Exception {
-		return codeRepo.findByAdgub(adgub);
-
+	public ResponseEntity getCodeByAdgub(Pageable pageable, @PathVariable String adgub) throws Exception {
+		switch (adgub){
+			case "31":
+				return new ResponseEntity(codeRepo.findFact(), HttpStatus.OK);
+			default:
+				return new ResponseEntity(codeRepo.findByAdgub(adgub, pageable), HttpStatus.OK);
+		}
 	}
 
 	@PutMapping
-	public ResponseEntity<Code> updateCode(@RequestBody Code itDamage ) throws Exception {
-		Code itDamageUpdated = codeRepo.save(itDamage );
-		return new ResponseEntity<Code>(itDamageUpdated, HttpStatus.OK);
+	public ResponseEntity updateCode(@RequestBody Code code ) throws Exception {
+		Code codeUpdated = codeRepo.save(code );
+		return new ResponseEntity (codeUpdated, HttpStatus.OK);
 	}
 
 //	@PostMapping("save")
@@ -51,7 +57,7 @@ class CodeRestController {
 //	}
 
 	@GetMapping("/fact")
-	public @ResponseBody List<Code> getFact() throws Exception {
-		return codeRepo.findFact();
+	public ResponseEntity getFact() throws Exception {
+		return new ResponseEntity(codeRepo.findFact(), HttpStatus.OK);
 	}
 }
