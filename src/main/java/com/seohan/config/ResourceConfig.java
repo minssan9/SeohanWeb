@@ -30,6 +30,7 @@ ResourceConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/websockethandler/**").permitAll()
                 .antMatchers("/app/**").permitAll()
                 .mvcMatchers(HttpMethod.GET, "/**").permitAll()  // 해당 요청은 누구나 가능하며
+                .mvcMatchers(HttpMethod.POST, "/erp/**").permitAll()        //  현재는 전체 허용
                 .mvcMatchers(HttpMethod.POST, "/dev/**").permitAll()
                 .mvcMatchers(HttpMethod.POST, "/oauth").permitAll()
                 .mvcMatchers(HttpMethod.POST, "/auth/join/check").permitAll()

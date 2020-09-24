@@ -20,8 +20,7 @@ public class Account {
 	private String name;
 	private String email;
 	private String phone;
-//	private String isAdmin;
-//
+
 //	private String address;
 //	private Long socialId;
 	@ElementCollection(fetch = FetchType.EAGER)
