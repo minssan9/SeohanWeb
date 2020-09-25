@@ -4,17 +4,18 @@ import lombok.Getter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @Table(name = "MNG_INWORKMST", schema = "SMLIB", catalog = "")
 public class MngInworkmstEntity {
-    @Id @GeneratedValue
+    @GeneratedValue
     @Column(name = "INWORKMST_ID")
     private Long id;
     private String company;
 
-    @Column(name = "DOCUNO")
+    @Id
     private String docuno;
     private String docutype;
     private String rdate;
@@ -26,6 +27,7 @@ public class MngInworkmstEntity {
     private String ref01;
 
 
-    @OneToMany(mappedBy = "mngInworkmstEntity", cascade = CascadeType.ALL)
-    private List<MngInworksubEntity>  mngInworksubEntities = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "docuno")
+    private List<MngInworksubEntity> mngInworksubEntities = new ArrayList<>();
 }
