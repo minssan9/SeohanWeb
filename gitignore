@@ -26,6 +26,7 @@ local.properties
 # Gradle:
 .idea/**/gradle.xml
 .idea/**/libraries
+.gradle/**
 
 # CMake
 cmake-build-debug/
@@ -159,6 +160,6 @@ fabric.properties
 # *.ipr
 
 # Sonarlint plugin
-.idea/sonarlint 
+.idea/sonarlint
 
 account.properties
