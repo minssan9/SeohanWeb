@@ -20,31 +20,9 @@ class FoodRestController {
 	@Autowired
 	private FoodRepository foodRepo;
 
-	@GetMapping
+	@GetMapping("/params")
 	public @ResponseBody List<MngFood> FoodTable(@RequestParam String gdate, @RequestParam String companycode) {
 		List<MngFood> foods = foodRepo.findByCompanycodeAndGdate(companycode, gdate);
-
-//		switch (companycode) {
-//			case "KAMTEC":
-//				List<FoodTableKamtec> foodTableKamtecs = foodTableKamtecRepo.findByGdate(gdate);
-//				for (FoodTableKamtec foodTableKamtec : foodTableKamtecs) {
-//					foods.add(foodTableKamtec);
-//				}
-//				break;
-//			case "SEOHAN":
-//				List<FoodTable>  foodTables = foodTableRepo.findByGdate(gdate);
-//				for (FoodTable foodTable : foodTables) {
-//					foods.add(foodTable);
-//				}
-//				break;
-//			case "LAB":
-//				List<FoodTableLab> foodTableLabs = foodTableLabRepo.findByGdate(gdate);
-//				for (FoodTableLab foodTableLab : foodTableLabs) {
-//					foods.add(foodTableLab);
-//				}
-//				break;
-//		}
-
 		return foods;
 	}
 
