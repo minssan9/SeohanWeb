@@ -2,7 +2,7 @@ package com.seohan.dev.temp.Controller;
 
 import com.seohan.dev.temp.Domain.TemperdtEntity;
 import com.seohan.dev.temp.Dto.TemperdtDto;
-import com.seohan.dev.temp.Mapper.TemperdtRepository;
+import com.seohan.dev.temp.Repository.TemperdtRepository;
 import com.seohan.dev.temp.Service.TemperdtService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

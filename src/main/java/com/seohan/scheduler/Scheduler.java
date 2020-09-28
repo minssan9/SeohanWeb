@@ -7,9 +7,11 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import static com.seohan.SeohanWebApplication.dateFormatString;
+import static com.seohan.SeohanWebApplication.timeFormatString;
 
 @Slf4j
 @Component
@@ -40,7 +42,8 @@ public class Scheduler  {
 		itemBalanceService.saveBalanceNow();
 
 //		scheduledJobs.saveBalanceOldByDate(nowDate, nowTime );
-		System.out.println("Java cron job expression:: " + nowDate + nowTime);
+		log.info("Java cron job expression:: " + nowDate + nowTime);
+//		System.out.println("Java cron job expression:: " + nowDate + nowTime);
 	}
 
 	@Scheduled(fixedDelay = 1000)

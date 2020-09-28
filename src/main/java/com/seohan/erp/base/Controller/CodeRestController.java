@@ -23,7 +23,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 class CodeRestController {
-
 	@Autowired
 	private CodeRepository codeRepo;
 
@@ -35,6 +34,7 @@ class CodeRestController {
 	@GetMapping("{adgub}")
 	public @ResponseBody List<Code> getCodeByAdgub(@PathVariable String adgub) throws Exception {
 		return codeRepo.findByAdgub(adgub);
+
 	}
 
 	@PutMapping

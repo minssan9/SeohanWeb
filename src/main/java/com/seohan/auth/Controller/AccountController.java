@@ -30,11 +30,6 @@ class AccountController {
 	private OrgUserRepository orgUserRepository;
 
 
-//	@PostMapping("userinfo")
-//	public @ResponseBody
-//	List<Code> getUserInfo(@RequestBody OrgUserDto orgUserDto ) throws Exception {
-//		return orgUserRepository.findByCompanycode(orgUserDto.getCompanycode());
-//	}
 
 
 	@GetMapping

@@ -1,7 +1,7 @@
 package com.seohan.message.Service;
 
-import com.seohan.erp.base.Domain.KakaoMessageModel;
+import com.seohan.message.Dto.MessageModel;
 
 public interface MessageService {
-	public String sendMessage(KakaoMessageModel kakaoMessageModel) throws Exception; 
+	public String sendMessage(MessageModel messageModel) throws Exception;
 }
