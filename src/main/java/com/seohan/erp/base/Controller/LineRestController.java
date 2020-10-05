@@ -1,10 +1,9 @@
 package com.seohan.erp.base.Controller;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import com.seohan.erp.base.Domain.LineView;
-import com.seohan.erp.base.Mapper.LineRepository;
+import com.seohan.erp.base.Repository.LineRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
