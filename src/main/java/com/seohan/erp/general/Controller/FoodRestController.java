@@ -5,6 +5,8 @@ import java.util.List;
 import com.seohan.erp.general.Domain.MngFood;
 import com.seohan.erp.general.Repository.FoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,31 +23,16 @@ class FoodRestController {
 	private FoodRepository foodRepo;
 
 	@GetMapping
-	public @ResponseBody List<MngFood> FoodTable(@RequestParam String gdate, @RequestParam String companycode) {
+	public ResponseEntity FoodTable(@RequestParam String gdate, @RequestParam String companycode) {
 		List<MngFood> foods = foodRepo.findByCompanycodeAndGdate(companycode, gdate);
+		return new ResponseEntity(foods, HttpStatus.OK);
+	}
 
-//		switch (companycode) {
-//			case "KAMTEC":
-//				List<FoodTableKamtec> foodTableKamtecs = foodTableKamtecRepo.findByGdate(gdate);
-//				for (FoodTableKamtec foodTableKamtec : foodTableKamtecs) {
-//					foods.add(foodTableKamtec);
-//				}
-//				break;
-//			case "SEOHAN":
-//				List<FoodTable>  foodTables = foodTableRepo.findByGdate(gdate);
-//				for (FoodTable foodTable : foodTables) {
-//					foods.add(foodTable);
-//				}
-//				break;
-//			case "LAB":
-//				List<FoodTableLab> foodTableLabs = foodTableLabRepo.findByGdate(gdate);
-//				for (FoodTableLab foodTableLab : foodTableLabs) {
-//					foods.add(foodTableLab);
-//				}
-//				break;
-//		}
 
-		return foods;
+	@GetMapping("params")
+	public ResponseEntity FoodTableByParams(@RequestParam String gdate, @RequestParam String companycode) {
+		List<MngFood> foods = foodRepo.findByCompanycodeAndGdate(companycode, gdate);
+		return new ResponseEntity(foods, HttpStatus.OK);
 	}
 
 //	@GetMapping("/foodTableKamtec")
