@@ -26,9 +26,9 @@ class ItemRestController {
 	private BomAssyRepository bomAssyRepository;
 
 	 @GetMapping("params" )
-	 public ResponseEntity searchItems(Pageable pageable, @RequestParam String itmno, @RequestParam String pumgb) {
-
-		 return new ResponseEntity(itemRepository.findByItmnoContainsOrPumgbContains(itmno, pumgb, pageable), HttpStatus.OK);
+	 public ResponseEntity searchItems(Pageable pageable, @RequestParam String itmno, @RequestParam String itemtype) {
+//		 return new ResponseEntity(itemRepository.findByItmnoContains(itmno,  pageable), HttpStatus.OK);
+		 return new ResponseEntity(itemRepository.findByItmnoContainsOrPumgb(itmno, itemtype, pageable), HttpStatus.OK);
 	 }
 
 //	@GetMapping(path= {"/search"})
