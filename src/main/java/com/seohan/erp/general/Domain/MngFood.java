@@ -14,6 +14,8 @@ import java.io.Serializable;
 @IdClass(MngFood.class)
 @Table(name="FOOD_VW", schema="AALIB")
 public class MngFood implements Serializable {
+
+	String row_id;
 	@Id
 	String companycode;
 	@Id

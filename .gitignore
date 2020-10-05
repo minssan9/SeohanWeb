@@ -26,7 +26,7 @@ local.properties
 # Gradle:
 .idea/**/gradle.xml
 .idea/**/libraries
-.gradle/**/* 
+.gradle/**/*
 
 # CMake
 cmake-build-debug/
@@ -184,4 +184,3 @@ node_modules
 Apache24/
 vueServer.zip
 src/main/resources/application-prod.properties
-

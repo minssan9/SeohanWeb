@@ -13,6 +13,7 @@ public class MngInworksubEntity {
     @Column(name = "INWORKSUB_ID")
     private Long id;
 
+    private String docuno;
     private String company;
     private String docutype;
     private int docusubno;
@@ -42,6 +43,6 @@ public class MngInworksubEntity {
     private String ref03;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "DOCUNO", updatable = false, insertable = false)
+    @JoinColumn(name = "docuno", insertable = false, updatable = false)
     private MngInworkmstEntity mngInworkmstEntity;
 }

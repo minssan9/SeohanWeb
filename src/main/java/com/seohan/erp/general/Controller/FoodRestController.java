@@ -34,19 +34,4 @@ class FoodRestController {
 		List<MngFood> foods = foodRepo.findByCompanycodeAndGdate(companycode, gdate);
 		return new ResponseEntity(foods, HttpStatus.OK);
 	}
-
-//	@GetMapping("/foodTableKamtec")
-//	public @ResponseBody List<FoodTableKamtec> FoodTableKamtec(@RequestParam String gdate) throws Exception {
-//		List<Food> foods = foodTableKamtecRepo.findByGdate(gdate);
-//
-//		return foodTableKamtecRepo.findByGdate(gdate);
-//	}
-//
-//	@GetMapping("/foodTableLab")
-//	public @ResponseBody List<FoodTableLab> FoodTableLab(@RequestParam String gdate) throws Exception {
-//		FoodTable foodTable = new FoodTable();
-//		foodTable.setGdate(gdate);
-//		return foodTableLabRepo.findByGdate(foodTable.getGdate());
-//	}
-
-}
+ }
