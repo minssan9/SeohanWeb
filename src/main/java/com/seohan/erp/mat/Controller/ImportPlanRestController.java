@@ -1,6 +1,8 @@
 package com.seohan.erp.mat.Controller;
 
+import com.seohan.erp.mat.Domain.ImportPlan;
 import com.seohan.erp.mat.Dto.ImportPlanAlarm;
+import com.seohan.erp.mat.Repository.ImportPlanRepository;
 import com.seohan.erp.mat.Service.ImportPlanService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +20,11 @@ class ImportPlanRestController {
 	@Autowired
 	private ImportPlanService importPlanService;
 
-	@GetMapping("/alarm")
-	public ResponseEntity<List<ImportPlanAlarm>> getImportPlanList(@RequestParam String userid) {
-		return new ResponseEntity<List<ImportPlanAlarm>>(importPlanService.getOmissionItemList(userid), HttpStatus.OK);
+	@Autowired
+	ImportPlanRepository importPlanRepository;
+	@GetMapping("{importPlanId}")
+	public @ResponseBody List<ImportPlan> getOneImportPlan(@PathVariable Long importPlanId) throws Exception {
+//		return importPlanRepository.findByWarhsAndItmno(importPlanId, "" );
+		return null;
 	}
-
-//	@GetMapping("{udate}")
-//	public @ResponseBody List<ImportPlan> getOneImportPlan(@PathVariable String udate) throws Exception {
-//		return importPlanRepository.importPlanListbyUdate(udate);
-//	}
 }

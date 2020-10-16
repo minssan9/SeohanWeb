@@ -1,10 +1,8 @@
 package com.seohan.erp.mat.Repository;
 
 import com.seohan.erp.mat.Domain.ImportPlan;
-import com.seohan.erp.mat.Domain.ItemBalance;
 import com.seohan.erp.mat.Domain.ItmblpfsubEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
