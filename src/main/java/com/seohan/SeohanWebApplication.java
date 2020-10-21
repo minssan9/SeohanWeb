@@ -76,7 +76,7 @@ public class SeohanWebApplication extends SpringBootServletInitializer {
                         .savingTime(savingTime)
                         .oldDate(oldDate)
                         .build();
-//				itemBalanceService.saveBalance(itemBalanceSaveQuery );
+				itemBalanceService.saveBalance(itemBalanceSaveQuery );
 //				itemBalanceService.saveBalanceNow();
 //				itemBalanceService.saveBalanceOldByDate(itemBalanceSaveQuery);
 //				itemBalanceHeaderMapper.saveBalanceHisHeader(itemBalanceSaveQuery);
