@@ -1,4 +1,4 @@
-package com.seohan.erp.base.Mapper;
+package com.seohan.erp.base.Repository;
 
 import com.seohan.erp.base.Domain.ItemView;
 import org.springframework.data.domain.Page;
@@ -20,7 +20,7 @@ public interface ItemRepository extends JpaRepository<ItemView, Long> {
 
 	Page<ItemView> findByItmnoContains(String itmno, Pageable pageable);
 
-	Page<ItemView> findByItmnoContainsOrPumgbContains(String itmno, String pumgb, Pageable pageable);
+	Page<ItemView> findByItmnoContainsOrPumgb(String itmno, String pumgb, Pageable pageable);
 
 
 	@Query(value="select distinct a.* from SMLIB.ITMSTPF_VW A WHERE pumgb=:pumgb", nativeQuery=true)

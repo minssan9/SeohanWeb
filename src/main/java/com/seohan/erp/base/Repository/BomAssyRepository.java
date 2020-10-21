@@ -1,4 +1,4 @@
-package com.seohan.erp.base.Mapper;
+package com.seohan.erp.base.Repository;
 
 import com.seohan.erp.base.Domain.BomAssy;
 import org.springframework.data.domain.Page;
