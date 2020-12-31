@@ -29,7 +29,7 @@ public class ProdPlanTest {
                 .prodDate("20200820")
                 .build();
         List<PrdpdpfEntity> prdpdpfEntities = prodPlanService.getPlanList(prodPlanDto );
-        System.out.println(prdpdpfEntities .toString());
+
         Assert.assertNotNull(prdpdpfEntities );
     }
 

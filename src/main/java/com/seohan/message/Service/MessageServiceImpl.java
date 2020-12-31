@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateCustomizer;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -25,6 +26,8 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public String sendMessage(MessageModel messageModel) throws Exception {
+
+
 		URI uri = new URI(messageServerUrl + "/message");
 
 		// RestTemplate 에 MessageConverter 세팅

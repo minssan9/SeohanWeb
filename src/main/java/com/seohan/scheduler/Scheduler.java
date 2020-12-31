@@ -41,6 +41,7 @@ public class Scheduler  {
 
 		itemBalanceService.saveBalanceNow();
 
+//		if (item)
 //		scheduledJobs.saveBalanceOldByDate(nowDate, nowTime );
 		log.info("Java cron job expression:: " + nowDate + nowTime);
 //		System.out.println("Java cron job expression:: " + nowDate + nowTime);

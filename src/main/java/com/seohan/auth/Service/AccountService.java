@@ -1,7 +1,10 @@
 package com.seohan.auth.Service;
 
+import com.seohan.auth.Domain.ExtAccount;
 import com.seohan.auth.Dto.Account;
 import com.seohan.auth.Mapper.AccountMapper;
+import com.seohan.auth.Repository.ExtAccountRepository;
+import com.seohan.auth.Repository.InAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,7 +14,8 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.*;
+
 /**
  * Created by vivie on 2017-06-08.
  */
@@ -27,7 +31,10 @@ public class AccountService implements UserDetailsService {
 
     @Autowired
     private AccountMapper accountMapper;
-
+	@Autowired
+	private InAccountRepository inAccountRepository;
+	@Autowired
+	private ExtAccountRepository extAccountRepository;
 
 	private boolean isAccordPassword(Account account, String password) {
 		String encodedPassword = account.getPassword().trim();
@@ -37,9 +44,10 @@ public class AccountService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		HashMap map = new HashMap();
+
 		AccountAdapter accountAdapter = new AccountAdapter(accountMapper.findByAccountId(username).get());
 
-		UserDetails userDetails = null;
 		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
 		User.UserBuilder builder =	User.builder()
